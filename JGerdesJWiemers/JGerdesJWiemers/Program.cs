@@ -15,7 +15,7 @@ namespace JGerdesJWiemers
         
         static void Main(string[] args)
         {
-            new Game().start();
+            new Game().Start();
         }
     }
 }
