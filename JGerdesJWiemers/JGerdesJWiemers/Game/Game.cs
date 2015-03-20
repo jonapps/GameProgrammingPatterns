@@ -41,12 +41,12 @@ namespace JGerdesJWiemers.GameIternal
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckKeys(object sender, KeyEventArgs e)
+        private void CheckKeys(object sender, EventArgs e)
         {
-            if (e.Code == Keyboard.Key.Escape)
+            KeyEventArgs ev = (KeyEventArgs)e;
+            if (ev.Code == Keyboard.Key.Escape)
             {
-                RenderWindow window = (RenderWindow)sender;
-                window.Close();
+                this.OnClose(sender, e);
             }
                 
         }
