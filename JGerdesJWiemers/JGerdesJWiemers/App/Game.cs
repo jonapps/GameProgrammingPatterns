@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.GameIternal
+namespace JGerdesJWiemers.App
 {
     class Game
     {
