@@ -1,5 +1,5 @@
 ﻿using SFML.Graphics;
-using SFML.Window;
+using SFML.Window;  
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,19 +57,52 @@ namespace JGerdesJWiemers.App
         private void Run()
         {
             CircleShape cs = new CircleShape(100.0f);
-            cs.FillColor = Color.Green;
+            cs.SetPointCount(8);
+            cs.Origin = new Vector2f(100, 100);
+            Vector2f center = new Vector2f(window.Size.X,window.Size.Y) / 2;
+            cs.Position = center;
+            cs.FillColor = new Color(150, 255, 150);
+
+            Font roboto = null;
+            try
+            {
+                roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
+            }
+            catch (SFML.LoadingFailedException lfe)
+            {
+                this.OnClose(window, null);
+            }
+
+            Text text = new Text("foobar", roboto);
+            
+
+            CircleShape point = new CircleShape(20f);
+            point.Origin = new Vector2f(20, 20);
+            point.FillColor = new Color(255, 150, 150);
+
             window.Closed += this.OnClose;
             window.KeyPressed += this.CheckKeys;
             window.SetActive();
             window.Capture();
+            long start = this.getMillis();
+            long now = start;
             while (this.window.IsOpen())
             {
-
+                cs.Rotation -= 0.05f;
+                now = this.getMillis() - start;
+                point.Position = center + new Vector2f((float)Math.Cos(now/500f)*200f, (float)Math.Sin(now/500f)*200f);
                 window.Clear();
                 window.DispatchEvents();
                 window.Draw(cs);
+                window.Draw(point);
+                window.Draw(text);
                 window.Display();
             }
+        }
+
+        public long getMillis()
+        {
+            return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
     }
 }
