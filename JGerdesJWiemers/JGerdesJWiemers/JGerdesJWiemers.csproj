@@ -35,6 +35,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="sfmlnet-audio-2">
       <HintPath>..\packages\SFML.Net.2.1.5\lib\sfmlnet-audio-2.dll</HintPath>
@@ -60,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App\Assets\Fonts\Roboto-Light.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -71,6 +75,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(ProjectDir)App\Assets" "$(TargetDir)Assets" /E /y /i</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
