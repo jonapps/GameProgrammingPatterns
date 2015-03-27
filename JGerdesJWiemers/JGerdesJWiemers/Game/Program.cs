@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.Window;
-using JGerdesJWiemers.App;
 
-namespace JGerdesJWiemers.App.Internal
+namespace JGerdesJWiemers.Game
 {
     class Program
     { 
