@@ -12,6 +12,11 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     {
         private List<Entity> _entities;
 
+        public GameScreen()
+        {
+            _entities = new List<Entity>();
+        }
+
         public void Update()
         {
             foreach(Entity entity in _entities)
