@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong;
 using JGerdesJWiemers.Game.Pong.Screens;
 using JGerdesJWiemers.Game.Engine.Graphics;
