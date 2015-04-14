@@ -11,7 +11,8 @@ using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong;
 using JGerdesJWiemers.Game.Pong.Screens;
-
+using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Inputs;
 
 namespace JGerdesJWiemers.Game
 {
@@ -22,6 +23,7 @@ namespace JGerdesJWiemers.Game
         private Stopwatch _stopWatch;
         public static long _MS_PER_UPDATE = 15;
         private ScreenManager _screenManager;
+        private InputManager _inputManager;
      
         /// <summary>
         /// Starts the app
@@ -32,6 +34,7 @@ namespace JGerdesJWiemers.Game
             this._stopWatch = new Stopwatch();
             this._screenManager = new ScreenManager();
             this._screenManager.CurrentScreen = new GameScreen();
+            this._inputManager = InputManager.Instance;
             this.Run();
         }
 
@@ -41,7 +44,7 @@ namespace JGerdesJWiemers.Game
         /// </summary
         private void _Update()
         {
-            Console.WriteLine("update");
+            _window.KeyPressed += this.CheckKeys;
             _window.Clear();
             _window.DispatchEvents();
             this._screenManager.Update();
