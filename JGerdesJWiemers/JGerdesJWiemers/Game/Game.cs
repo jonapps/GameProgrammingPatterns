@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Pong;
+using JGerdesJWiemers.Game.Pong.Screens;
+
 
 namespace JGerdesJWiemers.Game
 {
@@ -15,7 +19,8 @@ namespace JGerdesJWiemers.Game
         public static readonly string GAME_TITLE = "Pong";
         private RenderWindow _window;
         private Stopwatch _stopWatch;
-        private static long _MS_PER_UPDATE = 15;
+        public static long _MS_PER_UPDATE = 15;
+        private ScreenManager _screenManager;
      
         /// <summary>
         /// Starts the app
@@ -24,33 +29,31 @@ namespace JGerdesJWiemers.Game
         {
             this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default);
             this._stopWatch = new Stopwatch();
+            this._screenManager = new ScreenManager();
+            this._screenManager.CurrentScreen = new GameScreen();
             this.Run();
         }
 
-        private double _GetCurrentTime()
-        {
-            return 0.0;
-        }
 
         /// <summary>
         /// 
-        /// </summary>
-        /// <param name="delta"></param>
-        private void _Update(long delta)
+        /// </summary
+        private void _Update()
         {
-            Console.WriteLine("update: " + delta);
+            Console.WriteLine("update");
             _window.Clear();
             _window.DispatchEvents();
-            Thread.Sleep(13);
+            this._screenManager.Update();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="delta"></param>
-        private void _Render()
+        private void _Render(long delta)
         {
-            Console.WriteLine("Render");
+            Console.WriteLine("Render: "+ delta);
+            this._screenManager.Render(_window, delta);
             _window.Display();
         }
 
@@ -69,10 +72,10 @@ namespace JGerdesJWiemers.Game
                 lag += elapsed;
                 while (lag >= _MS_PER_UPDATE)
                 {
-                    _Update(lag / _MS_PER_UPDATE);
+                    _Update();
                     lag -= _MS_PER_UPDATE;
                 }
-                this._Render();
+                this._Render(lag / _MS_PER_UPDATE);
             }
         }
 
