@@ -12,7 +12,7 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong;
 using JGerdesJWiemers.Game.Pong.Screens;
 using JGerdesJWiemers.Game.Engine.Graphics;
-using JGerdesJWiemers.Game.Engine.Inputs;
+
 
 namespace JGerdesJWiemers.Game
 {
@@ -24,7 +24,7 @@ namespace JGerdesJWiemers.Game
         private RenderWindow _window;
         private Stopwatch _stopWatch;
         private ScreenManager _screenManager;
-        private InputManager _inputManager;
+
      
         /// <summary>
         /// Starts the app
@@ -34,10 +34,10 @@ namespace JGerdesJWiemers.Game
             ContextSettings settings = new ContextSettings();
             settings.AntialiasingLevel = 8;
             this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default, settings);
+            _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();
             this._screenManager = new ScreenManager();
             this._screenManager.CurrentScreen = new GameScreen();
-            this._inputManager = InputManager.Instance;
             this.Run();
         }
 
@@ -47,19 +47,22 @@ namespace JGerdesJWiemers.Game
             Console.WriteLine("check: das aus");
         }
 
+        private void _CloseGame(Object window, KeyEventArgs e)
+        {
+            if (e.Code == Keyboard.Key.Escape)
+            {
+                ((Window)window).Close();
+            }
+        }
+
+        
+
 
         /// <summary>
         /// 
         /// </summary
         private void _Update()
         {
-            if (this._inputManager.IsKeyPressed(Keyboard.Key.C))
-            {
-                this._SendMsg();
-            }
-
-            _window.KeyPressed += this._inputManager.KeyPressed;
-            _window.KeyReleased += this._inputManager.KeyReleased;
             _window.DispatchEvents();
             this._screenManager.Update();
         }

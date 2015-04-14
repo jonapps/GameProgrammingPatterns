@@ -75,7 +75,6 @@
     <Compile Include="Game\Engine\Entity.cs" />
     <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
     <Compile Include="Game\Engine\Graphics\IScreen.cs" />
-    <Compile Include="Game\Engine\Inputs\InputManager.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Game.cs" />
