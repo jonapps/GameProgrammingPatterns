@@ -57,5 +57,15 @@ namespace JGerdesJWiemers.Game.Engine.Inputs
                 this._keys.Add(e.Code, false);
             } 
         }
+
+        public bool IsKeyPressed(Keyboard.Key code)
+        {
+            if (this._keys.ContainsKey(code))
+            {
+                return (bool)this._keys[code];
+            }
+            return false;
+        }
+
     }
 }
