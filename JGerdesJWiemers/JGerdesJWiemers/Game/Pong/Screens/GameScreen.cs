@@ -8,6 +8,7 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong.Entities;
 
 
+
 namespace JGerdesJWiemers.Game.Pong.Screens
 {
     class GameScreen : IScreen
