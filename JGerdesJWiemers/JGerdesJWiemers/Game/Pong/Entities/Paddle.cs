@@ -11,14 +11,13 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 {
     class Paddle : Entity
     {
-        private Vector2f _position;
         private Shape _shape;
 
         public Paddle()
         {
-            _position = new Vector2f(100, 100);
             _shape = new RectangleShape(new Vector2f(100, 400));
             _shape.Origin = new Vector2f(50, 200);
+            _shape.Position = new Vector2f(100, 100);
         }
 
         public override void Update()
