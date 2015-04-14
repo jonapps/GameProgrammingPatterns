@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Pong.Entities;
 
 
 namespace JGerdesJWiemers.Game.Pong.Screens
@@ -15,6 +16,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         public GameScreen()
         {
             _entities = new List<Entity>();
+            _entities.Add(new Paddle());
         }
 
         public void Update()

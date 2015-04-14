@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AE12124C-4556-4FE0-A71A-20280C3B5BDC}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JGerdesJWiemers</RootNamespace>
     <AssemblyName>JGerdesJWiemers</AssemblyName>
@@ -77,7 +77,9 @@
     <Compile Include="Game\Engine\IScreen.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\ScreenManager.cs" />
+    <Compile Include="Game\Engine\Shapes\TriangleShape.cs" />
     <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Pong\Entities\Paddle.cs" />
     <Compile Include="Game\Pong\Screens\GameScreen.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
