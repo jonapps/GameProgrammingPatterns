@@ -42,25 +42,35 @@ namespace JGerdesJWiemers.Game
         }
 
 
+        private void _SendMsg()
+        {
+            Console.WriteLine("check: das aus");
+        }
+
+
         /// <summary>
         /// 
         /// </summary
         private void _Update()
         {
+            if (this._inputManager.IsKeyPressed(Keyboard.Key.C))
+            {
+                this._SendMsg();
+            }
+
             _window.KeyPressed += this._inputManager.KeyPressed;
             _window.KeyReleased += this._inputManager.KeyReleased;
             _window.Clear();
             _window.DispatchEvents();
             this._screenManager.Update();
         }
-
+         
         /// <summary>
         /// 
         /// </summary>
         /// <param name="delta"></param>
         private void _Render(long delta)
         {
-            Console.WriteLine("Render: "+ delta);
             this._screenManager.Render(_window, delta);
             _window.Display();
         }
