@@ -39,6 +39,8 @@ namespace JGerdesJWiemers.Game
         private void _Update(long delta)
         {
             Console.WriteLine("update: " + delta);
+            _window.Clear();
+            _window.DispatchEvents();
             Thread.Sleep(13);
         }
 
@@ -49,6 +51,7 @@ namespace JGerdesJWiemers.Game
         private void _Render()
         {
             Console.WriteLine("Render");
+            _window.Display();
         }
 
         /// <summary>
@@ -70,10 +73,6 @@ namespace JGerdesJWiemers.Game
                     lag -= _MS_PER_UPDATE;
                 }
                 this._Render();
-                _window.Clear();
-                _window.DispatchEvents();
-                _window.Display();
-                
             }
         }
 
