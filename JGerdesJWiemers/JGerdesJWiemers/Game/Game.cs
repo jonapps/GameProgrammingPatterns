@@ -45,7 +45,8 @@ namespace JGerdesJWiemers.Game
         /// </summary
         private void _Update()
         {
-            _window.KeyPressed += this.CheckKeys;
+            _window.KeyPressed += this._inputManager.KeyPressed;
+            _window.KeyReleased += this._inputManager.KeyReleased;
             _window.Clear();
             _window.DispatchEvents();
             this._screenManager.Update();
