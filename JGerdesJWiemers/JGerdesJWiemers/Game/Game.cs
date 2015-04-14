@@ -19,9 +19,10 @@ namespace JGerdesJWiemers.Game
     class Game
     {
         public static readonly string GAME_TITLE = "Pong";
+        public static long MS_PER_UPDATE = 15;
+
         private RenderWindow _window;
         private Stopwatch _stopWatch;
-        public static long _MS_PER_UPDATE = 15;
         private ScreenManager _screenManager;
         private InputManager _inputManager;
      
@@ -74,12 +75,12 @@ namespace JGerdesJWiemers.Game
                 elapsed = this._stopWatch.ElapsedMilliseconds;
                 this._stopWatch.Restart();
                 lag += elapsed;
-                while (lag >= _MS_PER_UPDATE)
+                while (lag >= MS_PER_UPDATE)
                 {
                     _Update();
-                    lag -= _MS_PER_UPDATE;
+                    lag -= MS_PER_UPDATE;
                 }
-                this._Render(lag / _MS_PER_UPDATE);
+                this._Render(lag / MS_PER_UPDATE);
             }
         }
 
