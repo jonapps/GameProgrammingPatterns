@@ -5,19 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.Game.Engine
+namespace JGerdesJWiemers.Game.Engine.Graphics
 {
-    interface IScreen
+    interface IRenderable
     {
         /// <summary>
-        /// Updates screen 
+        /// Renders on provided render target
         /// </summary>
-        void Update();
-
-        /// <summary>
-        /// Renders content of screen on provided render target
-        /// </summary>
-        /// <param name="renderTarget">target to render content of screen to</param>
+        /// <param name="renderTarget">target to render to</param>
         /// <param name="extra">value between 0 and 1 for extrapolation</param>
         void Render(RenderTarget renderTarget, float extra);
     }

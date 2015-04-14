@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.Game.Engine
+namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     class ScreenManager : IScreen
     {

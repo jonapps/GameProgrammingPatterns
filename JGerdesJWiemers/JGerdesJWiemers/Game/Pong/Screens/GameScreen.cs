@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong.Entities;
 
 
