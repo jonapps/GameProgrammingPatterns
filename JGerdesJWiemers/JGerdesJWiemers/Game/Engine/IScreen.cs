@@ -12,13 +12,13 @@ namespace JGerdesJWiemers.Game.Engine
         /// <summary>
         /// Updates screen 
         /// </summary>
-        public void Update();
+        void Update();
 
         /// <summary>
         /// Renders content of screen on provided render target
         /// </summary>
         /// <param name="renderTarget">target to render content of screen to</param>
         /// <param name="extra">value between 0 and 1 for extrapolation</param>
-        public void Render(RenderTarget renderTarget, float extra);
+        void Render(RenderTarget renderTarget, float extra);
     }
 }
