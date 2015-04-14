@@ -31,7 +31,9 @@ namespace JGerdesJWiemers.Game
         /// </summary>
         public void Start()
         {
-            this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default);
+            ContextSettings settings = new ContextSettings();
+            settings.AntialiasingLevel = 8;
+            this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default, settings);
             this._stopWatch = new Stopwatch();
             this._screenManager = new ScreenManager();
             this._screenManager.CurrentScreen = new GameScreen();
