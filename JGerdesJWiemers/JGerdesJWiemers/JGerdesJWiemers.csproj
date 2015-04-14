@@ -72,9 +72,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Engine\Entity.cs" />
+    <Compile Include="Game\Engine\IRenderable.cs" />
     <Compile Include="Game\Engine\IScreen.cs" />
+    <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\ScreenManager.cs" />
     <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Pong\Screens\GameScreen.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +104,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
