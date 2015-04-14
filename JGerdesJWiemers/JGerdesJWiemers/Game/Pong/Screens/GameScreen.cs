@@ -19,6 +19,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         {
             _entities = new List<Entity>();
             _entities.Add(new Paddle());
+            _entities.Add(new Ball(400, 400));
         }
 
         public void Update()
