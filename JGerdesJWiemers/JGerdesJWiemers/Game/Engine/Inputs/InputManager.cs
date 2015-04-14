@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using SFML.Graphics;
+using SFML.Window;  
 
 namespace JGerdesJWiemers.Game.Engine.Inputs
 {
@@ -32,5 +34,28 @@ namespace JGerdesJWiemers.Game.Engine.Inputs
             }
         }
 
+        public void KeyPressed(object sender, KeyEventArgs e)
+        {
+            if (this._keys.ContainsKey(e.Code))
+            {
+                this._keys[e.Code] = true;
+            }
+            else
+            {
+                this._keys.Add(e.Code, true);
+            }        
+        }
+
+        public void KeyReleased(object sender, KeyEventArgs e)
+        {
+            if (this._keys.ContainsKey(e.Code))
+            {
+                this._keys[e.Code] = false;
+            }
+            else
+            {
+                this._keys.Add(e.Code, false);
+            } 
+        }
     }
 }
