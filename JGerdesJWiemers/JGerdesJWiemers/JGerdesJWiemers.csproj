@@ -77,7 +77,6 @@
     <Compile Include="Game\Engine\IScreen.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\ScreenManager.cs" />
-    <Compile Include="Game\Engine\Shapes\TriangleShape.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Pong\Entities\Paddle.cs" />
     <Compile Include="Game\Pong\Screens\GameScreen.cs" />
