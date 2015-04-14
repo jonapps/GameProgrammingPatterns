@@ -60,7 +60,6 @@ namespace JGerdesJWiemers.Game
 
             _window.KeyPressed += this._inputManager.KeyPressed;
             _window.KeyReleased += this._inputManager.KeyReleased;
-            _window.Clear();
             _window.DispatchEvents();
             this._screenManager.Update();
         }
@@ -69,8 +68,9 @@ namespace JGerdesJWiemers.Game
         /// 
         /// </summary>
         /// <param name="delta"></param>
-        private void _Render(long delta)
+        private void _Render(float delta)
         {
+            _window.Clear();
             this._screenManager.Render(_window, delta);
             _window.Display();
         }
@@ -93,7 +93,7 @@ namespace JGerdesJWiemers.Game
                     _Update();
                     lag -= MS_PER_UPDATE;
                 }
-                this._Render(lag / MS_PER_UPDATE);
+                this._Render(lag / (float)MS_PER_UPDATE);
             }
         }
 
