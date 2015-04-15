@@ -31,15 +31,21 @@ namespace JGerdesJWiemers.Game.Engine
             }
         }
 
-        public void Update()
+        public virtual void Update()
         {
             _position += _speed;
         }
 
-        public void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
+        public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             _shape.Position = _position + extra * _speed;
             renderTarget.Draw(_shape);
+        }
+
+        public FloatRect GetBoundingBox()
+        {
+            _shape.Position = _position - _shape.Origin;
+            return _shape.GetGlobalBounds();
         }
     }
 }
