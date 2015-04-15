@@ -12,14 +12,14 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong;
 using JGerdesJWiemers.Game.Pong.Screens;
 using JGerdesJWiemers.Game.Engine.Graphics;
-
+using SFML.System;
 
 namespace JGerdesJWiemers.Game
 {
     class Game
     {
         public static readonly string GAME_TITLE = "Pong";
-        public static float PADDLE_GAME_SPEED = 50;
+        public static float PADDLE_GAME_SPEED = 25;
 
         readonly TimeSpan TargetElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 60);
         readonly TimeSpan MaxElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 10);
@@ -53,6 +53,7 @@ namespace JGerdesJWiemers.Game
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.SetVerticalSyncEnabled(true);
+            
             try
             {
                 _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
@@ -110,10 +111,10 @@ namespace JGerdesJWiemers.Game
         /// <param name="delta"></param>
         private void _Render(float delta)
         {
-
             _window.Clear();
             this._screenManager.Render(_window, delta);
             _window.Display();
+
         }
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace JGerdesJWiemers.Game
         private void Run()
         {
             _stopWatch.Start();
-            while (this._window.IsOpen())
+            while (this._window.IsOpen)
             {
                 TimeSpan currentTime = _stopWatch.Elapsed;
                 TimeSpan elapsedTime = currentTime - lastTime;

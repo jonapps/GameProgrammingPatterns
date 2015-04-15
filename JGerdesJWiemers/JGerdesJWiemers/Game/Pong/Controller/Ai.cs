@@ -26,7 +26,8 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         private float _GenerateNewPosition()
         {
-            return this._ball.Position.Y;
+
+            return 0;
         }
     }
 }

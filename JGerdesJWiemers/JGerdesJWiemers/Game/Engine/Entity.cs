@@ -7,6 +7,7 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using SFML.Graphics;
 using SFML.Window;
 using JGerdesJWiemers.Game.Engine.Controller;
+using SFML.System;
 
 namespace JGerdesJWiemers.Game.Engine
 {

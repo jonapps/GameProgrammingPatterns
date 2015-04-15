@@ -10,6 +10,7 @@ using JGerdesJWiemers.Game.Pong.Controller;
 using SFML.Window;
 using SFML.Graphics;
 using System.Diagnostics;
+using SFML.System;
 
 
 
@@ -23,11 +24,15 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         public GameScreen(Window w):base(w)
         {
             _entities = new List<Entity>();
-            Paddle playerPaddle = new Paddle();
-            playerPaddle.Controller = new Player(_window);
-            _entities.Add(playerPaddle);
             _ball = new Ball(400, 400);
             _entities.Add(_ball);
+            Paddle aiPaddle = new Paddle(new Vector2f(1100, 250));
+            aiPaddle.Controller = new Ai(_window, _ball);
+            Paddle playerPaddle = new Paddle(new Vector2f(100, 250));
+            playerPaddle.Controller = new Player(_window);
+            _entities.Add(playerPaddle);
+            _entities.Add(aiPaddle);
+
            
         }
 

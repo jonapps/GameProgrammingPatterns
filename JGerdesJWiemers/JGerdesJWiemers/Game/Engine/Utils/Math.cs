@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.Window;
+using SFML.System;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {

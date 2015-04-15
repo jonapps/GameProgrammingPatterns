@@ -7,6 +7,7 @@ using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Window;
 using SFML.Graphics;
+using SFML.System;
 
 namespace JGerdesJWiemers.Game.Pong.Entities
 {
@@ -41,22 +42,6 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
         public bool CollideWith(Paddle paddle)
         {
-            FloatRect box = paddle.GetBoundingBox();
-
-            Vector2f distance = new Vector2f(System.Math.Abs(box.Left - _position.X), System.Math.Abs(box.Top - _position.Y));
-            Vector2f halfSize = new Vector2f(box.Width / 2f, box.Height / 2f);
-
-            if (distance.X > halfSize.X + _radius || distance.Y >halfSize.Y + _radius)
-            {
-                return false;
-            }
-
-            if (distance.X <= halfSize.X || distance.Y <= halfSize.Y || distance.Distance2To(halfSize) <= _radius * _radius)
-            {
-                _position -= _speed;
-                _speed.X *= -1;
-                return true;
-            } 
 
             return false;
         }
