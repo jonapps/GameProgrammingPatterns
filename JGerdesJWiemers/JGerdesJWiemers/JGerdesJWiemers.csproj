@@ -85,6 +85,7 @@
     <Compile Include="Game\Pong\Entities\Ball.cs" />
     <Compile Include="Game\Pong\Entities\Paddle.cs" />
     <Compile Include="Game\Pong\Screens\GameScreen.cs" />
+    <Compile Include="Game\Pong\Screens\StartScreen.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

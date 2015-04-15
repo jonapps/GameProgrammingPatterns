@@ -23,7 +23,6 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         public override float Update()
         {
-            System.Console.WriteLine("Controller update");
             float result = 0;
             if (_up)
             {
