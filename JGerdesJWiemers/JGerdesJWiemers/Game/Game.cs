@@ -132,11 +132,8 @@ namespace JGerdesJWiemers.Game
                 {
                     elapsedTime = MaxElapsedTime;
                 }
-
                 accumulatedTime += elapsedTime;
-
                 bool updated = false;
-
                 while (accumulatedTime >= TargetElapsedTime)
                 {
                     _Update();
