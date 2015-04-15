@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SFML.Window;
 
 namespace JGerdesJWiemers.Game.Engine.Graphics
 {
-    class ScreenManager : IScreen
+    class ScreenManager : Screen
     {
-        private IScreen _currentScreen;
+        private Screen _currentScreen;
 
-        public IScreen CurrentScreen
+        public Screen CurrentScreen
         {
             get
             {
@@ -26,12 +27,18 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             }
         }
 
-        public void Update()
+        public ScreenManager(Window w)
+            : base(w)
+        {
+
+        }
+
+        public override void Update()
         {
             _currentScreen.Update();
         }
 
-        public void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
+        public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             _currentScreen.Render(renderTarget, extra);
         }

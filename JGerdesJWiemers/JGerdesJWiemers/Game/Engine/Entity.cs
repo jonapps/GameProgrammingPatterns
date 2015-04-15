@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using SFML.Graphics;
 using SFML.Window;
+using JGerdesJWiemers.Game.Engine.Controller;
 
 namespace JGerdesJWiemers.Game.Engine
 {
@@ -14,6 +15,7 @@ namespace JGerdesJWiemers.Game.Engine
         protected Vector2f _position;
         protected Vector2f _speed;
         protected Shape _shape;
+        protected ControllerBase _controller;
 
         public Vector2f Speed
         {
@@ -30,9 +32,28 @@ namespace JGerdesJWiemers.Game.Engine
                 }
             }
         }
+        public ControllerBase Controller
+        {
+            set
+            {
+                this._controller = value;
+            }
+        }
+
+        public Vector2f Position
+        {
+            get
+            {
+                return _position;
+            }
+        }
 
         public virtual void Update()
         {
+            if (this._controller != null)
+            {
+                this._position.Y += this._controller.Update() * Game.PADDLE_GAME_SPEED;
+            }
             _position += _speed;
         }
 

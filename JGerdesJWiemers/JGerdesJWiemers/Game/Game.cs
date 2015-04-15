@@ -20,10 +20,12 @@ namespace JGerdesJWiemers.Game
     {
         public static readonly string GAME_TITLE = "Pong";
         public static long MS_PER_UPDATE = 15;
+        public static float PADDLE_GAME_SPEED = 50;
 
         private RenderWindow _window;
         private Stopwatch _stopWatch;
         private ScreenManager _screenManager;
+        
 
      
         /// <summary>
@@ -36,16 +38,24 @@ namespace JGerdesJWiemers.Game
             this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default, settings);
             _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();
-            this._screenManager = new ScreenManager();
-            this._screenManager.CurrentScreen = new GameScreen();
+            this._screenManager = new ScreenManager(_window);
+            this._screenManager.CurrentScreen = new GameScreen(_window);
+            _window.SetActive();
+            _window.Closed += this._OnClose;
             this.Run();
         }
 
-
-        private void _SendMsg()
+        /// <summary>
+        /// Close the window when OnClose event is received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _OnClose(object sender, EventArgs e)
         {
-            Console.WriteLine("check: das aus");
+            RenderWindow window = (RenderWindow)sender;
+            window.Close();
         }
+
 
         private void _CloseGame(Object window, KeyEventArgs e)
         {
@@ -63,6 +73,7 @@ namespace JGerdesJWiemers.Game
         /// </summary
         private void _Update()
         {
+            System.Console.WriteLine("Game.Update");
             _window.DispatchEvents();
             this._screenManager.Update();
         }
