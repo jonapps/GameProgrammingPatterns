@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.Window;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using SFML.Window;
 
 namespace JGerdesJWiemers.Game.Pong.Screens
 {
@@ -14,17 +15,21 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         public StartScreen(Window w)
             : base(w)
         {
- 
+            _window.KeyPressed+= this._ProcessKeyInput;
+        }
+
+        private _ProcessKeyInput(Object sender, KeyEventArgs e){
+
         }
 
         public override void Update()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
