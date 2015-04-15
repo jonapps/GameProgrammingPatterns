@@ -72,12 +72,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Engine\Controller\ControllerBase.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
     <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
     <Compile Include="Game\Engine\Graphics\IScreen.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Pong\Controller\Ai.cs" />
+    <Compile Include="Game\Pong\Controller\Player.cs" />
     <Compile Include="Game\Pong\Entities\Ball.cs" />
     <Compile Include="Game\Pong\Entities\Paddle.cs" />
     <Compile Include="Game\Pong\Screens\GameScreen.cs" />

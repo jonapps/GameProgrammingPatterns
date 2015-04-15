@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Pong.Entities;
+using JGerdesJWiemers.Game.Pong.Controller;
+using SFML.Window;
+using SFML.Graphics;
+using System.Diagnostics;
 
 
 
@@ -14,15 +18,35 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     class GameScreen : IScreen
     {
         private List<Entity> _entities;
+        private Window _window;
+        private Font _roboto = null;
+        private Text _fps;
+        private Stopwatch _stopWatch;
 
-        public GameScreen()
+        public GameScreen(Window w)
         {
+            _window = w;
             _entities = new List<Entity>();
-            _entities.Add(new Paddle());
+            Paddle playerPaddle = new Paddle();
+            playerPaddle.Controller = new Player(_window);
+            _entities.Add(playerPaddle);
             _entities.Add(new Ball(400, 400));
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
+            try
+            {
+                _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
+            }
+            catch (SFML.LoadingFailedException lfe)
+            {
+                /// todo
+            }
+
+            _fps = new Text("foobar", _roboto);
+            
         }
 
-        public void Update()
+        public void  Update()
         {
             foreach(Entity entity in _entities)
             {
@@ -32,6 +56,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens
  
         public void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
+            
+            renderTarget.Draw(_fps);
             foreach (Entity entity in _entities)
             {
                 entity.Render(renderTarget, extra);
