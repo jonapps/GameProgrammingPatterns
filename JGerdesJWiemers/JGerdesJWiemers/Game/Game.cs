@@ -19,8 +19,14 @@ namespace JGerdesJWiemers.Game
     class Game
     {
         public static readonly string GAME_TITLE = "Pong";
-        public static long MS_PER_UPDATE = 15;
         public static float PADDLE_GAME_SPEED = 50;
+
+        readonly TimeSpan TargetElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 60);
+        readonly TimeSpan MaxElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 10);
+
+        TimeSpan accumulatedTime;
+        TimeSpan lastTime;
+
 
         private RenderWindow _window;
         private Stopwatch _stopWatch;
@@ -46,6 +52,7 @@ namespace JGerdesJWiemers.Game
             this._screenManager.CurrentScreen = new GameScreen(_window);
             _window.SetActive();
             _window.Closed += this._OnClose;
+            _window.SetVerticalSyncEnabled(true);
             try
             {
                 _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
@@ -86,7 +93,7 @@ namespace JGerdesJWiemers.Game
         /// </summary
         private void _Update()
         {
-            System.Console.WriteLine("Game.Update");
+
             _window.DispatchEvents();
             this._screenManager.Update();
         }
@@ -103,9 +110,8 @@ namespace JGerdesJWiemers.Game
         /// <param name="delta"></param>
         private void _Render(float delta)
         {
+
             _window.Clear();
-            _DrawFPS();
-            _fps++;
             this._screenManager.Render(_window, delta);
             _window.Display();
         }
@@ -115,28 +121,33 @@ namespace JGerdesJWiemers.Game
         /// </summary>
         private void Run()
         {
-            this._stopWatch.Start();
-            long elapsed = 0;
-            long lag = 0;
+            _stopWatch.Start();
             while (this._window.IsOpen())
             {
-                elapsed = this._stopWatch.ElapsedMilliseconds;
-                _millsSinceSec += elapsed;
-                if (_millsSinceSec > 1000f)
+                TimeSpan currentTime = _stopWatch.Elapsed;
+                TimeSpan elapsedTime = currentTime - lastTime;
+                lastTime = currentTime;
+
+                if (elapsedTime > MaxElapsedTime)
                 {
-                    _fpsText = new Text("fps: " + _fps, _roboto);
-                    _millsSinceSec = 0;
-                    _fps = 0;
+                    elapsedTime = MaxElapsedTime;
                 }
-                this._stopWatch.Restart();
-                lag += elapsed;
-                while (lag >= MS_PER_UPDATE)
+
+                accumulatedTime += elapsedTime;
+
+                bool updated = false;
+
+                while (accumulatedTime >= TargetElapsedTime)
                 {
                     _Update();
-                    lag -= MS_PER_UPDATE;
+                    accumulatedTime -= TargetElapsedTime;
+                    updated = true;
                 }
-                
-                this._Render(lag / (float)MS_PER_UPDATE);
+
+                if (updated)
+                {
+                    _Render(accumulatedTime.Milliseconds / (float)TargetElapsedTime.Milliseconds);
+                }
             }
         }
     }
