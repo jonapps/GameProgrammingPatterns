@@ -78,6 +78,7 @@
     <Compile Include="Game\Engine\Inputs\InputManager.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
+    <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Pong\Entities\Ball.cs" />
     <Compile Include="Game\Pong\Entities\Paddle.cs" />
