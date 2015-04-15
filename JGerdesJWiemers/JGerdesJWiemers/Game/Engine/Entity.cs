@@ -18,6 +18,15 @@ namespace JGerdesJWiemers.Game.Engine
         protected Shape _shape;
         protected ControllerBase _controller;
 
+
+        public Shape Shape
+        {
+            get
+            {
+                return _shape;
+            }
+        }
+        
         public Vector2f Speed
         {
             get
@@ -62,12 +71,6 @@ namespace JGerdesJWiemers.Game.Engine
         {
             _shape.Position = _position;
             renderTarget.Draw(_shape);
-        }
-
-        public FloatRect GetBoundingBox()
-        {
-            _shape.Position = _position - _shape.Origin;
-            return _shape.GetGlobalBounds();
         }
     }
 }

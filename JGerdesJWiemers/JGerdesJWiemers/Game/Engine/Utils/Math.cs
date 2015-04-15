@@ -29,5 +29,13 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         {
             return (v1 - v2).Length2();
         }
+
+
+
+        public static float Scalar(Vector2f v1, Vector2f v2)
+        {
+            return v1.X * v2.X + v1.Y * v2.Y; 
+        }
+
     }
 }

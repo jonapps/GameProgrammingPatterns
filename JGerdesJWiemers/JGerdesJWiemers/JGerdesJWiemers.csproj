@@ -84,7 +84,6 @@
     <Compile Include="Game\Engine\Graphics\Screen.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
-    <Compile Include="Game\Engine\Utils\Datatypes\Box.cs" />
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Pong\Controller\Ai.cs" />
