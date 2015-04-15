@@ -25,6 +25,10 @@ namespace JGerdesJWiemers.Game
         private RenderWindow _window;
         private Stopwatch _stopWatch;
         private ScreenManager _screenManager;
+        private Font _roboto = null;
+        private long _millsSinceSec;
+        private int _fps;
+        private Text _fpsText;
         
 
      
@@ -42,6 +46,15 @@ namespace JGerdesJWiemers.Game
             this._screenManager.CurrentScreen = new GameScreen(_window);
             _window.SetActive();
             _window.Closed += this._OnClose;
+            try
+            {
+                _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
+            }
+            catch (SFML.LoadingFailedException lfe)
+            {
+                /// todo
+            }
+            _fpsText = new Text("fps: " + _fps, _roboto);
             this.Run();
         }
 
@@ -77,6 +90,12 @@ namespace JGerdesJWiemers.Game
             _window.DispatchEvents();
             this._screenManager.Update();
         }
+
+        private void _DrawFPS()
+        {
+
+            _window.Draw(_fpsText);
+        }
          
         /// <summary>
         /// 
@@ -85,6 +104,8 @@ namespace JGerdesJWiemers.Game
         private void _Render(float delta)
         {
             _window.Clear();
+            _DrawFPS();
+            _fps++;
             this._screenManager.Render(_window, delta);
             _window.Display();
         }
@@ -100,6 +121,13 @@ namespace JGerdesJWiemers.Game
             while (this._window.IsOpen())
             {
                 elapsed = this._stopWatch.ElapsedMilliseconds;
+                _millsSinceSec += elapsed;
+                if (_millsSinceSec > 1000f)
+                {
+                    _fpsText = new Text("fps: " + _fps, _roboto);
+                    _millsSinceSec = 0;
+                    _fps = 0;
+                }
                 this._stopWatch.Restart();
                 lag += elapsed;
                 while (lag >= MS_PER_UPDATE)
@@ -107,11 +135,9 @@ namespace JGerdesJWiemers.Game
                     _Update();
                     lag -= MS_PER_UPDATE;
                 }
+                
                 this._Render(lag / (float)MS_PER_UPDATE);
             }
         }
-
-       
-
     }
 }

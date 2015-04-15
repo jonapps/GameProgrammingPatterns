@@ -19,9 +19,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     {
         private List<Entity> _entities;
         private Window _window;
-        private Font _roboto = null;
-        private Text _fps;
-        private Stopwatch _stopWatch;
+
 
         public GameScreen(Window w)
         {
@@ -31,18 +29,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             playerPaddle.Controller = new Player(_window);
             _entities.Add(playerPaddle);
             _entities.Add(new Ball(400, 400));
-            _stopWatch = new Stopwatch();
-            _stopWatch.Start();
-            try
-            {
-                _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
-            }
-            catch (SFML.LoadingFailedException lfe)
-            {
-                /// todo
-            }
-
-            _fps = new Text("foobar", _roboto);
+            
             
         }
 
@@ -56,12 +43,10 @@ namespace JGerdesJWiemers.Game.Pong.Screens
  
         public void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            
-            renderTarget.Draw(_fps);
             foreach (Entity entity in _entities)
             {
                 entity.Render(renderTarget, extra);
             }
         }
-}
+    }
 }
