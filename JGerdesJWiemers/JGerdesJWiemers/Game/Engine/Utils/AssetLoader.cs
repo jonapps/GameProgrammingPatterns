@@ -45,7 +45,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         {
             get
             {
-                if (_instance != null)
+                if (_instance == null)
                 {
                     _instance = new AssetLoader();
                 }
