@@ -18,6 +18,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         protected ControllerBase _controller;
         protected Rail _rail;
         protected float _railPosition = 0;
+        protected float _rotation = 0;
 
         public Paddle(Rail rail)
         {
@@ -46,6 +47,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
 
              _position = _rail.getPointAt(_railPosition);
+             _shape.Rotation = _railPosition*-60 + _rotation;
         }
 
         public override void Render(RenderTarget renderTarget, float extra)
