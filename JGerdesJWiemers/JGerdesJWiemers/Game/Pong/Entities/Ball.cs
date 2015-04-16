@@ -81,6 +81,13 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                     
                     return true;
                 }
+                float pointToMiddle = (p1 - _position).Length();
+                if ((pointToMiddle - _radius) < 0.4f)
+                {
+                    _position -= _speed;
+                    _speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, _speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, _speed) * normal;
+                    return true;
+                }
             }
                 return false;
         }
