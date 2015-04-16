@@ -25,6 +25,16 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             _speed = new Vector2f(5f,-1.4f);
         }
 
+        public void reset()
+        {
+            _position = new Vector2f(1280 / 2f, 720 / 2f);
+            Random rand = new Random();
+            _speed = new Vector2f(rand.Next(1,5), rand.Next(1,5));
+            //normalize
+            _speed /= _speed.Length();
+            //set length
+            _speed *= 5;
+        }
 
         public override void Update()
         {

@@ -60,10 +60,12 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             if (_ball.Position.X < 0)
             {
                 _score2.addToScore(1);
+                _ball.reset();
             }
             else if (_ball.Position.X > 1280)
             {
                 _score1.addToScore(1);
+                _ball.reset();
             }
         }
  
