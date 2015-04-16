@@ -59,7 +59,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             if (_position.Y >= 720 || _position.Y <= 0)
             {
                 _speed.Y *= -1;
-                _rotationSpeed = _speed.Y;
+                _rotationSpeed = -10f/_speed.Y;
             }
 
             _shape.Rotation += _rotationSpeed ;
