@@ -43,11 +43,13 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         public bool CollideWith(Paddle paddle, RenderTarget w)
         {
             Shape shape = paddle.Shape;
+            
             Vector2f p1;
             Vector2f p2;
             Vector2f normal;
             Vector2f tangente;
             Vector2f potencial;
+            
             uint j;
             for (uint i = 0; i < shape.GetPointCount(); ++i)
             {
@@ -61,9 +63,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                 }
                 
                 p1 = shape.GetPoint(i);
-                p1 = p1 + paddle.Position - shape.Origin;
+                p1 = shape.Transform.TransformPoint(p1);
                 p2 = shape.GetPoint(j);
-                p2 = p2 + paddle.Position - shape.Origin;
+                p2 = shape.Transform.TransformPoint(p2);
                 tangente = p2 - p1;
                 tangente /= tangente.Length();
                 normal = new Vector2f(tangente.Y, tangente.X * -1) * -1;
