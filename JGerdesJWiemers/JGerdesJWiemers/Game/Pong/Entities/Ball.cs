@@ -24,6 +24,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             _shape.Origin = new Vector2f(5, 5);
             _position = new Vector2f(x, y);
             _speed = new Vector2f(5f,-1.4f);
+            _shape.FillColor = new Color(0, 0, 0, 255);
         }
 
         public void reset()

@@ -24,7 +24,15 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             _side = side;
             base.Update();
             FillColor = new Color(0, 0, 0, 0);
-            OutlineColor = new Color(255, 255, 255, 128);
+            if (_side == SIDE_LEFT)
+            {
+                OutlineColor = new Color(146, 27, 37, 80);
+            }
+            else
+            {
+                OutlineColor = new Color(49, 27, 146, 80);
+            }
+           
             OutlineThickness = 2f;
            
         }

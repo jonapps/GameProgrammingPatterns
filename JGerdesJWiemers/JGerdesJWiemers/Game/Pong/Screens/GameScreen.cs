@@ -24,6 +24,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         private Score _score1;
         private Score _score2;
 
+        private Sprite _background;
+
         public GameScreen(Window w):base(w)
         {
             _entities = new List<Entity>();
@@ -42,6 +44,9 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
             _score2 = new Score(AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT),
                             new Vector2f(1280 - 40, 20));
+
+            _background = new Sprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BACKGROUND));
+
 
            
         }
@@ -71,6 +76,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
  
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
+            renderTarget.Draw(_background);
             foreach (Entity entity in _entities)
             {
                 entity.Render(renderTarget, extra);

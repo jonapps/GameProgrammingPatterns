@@ -27,6 +27,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             _shape.Origin = new Vector2f(10, 40);
             _speed = new Vector2f(0, 0);
             _rail = rail;
+            _shape.FillColor = new Color(0, 0, 0, 255);
         }
 
          public ControllerBase Controller
