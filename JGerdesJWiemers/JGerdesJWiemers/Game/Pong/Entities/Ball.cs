@@ -22,7 +22,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         {
             _shape = new CircleShape(_radius);
             ((CircleShape)_shape).SetPointCount(6);
-            _shape.Origin = new Vector2f(5, 5);
+            _shape.Origin = new Vector2f(10, 10);
             _position = new Vector2f(x, y);
             _shape.FillColor = new Color(0, 0, 0, 255);
             reset();
