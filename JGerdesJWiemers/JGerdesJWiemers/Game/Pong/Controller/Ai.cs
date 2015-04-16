@@ -24,11 +24,11 @@ namespace JGerdesJWiemers.Game.Pong.Controller
         {
             if (_paddle.Position.Y < _ball.Position.Y)
             {
-                return 1;
+                return 0.1f;
             }
             else
             {
-                return -1;
+                return -0.1f;
             }
         }
 

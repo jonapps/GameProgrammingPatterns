@@ -62,7 +62,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
 
              _position = _rail.getPointAt(_railPosition);
-             _shape.Rotation = _railPosition*-60 + _rotation;
+             _shape.Rotation = _railPosition*_rail.Side*60 + _rotation;
         }
 
         public override void Render(RenderTarget renderTarget, float extra)

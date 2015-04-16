@@ -18,6 +18,14 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         Vector2f center;
         int _side;
 
+        public int Side
+        {
+            get
+            {
+                return _side;
+            }
+        }
+
         public Rail(int side): base()
         {
             center = new Vector2f(1280/2f + side*200, 720 / 2f);
