@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Pong.Entities;
 using JGerdesJWiemers.Game.Pong.Controller;
 using SFML.Window;
@@ -20,6 +21,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     {
         private List<Entity> _entities;
         private Ball _ball;
+        private Score _score1;
+        private Score _score2;
 
         public GameScreen(Window w):base(w)
         {
@@ -32,6 +35,13 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             playerPaddle.Controller = new Player(_window);
             _entities.Add(playerPaddle);
             _entities.Add(aiPaddle);
+
+
+            _score1 = new Score(AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT),
+                            new Vector2f(20, 20));
+
+            _score2 = new Score(AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT),
+                            new Vector2f(1280 - 40, 20));
 
            
         }
@@ -46,6 +56,17 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                     _ball.CollideWith((Paddle)entity, (RenderTarget)_window);
                 }
             }
+
+            if (_ball.Position.X < 0)
+            {
+                _score2.addToScore(1);
+                _ball.reset();
+            }
+            else if (_ball.Position.X > 1280)
+            {
+                _score1.addToScore(1);
+                _ball.reset();
+            }
         }
  
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
@@ -54,6 +75,9 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             {
                 entity.Render(renderTarget, extra);
             }
+
+            _score1.Render(renderTarget, extra);
+            _score2.Render(renderTarget, extra);
         }
     }
 }
