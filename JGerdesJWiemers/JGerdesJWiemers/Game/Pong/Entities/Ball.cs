@@ -22,7 +22,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             ((CircleShape)_shape).SetPointCount(6);
             _shape.Origin = new Vector2f(5, 5);
             _position = new Vector2f(x, y);
-            _speed = new Vector2f(5,-1);
+            _speed = new Vector2f(5f,-1.4f);
         }
 
 
@@ -51,7 +51,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             uint j;
             for (uint i = 0; i < shape.GetPointCount(); ++i)
             {
-                if (i == shape.GetPointCount() + 1)
+                if (i == shape.GetPointCount() - 1)
                 {
                     j = 0;
                 }
@@ -66,12 +66,12 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                 p2 = p2 + paddle.Position - shape.Origin;
                 tangente = p2 - p1;
                 tangente /= tangente.Length();
-                normal = new Vector2f(tangente.Y, tangente.X * -1);
+                normal = new Vector2f(tangente.Y, tangente.X * -1) * -1;
                 potencial = _position + normal * _radius;
                 float x = (potencial - p1).Length();
                 float y = (potencial - p2).Length();
                 float z = (p1 - p2).Length();
-                if (x + y - z < 0.01f)
+                if (x + y - z < 0.4f)
                 {
                     float speedLength = _speed.Length();
                     _position -= _speed;
