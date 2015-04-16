@@ -22,14 +22,20 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         public override float Update()
         {
-            if (_paddle.Position.Y < _ball.Position.Y)
+            bool distance = Math.Abs(_paddle.Position.Y - _ball.Position.Y) > 20;
+            if (distance)
             {
-                return 0.2f;
+                if (_paddle.Position.Y < _ball.Position.Y)
+                {
+                    return 0.15f;
+                }
+                else if (_paddle.Position.Y > _ball.Position.Y)
+                {
+                    return -0.15f;
+                }
             }
-            else
-            {
-                return -0.2f;
-            }
+            
+            return 0f;
         }
 
         private float _GenerateNewPosition()
