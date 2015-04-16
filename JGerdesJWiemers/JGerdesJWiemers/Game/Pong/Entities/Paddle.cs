@@ -61,8 +61,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                  _rotation += (_rotationTarget - _rotation) / 10f;
              }
 
-
+             Vector2f oldPosition = new Vector2f(_position.X, _position.Y);
              _position = _rail.getPointAt(_railPosition);
+             _speed = _position - oldPosition;
              _shape.Rotation = _railPosition*_rail.Side*60 + _rotation;
         }
 
