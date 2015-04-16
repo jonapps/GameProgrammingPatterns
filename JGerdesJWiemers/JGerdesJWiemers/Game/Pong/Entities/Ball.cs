@@ -34,10 +34,6 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                 _speed.Y *= -1;
             }
 
-
-            if(_position.X >= 1280){
-                _speed.X *= -1;
-            }
         }
 
         public bool CollideWith(Paddle paddle, RenderTarget w)
