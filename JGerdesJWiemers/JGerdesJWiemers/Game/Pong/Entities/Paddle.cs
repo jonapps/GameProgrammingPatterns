@@ -21,13 +21,13 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         protected float _rotation = 0;
         protected float _rotationTarget = 0;
 
-        public Paddle(Rail rail)
+        public Paddle(Rail rail, Color c)
         {
             _shape = new RectangleShape(new Vector2f(20, 80));
             _shape.Origin = new Vector2f(10, 40);
             _speed = new Vector2f(0, 0);
             _rail = rail;
-            _shape.FillColor = new Color(90, 90, 90, 255);
+            _shape.FillColor = c;
         }
 
          public ControllerBase Controller

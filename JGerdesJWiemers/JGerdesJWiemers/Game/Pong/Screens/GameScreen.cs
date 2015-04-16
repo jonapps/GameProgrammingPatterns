@@ -31,9 +31,9 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             _entities = new List<Entity>();
             _ball = new Ball(1, 1);
             _entities.Add(_ball);
-            Paddle aiPaddle = new Paddle(new Rail(Rail.SIDE_RIGHT));
+            Paddle aiPaddle = new Paddle(new Rail(Rail.SIDE_RIGHT), new Color(49, 27, 146, 80));
             aiPaddle.Controller = new Ai(_window, aiPaddle, _ball);
-            Paddle playerPaddle = new Paddle(new Rail(Rail.SIDE_LEFT));
+            Paddle playerPaddle = new Paddle(new Rail(Rail.SIDE_LEFT), new Color(146, 27, 37, 80));
             playerPaddle.Controller = new Player(_window, playerPaddle);
             _entities.Add(playerPaddle);
             _entities.Add(aiPaddle);
