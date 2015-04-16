@@ -48,5 +48,11 @@ namespace JGerdesJWiemers.Game.Pong.Entities
              _position = _rail.getPointAt(_railPosition);
         }
 
+        public override void Render(RenderTarget renderTarget, float extra)
+        {
+            renderTarget.Draw(_rail);
+            base.Render(renderTarget, extra);
+        }
+
     }
 }
