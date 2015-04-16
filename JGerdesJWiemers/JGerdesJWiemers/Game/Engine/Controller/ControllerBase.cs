@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Pong.Entities;
 
 namespace JGerdesJWiemers.Game.Engine.Controller
 {
@@ -13,14 +14,16 @@ namespace JGerdesJWiemers.Game.Engine.Controller
     {
 
         protected float _direction;
+        protected Paddle _paddle;
         protected Window _window;
 
-        public ControllerBase(Window w)
+        public ControllerBase(Window w, Paddle paddle)
         {
             this._window = w;
             this._direction = 0;
+            _paddle = paddle;
         }
         
-        public abstract Vector2f Update();
+        public abstract float Update();
     }
 }
