@@ -15,12 +15,12 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         public StartScreen(Window w)
             : base(w)
         {
-            //_window.KeyPressed+= this._ProcessKeyInput;
+            _window.KeyPressed+= this._ProcessKeyInput;
         }
 
-        /*private _ProcessKeyInput(Object sender, KeyEventArgs e){
-
-        }*/
+        private void _ProcessKeyInput(Object sender, KeyEventArgs e){
+    
+        }
 
         public override void Update()
         {

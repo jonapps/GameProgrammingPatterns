@@ -16,7 +16,6 @@ namespace JGerdesJWiemers.Game.Engine
         protected Vector2f _position;
         protected Vector2f _speed;
         protected Shape _shape;
-        protected ControllerBase _controller;
 
 
         public Shape Shape
@@ -42,13 +41,6 @@ namespace JGerdesJWiemers.Game.Engine
                 }
             }
         }
-        public ControllerBase Controller
-        {
-            set
-            {
-                this._controller = value;
-            }
-        }
 
         public Vector2f Position
         {
@@ -60,10 +52,6 @@ namespace JGerdesJWiemers.Game.Engine
 
         public virtual void Update()
         {
-            if (this._controller != null)
-            {
-                this._position.Y += this._controller.Update() * Game.PADDLE_GAME_SPEED;
-            }
             _position += _speed;
         }
 

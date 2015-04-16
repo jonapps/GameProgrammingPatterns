@@ -12,7 +12,7 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 {
     class Player : ControllerBase
     {
-        public static readonly float CONTROLLER_DEADZONE = 10;
+        public static readonly float CONTROLLER_DEADZONE = 20;
         public static readonly float CONTROLLER_MAX_INPUT = 100;
         public static readonly long MILLISECONDS_TO_FULL_SPEED = 1000;
 
