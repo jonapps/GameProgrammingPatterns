@@ -15,6 +15,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
     {
        
         private float _radius = 10;
+        private float _generationSpeed = 5;
 
         public Ball(float x, float y)
         {
@@ -29,11 +30,12 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         {
             _position = new Vector2f(1280 / 2f, 720 / 2f);
             Random rand = new Random();
-            _speed = new Vector2f(rand.Next(1,5), rand.Next(1,5));
+            _speed = new Vector2f(rand.Next(-5,5), rand.Next(-5,5));
             //normalize
             _speed /= _speed.Length();
             //set length
-            _speed *= 5;
+            _speed *= _generationSpeed;
+            _generationSpeed += 2;
         }
 
         public override void Update()
