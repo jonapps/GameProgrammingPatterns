@@ -22,7 +22,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             ((CircleShape)_shape).SetPointCount(6);
             _shape.Origin = new Vector2f(5, 5);
             _position = new Vector2f(x, y);
-            _speed = new Vector2f(4, 5);
+            _speed = new Vector2f(5,1);
         }
 
 
@@ -40,7 +40,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             }
         }
 
-        public bool CollideWith(Paddle paddle)
+        public bool CollideWith(Paddle paddle, RenderTarget w)
         {
             Shape shape = paddle.Shape;
             Vector2f p1;
@@ -59,7 +59,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                 {
                     j = i + 1;
                 }
-               
+                
                 p1 = shape.GetPoint(i);
                 p1 = p1 + paddle.Position - shape.Origin;
                 p2 = shape.GetPoint(j);
@@ -68,11 +68,15 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                 tangente /= tangente.Length();
                 normal = new Vector2f(tangente.Y, tangente.X * -1);
                 potencial = _position + normal * _radius;
-
-                if ((potencial - p1).Length2() + (potencial - p2).Length2() - (p1 - p2).Length2() < 0.01f)
+                float x = (potencial - p1).Length();
+                float y = (potencial - p2).Length();
+                float z = (p1 - p2).Length();
+                if (x + y - z < 0.01f)
                 {
                     float speedLength = _speed.Length();
+                    _position -= _speed;
                     _speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, _speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, _speed) * normal;
+                    
                     return true;
                 }
             }

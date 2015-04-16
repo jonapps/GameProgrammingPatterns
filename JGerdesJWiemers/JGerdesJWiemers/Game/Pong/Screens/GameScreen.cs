@@ -43,7 +43,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                 entity.Update();
                 if (entity is Paddle)
                 {
-                    _ball.CollideWith((Paddle)entity);
+                    _ball.CollideWith((Paddle)entity, (RenderTarget)_window);
                 }
             }
         }
