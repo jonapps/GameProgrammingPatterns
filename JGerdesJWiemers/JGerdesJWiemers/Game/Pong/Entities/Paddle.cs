@@ -19,6 +19,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         protected Rail _rail;
         protected float _railPosition = 0;
         protected float _rotation = 0;
+        protected float _rotationTarget = 0;
 
         public Paddle(Rail rail)
         {
@@ -34,17 +35,29 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             {
                 this._controller = value;
             }
-        }
+        
+         }
+
+         public float Rotation
+         {
+             get
+             {
+                 return _rotationTarget;
+             }
+             set
+             {
+                 _rotationTarget = value;
+             }
+         }
 
         public override void Update()
         {
              if (this._controller != null)
              {
-                 Vector2f updateData = this._controller.Update();
-                 _railPosition += updateData.X/10;
+                 _railPosition += this._controller.Update() / 10;
                  _railPosition = Math.Max(-1, _railPosition);
                  _railPosition = Math.Min(1, _railPosition);
-                 _rotation = updateData.Y * 90 ;
+                 _rotation += (_rotationTarget - _rotation) / 10f;
              }
 
 

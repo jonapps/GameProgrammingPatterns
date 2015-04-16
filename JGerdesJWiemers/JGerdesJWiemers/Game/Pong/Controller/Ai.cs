@@ -15,14 +15,14 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         private Ball _ball;
 
-        public Ai(Window w, Ball b) : base(w)
+        public Ai(Window w, Paddle p, Ball b) : base(w, p)
         {
             this._ball = b;
         }
 
-        public override Vector2f Update()
+        public override float Update()
         {
-            return new Vector2f(0,0) ;
+            return 0 ;
         }
 
         private float _GenerateNewPosition()
