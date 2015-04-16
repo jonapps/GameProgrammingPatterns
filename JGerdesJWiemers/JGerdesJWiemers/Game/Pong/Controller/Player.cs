@@ -18,6 +18,8 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         private float _controllerMovement = 0;
         private float _keyMovement = 0;
+
+        private float _rotation;
         private Stopwatch _stopwatch;
 
         //true is up, false is down
@@ -39,9 +41,16 @@ namespace JGerdesJWiemers.Game.Pong.Controller
                 _controllerMovement /= CONTROLLER_MAX_INPUT * CONTROLLER_MAX_INPUT;
                 
             }
+
+            if (e.Axis == Joystick.Axis.X)
+            {
+                _rotation = Math.Sign(e.Position) * e.Position * e.Position - CONTROLLER_DEADZONE;
+                _rotation /= CONTROLLER_MAX_INPUT * CONTROLLER_MAX_INPUT;
+
+            }
         }
 
-        public override float Update()
+        public override Vector2f Update()
         {
             if (_stopwatch.ElapsedMilliseconds != 0)
             {
@@ -54,7 +63,7 @@ namespace JGerdesJWiemers.Game.Pong.Controller
             }
             float currentMovement = _controllerMovement != 0 ? _controllerMovement : _keyMovement;
             _keyMovement /= 1.2f;
-            return currentMovement;
+            return new Vector2f(currentMovement, _rotation);
         }
 
         private void _ProcessKeyboardPress(Object sender, KeyEventArgs e)

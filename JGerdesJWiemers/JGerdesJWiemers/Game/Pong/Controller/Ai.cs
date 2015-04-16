@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JGerdesJWiemers.Game.Engine.Controller;
 using JGerdesJWiemers.Game.Pong.Entities;
 using SFML.Window;
+using SFML.System;
 
 namespace JGerdesJWiemers.Game.Pong.Controller
 {
@@ -19,9 +20,9 @@ namespace JGerdesJWiemers.Game.Pong.Controller
             this._ball = b;
         }
 
-        public override float Update()
+        public override Vector2f Update()
         {
-            return this._GenerateNewPosition();
+            return new Vector2f(0,0) ;
         }
 
         private float _GenerateNewPosition()

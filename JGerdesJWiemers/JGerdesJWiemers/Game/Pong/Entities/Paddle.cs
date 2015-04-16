@@ -40,9 +40,11 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         {
              if (this._controller != null)
              {
-                 _railPosition += this._controller.Update()/10;
+                 Vector2f updateData = this._controller.Update();
+                 _railPosition += updateData.X/10;
                  _railPosition = Math.Max(-1, _railPosition);
                  _railPosition = Math.Min(1, _railPosition);
+                 _rotation = updateData.Y * 90 ;
              }
 
 

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SFML.System;
+using JGerdesJWiemers.Game.Engine;
 
 namespace JGerdesJWiemers.Game.Engine.Controller
 {
@@ -19,6 +21,6 @@ namespace JGerdesJWiemers.Game.Engine.Controller
             this._direction = 0;
         }
         
-        public abstract float Update();
+        public abstract Vector2f Update();
     }
 }
