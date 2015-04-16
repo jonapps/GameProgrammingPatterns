@@ -40,14 +40,14 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
 
             _score1 = new Score(AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT),
-                            new Vector2f(20, 20));
+                            new Vector2f(30, 20), new Color(146, 27, 37, 100));
 
             _score2 = new Score(AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT),
-                            new Vector2f(1280 - 40, 20));
+                            new Vector2f(1280 - 50, 20), new Color(49, 27, 146, 100));
 
             _background = new Sprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BACKGROUND));
 
-
+           
            
         }
 

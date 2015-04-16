@@ -16,6 +16,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
        
         private float _radius = 10;
         private float _generationSpeed = 5;
+        private float _rotationSpeed = 2f;
 
         public Ball(float x, float y)
         {
@@ -40,7 +41,16 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             {
                 _speed.X = System.Math.Sign(_speed.X);
             }
-            _generationSpeed += 1;
+            if (_speed.X == 0)
+            {
+                _speed.X = -1;
+            }
+
+            if (_generationSpeed < 10)
+            {
+                _generationSpeed += 0.5f;
+            }
+            
         }
 
         public override void Update()
@@ -49,7 +59,10 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             if (_position.Y >= 720 || _position.Y <= 0)
             {
                 _speed.Y *= -1;
+                _rotationSpeed = _speed.Y;
             }
+
+            _shape.Rotation += _rotationSpeed ;
 
         }
 
@@ -92,7 +105,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                     float speedLength = _speed.Length();
                     _position -= _speed * (pointToMiddle - 1) * -1;
                     _speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, _speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, _speed) * normal;
-                    
+                    _rotationSpeed = pointToMiddle * pointToMiddle * 40;
                     return true;
                 }
                 pointToMiddle = (p1 - _position).Length() - _radius;

@@ -16,7 +16,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         private Font _font;
         private Text _text;
 
-        public Score(Font font, Vector2f position)
+        public Score(Font font, Vector2f position, Color color)
             :base()
         {
             _font = font;
@@ -25,6 +25,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             _score = 0;
             _text.DisplayedString = "0";
             _text.Position = position;
+            _text.Color = color;
 
         }
 
