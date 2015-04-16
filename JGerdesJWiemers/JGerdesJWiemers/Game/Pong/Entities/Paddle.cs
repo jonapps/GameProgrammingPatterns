@@ -20,6 +20,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         protected float _railPosition = 0;
         protected float _rotation = 0;
         protected float _rotationTarget = 0;
+        protected byte _alpha ;
 
         public Paddle(Rail rail, Color c)
         {
@@ -28,6 +29,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             _speed = new Vector2f(0, 0);
             _rail = rail;
             _shape.FillColor = c;
+            _alpha = c.A;
         }
 
          public ControllerBase Controller
@@ -65,12 +67,23 @@ namespace JGerdesJWiemers.Game.Pong.Entities
              _position = _rail.getPointAt(_railPosition);
              _speed = _position - oldPosition;
              _shape.Rotation = _railPosition*_rail.Side*60 + _rotation;
+
+            byte a = _shape.FillColor.A;
+            float f = ( _alpha - a)/15f;
+            a += (byte)f;
+            _shape.FillColor = new Color(_shape.FillColor.R, _shape.FillColor.G, _shape.FillColor.B, a);
         }
 
         public override void Render(RenderTarget renderTarget, float extra)
         {
             renderTarget.Draw(_rail);
             base.Render(renderTarget, extra);
+        }
+
+        public void onCollision()
+        {
+            _shape.FillColor = new Color(_shape.FillColor.R, _shape.FillColor.G, _shape.FillColor.B, 255);
+            _alpha = 80;
         }
 
     }
