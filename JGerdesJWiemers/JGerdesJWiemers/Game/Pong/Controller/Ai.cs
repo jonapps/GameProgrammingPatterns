@@ -22,7 +22,14 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         public override float Update()
         {
-            return 0 ;
+            if (_paddle.Position.Y < _ball.Position.Y)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         private float _GenerateNewPosition()
