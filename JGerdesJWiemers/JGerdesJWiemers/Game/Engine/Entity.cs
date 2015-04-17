@@ -57,7 +57,7 @@ namespace JGerdesJWiemers.Game.Engine
 
         public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            _shape.Position = _position;
+            _shape.Position = _position + _speed * extra;
             renderTarget.Draw(_shape);
         }
     }
