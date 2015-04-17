@@ -7,7 +7,7 @@ using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Window;
 using SFML.Graphics;
-using SFML.System;
+    using SFML.System;
 
 namespace JGerdesJWiemers.Game.Pong.Entities
 {
@@ -18,6 +18,11 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         private float _generationSpeed = 5;
         private float _rotationSpeed = 2f;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public Ball(float x, float y)
         {
             _shape = new CircleShape(_radius);
@@ -28,6 +33,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             reset();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void reset()
         {
             _position = new Vector2f(1280 / 2f, 720 / 2f);
@@ -53,6 +61,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Update()
         {
             base.Update();
@@ -66,6 +77,12 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="paddle"></param>
+        /// <param name="w"></param>
+        /// <returns></returns>
         public bool CollideWith(Paddle paddle, RenderTarget w)
         {
             Shape shape = paddle.Shape;
