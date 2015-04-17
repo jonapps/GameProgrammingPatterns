@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         public void solve(Entity a, Entity b)
         {
-
+            
         }
     }
 }
