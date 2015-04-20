@@ -26,10 +26,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         private Collision _SolveCircleRectangle(Collision c)
         {
-            for (uint i = 0; i < c.First.Shape.GetPointCount(); ++i)
-            {
-                Vector2f p1, p2, ps1, ps2;
-            }
+            
             return c;
         }
     }

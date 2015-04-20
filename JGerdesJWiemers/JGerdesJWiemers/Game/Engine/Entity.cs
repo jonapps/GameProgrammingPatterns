@@ -14,14 +14,12 @@ namespace JGerdesJWiemers.Game.Engine
     abstract class Entity : IUpdateable, IRenderable
     {
         protected Vector2f _position;
-        protected Vector2f _lastPosition;
         protected Vector2f _speed;
         protected Shape _shape;
 
         public Entity(float x, float y)
         {
             _position = new Vector2f(x, y);
-            _lastPosition = new Vector2f(x, y);
         }
 
         public Shape Shape
@@ -53,14 +51,6 @@ namespace JGerdesJWiemers.Game.Engine
             get
             {
                 return _position;
-            }
-        }
-
-        public Vector2f LastPosition
-        {
-            get
-            {
-                return _lastPosition;
             }
         }
 
