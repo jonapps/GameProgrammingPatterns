@@ -54,7 +54,6 @@ namespace JGerdesJWiemers.Game
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.SetVerticalSyncEnabled(true);
-            
             try
             {
                 _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
@@ -124,7 +123,7 @@ namespace JGerdesJWiemers.Game
         private void Run()
         {
             _stopWatch.Start();
-            while (this._window.IsOpen)
+            while (_window.IsOpen)
             {
                 TimeSpan currentTime = _stopWatch.Elapsed;
                 TimeSpan elapsedTime = currentTime - lastTime;

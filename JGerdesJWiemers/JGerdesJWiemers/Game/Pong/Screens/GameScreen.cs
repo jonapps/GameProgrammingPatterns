@@ -23,13 +23,12 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         private Ball _ball;
         private Score _score1;
         private Score _score2;
-
         private Sprite _background;
 
         public GameScreen(Window w):base(w)
         {
             _entities = new List<Entity>();
-            _ball = new Ball(1, 1);
+            _ball = new Ball(1, 1, 10);
             _entities.Add(_ball);
             Paddle aiPaddle = new Paddle(new Rail(Rail.SIDE_RIGHT), new Color(49, 27, 146, 80));
             aiPaddle.Controller = new Ai(_window, aiPaddle, _ball);
@@ -56,13 +55,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             foreach(Entity entity in _entities)
             {
                 entity.Update();
-                if (entity is Paddle)
-                {
-                    if (_ball.CollideWith((Paddle)entity, (RenderTarget)_window))
-                    {
-                        ((Paddle)entity).onCollision();
-                    }
-                }
+                
             }
 
             if (_ball.Position.X < 0)

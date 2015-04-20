@@ -7,19 +7,25 @@ using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Window;
 using SFML.Graphics;
-using SFML.System;
+    using SFML.System;
+using JGerdesJWiemers.Game.Engine.Entities;
 
 namespace JGerdesJWiemers.Game.Pong.Entities
 {
-    class Ball : Entity
+    class Ball : CircleEntity
     {
-       
-        private float _radius = 10;
+      
         private float _generationSpeed = 5;
         private float _rotationSpeed = 2f;
 
-        public Ball(float x, float y)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public Ball(float x, float y, float r) : base(x,y,r)
         {
+            _radius = r;
             _shape = new CircleShape(_radius);
             ((CircleShape)_shape).SetPointCount(6);
             _shape.Origin = new Vector2f(10, 10);
@@ -28,6 +34,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             reset();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void reset()
         {
             _position = new Vector2f(1280 / 2f, 720 / 2f);
@@ -53,6 +62,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Update()
         {
             base.Update();
@@ -66,57 +78,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
         }
 
-        public bool CollideWith(Paddle paddle, RenderTarget w)
+        public override void onCollision()
         {
-            Shape shape = paddle.Shape;
-            
-            Vector2f p1;
-            Vector2f p2;
-            Vector2f normal;
-            Vector2f tangente;
-            Vector2f potencial;
-            
-            uint j;
-            for (uint i = 0; i < shape.GetPointCount(); ++i)
-            {
-                if (i == shape.GetPointCount() - 1)
-                {
-                    j = 0;
-                }
-                else
-                {
-                    j = i + 1;
-                }
-                
-                p1 = shape.GetPoint(i);
-                p1 = shape.Transform.TransformPoint(p1);
-                p2 = shape.GetPoint(j);
-                p2 = shape.Transform.TransformPoint(p2);
-                tangente = p2 - p1;
-                tangente /= tangente.Length();
-                normal = new Vector2f(tangente.Y, tangente.X * -1) * -1;
-                potencial = _position + normal * _radius;
-                float x = (potencial - p1).Length();
-                float y = (potencial - p2).Length();
-                float z = (p1 - p2).Length();
-                float pointToMiddle = x + y - z;
-                if (pointToMiddle < 0.4f)
-                {
-                    float speedLength = _speed.Length();
-                    _position -= normal * (pointToMiddle - 1) * -1;
-                    _speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, _speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, _speed) * normal;
-                    _rotationSpeed = pointToMiddle * pointToMiddle * 40;
-                    return true;
-                }
-                pointToMiddle = (p1 - _position).Length() - _radius;
-                if (pointToMiddle < 0.4f)
-                {
-                    _position -= (normal * (pointToMiddle - 1) * -1f);
-                    _speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, _speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, _speed) * normal;
-                    return true;
-                }
-            }
-                return false;
+            // todo
         }
       
 

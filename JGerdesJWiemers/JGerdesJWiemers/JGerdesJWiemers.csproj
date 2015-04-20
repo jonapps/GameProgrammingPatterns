@@ -79,12 +79,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\Engine\Controller\ControllerBase.cs" />
+    <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
+    <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
     <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
     <Compile Include="Game\Engine\Graphics\Screen.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
+    <Compile Include="Game\Engine\Utils\CollisionSolver.cs" />
+    <Compile Include="Game\Engine\Helper\Collision.cs" />
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Pong\Controller\Ai.cs" />
