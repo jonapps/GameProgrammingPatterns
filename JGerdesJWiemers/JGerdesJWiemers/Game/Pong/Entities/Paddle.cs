@@ -23,7 +23,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         protected float _rotationTarget = 0;
         protected byte _alpha ;
 
-        public Paddle(Rail rail, Color c)
+        public Paddle(Rail rail, Color c) : base(rail.getPointAt(0).X, rail.getPointAt(0).Y)
         {
             _shape = new RectangleShape(new Vector2f(20, 80));
             _shape.Origin = new Vector2f(10, 40);
@@ -81,7 +81,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             base.Render(renderTarget, extra);
         }
 
-        public void onCollision()
+        public override void onCollision()
         {
             _shape.FillColor = new Color(_shape.FillColor.R, _shape.FillColor.G, _shape.FillColor.B, 255);
             _alpha = 80;

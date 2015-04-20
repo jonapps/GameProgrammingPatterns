@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.Engine.Entities
 {
-    class CircleEntity : Entity
+    abstract class CircleEntity : Entity
     {
         protected float _radius;
 
@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         /// 
         /// </summary>
         /// <param name="r"></param>
-        public CircleEntity(float r)
+        public CircleEntity(float x, float y, float r) : base(x,y)
         {
             this._radius = r;
         }

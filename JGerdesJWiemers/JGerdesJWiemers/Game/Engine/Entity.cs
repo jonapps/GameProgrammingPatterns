@@ -17,8 +17,12 @@ namespace JGerdesJWiemers.Game.Engine
         protected Vector2f _lastPosition;
         protected Vector2f _speed;
         protected Shape _shape;
-        
 
+        public Entity(float x, float y)
+        {
+            _position = new Vector2f(x, y);
+            _lastPosition = new Vector2f(x, y);
+        }
 
         public Shape Shape
         {
@@ -70,5 +74,7 @@ namespace JGerdesJWiemers.Game.Engine
             _shape.Position = _position + _speed * extra;
             renderTarget.Draw(_shape);
         }
+
+        public abstract void onCollision();
     }
 }

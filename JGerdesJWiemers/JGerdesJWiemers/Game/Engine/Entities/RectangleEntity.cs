@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.Engine.Entities
 {
-    class RectangleEntity : Entity
+    abstract class RectangleEntity : Entity
     {
         /// <summary>
         /// 
         /// </summary>
-        public RectangleEntity()
+        public RectangleEntity(float x, float y) : base(x, y)
         {
 
         }

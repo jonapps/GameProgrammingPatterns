@@ -55,13 +55,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             foreach(Entity entity in _entities)
             {
                 entity.Update();
-                if (entity is Paddle)
-                {
-                    if (_ball.CollideWith((Paddle)entity, (RenderTarget)_window))
-                    {
-                        ((Paddle)entity).onCollision();
-                    }
-                }
+                
             }
 
             if (_ball.Position.X < 0)
