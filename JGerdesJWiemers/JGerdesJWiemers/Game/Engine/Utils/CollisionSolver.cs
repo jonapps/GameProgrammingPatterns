@@ -10,7 +10,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
     {
         public CollisionSolver()
         {
-
+            
         }
 
         public void solve(Entity a, Entity b)
