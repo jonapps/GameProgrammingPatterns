@@ -88,5 +88,10 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             _score1.Render(renderTarget, extra);
             _score2.Render(renderTarget, extra);
         }
+
+        public override void Exit()
+        {
+            
+        }
     }
 }

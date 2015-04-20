@@ -37,5 +37,8 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         /// <param name="renderTarget">target to render content of screen to</param>
         /// <param name="extra">value between 0 and 1 for extrapolation</param>
         public abstract void Render(RenderTarget renderTarget, float extra);
+
+
+        public abstract void Exit();
     }
 }

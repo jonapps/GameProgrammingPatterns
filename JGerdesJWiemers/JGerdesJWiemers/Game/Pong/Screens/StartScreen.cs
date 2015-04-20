@@ -63,5 +63,11 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             renderTarget.Draw(_startText);
             renderTarget.Draw(_versionText);
         }
+
+        public override void Exit()
+        {
+            _window.KeyPressed -= this._ProcessInput;
+            _window.JoystickButtonPressed -= this._ProcessInput;
+        }
     }
 }

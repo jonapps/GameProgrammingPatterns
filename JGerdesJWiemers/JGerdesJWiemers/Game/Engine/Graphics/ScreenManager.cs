@@ -22,6 +22,9 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             {
                 if (value != null)
                 {
+                    if(_currentScreen != null){
+                        _currentScreen.Exit();
+                    }
                     _currentScreen = value;
                     _currentScreen.Manager = this;
                 }
@@ -42,6 +45,12 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             _currentScreen.Render(renderTarget, extra);
+        }
+
+
+        public override void Exit()
+        {
+            _currentScreen.Exit();
         }
     }
 }
