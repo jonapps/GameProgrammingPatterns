@@ -16,18 +16,34 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             
         }
 
-        public void solve(Collision c)
+        public Collision solve(RectangleEntity a, CircleEntity b)
         {
-            if (c.First is CircleEntity && c.Second is RectangleEntity)
-            {
-                _SolveCircleRectangle(c);
-            }
+            return _SolveCircleRectangle(a, b);
         }
 
-        private Collision _SolveCircleRectangle(Collision c)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private Collision _SolveCircleRectangle(RectangleEntity a, CircleEntity b)
         {
-            
-            return c;
+            Vector2f p1, p2, l1, l2;
+            for (uint i = 0; i < a.LastPoints.Count(); ++i)
+            {
+                //todo
+            }
+
+                return new Collision(a, b);
         }
     }
 }

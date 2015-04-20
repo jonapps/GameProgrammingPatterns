@@ -12,6 +12,15 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         protected List<Vector2f> _lastPoints;
 
+
+        public List<Vector2f> LastPoints
+        {
+            get
+            {
+                return _lastPoints;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
