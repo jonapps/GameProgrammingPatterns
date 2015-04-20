@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JGerdesJWiemers.Game.Engine.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             
         }
 
-        public void solve(Entity a, Entity b)
+        public void solve(Collision c)
         {
             
         }

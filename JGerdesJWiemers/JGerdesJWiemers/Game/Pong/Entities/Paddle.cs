@@ -8,10 +8,11 @@ using JGerdesJWiemers.Game.Engine.Controller;
 using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
+using JGerdesJWiemers.Game.Engine.Entities;
 
 namespace JGerdesJWiemers.Game.Pong.Entities
 {
-    class Paddle : Entity
+    class Paddle : RectangleEntity
     {
 
 

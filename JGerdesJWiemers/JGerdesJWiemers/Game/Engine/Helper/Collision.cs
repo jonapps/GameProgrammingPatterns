@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.Game.Engine.Utils.Helper
+namespace JGerdesJWiemers.Game.Engine.Helper
 {
     class Collision
     {
 
         private Entity _first;
-        private Entity _secound;
+        private Entity _second;
 
 
         
         public Collision(Entity a, Entity b)
         {
             this._first = a;
-            this._secound = b;
+            this._second = b;
         }
 
         #region Collision getter/setter
@@ -29,11 +29,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper
             }
         }
 
-        public Entity Secound
+        public Entity Second
         {
             get
             {
-                return _secound;
+                return _second;
             }
         }
         #endregion

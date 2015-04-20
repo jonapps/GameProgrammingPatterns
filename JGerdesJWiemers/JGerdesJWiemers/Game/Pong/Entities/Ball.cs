@@ -8,13 +8,13 @@ using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Window;
 using SFML.Graphics;
     using SFML.System;
+using JGerdesJWiemers.Game.Engine.Entities;
 
 namespace JGerdesJWiemers.Game.Pong.Entities
 {
-    class Ball : Entity
+    class Ball : CircleEntity
     {
-       
-        private float _radius = 10;
+      
         private float _generationSpeed = 5;
         private float _rotationSpeed = 2f;
 
@@ -23,8 +23,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Ball(float x, float y)
+        public Ball(float x, float y, float r) : base(r)
         {
+            _radius = r;
             _shape = new CircleShape(_radius);
             ((CircleShape)_shape).SetPointCount(6);
             _shape.Origin = new Vector2f(10, 10);

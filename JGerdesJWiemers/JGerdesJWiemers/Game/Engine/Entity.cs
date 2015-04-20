@@ -17,7 +17,7 @@ namespace JGerdesJWiemers.Game.Engine
         protected Vector2f _lastPosition;
         protected Vector2f _speed;
         protected Shape _shape;
-
+        
 
 
         public Shape Shape
