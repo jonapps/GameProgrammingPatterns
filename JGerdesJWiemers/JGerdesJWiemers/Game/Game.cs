@@ -18,6 +18,7 @@ namespace JGerdesJWiemers.Game
 {
     class Game
     {
+        public static readonly string VERSION = "v0.1.1";
         public static readonly string GAME_TITLE = "Pong";
         public static float PADDLE_GAME_SPEED = 25;
 
@@ -49,7 +50,7 @@ namespace JGerdesJWiemers.Game
             _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();
             this._screenManager = new ScreenManager(_window);
-            this._screenManager.CurrentScreen = new GameScreen(_window);
+            this._screenManager.CurrentScreen = new StartScreen(_window);
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.SetVerticalSyncEnabled(true);

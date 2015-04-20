@@ -23,6 +23,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 if (value != null)
                 {
                     _currentScreen = value;
+                    _currentScreen.Manager = this;
                 }
             }
         }

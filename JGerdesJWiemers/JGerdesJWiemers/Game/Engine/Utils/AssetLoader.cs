@@ -11,6 +11,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
     {
         public static readonly String FONT_ROBOTO_LIGHT = "Roboto-Light.ttf";
         public static readonly String TEXTURE_BACKGROUND = "background.png";
+        public static readonly String TEXTURE_TITLE_BACKGROUND = "title.png";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -27,6 +28,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
             LoadFont(FONT_ROBOTO_LIGHT, FONT_ROBOTO_LIGHT);
             LoadTexture(TEXTURE_BACKGROUND, TEXTURE_BACKGROUND);
+            LoadTexture(TEXTURE_TITLE_BACKGROUND, TEXTURE_TITLE_BACKGROUND);
         }
 
         public void LoadFont(String name, String filename)
