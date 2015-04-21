@@ -30,7 +30,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         {
             _colSolve = new CollisionSolver();
             _entities = new List<Entity>();
-            _ball = new Ball(1, 1, 10);
+            _ball = new Ball(1, 1, 10, 2f);
             _entities.Add(_ball);
             Paddle aiPaddle = new Paddle(new Rail(Rail.SIDE_RIGHT), new Color(49, 27, 146, 80));
             aiPaddle.Controller = new Ai(_window, aiPaddle, _ball);

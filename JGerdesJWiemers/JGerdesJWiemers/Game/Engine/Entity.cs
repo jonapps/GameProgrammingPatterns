@@ -52,6 +52,10 @@ namespace JGerdesJWiemers.Game.Engine
             {
                 return _position;
             }
+            set
+            {
+                _position = value;
+            }
         }
 
         public virtual void Update()

@@ -23,9 +23,8 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Ball(float x, float y, float r) : base(x,y,r)
+        public Ball(float x, float y, float r, float rs) : base(x,y,r,rs)
         {
-            _radius = r;
             _shape = new CircleShape(_radius);
             ((CircleShape)_shape).SetPointCount(6);
             _shape.Origin = new Vector2f(10, 10);

@@ -12,13 +12,29 @@ namespace JGerdesJWiemers.Game.Engine.Entities
     {
         protected float _radius;
         protected Vector2f _lastPosition;
-
+        protected float _rotationSpeed;
 
         public float Radius
         {
             get
             {
                 return _radius;
+            }
+            set
+            {
+                _radius = value;
+            }
+        }
+
+        public float RotationSpeed
+        {
+            get
+            {
+                return _rotationSpeed;
+            }
+            set
+            {
+                _rotationSpeed = value;
             }
         }
 
@@ -28,14 +44,19 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             {
                 return _lastPosition;
             }
+            set
+            {
+                _lastPosition = value;
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="r"></param>
-        public CircleEntity(float x, float y, float r) : base(x,y)
+        public CircleEntity(float x, float y, float r, float rs) : base(x,y)
         {
-            this._radius = r;
+            _radius = r;
+            _rotationSpeed = rs;
         }
 
         public override void Update()
