@@ -40,6 +40,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         public override void Update()
         {
+            base.Update();
             _lastPosition = _GetLastPosition();
         }
 
