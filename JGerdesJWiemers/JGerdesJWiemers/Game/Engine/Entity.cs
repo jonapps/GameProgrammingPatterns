@@ -39,7 +39,7 @@ namespace JGerdesJWiemers.Game.Engine
 
             set
             {
-                if (value.Equals(null))
+                if (!value.Equals(null))
                 {
                     _speed = value;
                 }
