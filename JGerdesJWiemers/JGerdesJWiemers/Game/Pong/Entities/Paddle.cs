@@ -73,6 +73,8 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             float f = ( _alpha - a)/15f;
             a += (byte)f;
             _shape.FillColor = new Color(_shape.FillColor.R, _shape.FillColor.G, _shape.FillColor.B, a);
+
+            _shape.Position = _position;
         }
 
         public override void Render(RenderTarget renderTarget, float extra)
