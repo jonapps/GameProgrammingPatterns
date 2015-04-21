@@ -45,6 +45,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         public override void Update()
         {
+            base.Update();
             _lastPoints = GetCurrentPoints();
         }
     }
