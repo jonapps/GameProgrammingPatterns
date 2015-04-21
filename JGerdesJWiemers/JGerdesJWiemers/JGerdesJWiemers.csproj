@@ -92,7 +92,6 @@
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Pong\Controller\Ai.cs" />
-    <Compile Include="Game\Pong\Controller\Player2.cs" />
     <Compile Include="Game\Pong\Controller\Player.cs" />
     <Compile Include="Game\Pong\Entities\Ball.cs" />
     <Compile Include="Game\Pong\Entities\Paddle.cs" />
