@@ -14,6 +14,14 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         protected Vector2f _lastPosition;
 
 
+        public float Radius
+        {
+            get
+            {
+                return _radius;
+            }
+        }
+
         public Vector2f LastPosition
         {
             get

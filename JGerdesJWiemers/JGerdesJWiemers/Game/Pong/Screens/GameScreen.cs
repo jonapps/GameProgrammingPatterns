@@ -12,7 +12,7 @@ using SFML.Window;
 using SFML.Graphics;
 using System.Diagnostics;
 using SFML.System;
-
+using JGerdesJWiemers.Game.Engine.Entities;
 
 
 namespace JGerdesJWiemers.Game.Pong.Screens
@@ -24,9 +24,11 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         private Score _score1;
         private Score _score2;
         private Sprite _background;
+        private CollisionSolver _colSolve;
 
         public GameScreen(Window w):base(w)
         {
+            _colSolve = new CollisionSolver();
             _entities = new List<Entity>();
             _ball = new Ball(1, 1, 10);
             _entities.Add(_ball);
@@ -55,6 +57,13 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             foreach(Entity entity in _entities)
             {
                 entity.Update();
+                if (entity is RectangleEntity)
+                {
+                    if (_colSolve.solve((RectangleEntity)entity, _ball))
+                    {
+                        ((RectangleEntity)entity).onCollision();
+                    }
+                }
                 
             }
 
