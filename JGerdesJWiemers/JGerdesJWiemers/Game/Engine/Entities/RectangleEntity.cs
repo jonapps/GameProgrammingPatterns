@@ -17,6 +17,10 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             get
             {
+                if (_lastPoints.Count < 4)
+                {
+                    return GetCurrentPoints();
+                }
                 return _lastPoints;
             }
         }
@@ -26,7 +30,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         /// </summary>
         public RectangleEntity(float x, float y) : base(x, y)
         {
-
+            _lastPoints = new List<Vector2f>();
         }
 
         /// <summary>

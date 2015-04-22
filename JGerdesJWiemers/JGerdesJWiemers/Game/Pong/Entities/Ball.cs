@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
     class Ball : CircleEntity
     {
       
-        private float _generationSpeed = 5;
+        private float _generationSpeed = 10;
         private float _rotationSpeed = 2f;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         {
             _position = new Vector2f(1280 / 2f, 720 / 2f);
             Random rand = new Random();
-            _speed = new Vector2f(rand.Next(-5,5), rand.Next(-5,5));
+            _speed = new Vector2f(rand.Next(-5,5), rand.Next(-1,1));
             //normalize
             _speed /= _speed.Length();
             //set length
