@@ -47,11 +47,11 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 {
                     if (Math.Sign(e.Position) == Math.Sign(UpMax))
                     {
-                        OnUp(e.Position * 100 / UpMax);
+                        OnUp(Math.Abs(e.Position * 100 / UpMax));
                     }
                     else
                     {
-                        OnDown(e.Position * 100 / DownMax);
+                        OnDown(Math.Abs(e.Position * 100 / DownMax));
                     }
                 }
                 else if(e.Axis == AxisLeftRight)
@@ -100,19 +100,19 @@ namespace JGerdesJWiemers.Game.Engine.Input
         {
             if (e.Code == KeyUp)
             {
-                OnUp(2);
+                OnUp(0);
             }
             else if (e.Code == KeyDown)
             {
-                OnDown(2);
+                OnDown(0);
             }
             else if (e.Code == KeyLeft)
             {
-                OnLeft(2);
+                OnLeft(0);
             }
             else if (e.Code == KeyRight)
             {
-                OnRight(2);
+                OnRight(0);
             }
             else if (e.Code == KeyAction1)
             {

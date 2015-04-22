@@ -99,5 +99,23 @@ namespace JGerdesJWiemers.Game.Engine.Input
         }
 
 
+        public static void Debug(bool debug){
+            if (debug)
+            {
+                for (int i=0; i<_channel.Count; i++)
+                {
+                    Channel c = _channel[i];
+                    c.OnAction1 += delegate(bool a) { System.Console.WriteLine("C" + i + ":OnAction1 " + (a ? "pressed" : "released")); };
+                    c.OnAction2 += delegate(bool a) { System.Console.WriteLine("C" + i + ":OnAction2 " + (a ? "pressed" : "released")); };
+
+                    c.OnUp += delegate(float val) { System.Console.WriteLine("C" + i + ":OnUp "+val);};
+                    c.OnDown += delegate(float val) { System.Console.WriteLine("C" + i + ":OnDown "+val);};
+                    c.OnLeft += delegate(float val) { System.Console.WriteLine("C" + i + ":OnLeft "+val);};
+                    c.OnRight += delegate(float val) { System.Console.WriteLine("C" + i + ":OnRight " + val); };
+                }
+            }
+        }
+
+
     }
 }
