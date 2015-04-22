@@ -31,13 +31,13 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public uint Action2;
 
 
-        public event InputManager.MotionEventHandler OnUp;
-        public event InputManager.MotionEventHandler OnDown;
-        public event InputManager.MotionEventHandler OnLeft;
-        public event InputManager.MotionEventHandler OnRight;
+        public event InputManager.MotionEventHandler OnUp = delegate {};
+        public event InputManager.MotionEventHandler OnDown = delegate {};
+        public event InputManager.MotionEventHandler OnLeft = delegate {};
+        public event InputManager.MotionEventHandler OnRight = delegate {};
 
-        public event InputManager.ButtonEventHandler OnAction1;
-        public event InputManager.ButtonEventHandler OnAction2;
+        public event InputManager.ButtonEventHandler OnAction1 = delegate {};
+        public event InputManager.ButtonEventHandler OnAction2 = delegate {};
 
         public void HandleJoystickMoved(object sender, JoystickMoveEventArgs e)
         {
