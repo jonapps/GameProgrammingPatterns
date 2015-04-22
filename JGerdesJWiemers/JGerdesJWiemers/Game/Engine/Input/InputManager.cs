@@ -29,10 +29,38 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 }
 
 
-                window.JoystickMoved += delegate(object sender,JoystickMoveEventArgs e){
+                window.JoystickMoved += delegate(object sender, JoystickMoveEventArgs e)
+                {
                     _channel[(int)e.JoystickId].HandleJoystickMoved(sender, e);
                 };
-                    
+
+                window.JoystickButtonPressed += delegate(object sender, JoystickButtonEventArgs e)
+                {
+                    _channel[(int)e.JoystickId].HandleJoystickButtonPressed(sender, e);
+                };
+
+                window.JoystickButtonReleased += delegate(object sender, JoystickButtonEventArgs e)
+                {
+                    _channel[(int)e.JoystickId].HandleJoystickButtonReleased(sender, e);
+                };
+
+                window.KeyPressed += delegate(object sender, KeyEventArgs e)
+                {
+                    foreach (Channel c in _channel)
+                    {
+                        c.HandleKeyPressed(sender, e);
+                    }
+                };
+
+                window.KeyReleased += delegate(object sender, KeyEventArgs e)
+                {
+                    foreach (Channel c in _channel)
+                    {
+                        c.HandleKeyReleased(sender, e);
+                    }
+                };
+
+
                 //TODO: Read from file
                 _channel[0].KeyUp = Keyboard.Key.W;
                 _channel[0].KeyDown = Keyboard.Key.S;

@@ -37,6 +37,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public event InputManager.MotionEventHandler OnRight;
 
         public event InputManager.ButtonEventHandler OnAction1;
+        public event InputManager.ButtonEventHandler OnAction2;
 
         public void HandleJoystickMoved(object sender, JoystickMoveEventArgs e)
         {
@@ -64,6 +65,86 @@ namespace JGerdesJWiemers.Game.Engine.Input
                         OnRight(e.Position * 100 / RightMax);
                     }
                 }
+            }
+        }
+
+        internal void HandleKeyPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Code == KeyUp)
+            {
+                OnUp(1);
+            }
+            else if (e.Code == KeyDown)
+            {
+                OnDown(1);
+            }
+            else if (e.Code == KeyLeft)
+            {
+                OnLeft(1);
+            }
+            else if (e.Code == KeyRight)
+            {
+                OnRight(1);
+            }
+            else if (e.Code == KeyAction1)
+            {
+                OnAction1(true);
+            }
+            else if (e.Code == KeyAction2)
+            {
+                OnAction2(true);
+            }
+        }
+
+        internal void HandleKeyReleased(object sender, KeyEventArgs e)
+        {
+            if (e.Code == KeyUp)
+            {
+                OnUp(2);
+            }
+            else if (e.Code == KeyDown)
+            {
+                OnDown(2);
+            }
+            else if (e.Code == KeyLeft)
+            {
+                OnLeft(2);
+            }
+            else if (e.Code == KeyRight)
+            {
+                OnRight(2);
+            }
+            else if (e.Code == KeyAction1)
+            {
+                OnAction1(false);
+            }
+            else if (e.Code == KeyAction2)
+            {
+                OnAction2(false);
+            }
+        }
+
+        internal void HandleJoystickButtonPressed(object sender, JoystickButtonEventArgs e)
+        {
+            if (e.Button == Action1)
+            {
+	            OnAction1(true);
+            }
+            else if (e.Button == Action2)
+            {
+                OnAction2(true);
+            }	
+        }
+
+        internal void HandleJoystickButtonReleased(object sender, JoystickButtonEventArgs e)
+        {
+            if (e.Button == Action1)
+            {
+                OnAction1(false);
+            }
+            else if (e.Button == Action2)
+            {
+                OnAction2(false);
             }
         }
     }
