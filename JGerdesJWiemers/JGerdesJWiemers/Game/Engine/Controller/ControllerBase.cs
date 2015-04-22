@@ -15,11 +15,9 @@ namespace JGerdesJWiemers.Game.Engine.Controller
 
         protected float _direction;
         protected Paddle _paddle;
-        protected Window _window;
 
-        public ControllerBase(Window w, Paddle paddle)
+        public ControllerBase(Paddle paddle)
         {
-            this._window = w;
             this._direction = 0;
             _paddle = paddle;
         }

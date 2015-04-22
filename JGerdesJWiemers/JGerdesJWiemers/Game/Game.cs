@@ -13,6 +13,7 @@ using JGerdesJWiemers.Game.Pong;
 using JGerdesJWiemers.Game.Pong.Screens;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using SFML.System;
+using JGerdesJWiemers.Game.Engine.Input;
 
 namespace JGerdesJWiemers.Game
 {
@@ -54,6 +55,9 @@ namespace JGerdesJWiemers.Game
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.SetVerticalSyncEnabled(true);
+
+            InputManager.Init(_window);
+
             try
             {
                 _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");

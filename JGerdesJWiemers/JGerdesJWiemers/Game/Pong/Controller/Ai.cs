@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 
         private Ball _ball;
 
-        public Ai(Window w, Paddle p, Ball b) : base(w, p)
+        public Ai(Paddle p, Ball b) : base(p)
         {
             this._ball = b;
         }
