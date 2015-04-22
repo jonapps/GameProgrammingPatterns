@@ -1,6 +1,7 @@
 ﻿using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ namespace JGerdesJWiemers.Game.Engine.Input
 {
     class Channel
     {
+
+        private static readonly float MAX_PRESSED_TIME = 1500;
+
+
         public Keyboard.Key KeyUp;
         public Keyboard.Key KeyDown;
         public Keyboard.Key KeyLeft;
@@ -30,6 +35,11 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public uint Action1;
         public uint Action2;
 
+        private Stopwatch _upWatch;
+        private Stopwatch _downWatch;
+        private Stopwatch _leftWatch;
+        private Stopwatch _rightWatch;
+
 
         public event InputManager.MotionEventHandler OnUp = delegate {};
         public event InputManager.MotionEventHandler OnDown = delegate {};
@@ -39,60 +49,105 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public event InputManager.ButtonEventHandler OnAction1 = delegate {};
         public event InputManager.ButtonEventHandler OnAction2 = delegate {};
 
+        public Channel()
+        {
+            _upWatch = new Stopwatch();
+            _downWatch = new Stopwatch();
+            _leftWatch = new Stopwatch();
+            _rightWatch = new Stopwatch();
+        }
+
         public void HandleJoystickMoved(object sender, JoystickMoveEventArgs e)
         {
-            if (e.Position >= Deadzone)
+            
+            if (e.Axis == AxisUpDown)
             {
-                if (e.Axis == AxisUpDown)
+                if (Math.Sign(e.Position) == Math.Sign(UpMax))
                 {
-                    if (Math.Sign(e.Position) == Math.Sign(UpMax))
+                    if (Math.Abs(e.Position) >= Deadzone)
                     {
-                        OnUp(Math.Abs(e.Position * 100 / UpMax));
+                        OnUp(Math.Abs(e.Position / UpMax));
                     }
                     else
                     {
-                        OnDown(Math.Abs(e.Position * 100 / DownMax));
+                        OnUp(0);
                     }
                 }
-                else if(e.Axis == AxisLeftRight)
+                else
                 {
-                    if (Math.Sign(e.Position) == Math.Sign(LeftMax))
+                    if (Math.Abs(e.Position) >= Deadzone)
                     {
-                        OnLeft(e.Position * 100 / LeftMax);
+                        OnDown(Math.Abs(e.Position / DownMax));
                     }
                     else
                     {
-                        OnRight(e.Position * 100 / RightMax);
+                        OnDown(0);
                     }
                 }
             }
+            else if(e.Axis == AxisLeftRight)
+            {
+                if (Math.Sign(e.Position) == Math.Sign(LeftMax))
+                {
+                    OnLeft(e.Position / LeftMax);
+                }
+                else
+                {
+                    OnRight(e.Position / RightMax);
+                }
+            }
+
         }
 
         internal void HandleKeyPressed(object sender, KeyEventArgs e)
         {
             if (e.Code == KeyUp)
             {
-                OnUp(1);
+                if(_upWatch.IsRunning)
+                {
+                    OnUp(Math.Min(_upWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                }
+                else
+                {
+                    _upWatch.Start();
+                    OnUp(0.1f);    
+                }
             }
             else if (e.Code == KeyDown)
             {
-                OnDown(1);
+                if(_downWatch.IsRunning)
+                {
+                    OnDown(Math.Min(_downWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                }
+                else
+                {
+                    _downWatch.Start();
+                    OnDown(0.1f);    
+                }
             }
             else if (e.Code == KeyLeft)
             {
-                OnLeft(1);
+                if(_leftWatch.IsRunning)
+                {
+                    OnLeft(Math.Min(_leftWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                }
+                else
+                {
+                    _leftWatch.Start();
+                    OnLeft(0.1f);    
+                }
             }
             else if (e.Code == KeyRight)
             {
-                OnRight(1);
-            }
-            else if (e.Code == KeyAction1)
-            {
-                OnAction1(true);
-            }
-            else if (e.Code == KeyAction2)
-            {
-                OnAction2(true);
+                if(_rightWatch.IsRunning)
+                {
+                    OnRight(Math.Min(_rightWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                }
+                else
+                {
+                    _rightWatch.Start();
+                    OnRight(0.1f);    
+                }
             }
         }
 
@@ -101,18 +156,26 @@ namespace JGerdesJWiemers.Game.Engine.Input
             if (e.Code == KeyUp)
             {
                 OnUp(0);
+                _upWatch.Stop();
+                _upWatch.Reset();
             }
             else if (e.Code == KeyDown)
             {
                 OnDown(0);
+                _downWatch.Stop();
+                _downWatch.Reset();
             }
             else if (e.Code == KeyLeft)
             {
                 OnLeft(0);
+                _leftWatch.Stop();
+                _leftWatch.Reset();
             }
             else if (e.Code == KeyRight)
             {
                 OnRight(0);
+                _rightWatch.Stop();
+                _rightWatch.Reset();
             }
             else if (e.Code == KeyAction1)
             {

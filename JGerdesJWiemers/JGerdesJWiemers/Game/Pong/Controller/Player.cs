@@ -20,7 +20,11 @@ namespace JGerdesJWiemers.Game.Pong.Controller
         {
             InputManager.Channel[playerId].OnUp += delegate(float value)
             {
-                _speed = value;
+                _speed = -(value*value);
+            };
+            InputManager.Channel[playerId].OnDown += delegate(float value)
+            {
+                _speed = value*value;
             };
         }
  

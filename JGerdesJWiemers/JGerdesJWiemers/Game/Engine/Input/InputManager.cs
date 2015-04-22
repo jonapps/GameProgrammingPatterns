@@ -70,8 +70,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
 
                 _channel[0].AxisUpDown = Joystick.Axis.Y;
                 _channel[0].AxisLeftRight = Joystick.Axis.X;
-                _channel[0].UpMax = 100;
-                _channel[0].DownMax = -100;
+                _channel[0].UpMax = -100;
+                _channel[0].DownMax = 100;
                 _channel[0].RightMax = 100;
                 _channel[0].LeftMax = -100;
                 _channel[0].Deadzone = 20;
