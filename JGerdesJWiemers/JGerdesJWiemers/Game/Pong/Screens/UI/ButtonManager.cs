@@ -16,7 +16,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
         private List<Button> _buttons;
         private int _currentSelection;
 
-        public ButtonManager(Window w)
+        public ButtonManager()
         {
             _buttons = new List<Button>();
             InputManager.Channel[0].OnUp += delegate(float val)

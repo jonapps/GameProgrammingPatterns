@@ -13,8 +13,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
     class Button: IRenderable, IUpdateable
     {
         
-        private static const Color COLOR = new Color(0, 0, 0, 128);
-        private static const Color COLOR_FOCUS = new Color(0, 0, 0, 255);
+        private Color _color;
+        private Color _colorFocus;
         private Text _text;
         private bool _isFocused = false;
 
@@ -24,20 +24,23 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
 
         public Button(float x, float y, String label)
         {
+            _color = new Color(0, 0, 0, 128);
+            _colorFocus = new Color(0, 0, 0, 255);
+        
             _text = new Text(label, AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT));
-            _text.Color = COLOR;
+            _text.Color = _color;
         }
 
         public void Focus()
         {
             _isFocused = true;
-            _text.Color = COLOR_FOCUS;
+            _text.Color = _colorFocus;
         }
 
         public void Blur()
         {
             _isFocused = false;
-            _text.Color = COLOR;
+            _text.Color = _color;
         }
 
         public void Select()
