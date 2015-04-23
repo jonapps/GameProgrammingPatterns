@@ -35,6 +35,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         }
 
         private List<Entity> _entities;
+        private List<IRenderable> _effects;
         private Ball _ball;
         private Score _score1;
         private Score _score2;
@@ -48,6 +49,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             AudioManager.Instance.Play(SOUND_BACKGROUND, 50, true);
             _colSolve = new CollisionSolver((RenderWindow)w);
             _entities = new List<Entity>();
+            _effects = new List<IRenderable>();
             _ball = new Ball(1, 1, 10, 2f);
             _entities.Add(_ball);
 
@@ -107,11 +109,13 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             if (_ball.Position.X < 0)
             {
                 _score2.addToScore(1);
+                _effects.Add(new FloatingTextEffect(1280 - 1280 / 4f, 720 / 2f, new Color(49, 27, 146), "+1"));
                 _ball.reset();
             }
             else if (_ball.Position.X > 1280)
             {
                 _score1.addToScore(1);
+                _effects.Add(new FloatingTextEffect(1280 / 4f, 720 / 2f, new Color(146, 27, 37), "+1"));
                 _ball.reset();
             }
         }
@@ -122,6 +126,11 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             foreach (Entity entity in _entities)
             {
                 entity.Render(renderTarget, extra);
+            }
+
+            foreach (IRenderable effect in _effects)
+            {
+                effect.Render(renderTarget, extra);
             }
 
             _score1.Render(renderTarget, extra);
