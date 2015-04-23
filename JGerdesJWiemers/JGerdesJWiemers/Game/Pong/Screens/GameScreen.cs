@@ -13,21 +13,29 @@ using SFML.Graphics;
 using System.Diagnostics;
 using SFML.System;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.Audio;
+using SFML.Audio;
 
 
 namespace JGerdesJWiemers.Game.Pong.Screens
 {
     class GameScreen : Screen
     {
+
+        public static String PADDLE_BALL_COLLISION = "PADDLE_BALL_COLLISION";
+
         private List<Entity> _entities;
         private Ball _ball;
         private Score _score1;
         private Score _score2;
         private Sprite _background;
         private CollisionSolver _colSolve;
+        private AudioManager _audioM;
 
         public GameScreen(Window w):base(w)
         {
+            AudioManager.Instance.AddSound(GameScreen.PADDLE_BALL_COLLISION, "Assets/Audio/Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav");
+
             _colSolve = new CollisionSolver((RenderWindow)w);
             _entities = new List<Entity>();
             _ball = new Ball(1, 1, 10, 2f);
@@ -61,6 +69,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                 {
                     if (_colSolve.solve((RectangleEntity)entity, _ball))
                     {
+                        AudioManager.Instance.Play(GameScreen.PADDLE_BALL_COLLISION);
                         ((RectangleEntity)entity).onCollision();
                     }
                 }

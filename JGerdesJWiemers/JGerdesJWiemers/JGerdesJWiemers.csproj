@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Engine\Audio\AudioManager.cs" />
     <Compile Include="Game\Engine\Controller\ControllerBase.cs" />
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
@@ -131,6 +132,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Game\Assets\Audio\Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav" />
     <Content Include="Game\Assets\Graphics\background.png" />
     <Content Include="Game\Assets\Graphics\title.png" />
   </ItemGroup>
