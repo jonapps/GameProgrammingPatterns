@@ -21,19 +21,19 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         {
             _buttonManager = new ButtonManager();
 
-            Button pvpButton = new Button(1280 / 2f, 200, "Player VS Player");
+            Button pvpButton = new Button(1280 / 2f, 720 / 6f, "Player VS Player");
             pvpButton.OnSelected += delegate
             {
                 _screenManager.CurrentScreen = new GameScreen(w, GameScreen.GameType.PlayerVsPlayer);
             };
 
-            Button pvnButton = new Button(1280 / 2f, 400, "Player VS NPC");
-            pvpButton.OnSelected += delegate
+            Button pvnButton = new Button(1280 / 2f, 720 - 720/ 6f, "Player VS NPC");
+            pvnButton.OnSelected += delegate
             {
                 _screenManager.CurrentScreen = new GameScreen(w, GameScreen.GameType.PlayerVsNPC);
             };
 
-            Button exitButton = new Button(1280 - 200, 720 - 200, "Exit");
+            Button exitButton = new Button(1280 - 100, 720 - 50, "Exit");
             exitButton.OnSelected += delegate
             {
                 w.Close();
