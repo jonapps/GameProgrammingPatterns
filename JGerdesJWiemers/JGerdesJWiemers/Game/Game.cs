@@ -19,7 +19,7 @@ namespace JGerdesJWiemers.Game
 {
     class Game
     {
-        public static readonly string VERSION = "v0.1.1";
+        public static readonly string VERSION = "v0.9.0";
         public static readonly string GAME_TITLE = "Pong";
         public static float PADDLE_GAME_SPEED = 25;
 

@@ -40,6 +40,10 @@ namespace JGerdesJWiemers.Game.Pong.Controller
                     return -_difficulty;
                 }
             }
+            else
+            {
+                return _difficulty * (_ball.Position.Y - _paddle.Position.Y) / 20f;
+            }
             
             return 0f;
         }
