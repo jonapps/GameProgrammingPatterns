@@ -42,10 +42,6 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             Random rand = new Random();
             _speed = new Vector2f(rand.Next(-5, 5), rand.Next(-1,1));
             //_speed = new Vector2f(1,0);
-            //normalize
-            _speed /= _speed.Length();
-            //set length
-            _speed *= _generationSpeed;
             if (System.Math.Abs(_speed.X) < 1)
             {
                 _speed.X = System.Math.Sign(_speed.X);
@@ -54,6 +50,11 @@ namespace JGerdesJWiemers.Game.Pong.Entities
             {
                 _speed.X = -1;
             }
+            //normalize
+            _speed /= _speed.Length();
+            //set length
+            _speed *= _generationSpeed;
+
 
             if (_generationSpeed < 10)
             {
