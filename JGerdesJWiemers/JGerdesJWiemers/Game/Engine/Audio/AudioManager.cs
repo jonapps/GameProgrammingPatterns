@@ -10,16 +10,21 @@ namespace JGerdesJWiemers.Game.Engine.Audio
 {
     class AudioManager
     {
-        private Hashtable _sounds;
+        private Dictionary<String, Sound> _sounds;
+        private List<String> _stoppedLoopSounds;
         private static AudioManager _instance;
         private Sound _sound;
+
+        private bool _silent = false;
         
 
         private AudioManager()
         {
-            _sounds = new Hashtable();
+            _sounds = new Dictionary<String, Sound>();
             _sound = new Sound();
+            _stoppedLoopSounds = new List<string>();
         }
+
 
         public static AudioManager Instance
         {
@@ -33,6 +38,38 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             }
         }
 
+
+        public bool Silent
+        {
+            get
+            {
+                return _silent;
+            }
+            set
+            {
+                _silent = value;
+                if (value)
+                {
+                    foreach (var sound in _sounds)
+                    {
+                        if(sound.Value.Loop){
+                            _stoppedLoopSounds.Add(sound.Key);
+                        }
+                        sound.Value.Stop();   
+                    }
+                }
+                else
+                {
+                    foreach (var sound in _stoppedLoopSounds)
+                    {
+                        System.Console.WriteLine(sound);
+                        Play(sound);
+                    }
+                    _stoppedLoopSounds.Clear();
+                }
+                
+            }
+        }
 
         /// <summary>
         /// creats a sound from string path and adds it to a hashtable 
@@ -64,10 +101,15 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         {
             try
             {
-                Sound s = ((Sound)_sounds[key]);
-                s.Play();
-                s.Loop = loop;
-                s.Volume = volume;
+                if (!_silent)
+                {
+                    Sound s = _sounds[key];
+                    s.Play();
+                    s.Loop = loop;
+                    s.Volume = volume;
+
+                }
+                
 
             }
             catch (Exception e)
@@ -76,21 +118,12 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             }
         }
 
-        /// <summary>
-        /// Plays a looped sound
-        /// </summary>
-        /// <param name="key">hashtable store key</param>
-        public void PlayLoopSound(String key)
-        {
-            ((Sound)_sounds[key]).Loop = true;
-            ((Sound)_sounds[key]).Play();
-        }
 
         public void Stop(String key)
         {
             try
             {
-                Sound s = ((Sound)_sounds[key]);
+                Sound s = _sounds[key];
                 s.Stop();
 
             }
@@ -109,6 +142,8 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         {
             return (Sound)_sounds[key];
         }
+
+        
 
 
     }

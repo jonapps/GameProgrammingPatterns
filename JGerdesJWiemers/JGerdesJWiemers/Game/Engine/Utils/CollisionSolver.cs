@@ -16,18 +16,43 @@ namespace JGerdesJWiemers.Game.Engine.Utils
     {
         private bool _debug = false;
         private RenderWindow _window;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="w"></param>
         public CollisionSolver(RenderWindow w)
         {
             _window = w;
         }
 
+        /// <seealso cref="_SolveCircleRectangle(RectangleEntity a, CircleEntity b)">
         public bool solve(RectangleEntity a, CircleEntity b)
         {
             return _SolveCircleRectangle(a, b);
         }
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool solve(RectangleEntity a, RectangleEntity b)
+        {
+
+            return false;
+        }
 
 
+        /// #NOT FINISHED
+        /// <summary>
+        /// check's if a RectangleEntity and CircleEntity are colliding 
+        /// set's new position and speed (should get sourced out soon)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>bool</returns>
         private bool _SolveCircleRectangle(RectangleEntity a, CircleEntity b)
         {
             bool result = false;
@@ -113,6 +138,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                     continue;
                 }
 
+                /// todo: Better naming here :P
+                /// 
                 intersectionPoint1 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentTopPoint, lastTopPoint, aCurrentPoints[i], aLastPoints[i]);
                 intersectionPoint2 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentBottomPoint, lastBottomPoint, aCurrentPoints[i], aLastPoints[i]);
                 intersectionPoint3 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentTopPoint, lastTopPoint, aCurrentPoints[i], aCurrentPoints[j]);
