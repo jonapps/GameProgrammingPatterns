@@ -23,7 +23,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     {
 
 
-        public static String PADDLE_BALL_COLLISION = "PADDLE_BALL_COLLISION";
+        public static String SOUND_PADDLE_BALL_COLLISION = "SOUND_PADDLE_BALL_COLLISION";
+        public static String SOUND_BACKGROUND = "SOUND_BACKGROUND";
 
 
         public enum GameType
@@ -39,12 +40,12 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         private Score _score2;
         private Sprite _background;
         private CollisionSolver _colSolve;
-        private AudioManager _audioM;
 
         public GameScreen(Window w, GameType type):base(w)
         {
-            AudioManager.Instance.AddSound(GameScreen.PADDLE_BALL_COLLISION, "Assets/Audio/Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav");
-
+            AudioManager.Instance.AddSound(GameScreen.SOUND_PADDLE_BALL_COLLISION, "Assets/Audio/Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav");
+            AudioManager.Instance.AddSound(GameScreen.SOUND_BACKGROUND, "Assets/Audio/background.wav");
+            AudioManager.Instance.Play(SOUND_BACKGROUND, 50, true);
             _colSolve = new CollisionSolver((RenderWindow)w);
             _entities = new List<Entity>();
             _ball = new Ball(1, 1, 10, 2f);
@@ -99,7 +100,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                 {
                     if (_colSolve.solve((RectangleEntity)entity, _ball))
                     {
-                        AudioManager.Instance.Play(GameScreen.PADDLE_BALL_COLLISION);
+                        AudioManager.Instance.Play(GameScreen.SOUND_PADDLE_BALL_COLLISION);
                         ((RectangleEntity)entity).onCollision();
                     }
                 }
