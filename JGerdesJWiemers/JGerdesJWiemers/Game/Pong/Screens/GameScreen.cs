@@ -26,6 +26,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
         private static String _SOUND_GAME_PADDLE_BALL_COLLISION = "SOUND_PADDLE_BALL_COLLISION";
         private static String _SOUND_GAME_BACKGROUND = "SOUND_BACKGROUND";
+        private static String _SOUND_GAME_SCORE = "SOUND_SCORE";
 
 
         public enum GameType
@@ -48,6 +49,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             InputManager.Reset();
             AudioManager.Instance.AddSound(GameScreen._SOUND_GAME_PADDLE_BALL_COLLISION, "Assets/Audio/Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav");
             AudioManager.Instance.AddSound(GameScreen._SOUND_GAME_BACKGROUND, "Assets/Audio/game_background.wav");
+            AudioManager.Instance.AddSound(GameScreen._SOUND_GAME_SCORE, "Assets/Audio/pling.wav");
             AudioManager.Instance.Play(_SOUND_GAME_BACKGROUND, 50, true);
             _colSolve = new CollisionSolver((RenderWindow)w);
             _entities = new List<Entity>();
@@ -112,6 +114,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             {
                 _score2.addToScore(1);
                 _effects.Add(new FloatingTextEffect(1280 - 1280 / 4f, 720 / 2f, new Color(49, 27, 146), "+1"));
+                AudioManager.Instance.Play(_SOUND_GAME_SCORE, 100, false);
                 _ball.reset();
                 if (_score2.Value >= 10)
                 {
@@ -122,6 +125,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             {
                 _score1.addToScore(1);
                 _effects.Add(new FloatingTextEffect(1280 / 4f, 720 / 2f, new Color(146, 27, 37), "+1"));
+                AudioManager.Instance.Play(_SOUND_GAME_SCORE, 100, false);
                 _ball.reset();
                 if (_score1.Value >= 10)
                 {

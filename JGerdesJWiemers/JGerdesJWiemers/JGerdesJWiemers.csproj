@@ -137,6 +137,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Game\Assets\Audio\applause.wav" />
+    <Content Include="Game\Assets\Audio\pling.wav" />
     <Content Include="Game\Assets\Audio\_BALL_BORDER_COLLISION.wav" />
     <Content Include="Game\Assets\Audio\Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav" />
     <Content Include="Game\Assets\Audio\game_background.wav" />

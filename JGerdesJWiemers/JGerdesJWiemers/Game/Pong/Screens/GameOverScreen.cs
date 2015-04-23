@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics;
+﻿using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Graphics;
@@ -65,6 +66,9 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
             _window.KeyPressed += this._ProcessInput;
             _window.JoystickButtonPressed += this._ProcessInput;
+
+            AudioManager.Instance.AddSound("applause", "Assets/Audio/applause.wav");
+            AudioManager.Instance.Play("applause", 100, false);
             
         }
 
