@@ -60,6 +60,7 @@ namespace JGerdesJWiemers.Game.Engine
 
         public virtual void Update()
         {
+
             _position += _speed;
         }
 
@@ -70,5 +71,6 @@ namespace JGerdesJWiemers.Game.Engine
         }
 
         public abstract void onCollision();
+
     }
 }

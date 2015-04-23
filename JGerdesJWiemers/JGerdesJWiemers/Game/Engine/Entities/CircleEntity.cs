@@ -61,11 +61,12 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         public override void Update()
         {
+            _lastPosition = GetCurrentPosition();
             base.Update();
-            _lastPosition = _GetLastPosition();
+
         }
 
-        protected Vector2f _GetLastPosition()
+        public  Vector2f GetCurrentPosition()
         {
             return new Vector2f(_position.X, _position.Y);
         }

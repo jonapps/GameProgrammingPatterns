@@ -12,12 +12,18 @@ namespace JGerdesJWiemers.Game.Pong.Controller
 {
     class Ai : ControllerBase
     {
+        public static float DIFFICULTY_EASY = 0.15f;
+        public static float DIFFICULTY_MID = 0.15f;
+        public static float DIFFICULTY_HARD = 0.15f;
+
+        private float _difficulty;
 
         private Ball _ball;
 
         public Ai(Paddle p, Ball b) : base(p)
         {
             this._ball = b;
+            _difficulty = DIFFICULTY_EASY;
         }
 
         public override float Update()
@@ -27,11 +33,11 @@ namespace JGerdesJWiemers.Game.Pong.Controller
             {
                 if (_paddle.Position.Y < _ball.Position.Y)
                 {
-                    return 0.15f;
+                    return _difficulty;
                 }
                 else if (_paddle.Position.Y > _ball.Position.Y)
                 {
-                    return -0.15f;
+                    return -_difficulty;
                 }
             }
             

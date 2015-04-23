@@ -42,15 +42,16 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             List<Vector2f> result = new List<Vector2f>();
             for (uint i = 0; i < _shape.GetPointCount(); ++i)
             {
-                result.Add(_shape.Transform.TransformPoint(_shape.GetPoint(i)));
+                Vector2f point = _shape.Transform.TransformPoint(_shape.GetPoint(i));
+                result.Add(new Vector2f(point.X, point.Y));
             }
             return result;
         }
 
         public override void Update()
         {
-            base.Update();
             _lastPoints = GetCurrentPoints();
+            base.Update();
         }
     }
 }

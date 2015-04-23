@@ -28,7 +28,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
         public GameScreen(Window w):base(w)
         {
-            _colSolve = new CollisionSolver();
+            _colSolve = new CollisionSolver((RenderWindow)w);
             _entities = new List<Entity>();
             _ball = new Ball(1, 1, 10, 2f);
             _entities.Add(_ball);
