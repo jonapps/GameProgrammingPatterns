@@ -114,13 +114,22 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                 _score2.addToScore(1);
                 _effects.Add(new FloatingTextEffect(1280 - 1280 / 4f, 720 / 2f, new Color(49, 27, 146), "+1"));
                 _ball.reset();
+                if (_score2.Value >= 10)
+                {
+                    _screenManager.CurrentScreen = new GameOverScreen(_window, _score1.Value, _score2.Value);
+                }
             }
             else if (_ball.Position.X > 1280)
             {
                 _score1.addToScore(1);
                 _effects.Add(new FloatingTextEffect(1280 / 4f, 720 / 2f, new Color(146, 27, 37), "+1"));
                 _ball.reset();
+                if (_score1.Value >= 10)
+                {
+                    _screenManager.CurrentScreen = new GameOverScreen(_window, _score1.Value, _score2.Value);
+                }
             }
+
         }
  
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
