@@ -9,12 +9,15 @@ using SFML.Window;
 using SFML.Graphics;
     using SFML.System;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.Audio;
 
 namespace JGerdesJWiemers.Game.Pong.Entities
 {
     class Ball : CircleEntity
     {
-      
+
+        private static String _BALL_BORDER_COLLISION = "_BALL_BORDER_COLLISION";
+
         private float _generationSpeed = 5;
         private float _rotationSpeed = 2f;
 
@@ -25,6 +28,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         /// <param name="y"></param>
         public Ball(float x, float y, float r, float rs) : base(x,y,r,rs)
         {
+            AudioManager.Instance.AddSound(_BALL_BORDER_COLLISION, "Assets/Audio/_BALL_BORDER_COLLISION.wav");
             _shape = new CircleShape(_radius);
             ((CircleShape)_shape).SetPointCount(6);
             _shape.Origin = new Vector2f(10, 10);
@@ -69,8 +73,9 @@ namespace JGerdesJWiemers.Game.Pong.Entities
         public override void Update()
         {
             base.Update();
-            if (_position.Y >= 720 || _position.Y <= 0)
+            if (_position.Y >= 720-_radius || _position.Y <= 0+_radius)
             {
+                AudioManager.Instance.Play(_BALL_BORDER_COLLISION);
                 _speed.Y *= -1;
                 _rotationSpeed = -10f/_speed.Y;
             }
