@@ -29,6 +29,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
             _colorFocus = new Color(0, 0, 0, 255);
         
             _text = new Text(label, AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT));
+            _text.CharacterSize = 48;
             _text.Position = new Vector2f(x, y);
             _text.Origin = new Vector2f(_text.GetGlobalBounds().Width / 2f, _text.GetGlobalBounds().Height / 2f);
             _text.Color = _color;
