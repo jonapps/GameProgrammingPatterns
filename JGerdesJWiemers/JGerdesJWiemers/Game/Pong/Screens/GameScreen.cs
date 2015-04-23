@@ -61,9 +61,6 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                             new Vector2f(1280 - 50, 20), new Color(49, 27, 146, 100));
 
             _background = new Sprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BACKGROUND));
-
-           
-           
         }
 
         private void _SetUpGame(GameType type)
