@@ -21,6 +21,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
 
         public Keyboard.Key KeyAction1;
         public Keyboard.Key KeyAction2;
+        public Keyboard.Key KeyAction3;
+        public Keyboard.Key KeyAction4;
 
         public Joystick.Axis AxisUpDown;
         public Joystick.Axis AxisLeftRight;
@@ -30,10 +32,11 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public float RightMax;
         public float Deadzone;
 
-        public uint ShoulderLeft;
-        public uint ShoulderRight;
+        
         public uint Action1;
         public uint Action2;
+        public uint Action3;
+        public uint Action4;
 
         private Stopwatch _upWatch;
         private Stopwatch _downWatch;
@@ -47,7 +50,9 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public event InputManager.MotionEventHandler OnRight = delegate {};
 
         public event InputManager.ButtonEventHandler OnAction1 = delegate {};
-        public event InputManager.ButtonEventHandler OnAction2 = delegate {};
+        public event InputManager.ButtonEventHandler OnAction2 = delegate { };
+        public event InputManager.ButtonEventHandler OnAction3 = delegate { };
+        public event InputManager.ButtonEventHandler OnAction4 = delegate { };
 
         public Channel()
         {
@@ -113,7 +118,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     OnUp(0.3f);    
                 }
             }
-            else if (e.Code == KeyDown)
+            if (e.Code == KeyDown)
             {
                 if(_downWatch.IsRunning)
                 {
@@ -125,7 +130,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     OnDown(0.3f);    
                 }
             }
-            else if (e.Code == KeyLeft)
+            if (e.Code == KeyLeft)
             {
                 if(_leftWatch.IsRunning)
                 {
@@ -137,7 +142,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     OnLeft(0.3f);    
                 }
             }
-            else if (e.Code == KeyRight)
+            if (e.Code == KeyRight)
             {
                 if(_rightWatch.IsRunning)
                 {
@@ -149,6 +154,22 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     OnRight(0.3f);    
                 }
             }
+            if (e.Code == KeyAction1)
+            {
+                OnAction1(true);
+            }
+            if (e.Code == KeyAction2)
+            {
+                OnAction2(true);
+            }
+            if (e.Code == KeyAction3)
+            {
+                OnAction3(true);
+            }
+            if (e.Code == KeyAction4)
+            {
+                OnAction4(true);
+            }
         }
 
         internal void HandleKeyReleased(object sender, KeyEventArgs e)
@@ -159,31 +180,39 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _upWatch.Stop();
                 _upWatch.Reset();
             }
-            else if (e.Code == KeyDown)
+            if (e.Code == KeyDown)
             {
                 OnDown(0);
                 _downWatch.Stop();
                 _downWatch.Reset();
             }
-            else if (e.Code == KeyLeft)
+            if (e.Code == KeyLeft)
             {
                 OnLeft(0);
                 _leftWatch.Stop();
                 _leftWatch.Reset();
             }
-            else if (e.Code == KeyRight)
+            if (e.Code == KeyRight)
             {
                 OnRight(0);
                 _rightWatch.Stop();
                 _rightWatch.Reset();
             }
-            else if (e.Code == KeyAction1)
+            if (e.Code == KeyAction1)
             {
                 OnAction1(false);
             }
-            else if (e.Code == KeyAction2)
+            if (e.Code == KeyAction2)
             {
                 OnAction2(false);
+            }
+            if (e.Code == KeyAction3)
+            {
+                OnAction3(false);
+            }
+            if (e.Code == KeyAction4)
+            {
+                OnAction4(false);
             }
         }
 
@@ -193,10 +222,18 @@ namespace JGerdesJWiemers.Game.Engine.Input
             {
 	            OnAction1(true);
             }
-            else if (e.Button == Action2)
+            if (e.Button == Action2)
             {
                 OnAction2(true);
-            }	
+            }
+            if (e.Button == Action3)
+            {
+                OnAction3(true);
+            }
+            if (e.Button == Action4)
+            {
+                OnAction4(true);
+            }
         }
 
         internal void HandleJoystickButtonReleased(object sender, JoystickButtonEventArgs e)
@@ -205,9 +242,17 @@ namespace JGerdesJWiemers.Game.Engine.Input
             {
                 OnAction1(false);
             }
-            else if (e.Button == Action2)
+            if (e.Button == Action2)
             {
                 OnAction2(false);
+            }
+            if (e.Button == Action3)
+            {
+                OnAction3(false);
+            }
+            if (e.Button == Action4)
+            {
+                OnAction4(false);
             }
         }
     }

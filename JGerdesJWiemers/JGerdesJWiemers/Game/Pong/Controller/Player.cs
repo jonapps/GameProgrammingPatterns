@@ -26,6 +26,16 @@ namespace JGerdesJWiemers.Game.Pong.Controller
             {
                 _speed = value*value;
             };
+
+            InputManager.Channel[playerId].OnAction3 += delegate(bool pressed)
+            {
+                p.Rotation = pressed ? -60 : 0;
+            };
+
+            InputManager.Channel[playerId].OnAction4 += delegate(bool pressed)
+            {
+                p.Rotation = pressed ? 60 : 0;
+            };
         }
  
 

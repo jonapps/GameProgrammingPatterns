@@ -67,6 +67,9 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _channel[0].KeyLeft = Keyboard.Key.A;
                 _channel[0].KeyRight = Keyboard.Key.D;
                 _channel[0].KeyAction1 = Keyboard.Key.Space;
+                _channel[0].KeyAction2 = Keyboard.Key.BackSpace;
+                _channel[0].KeyAction3 = Keyboard.Key.A;
+                _channel[0].KeyAction4 = Keyboard.Key.D;
 
                 _channel[0].AxisUpDown = Joystick.Axis.Y;
                 _channel[0].AxisLeftRight = Joystick.Axis.X;
@@ -76,8 +79,10 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _channel[0].LeftMax = -100;
                 _channel[0].Deadzone = 20;
 
-                _channel[0].ShoulderLeft = 4;
-                _channel[0].ShoulderRight = 5;
+                _channel[0].Action1 = 1;
+                _channel[0].Action2 = 2;
+                _channel[0].Action3 = 4;
+                _channel[0].Action4 = 5;
 
                 _isInit = true;
             }
