@@ -18,7 +18,7 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
         public FloatingTextEffect(float x, float y, Color c, String text)
         {
-            _text = new Text(text, AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_REGULAR));
+            _text = new Text(text, AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_THIN));
             _text.Position = new Vector2f(x, y);
             _alpha = 192;
             _text.Color = c;

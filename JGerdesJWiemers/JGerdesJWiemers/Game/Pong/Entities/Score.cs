@@ -29,6 +29,14 @@ namespace JGerdesJWiemers.Game.Pong.Entities
 
         }
 
+        public int Value
+        {
+            get
+            {
+                return _score;
+            }
+        }
+
         public void Render(RenderTarget renderTarget, float extra)
         {
             renderTarget.Draw(_text);

@@ -20,7 +20,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
         public ButtonManager()
         {
             _buttons = new List<Button>();
-            InputManager.Channel[0].OnUp += delegate(float val)
+            InputManager.MotionEventHandler up = delegate(float val)
             {
                 if (val >= 0.3 && _controllReleased)
                 {
@@ -35,7 +35,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
                     }
                 }
             };
-            InputManager.Channel[0].OnDown += delegate(float val)
+
+            InputManager.MotionEventHandler down = delegate(float val)
             {
                 if (val >= 0.3 && _controllReleased) 
                 {
@@ -51,13 +52,20 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
                 }
                 
             };
-            InputManager.Channel[0].OnAction1 += delegate(bool pressed)
+            InputManager.ButtonEventHandler select = delegate(bool pressed)
             {
                 if (pressed)
                 {
                   _buttons[_currentSelection].Select();
                 }
             };
+
+            for (int i = 0; i < 4; i++)
+            {
+                InputManager.Channel[i].OnUp += up;
+                InputManager.Channel[i].OnDown += down;
+                InputManager.Channel[i].OnAction1 += select;
+            }
         }
 
         private void ChangeSelection(int delta)
