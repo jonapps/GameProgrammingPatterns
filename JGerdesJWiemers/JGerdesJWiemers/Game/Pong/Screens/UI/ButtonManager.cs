@@ -1,5 +1,6 @@
 ﻿using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Input;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,38 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
 
         public ButtonManager(Window w)
         {
-            
+            _buttons = new List<Button>();
+            InputManager.Channel[0].OnUp += delegate(float val)
+            {
+                ChangeSelection(-1);
+            };
+            InputManager.Channel[0].OnDown += delegate(float val)
+            {
+                ChangeSelection(1);
+            };
+            InputManager.Channel[0].OnAction1 += delegate(bool pressed)
+            {
+                if (pressed)
+                {
+                    _buttons[_currentSelection].Select();
+                }
+            };
+        }
+
+        private void ChangeSelection(int delta)
+        {
+            _buttons[_currentSelection].Blur();
+            _currentSelection += delta;
+            if (_currentSelection < 0)
+            {
+                _currentSelection = _buttons.Count - 1;
+            }
+            if (_currentSelection >= _buttons.Count)
+            {
+                _currentSelection = 0;
+            }
+
+            _buttons[_currentSelection].Focus();
         }
 
 
@@ -36,6 +68,11 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
             {
                 b.Render(renderTarget, extra);
             }
+        }
+
+        public void AddButton(Button b)
+        {
+            _buttons.Add(b);
         }
     }
 }
