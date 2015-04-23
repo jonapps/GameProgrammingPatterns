@@ -101,6 +101,7 @@
     <Compile Include="Game\Pong\Entities\Paddle.cs" />
     <Compile Include="Game\Pong\Entities\Rail.cs" />
     <Compile Include="Game\Pong\Entities\Score.cs" />
+    <Compile Include="Game\Pong\Entities\FloatingTextEffect.cs" />
     <Compile Include="Game\Pong\Screens\GameScreen.cs" />
     <Compile Include="Game\Pong\Screens\MenuScreen.cs" />
     <Compile Include="Game\Pong\Screens\StartScreen.cs" />
