@@ -14,6 +14,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
     class CollisionSolver
     {
+        private bool _debug = true;
+        private bool _result = false;
         private RenderWindow _window;
         public CollisionSolver(RenderWindow w)
         {
@@ -46,21 +48,24 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
             List<Vector2f> aLastPoints = a.LastPoints;
             List<Vector2f> aCurrentPoints = a.GetCurrentPoints();
-            Vertex[] lineTop = 
-            {
-                new Vertex(lastTopPoint),
-                new Vertex(currentTopPoint)
-            };
-            Vertex[] lineBot = 
-            {
-                new Vertex(lastBottomPoint),
-                new Vertex(currentBottomPoint)
-            };
             //debug
-            //_window.Draw(lineBot, PrimitiveType.Lines);
-            //_window.Draw(lineTop, PrimitiveType.Lines);
-            //b.Render(_window, 0);
-            //_window.Display();
+            if (_debug)
+            {
+                Vertex[] lineTop = 
+                {
+                    new Vertex(lastTopPoint),
+                    new Vertex(currentTopPoint)
+                };
+                    Vertex[] lineBot = 
+                {
+                    new Vertex(lastBottomPoint),
+                    new Vertex(currentBottomPoint)
+                };
+                _window.Draw(lineBot, PrimitiveType.Lines);
+                _window.Draw(lineTop, PrimitiveType.Lines);
+                b.Render(_window, 0);
+            }
+            
 
 
             for (i = 0; i < a.Shape.GetPointCount(); ++i)
@@ -90,14 +95,16 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                     b.Position -= normal * (pointToMiddle - 1) * -1;
                     b.Speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, b.Speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, b.Speed) * normal;
                     b.RotationSpeed = pointToMiddle * pointToMiddle * 40;
-                    return true;
+                    _result = true;
+                    continue;
                 }
                 pointToMiddleCorner = (p1 - b.Position).Length() - b.Radius;
                 if (pointToMiddle < 0.4f)
                 {
                     b.Position -= (normal * (pointToMiddleCorner - 1) * -1f);
                     b.Speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, b.Speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, b.Speed) * normal;
-                    return true;
+                    _result = true;
+                    continue;
                 }
 
                 intersectionPoint1 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentTopPoint, lastTopPoint, aCurrentPoints[i], aLastPoints[i]);
@@ -110,12 +117,42 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                     b.Position = b.LastPosition - (normal * (pointToMiddle - 1));
                     b.Speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, b.Speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, b.Speed) * normal;
                     b.RotationSpeed = pointToMiddle * pointToMiddle * 40;
-                    return true;
+                    
+                    if (_debug)
+                    {
+                        CircleShape c = new CircleShape();
+                        c.Position = intersectionPoint1;
+                        c.FillColor = new Color(255, 0, 0);
+                        c.Radius = 2f;
+                        _window.Draw(c);
+                        c.Position = intersectionPoint2;
+                        c.FillColor = new Color(255, 128, 0);
+                        c.Radius = 2f;
+                        _window.Draw(c);
+                        c.Position = intersectionPoint3;
+                        c.FillColor = new Color(255, 128, 0);
+                        c.Radius = 2f;
+                        _window.Draw(c);
+                        c.Position = intersectionPoint4;
+                        c.FillColor = new Color(255, 128, 0);
+                        c.Radius = 2f;
+                        _window.Draw(c);
+                        c.Position = intersectionPoint5;
+                        c.FillColor = new Color(255, 128, 0);
+                        c.Radius = 2f;
+                        _window.Draw(c);
+                    }
+                   
+                    _result = true;
+                    continue;
                 }
 
             }
-            
-            return false;
+            if (_debug)
+            {
+                _window.Display();
+            }
+            return _result;
         }
 
         private bool _IsVectorNull(Vector2f v)
