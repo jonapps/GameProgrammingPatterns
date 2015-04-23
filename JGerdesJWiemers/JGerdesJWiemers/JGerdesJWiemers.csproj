@@ -136,7 +136,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game\Assets\Audio\Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav" />
-    <Content Include="Game\Assets\Audio\background.wav" />
+    <Content Include="Game\Assets\Audio\game_background.wav" />
+    <Content Include="Game\Assets\Audio\menu_background.wav" />
     <Content Include="Game\Assets\Graphics\background.png" />
     <Content Include="Game\Assets\Graphics\title.png" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics;
+﻿using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Pong.Screens.UI;
 using SFML.Graphics;
@@ -14,12 +15,16 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     class MenuScreen : Screen
     {
 
+        private static String _SOUND_MENU_BACKGROUND = "SOUND_MENU_BACKGROUND";
+
         private ButtonManager _buttonManager;
         private Sprite _background;
 
         public MenuScreen(Window w) : base(w)
         {
             _buttonManager = new ButtonManager();
+            AudioManager.Instance.AddSound(_SOUND_MENU_BACKGROUND, "Assets/Audio/menu_background.wav");
+            AudioManager.Instance.Play(_SOUND_MENU_BACKGROUND, 50, true);
 
             Button pvpButton = new Button(1280 / 2f, 720 / 6f, "Player VS Player");
             pvpButton.OnSelected += delegate
@@ -60,7 +65,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
         public override void Exit()
         {
-            
+            AudioManager.Instance.Stop(_SOUND_MENU_BACKGROUND);
         }
     }
 }
