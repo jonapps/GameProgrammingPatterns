@@ -15,6 +15,7 @@ using SFML.System;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Audio;
 using SFML.Audio;
+using JGerdesJWiemers.Game.Engine.Input;
 
 
 namespace JGerdesJWiemers.Game.Pong.Screens
@@ -44,6 +45,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
         public GameScreen(Window w, GameType type):base(w)
         {
+            InputManager.Reset();
             AudioManager.Instance.AddSound(GameScreen._SOUND_GAME_PADDLE_BALL_COLLISION, "Assets/Audio/Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav");
             AudioManager.Instance.AddSound(GameScreen._SOUND_GAME_BACKGROUND, "Assets/Audio/game_background.wav");
             AudioManager.Instance.Play(_SOUND_GAME_BACKGROUND, 50, true);

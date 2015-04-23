@@ -111,6 +111,18 @@ namespace JGerdesJWiemers.Game.Engine.Input
             }
         }
 
+        public static void Reset()
+        {
+            if (_isInit)
+            {
+                foreach (Channel c in _channel)
+                {
+                    c.ResetEvents();
+                }
+            }
+            
+        }
+
         public static List<Channel> Channel
         {
             get

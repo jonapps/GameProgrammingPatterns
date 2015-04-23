@@ -62,6 +62,19 @@ namespace JGerdesJWiemers.Game.Engine.Input
             _rightWatch = new Stopwatch();
         }
 
+        public void ResetEvents()
+        {
+            OnUp = delegate { };
+            OnDown = delegate { };
+            OnLeft = delegate { };
+            OnRight = delegate { };
+
+            OnAction1 = delegate { };
+            OnAction2 = delegate { };
+            OnAction3 = delegate { };
+            OnAction4 = delegate { };
+        }
+
         public void HandleJoystickMoved(object sender, JoystickMoveEventArgs e)
         {
             
