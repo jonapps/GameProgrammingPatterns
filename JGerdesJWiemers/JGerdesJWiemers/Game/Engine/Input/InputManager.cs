@@ -84,6 +84,29 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _channel[0].Action3 = 4;
                 _channel[0].Action4 = 5;
 
+                _channel[1].KeyUp = Keyboard.Key.Up;
+                _channel[1].KeyDown = Keyboard.Key.Down;
+                _channel[1].KeyLeft = Keyboard.Key.Left;
+                _channel[1].KeyRight = Keyboard.Key.Right;
+                _channel[1].KeyAction1 = Keyboard.Key.Return;
+                _channel[1].KeyAction2 = Keyboard.Key.BackSpace;
+                _channel[1].KeyAction3 = Keyboard.Key.Left;
+                _channel[1].KeyAction4 = Keyboard.Key.Right;
+
+                _channel[1].AxisUpDown = Joystick.Axis.Y;
+                _channel[1].AxisLeftRight = Joystick.Axis.X;
+                _channel[1].UpMax = -100;
+                _channel[1].DownMax = 100;
+                _channel[1].RightMax = 100;
+                _channel[1].LeftMax = -100;
+                _channel[1].Deadzone = 20;
+
+                _channel[1].Action1 = 1;
+                _channel[1].Action2 = 2;
+                _channel[1].Action3 = 4;
+                _channel[1].Action4 = 5;
+
+
                 _isInit = true;
             }
         }

@@ -43,7 +43,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         }
 
         private void _ProcessInput(Object sender,EventArgs e){
-            _screenManager.CurrentScreen = new GameScreen(_window);
+            _screenManager.CurrentScreen = new MenuScreen(_window);
         }
 
         public override void Update()
