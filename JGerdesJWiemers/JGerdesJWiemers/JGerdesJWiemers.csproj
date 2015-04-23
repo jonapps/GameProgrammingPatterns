@@ -111,6 +111,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Game\Assets\Fonts\Roboto-Light.ttf" />
+    <None Include="Game\Assets\Fonts\Roboto-Medium.ttf" />
+    <None Include="Game\Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

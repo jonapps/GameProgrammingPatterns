@@ -25,7 +25,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
 
         public Button(float x, float y, String label)
         {
-            _color = new Color(0, 0, 0, 128);
+            _color = new Color(0, 0, 0, 100);
             _colorFocus = new Color(0, 0, 0, 255);
         
             _text = new Text(label, AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT));
@@ -37,12 +37,16 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
         public void Focus()
         {
             _isFocused = true;
+            _text.Font = AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_REGULAR);
+            _text.Origin = new Vector2f(_text.GetGlobalBounds().Width / 2f, _text.GetGlobalBounds().Height / 2f);
             _text.Color = _colorFocus;
         }
 
         public void Blur()
         {
             _isFocused = false;
+            _text.Font = AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT);
+            _text.Origin = new Vector2f(_text.GetGlobalBounds().Width / 2f, _text.GetGlobalBounds().Height / 2f);
             _text.Color = _color;
         }
 
