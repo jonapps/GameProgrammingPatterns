@@ -57,7 +57,7 @@ namespace JGerdesJWiemers.Game
             _window.SetVerticalSyncEnabled(true);
 
             InputManager.Init(_window);
-            InputManager.Debug(true);
+            InputManager.Debug();
 
             try
             {

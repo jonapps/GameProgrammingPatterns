@@ -105,48 +105,48 @@ namespace JGerdesJWiemers.Game.Engine.Input
             {
                 if(_upWatch.IsRunning)
                 {
-                    OnUp(Math.Min(_upWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                    OnUp(Math.Min(0.1f+_upWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
                 }
                 else
                 {
                     _upWatch.Start();
-                    OnUp(0.1f);    
+                    OnUp(0.3f);    
                 }
             }
             else if (e.Code == KeyDown)
             {
                 if(_downWatch.IsRunning)
                 {
-                    OnDown(Math.Min(_downWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                    OnDown(Math.Min(0.1f + _downWatch.ElapsedMilliseconds / MAX_PRESSED_TIME, 1));
                 }
                 else
                 {
                     _downWatch.Start();
-                    OnDown(0.1f);    
+                    OnDown(0.3f);    
                 }
             }
             else if (e.Code == KeyLeft)
             {
                 if(_leftWatch.IsRunning)
                 {
-                    OnLeft(Math.Min(_leftWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                    OnLeft(Math.Min(0.1f + _leftWatch.ElapsedMilliseconds / MAX_PRESSED_TIME, 1));
                 }
                 else
                 {
                     _leftWatch.Start();
-                    OnLeft(0.1f);    
+                    OnLeft(0.3f);    
                 }
             }
             else if (e.Code == KeyRight)
             {
                 if(_rightWatch.IsRunning)
                 {
-                    OnRight(Math.Min(_rightWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
+                    OnRight(Math.Min(0.1f + _rightWatch.ElapsedMilliseconds / MAX_PRESSED_TIME, 1));
                 }
                 else
                 {
                     _rightWatch.Start();
-                    OnRight(0.1f);    
+                    OnRight(0.3f);    
                 }
             }
         }
