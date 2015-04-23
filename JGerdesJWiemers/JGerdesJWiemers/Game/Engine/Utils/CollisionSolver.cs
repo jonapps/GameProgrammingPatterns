@@ -14,8 +14,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
     class CollisionSolver
     {
-        private bool _debug = true;
-        private bool _result = false;
+        private bool _debug = false;
         private RenderWindow _window;
         public CollisionSolver(RenderWindow w)
         {
@@ -31,6 +30,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         private bool _SolveCircleRectangle(RectangleEntity a, CircleEntity b)
         {
+            bool result = false;
             Vector2f p1, p2, normal, tangente, potencial;
             float bSpeedLength, x, y, z, pointToMiddle, pointToMiddleCorner;
             int j, i;
@@ -95,7 +95,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                     b.Position -= normal * (pointToMiddle - 1) * -1;
                     b.Speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, b.Speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, b.Speed) * normal;
                     b.RotationSpeed = pointToMiddle * pointToMiddle * 40;
-                    _result = true;
+                    result = true;
                     continue;
                 }
                 pointToMiddleCorner = (p1 - b.Position).Length() - b.Radius;
@@ -103,7 +103,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 {
                     b.Position -= (normal * (pointToMiddleCorner - 1) * -1f);
                     b.Speed = JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(tangente, b.Speed) * tangente - JGerdesJWiemers.Game.Engine.Utils.Math.Scalar(normal, b.Speed) * normal;
-                    _result = true;
+                    result = true;
                     continue;
                 }
 
@@ -142,17 +142,17 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                         c.Radius = 2f;
                         _window.Draw(c);
                     }
-                   
-                    _result = true;
+
+                    result = true;
                     continue;
                 }
 
             }
             if (_debug)
             {
-                _window.Display();
+                 _window.Display();
             }
-            return _result;
+            return result;
         }
 
         private bool _IsVectorNull(Vector2f v)
