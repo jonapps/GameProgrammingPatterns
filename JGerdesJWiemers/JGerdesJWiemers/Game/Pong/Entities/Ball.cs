@@ -80,13 +80,18 @@ namespace JGerdesJWiemers.Game.Pong.Entities
                 _rotationSpeed = -10f/_speed.Y;
             }
 
+            if (System.Math.Abs(_speed.X) < 0.1)
+            {
+                _speed.X = 0.1f;
+            }
+                
             _shape.Rotation += _rotationSpeed ;
 
         }
 
         public override void onCollision()
         {
-            // todo
+            _speed *= 1.1f;
         }
       
 

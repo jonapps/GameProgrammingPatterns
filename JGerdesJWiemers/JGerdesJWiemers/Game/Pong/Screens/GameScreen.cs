@@ -105,6 +105,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
                     {
                         AudioManager.Instance.Play(GameScreen._SOUND_GAME_PADDLE_BALL_COLLISION);
                         ((RectangleEntity)entity).onCollision();
+                        _ball.onCollision();
                     }
                 }
                 
