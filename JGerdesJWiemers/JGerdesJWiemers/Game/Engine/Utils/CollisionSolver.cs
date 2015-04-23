@@ -37,6 +37,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             Shape shape = a.Shape;
 
             // ball line stuff
+            //ctp>        <ltp
+            //    +-------+
+            //    |O-----O|
+            //    +-------+
+            //cbp>        <lbp
+            //
             bSpeedLength = b.Speed.Length();
             Vector2f normalizedSpeed = new Vector2f(b.Speed.X / bSpeedLength, b.Speed.Y / bSpeedLength);
             Vector2f bSpeedNormal = new Vector2f(normalizedSpeed.Y * -1, normalizedSpeed.X);

@@ -86,6 +86,20 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             ((Sound)_sounds[key]).Play();
         }
 
+        public void Stop(String key)
+        {
+            try
+            {
+                Sound s = ((Sound)_sounds[key]);
+                s.Stop();
+
+            }
+            catch (Exception e)
+            {
+                // sound not inizialized
+            }
+        }
+
         /// <summary>
         /// returns a sound from the sound hashtable
         /// </summary>
