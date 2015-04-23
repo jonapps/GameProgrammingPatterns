@@ -19,6 +19,12 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 {
     class GameScreen : Screen
     {
+        public enum GameType
+        {
+            PlayerVsPlayer,
+            PlayerVsNPC,
+            NPCVsNPC
+        }
         private List<Entity> _entities;
         private Ball _ball;
         private Score _score1;
@@ -26,18 +32,14 @@ namespace JGerdesJWiemers.Game.Pong.Screens
         private Sprite _background;
         private CollisionSolver _colSolve;
 
-        public GameScreen(Window w):base(w)
+        public GameScreen(Window w, GameType type):base(w)
         {
             _colSolve = new CollisionSolver((RenderWindow)w);
             _entities = new List<Entity>();
             _ball = new Ball(1, 1, 10, 2f);
             _entities.Add(_ball);
-            Paddle aiPaddle = new Paddle(new Rail(Rail.SIDE_RIGHT), new Color(49, 27, 146, 80));
-            aiPaddle.Controller = new Ai(aiPaddle, _ball);
-            Paddle playerPaddle = new Paddle(new Rail(Rail.SIDE_LEFT), new Color(146, 27, 37, 80));
-            playerPaddle.Controller = new Player(playerPaddle, 0);
-            _entities.Add(playerPaddle);
-            _entities.Add(aiPaddle);
+
+            _SetUpGame(type);
 
 
             _score1 = new Score(AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT),
@@ -50,6 +52,31 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
            
            
+        }
+
+        private void _SetUpGame(GameType type)
+        {
+            Paddle rightPaddle = new Paddle(new Rail(Rail.SIDE_RIGHT), new Color(49, 27, 146, 80));            
+            Paddle leftPaddle = new Paddle(new Rail(Rail.SIDE_LEFT), new Color(146, 27, 37, 80));
+            
+            switch (type)
+            {
+                case GameType.PlayerVsPlayer:
+                    leftPaddle.Controller = new Player(leftPaddle, 0);
+                    rightPaddle.Controller = new Player(rightPaddle, 1);
+                    break;
+                case GameType.PlayerVsNPC:
+                    leftPaddle.Controller = new Player(leftPaddle, 0);
+                    rightPaddle.Controller = new Ai(rightPaddle, _ball);
+                    break;
+                case GameType.NPCVsNPC:
+                    leftPaddle.Controller = new Ai(leftPaddle, _ball);
+                    rightPaddle.Controller = new Ai(rightPaddle, _ball);
+                    break;
+            }
+
+            _entities.Add(leftPaddle);
+            _entities.Add(rightPaddle);
         }
 
         public override void  Update()
