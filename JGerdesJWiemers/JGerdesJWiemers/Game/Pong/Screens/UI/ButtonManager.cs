@@ -21,17 +21,24 @@ namespace JGerdesJWiemers.Game.Pong.Screens.UI
             _buttons = new List<Button>();
             InputManager.Channel[0].OnUp += delegate(float val)
             {
-                ChangeSelection(-1);
+                if (val > 0.5)
+                {
+                    ChangeSelection(-1);
+                }
             };
             InputManager.Channel[0].OnDown += delegate(float val)
             {
-                ChangeSelection(1);
+                if (val > 0.5) 
+                {
+                    ChangeSelection(1);
+                }
+                
             };
             InputManager.Channel[0].OnAction1 += delegate(bool pressed)
             {
                 if (pressed)
                 {
-                    _buttons[_currentSelection].Select();
+                 //   _buttons[_currentSelection].Select();
                 }
             };
         }

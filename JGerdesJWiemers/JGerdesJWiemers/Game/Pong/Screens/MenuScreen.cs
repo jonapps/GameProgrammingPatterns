@@ -1,5 +1,7 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Pong.Screens.UI;
+using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
     {
 
         private ButtonManager _buttonManager;
+        private Sprite _background;
 
         public MenuScreen(Window w) : base(w)
         {
@@ -40,6 +43,8 @@ namespace JGerdesJWiemers.Game.Pong.Screens
             _buttonManager.AddButton(pvnButton);
             _buttonManager.AddButton(exitButton);
 
+            _background = new Sprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BACKGROUND));
+
         }
 
         public override void Update()
@@ -49,6 +54,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
+            renderTarget.Draw(_background);
             _buttonManager.Render(renderTarget, extra);
         }
 
