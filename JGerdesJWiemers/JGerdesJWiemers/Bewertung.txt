@@ -1,0 +1,21 @@
+Note: 1
+
+Positiv:
+
+Compiliert & Startet sofort
+Schicke Präsentation
+ScreenManager funktioniert
+GameLoop ordentlich umgesetzt.
+Controllersteuerung
+
+
+Kritik & Tips:
+
+Hab wirklich wenig zu meckern! Insgesamt sehr gute Ideen und sehr gute Umsetzung.
+
+Die Collisionsbehandlung ist teilweise noch etas buggy.
+
+Auch Effekte (_effects) hätten als Entity modeliert werden könnnen. Man würde sich die zweite Schleife in der Rendermethode sparen und müsste die Position nicht im Rendering updaten sondern schön davon getrennt im Update().
+
+
+Euer Sound-Manager kann jeden Sound nur einmal zur Zeit spielen. In der Praxis können sich SFX durchaus überlagern. Deshalb die (übliche) Trennung in SoundBuffer (einmal pro Sound-Source) und Sound (Instanziiert einen SoundBuffer mehrfach)
