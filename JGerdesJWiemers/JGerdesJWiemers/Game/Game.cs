@@ -55,15 +55,7 @@ namespace JGerdesJWiemers.Game
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.SetVerticalSyncEnabled(true);
-
-            ConvertUnits.SetDisplayUnitToSimUnitRatio(8f);
-
-            float width = ConvertUnits.ToSimUnits(_window.Size.X);
-            float height = ConvertUnits.ToSimUnits(_window.Size.Y);
-            View view = new View(new Vector2f(width / 2f, height / 2f), new Vector2f(width, height));
-            ////view.Size = new Vector2f(ConvertUnits.ToSimUnits(1280), ConvertUnits.ToSimUnits(720));
-            //view.Size = new Vector2f(800, 600);
-            _window.SetView(view);
+ 
 
             InputManager.Init(_window);
             InputManager.Debug();
