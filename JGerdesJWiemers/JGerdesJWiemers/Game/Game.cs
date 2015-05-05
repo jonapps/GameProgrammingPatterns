@@ -9,11 +9,10 @@ using System.Threading;
 using System.Diagnostics;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Graphics;
-using JGerdesJWiemers.Game.Pong;
-using JGerdesJWiemers.Game.Pong.Screens;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using SFML.System;
 using JGerdesJWiemers.Game.Engine.Input;
+using FarseerPhysics;
 
 namespace JGerdesJWiemers.Game
 {
