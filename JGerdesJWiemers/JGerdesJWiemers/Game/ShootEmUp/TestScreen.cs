@@ -30,7 +30,7 @@ namespace JGerdesJWiemers.Game
 
         public TestScreen(Window w):base(w)
         {
-           
+
             
 
             _world = new World(new Vector2(0, 9.81f ));
@@ -58,7 +58,8 @@ namespace JGerdesJWiemers.Game
 
             _ground.OnCollision += delegate(Fixture f1, Fixture f2, Contact contact)
             {
-                contact.Restitution = 0f;
+                contact.Restitution = 1f;
+                //contact.Friction = -0.2f;
                 return true;
             };
             _world.BodyList.Add(_ground);

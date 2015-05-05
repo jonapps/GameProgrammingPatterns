@@ -1,4 +1,5 @@
-﻿using SFML.System;
+﻿using FarseerPhysics.Dynamics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         /// <summary>
         /// 
         /// </summary>
-        public RectangleEntity(float x, float y) : base(x, y)
+        public RectangleEntity(float x, float y, World w) : base(x, y, w)
         {
             _lastPoints = new List<Vector2f>();
         }
@@ -40,9 +41,9 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         public List<Vector2f> GetCurrentPoints()
         {
             List<Vector2f> result = new List<Vector2f>();
-            for (uint i = 0; i < _shape.GetPointCount(); ++i)
+            for (uint i = 0; i < _renderShape.GetPointCount(); ++i)
             {
-                Vector2f point = _shape.Transform.TransformPoint(_shape.GetPoint(i));
+                Vector2f point = _renderShape.Transform.TransformPoint(_renderShape.GetPoint(i));
                 result.Add(new Vector2f(point.X, point.Y));
             }
             return result;

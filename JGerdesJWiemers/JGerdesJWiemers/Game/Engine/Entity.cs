@@ -7,6 +7,7 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
+using FarseerPhysics.Dynamics;
 
 namespace JGerdesJWiemers.Game.Engine
 {
@@ -14,18 +15,35 @@ namespace JGerdesJWiemers.Game.Engine
     {
         protected Vector2f _position;
         protected Vector2f _speed;
-        protected Shape _shape;
+        protected Shape _renderShape;
+        protected Body _body;
+        protected World _world;
 
-        public Entity(float x, float y)
+
+        public Entity(float x, float y, World w)
         {
             _position = new Vector2f(x, y);
+            _world = w;
         }
+
+        public Body Body
+        {
+            get
+            {
+                return _body;
+            }
+            set
+            {
+                _body = value;
+            }
+        }
+
 
         public Shape Shape
         {
             get
             {
-                return _shape;
+                return _renderShape;
             }
         }
         
@@ -65,8 +83,8 @@ namespace JGerdesJWiemers.Game.Engine
 
         public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            _shape.Position = _position + _speed * extra;
-            renderTarget.Draw(_shape);
+            _renderShape.Position = _position + _speed * extra;
+            renderTarget.Draw(_renderShape);
         }
 
         public abstract void onCollision();

@@ -1,4 +1,7 @@
-﻿using SFML.System;
+﻿using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
+using Microsoft.Xna.Framework;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,10 +56,12 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         /// 
         /// </summary>
         /// <param name="r"></param>
-        public CircleEntity(float x, float y, float r, float rs) : base(x,y)
+        public CircleEntity(float x, float y, float r, World w) : base(x,y,w)
         {
             _radius = r;
-            _rotationSpeed = rs;
+            _rotationSpeed = 0f;
+            _body = BodyFactory.CreateCircle(_world, r, 1f);
+            _body.Position = new Vector2(x, y);
         }
 
         public override void Update()
