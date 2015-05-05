@@ -155,7 +155,7 @@ namespace JGerdesJWiemers.Game.Pong.Screens
 
         public override void Exit()
         {
-            
+            AudioManager.Instance.Stop(_SOUND_GAME_BACKGROUND);
         }
     }
 }
