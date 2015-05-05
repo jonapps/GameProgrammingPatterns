@@ -139,7 +139,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 }
 
                 /// todo: Better naming here :P
-                /// 
                 intersectionPoint1 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentTopPoint, lastTopPoint, aCurrentPoints[i], aLastPoints[i]);
                 intersectionPoint2 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentBottomPoint, lastBottomPoint, aCurrentPoints[i], aLastPoints[i]);
                 intersectionPoint3 = JGerdesJWiemers.Game.Engine.Utils.Math.TestIntersection(currentTopPoint, lastTopPoint, aCurrentPoints[i], aCurrentPoints[j]);
