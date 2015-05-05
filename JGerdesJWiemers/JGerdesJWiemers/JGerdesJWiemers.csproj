@@ -54,6 +54,9 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FarseerPhysics">
+      <HintPath>..\packages\FarseerPhysics.3.5.0\lib\NET40\FarseerPhysics.dll</HintPath>
+    </Reference>
     <Reference Include="sfmlnet-audio-2, Version=2.2.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SFML.Net.2.2\lib\sfmlnet-audio-2.dll</HintPath>
@@ -79,7 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\Engine\Audio\AudioManager.cs" />
-    <Compile Include="Game\Engine\Controller\ControllerBase.cs" />
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
+    <Compile Include="Game\ShootEmUp\TestScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
