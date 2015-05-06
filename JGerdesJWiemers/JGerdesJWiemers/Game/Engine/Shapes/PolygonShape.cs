@@ -22,7 +22,6 @@ namespace JGerdesJWiemers.Game.Engine.Shapes
 
         public override Vector2f GetPoint(uint index)
         {
-            System.Console.WriteLine("=!=asdasidgiu21 39hodhoiahsdoiahsd");
             return _points[(int)index];
         }
 

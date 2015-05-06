@@ -20,7 +20,6 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         private Vertices _vertices;
 
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -35,10 +34,19 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
             if (vertices != null)
             {
-                _Create(x, y, vertices, w);
+                _Create(x, y, vertices, w, rotation, bodyType);
             }
         }
 
+        /// <summary>
+        /// Creates a Body and renderShape. MUST be called before update
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="vertices"></param>
+        /// <param name="w"></param>
+        /// <param name="rotation"></param>
+        /// <param name="bodyType"></param>
         protected void _Create(float x, float y, Vertices vertices, World w, float rotation = 0, BodyType bodyType = BodyType.Dynamic)
         {
             if (vertices.Count < 3)
@@ -55,9 +63,12 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             _renderShape = new PolygonShape(points);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Update()
         {
+            
             base.Update();
         }
     }
