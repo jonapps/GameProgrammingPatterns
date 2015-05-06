@@ -11,11 +11,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     abstract class Screen
     {
-        protected Window _window;
+        protected RenderWindow _window;
         protected ScreenManager _screenManager;
 
 
-        public Screen(Window window)
+        public Screen(RenderWindow window)
         {
             _window = window;
 
