@@ -34,8 +34,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         }
 
         public ScreenManager(RenderWindow w)
-            : base(w)
-        {
+            : base(w){
 
         }
 

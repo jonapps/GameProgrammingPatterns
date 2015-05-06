@@ -95,8 +95,6 @@
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
-    <Compile Include="Game\Engine\Utils\CollisionSolver.cs" />
-    <Compile Include="Game\Engine\Helper\Collision.cs" />
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
@@ -141,6 +139,9 @@
     <Content Include="Game\Assets\Graphics\medal_blue.png" />
     <Content Include="Game\Assets\Graphics\medal_red.png" />
     <Content Include="Game\Assets\Graphics\title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\ShootEmUp\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
