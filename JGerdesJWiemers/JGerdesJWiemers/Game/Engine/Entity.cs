@@ -8,22 +8,20 @@ using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
 using FarseerPhysics.Dynamics;
+using Microsoft.Xna.Framework;
 
 namespace JGerdesJWiemers.Game.Engine
 {
     abstract class Entity : IUpdateable, IRenderable
     {
-        protected Vector2f _position;
-        protected Vector2f _speed;
+
         protected Shape _renderShape;
+        protected Vector2f _renderPosition;
         protected Body _body;
-        protected World _world;
 
 
-        public Entity(float x, float y, World w)
+        public Entity()
         {
-            _position = new Vector2f(x, y);
-            _world = w;
         }
 
         public Body Body
@@ -47,47 +45,22 @@ namespace JGerdesJWiemers.Game.Engine
             }
         }
         
-        public Vector2f Speed
-        {
-            get
-            {
-                return _speed;
-            }
-
-            set
-            {
-                if (!value.Equals(null))
-                {
-                    _speed = value;
-                }
-            }
-        }
-
-        public Vector2f Position
-        {
-            get
-            {
-                return _position;
-            }
-            set
-            {
-                _position = value;
-            }
-        }
 
         public virtual void Update()
         {
 
-            _position += _speed;
         }
 
         public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            _renderShape.Position = _position + _speed * extra;
+            _renderShape.Position = _ConvertVectorToVector2f(_body.Position + _body.LinearVelocity * extra);
             renderTarget.Draw(_renderShape);
         }
 
-        public abstract void onCollision();
 
+        protected Vector2f _ConvertVectorToVector2f(Vector2 vec)
+        {
+            return new Vector2f(vec.X, vec.Y);
+        }
     }
 }

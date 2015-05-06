@@ -1,6 +1,8 @@
-﻿using FarseerPhysics.Dynamics;
+﻿
+using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
+using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
@@ -13,21 +15,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
     abstract class CircleEntity : Entity
     {
-        protected float _radius;
-        protected Vector2f _lastPosition;
         protected float _rotationSpeed;
-
-        public float Radius
-        {
-            get
-            {
-                return _radius;
-            }
-            set
-            {
-                _radius = value;
-            }
-        }
 
         public float RotationSpeed
         {
@@ -41,39 +29,24 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             }
         }
 
-        public Vector2f LastPosition
-        {
-            get
-            {
-                return _lastPosition;
-            }
-            set
-            {
-                _lastPosition = value;
-            }
-        }
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <param name="r"></param>
-        public CircleEntity(float x, float y, float r, World w) : base(x,y,w)
+        /// <param name="w"></param>
+        public CircleEntity(float x, float y, float r, World w) : base()
         {
-            _radius = r;
             _rotationSpeed = 0f;
-            _body = BodyFactory.CreateCircle(_world, r, 1f);
+            _body = BodyFactory.CreateCircle(w, r, 1f);
             _body.Position = new Vector2(x, y);
+            _renderShape = new CircleShape(r);
         }
 
         public override void Update()
         {
-            _lastPosition = GetCurrentPosition();
             base.Update();
-
-        }
-
-        public  Vector2f GetCurrentPosition()
-        {
-            return new Vector2f(_position.X, _position.Y);
         }
     }
 }
