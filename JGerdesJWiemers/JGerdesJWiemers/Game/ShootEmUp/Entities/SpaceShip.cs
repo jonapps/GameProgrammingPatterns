@@ -18,12 +18,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             Vertices sp = new Vertices();
 
             sp.Add(new Vector2(0, 0));
-            sp.Add(new Vector2(-15, 5));
+            sp.Add(new Vector2(-3, 5));
             sp.Add(new Vector2(-6, 10));
 
-            sp.Add(new Vector2(0, -6));
+            sp.Add(new Vector2(0, 12));
+
             sp.Add(new Vector2(6, 10));
-            sp.Add(new Vector2(15, 5));
+            sp.Add(new Vector2(3, 5));
 
             
 
