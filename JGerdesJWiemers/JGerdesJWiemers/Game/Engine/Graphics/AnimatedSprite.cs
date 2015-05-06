@@ -9,6 +9,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     class AnimatedSprite : Sprite
     {
+
         private int _tileWidth;
         private int _tileHeight;
         private int _rows;
@@ -23,23 +24,38 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         {
             _tileWidth = tileWidth;
             _tileHeight = tileHeight;
-            _columns = (int) tex.Size.X / _tileWidth;
-            _rows = (int) tex.Size.Y / _tileHeight;
+            _rows = (int) tex.Size.X / _tileWidth;
+            _columns = (int) tex.Size.Y / _tileHeight;
 
             _timePassed = 0;
-            _currentDuration = 1000;
+            _currentDuration = 20;
 
             TextureRect = new IntRect(0, 0, _tileWidth, _tileHeight);
         }
 
-        public new void Draw(RenderTarget renderTarget, RenderStates renderStates, float exta)
+        public new void Draw(RenderTarget renderTarget, RenderStates renderStates)
         {
             _timePassed += Game.ElapsedTime;
             if (_timePassed >= _currentDuration)
             {
-
+                _NextFrame();
+                _timePassed = 0;
             }
             base.Draw(renderTarget, renderStates);
+
+        }
+
+        private void _NextFrame()
+        {
+            _currentIndex++;
+            if (_currentIndex >= _columns * _rows)
+            {
+                _currentIndex = 0;
+            }
+            int indexX = _currentIndex % _rows;
+            int indexY = _currentIndex / _rows;
+            base.TextureRect = new IntRect(indexX * _tileWidth, indexY * _tileHeight, _tileWidth, _tileHeight);
+            Console.WriteLine("indexX:"+indexX+" indexY:"+indexY);
 
         }
     }
