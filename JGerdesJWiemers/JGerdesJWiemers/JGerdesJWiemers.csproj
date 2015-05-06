@@ -104,6 +104,7 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,11 +141,8 @@
     <Content Include="Game\Assets\Audio\Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav" />
     <Content Include="Game\Assets\Audio\game_background.wav" />
     <Content Include="Game\Assets\Audio\menu_background.wav" />
-    <Content Include="Game\Assets\Graphics\background.png" />
+    <Content Include="Game\Assets\Graphics\astronaut.png" />
     <Content Include="Game\Assets\Graphics\earth.png" />
-    <Content Include="Game\Assets\Graphics\medal_blue.png" />
-    <Content Include="Game\Assets\Graphics\medal_red.png" />
-    <Content Include="Game\Assets\Graphics\title.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
