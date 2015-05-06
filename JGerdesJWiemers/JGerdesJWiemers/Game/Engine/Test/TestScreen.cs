@@ -28,11 +28,24 @@ namespace JGerdesJWiemers.Game
     {
         private World _world;
 
-        public TestScreen(RenderWindow w):base(w)
+        public TestScreen(RenderWindow w) : base(w)
         {
             _world = new World(new Vector2(0,9.81f));
-            _entities.Add(new RectangleEntity(10, 12, 10, 10, _world, 1));
+            _entities.Add(new RectangleEntity(10, 20, 10, 10, _world, 1));
+            _entities.Add(new CircleEntity(10, 30, 5, _world));
+            _entities.Add(new CircleEntity(60, 10, 5, _world));
             _entities.Add(new RectangleEntity(10, 50, 10, 10, _world, 0, BodyType.Static));
+            Vertices vert = new Vertices();
+            vert.Add(new Vector2(1,6));
+            vert.Add(new Vector2(13, 3));
+            vert.Add(new Vector2(5, 12));
+            _entities.Add(new PolygonEntity(50, 50, vert, _world));
+            vert = new Vertices();
+            vert.Add(new Vector2(5, 12));
+            vert.Add(new Vector2(6, 1));
+            vert.Add(new Vector2(13, 3));
+            _entities.Add(new PolygonEntity(50, 10, vert, _world));
+            _entities.Add(new RectangleEntity(10, 80, 1000, 10, _world, 0, BodyType.Static));
         }
 
         public override void Update()
