@@ -9,14 +9,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     class AnimatedSprite : Sprite
     {
-        public struct Animation
-        {
-            public int[] Frames;
-            public bool Loop;
-            public bool Pingpong;
-            public int Duration;
-        }
-
+        
         private int _tileWidth;
         private int _tileHeight;
         private int _rows;
@@ -27,7 +20,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         private int _currentIndex;
         private int _timePassed;
 
-        public AnimatedSprite(Texture tex, int tileWidth, int tileHeight)
+        public AnimatedSprite(Texture tex, int tileWidth, int tileHeight, Animation animation)
             : base(tex)
         {
             _tileWidth = tileWidth;
@@ -38,17 +31,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _timePassed = 0;
 
             _animationQueue = new Queue<Animation>();
+            TextureRect = new IntRect(0, 0, _tileWidth, _tileHeight);          
 
-            TextureRect = new IntRect(0, 0, _tileWidth, _tileHeight);
+            SetAnimation(animation);
+        }
 
-            Animation defaultAnimation = new Animation();
-            defaultAnimation.Frames = new int[] { 0 };
-            defaultAnimation.Loop = false;
-            defaultAnimation.Pingpong = false;
-            defaultAnimation.Duration = 1;
+        public AnimatedSprite(Texture tex, int tileWidth, int tileHeight)
+            : this(tex, tileWidth, tileHeight, new Animation()) { }
 
-            _animationQueue.Enqueue(defaultAnimation);
-        } 
 
         public new void Draw(RenderTarget renderTarget, RenderStates renderStates)
         {
@@ -59,7 +49,6 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 _timePassed = 0;
             }
             base.Draw(renderTarget, renderStates);
-
         }
 
 
