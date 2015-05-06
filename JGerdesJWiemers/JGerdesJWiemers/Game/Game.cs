@@ -21,7 +21,7 @@ namespace JGerdesJWiemers.Game
     {
         public static readonly string VERSION = "v0.9.1";
         public static readonly string GAME_TITLE = "Pong";
-        public static float PADDLE_GAME_SPEED = 25;
+        public static int ElapsedTime = 0;
 
         readonly TimeSpan TargetElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 60);
         readonly TimeSpan MaxElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 10);
@@ -151,6 +151,7 @@ namespace JGerdesJWiemers.Game
                 if (updated)
                 {
                     _Render(accumulatedTime.Milliseconds / (float)TargetElapsedTime.Milliseconds);
+                    Game.ElapsedTime = accumulatedTime.Milliseconds;
                 }
             }
         }

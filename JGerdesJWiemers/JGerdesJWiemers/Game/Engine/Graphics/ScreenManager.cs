@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.Window;
 using JGerdesJWiemers.Game.Engine.Input;
+using SFML.Graphics;
 
 namespace JGerdesJWiemers.Game.Engine.Graphics
 {
@@ -32,7 +33,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             }
         }
 
-        public ScreenManager(Window w)
+        public ScreenManager(RenderWindow w)
             : base(w)
         {
 
