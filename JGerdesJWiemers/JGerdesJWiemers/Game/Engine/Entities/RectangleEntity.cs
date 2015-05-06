@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.Engine.Entities
 {
-    abstract class RectangleEntity : Entity
+    class RectangleEntity : Entity
     {
 
         /// <summary>

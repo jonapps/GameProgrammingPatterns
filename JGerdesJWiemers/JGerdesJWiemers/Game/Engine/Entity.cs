@@ -37,7 +37,7 @@ namespace JGerdesJWiemers.Game.Engine
         }
 
 
-        public Shape Shape
+        public Shape RenderShape
         {
             get
             {
@@ -54,6 +54,7 @@ namespace JGerdesJWiemers.Game.Engine
         public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             _renderShape.Position = _ConvertVectorToVector2f(_body.Position + _body.LinearVelocity * extra);
+            _renderShape.Rotation = _body.Rotation;
             renderTarget.Draw(_renderShape);
         }
 
