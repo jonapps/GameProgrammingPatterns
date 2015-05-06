@@ -84,23 +84,25 @@
   <ItemGroup>
     <Compile Include="Game\Engine\Audio\AudioManager.cs" />
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
+    <Compile Include="Game\Engine\Entities\PolygonEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
+    <Compile Include="Game\Engine\Exceptions\NotEnoughVerticesException.cs" />
     <Compile Include="Game\Engine\Exceptions\NotInitialisatedException.cs" />
     <Compile Include="Game\Engine\Graphics\AnimatedSprite.cs" />
     <Compile Include="Game\Engine\Graphics\Animation.cs" />
     <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
-    <Compile Include="Game\Engine\Graphics\Screen.cs" />
+    <Compile Include="Game\Engine\Graphics\Screens\Screen.cs" />
     <Compile Include="Game\Engine\Input\Channel.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
+    <Compile Include="Game\Engine\Shapes\PolygonShape.cs" />
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
-    <Compile Include="Game\ShootEmUp\Screen\GameScreen.cs" />
-    <Compile Include="Game\Engine\Test\TestScreen.cs" />
+    <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

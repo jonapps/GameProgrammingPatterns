@@ -9,21 +9,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JGraphics = JGerdesJWiemers.Game.Engine.Graphics;
 
-namespace JGerdesJWiemers.Game.ShootEmUp.Screen
+namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 {
-    class GameScreen : JGraphics.Screen
+    class GameScreen : Screen
     {
 
-        public static readonly float WORLD_STEP_SIZE = 0.3f;
+        public static readonly float WORLD_STEP_SIZE = 1 / 60f;
 
-        private World _world;
-        private List<Entity> _entities;
-        private View _originalView;
+        protected List<Entity> _entities;
+        protected View _originalView;
 
         public GameScreen(RenderWindow w) : base(w)
         {
+            _entities = new List<Entity>();
             _originalView = _window.GetView();
             ConvertUnits.SetDisplayUnitToSimUnitRatio(8f);
             float width = ConvertUnits.ToSimUnits(_window.Size.X);
@@ -40,7 +39,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screen
                 e.Update();
             }
 
-            _world.Step(WORLD_STEP_SIZE);
 
         }
 
