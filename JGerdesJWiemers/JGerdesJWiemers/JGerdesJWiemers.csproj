@@ -86,6 +86,7 @@
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\PolygonEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
+    <Compile Include="Game\Engine\Entities\SpriteEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
     <Compile Include="Game\Engine\Exceptions\NotEnoughVerticesException.cs" />
     <Compile Include="Game\Engine\Exceptions\NotInitialisatedException.cs" />

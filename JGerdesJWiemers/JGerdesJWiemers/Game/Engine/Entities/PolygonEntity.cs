@@ -19,7 +19,6 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         private Vertices _vertices;
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -29,7 +28,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         /// <param name="w"></param>
         /// <param name="rotation"></param>
         /// <param name="bodyType"></param>
-        public PolygonEntity(float x, float y, Vertices vertices,  World w, float rotation = 0, BodyType bodyType = BodyType.Dynamic) : base()
+        public PolygonEntity(float x = 0, float y = 0, Vertices vertices = null,  World w = null, float rotation = 0, BodyType bodyType = BodyType.Dynamic) : base()
         {
 
             if (vertices != null)

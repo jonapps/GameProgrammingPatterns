@@ -13,10 +13,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String FONT_ROBOTO_LIGHT = "Roboto-Light.ttf";
         public static readonly String FONT_ROBOTO_REGULAR = "Roboto-Regular.ttf";
         public static readonly String FONT_ROBOTO_MEDIUM = "Roboto-Medium.ttf";
-        public static readonly String TEXTURE_BACKGROUND = "background.png";
-        public static readonly String TEXTURE_TITLE_BACKGROUND = "title.png";
-        public static readonly String TEXTURE_MEDAL_RED = "medal_red.png";
-        public static readonly String TEXTURE_MEDAL_BLUE = "medal_blue.png";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -35,11 +31,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadFont(FONT_ROBOTO_LIGHT, FONT_ROBOTO_LIGHT);
             LoadFont(FONT_ROBOTO_REGULAR, FONT_ROBOTO_REGULAR);
             LoadFont(FONT_ROBOTO_MEDIUM, FONT_ROBOTO_MEDIUM);
-
-            LoadTexture(TEXTURE_BACKGROUND, TEXTURE_BACKGROUND);
-            LoadTexture(TEXTURE_TITLE_BACKGROUND, TEXTURE_TITLE_BACKGROUND);
-            LoadTexture(TEXTURE_MEDAL_RED, TEXTURE_MEDAL_RED);
-            LoadTexture(TEXTURE_MEDAL_BLUE, TEXTURE_MEDAL_BLUE);
         }
 
         public void LoadFont(String name, String filename)
