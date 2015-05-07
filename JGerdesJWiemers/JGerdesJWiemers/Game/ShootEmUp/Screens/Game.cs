@@ -3,6 +3,7 @@ using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
+using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -25,9 +26,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             InputManager.Init(w);
 
             _world = new World(new Vector2(0,0));
+
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 4000, 600, 0, 0, -0.05f, 0));
+
             _entities.Add(new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5));
             _ship = new SpaceShip(20, 10, _world);
             _entities.Add(_ship);
+            
             //_entities.Add(new CircleEntity(40, 10, 3, _world));
             //_entities.Add(new CircleEntity(45, 10, 3, _world));
             //_entities.Add(new CircleEntity(45, 25, 1, _world));
@@ -44,6 +49,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public override void Update()
         {
             _world.Step(WORLD_STEP_SIZE);
+
+            for (int i = 0; i < _entities.Count; ++i)
+            {
+                _entities[i].Update();
+            }
         }
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
