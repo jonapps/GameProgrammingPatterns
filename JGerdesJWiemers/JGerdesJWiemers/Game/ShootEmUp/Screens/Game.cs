@@ -35,6 +35,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             Earth earth = new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5);
             _entities.Add(earth);
             _entities.Add(new Moon(earth, _world, 1.5f));
+            _entities.Add(new Astronaut(new Vector2f(20,-20), _world, 0.5f, 2f, 3f, 0.2f));
+            _entities.Add(new Astronaut(new Vector2f(100, 95), _world, 0.5f, 2f, -5f, -0.6f));
 
             //_ship = new SpaceShip(100, 100, _world);
             //_entities.Add(_ship);

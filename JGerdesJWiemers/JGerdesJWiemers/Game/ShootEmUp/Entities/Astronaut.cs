@@ -19,7 +19,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private Animation _rotateAnimation;
 
-        public Astronaut(Vector2f position, World world, float scale = 1)
+        public Astronaut(Vector2f position, World world, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0)
             : base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 64, 83)
         {
             Vertices vertices = new Vertices();
@@ -38,8 +38,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _sprite.SetAnimation(_rotateAnimation);
 
             //_body.ApplyLinearImpulse(new Vector2(10f, 1f));
-            _body.LinearVelocity = new Vector2(2f, 3f);
-            _body.AngularVelocity = 0.2f;
+            _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
+            _body.AngularVelocity = rotSpeed;
         }
     }
 }
