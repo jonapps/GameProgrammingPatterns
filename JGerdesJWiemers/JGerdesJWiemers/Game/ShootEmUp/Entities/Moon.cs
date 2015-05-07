@@ -4,9 +4,11 @@ using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using Microsoft.Xna.Framework;
 using SFML.System;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private Animation _rotateAnimation;
         private Earth _earth;
         private static float MIN_DISTANCE = 20;
-        private float _distance;
+        private float _moonImpulse = 100;
+        private bool _forced = false;
+
+
 
         public Moon(Earth earth, World world, float radius) :
             base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_EARTH), 128, 128, earth.Body.Position.X+10, earth.Body.Position.Y+10, radius, world)
@@ -28,6 +33,18 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _earth = earth;            
             _rotateAnimation = new Animation(0, 319, 20, true, false);
             _sprite.SetAnimation(_rotateAnimation);
+
+
+            InputManager.Channel[0].OnAction1 += delegate(bool press)
+            {
+                if (press)
+                {
+                    _forced = true;
+                }
+
+            };
+
+
         }
 
         public override void Update()
@@ -72,6 +89,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             //_body.ApplyForce(forceNormal*10);
             //_body.ApplyLinearImpulse(forceNormal);
             _body.LinearVelocity = forceNormal * 10;
+
+            if (_forced)
+            {
+                _forced = false;
+                _body.ApplyForce(forceNormal * _moonImpulse);
+            }
+
             System.Console.WriteLine(dout.Distance);
 
             base.Update();
