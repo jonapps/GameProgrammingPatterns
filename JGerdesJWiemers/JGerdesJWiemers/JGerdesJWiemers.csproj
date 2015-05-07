@@ -86,6 +86,7 @@
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\PolygonEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
+    <Compile Include="Game\Engine\Entities\SpriteCircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\SpriteEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
     <Compile Include="Game\Engine\Exceptions\NotEnoughVerticesException.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\Earth.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />

@@ -15,6 +15,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String FONT_ROBOTO_MEDIUM = "Roboto-Medium.ttf";
 
         public static readonly String TEXTURE_ASTRONAUT = "astronaut.png";
+        public static readonly String TEXTURE_EARTH = "earth.png";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -35,6 +36,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadFont(FONT_ROBOTO_MEDIUM, FONT_ROBOTO_MEDIUM);
 
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
+            LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
         }
 
         public void LoadFont(String name, String filename)

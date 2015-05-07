@@ -36,7 +36,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             var ld = new Vector2(0, 0);
 
-            InputManager.Channel[0].OnUp += delegate(float val)
+            InputManager.Channel[1].OnUp += delegate(float val)
             {
                 ld.X = 0;
                 ld.Y = -1; 
@@ -46,7 +46,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _body.ApplyForce(wd);
             };
 
-            InputManager.Channel[0].OnDown += delegate(float val)
+            InputManager.Channel[1].OnDown += delegate(float val)
             {
                 ld.X = 0;
                 ld.Y = 1;
@@ -56,7 +56,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _body.ApplyForce(wd);
             };
 
-            InputManager.Channel[0].OnLeft += delegate(float val)
+            InputManager.Channel[1].OnLeft += delegate(float val)
             {
                 ld.X = -1;
                 ld.Y = 0;
@@ -66,7 +66,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _body.ApplyForce(wd);
             };
 
-            InputManager.Channel[0].OnRight += delegate(float val)
+            InputManager.Channel[1].OnRight += delegate(float val)
             {
                 ld.X = 1;
                 ld.Y = 0;
