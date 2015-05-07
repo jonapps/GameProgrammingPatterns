@@ -20,14 +20,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private Animation _rotateAnimation;
 
         public Astronaut(Vector2f position, World world)
-            : base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 64, 82)
+            : base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 64, 83)
         {
             Vertices vertices = new Vertices();
             //TODO: fit to sprite
             vertices.Add(new Vector2(0, 0));
             vertices.Add(new Vector2(ConvertUnits.ToSimUnits(64), 0));
-            vertices.Add(new Vector2(ConvertUnits.ToSimUnits(64), ConvertUnits.ToSimUnits(82)));
-            vertices.Add(new Vector2(0, ConvertUnits.ToSimUnits(82)));
+            vertices.Add(new Vector2(ConvertUnits.ToSimUnits(64), ConvertUnits.ToSimUnits(83)));
+            vertices.Add(new Vector2(0, ConvertUnits.ToSimUnits(83)));
             _Create(position.X, position.Y, vertices, world);
 
             _rotateAnimation = new Animation(0, 70, 20, true, false);
