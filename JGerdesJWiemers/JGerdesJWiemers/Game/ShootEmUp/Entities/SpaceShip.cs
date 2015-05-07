@@ -27,27 +27,49 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             sp.Add(new Vector2(6, 10));
             sp.Add(new Vector2(3, 5));
 
-            
+            float force = 1000;
             _Create(x, y, sp, w);
+
+            var ld = new Vector2(0, 0);
 
             InputManager.Channel[0].OnUp += delegate(float val)
             {
-                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, val*-10);
+                ld.X = 0;
+                ld.Y = -1; 
+                var wd = _body.GetWorldVector(ld);
+                wd.Normalize();
+                wd *= val * force;
+                _body.ApplyForce(wd);
             };
 
             InputManager.Channel[0].OnDown += delegate(float val)
             {
-                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, val*10);
+                ld.X = 0;
+                ld.Y = 1;
+                var wd = _body.GetWorldVector(ld);
+                wd.Normalize();
+                wd *= val * force;
+                _body.ApplyForce(wd);
             };
 
             InputManager.Channel[0].OnLeft += delegate(float val)
             {
-                _body.Rotation += val/100f;
+                ld.X = -1;
+                ld.Y = 0;
+                var wd = _body.GetWorldVector(ld);
+                wd.Normalize();
+                wd *= val * force;
+                _body.ApplyForce(wd);
             };
 
             InputManager.Channel[0].OnRight += delegate(float val)
             {
-                _body.Rotation += val / -100f;
+                ld.X = 1;
+                ld.Y = 0;
+                var wd = _body.GetWorldVector(ld);
+                wd.Normalize();
+                wd *= val * force;
+                _body.ApplyForce(wd);
             };
 
         }

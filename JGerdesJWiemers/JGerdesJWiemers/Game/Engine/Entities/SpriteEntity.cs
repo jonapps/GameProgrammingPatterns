@@ -18,7 +18,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         public SpriteEntity(Texture tex, int width, int height) : base()
         {
             _sprite = new AnimatedSprite(tex, width, height);
-            _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(1), ConvertUnits.ToSimUnits(1));
+            _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(0.5), ConvertUnits.ToSimUnits(0.5));
             _renderStates = new RenderStates(BlendMode.Alpha);
         }
 
