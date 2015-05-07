@@ -24,7 +24,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _world = new World(new Vector2(0,0));
             _entities.Add(new SpaceShip(20,10,_world));
-            _entities.Add(new Astronaut(new Vector2f(30,20), _world));
+
             _entities.Add(new CircleEntity(40, 10, 3, _world));
             _entities.Add(new CircleEntity(45, 10, 3, _world));
             _entities.Add(new CircleEntity(45, 25, 1, _world));
@@ -32,6 +32,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new CircleEntity(50, 10, 3, _world));
             _entities.Add(new CircleEntity(55, 10, 3, _world));
             _entities.Add(new RectangleEntity(-10, 80, 1000, 2, _world, 0,BodyType.Static));
+
+            _entities.Add(new Astronaut(new Vector2f(30,20), _world, 0.5f));
+
 
         }
 
