@@ -27,8 +27,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             sp.Add(new Vector2(6, 10));
             sp.Add(new Vector2(3, 5));
 
-            float force = 1000;
             _Create(x, y, sp, w);
+
+            _body.Friction = 1000;
+
+            float force = 1000;
+
 
             var ld = new Vector2(0, 0);
 
