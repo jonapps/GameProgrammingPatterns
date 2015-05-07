@@ -34,6 +34,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             TextureRect = new IntRect(0, 0, _tileWidth, _tileHeight);          
 
             SetAnimation(animation);
+            _RecalculateTextureRect();
         }
 
         public AnimatedSprite(Texture tex, int tileWidth, int tileHeight)
@@ -57,6 +58,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _animationQueue.Clear();
             _animationQueue.Enqueue(animation);
             _currentIndex = 0;
+            _RecalculateTextureRect();
         }
 
         public void EnqueueAnimation(Animation animation)
@@ -87,6 +89,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 _currentIndex++;
             }
 
+            _RecalculateTextureRect();
+        }
+
+        private void _RecalculateTextureRect()
+        {
             int frame = _animationQueue.Peek().Frames[_currentIndex];
             int indexX = frame % _rows;
             int indexY = frame / _rows;
