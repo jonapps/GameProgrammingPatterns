@@ -105,6 +105,7 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\Moon.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Earth.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />

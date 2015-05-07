@@ -17,18 +17,6 @@ namespace JGerdesJWiemers.Game.Engine.Entities
     {
         protected float _rotationSpeed;
 
-        public float RotationSpeed
-        {
-            get
-            {
-                return _rotationSpeed;
-            }
-            set
-            {
-                _rotationSpeed = value;
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -40,9 +28,23 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             _rotationSpeed = 0f;
             _body = BodyFactory.CreateCircle(w, r, 1f, new Vector2(x, y), bodyType, this);
+            _fixture = FixtureFactory.AttachCircle(r, 1f, _body, this);
             _body.Position = new Vector2(x, y);
             _renderShape = new CircleShape(r);
             _renderShape.Origin = new Vector2f(r, r);
+        }
+
+
+        public float RotationSpeed
+        {
+            get
+            {
+                return _rotationSpeed;
+            }
+            set
+            {
+                _rotationSpeed = value;
+            }
         }
 
         public override void Update()
