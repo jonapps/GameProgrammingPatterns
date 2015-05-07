@@ -23,7 +23,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _world = new World(new Vector2(0,0));
             _entities.Add(new SpaceShip(20,10,_world));
-            _entities.Add(new Astronaut(new Vector2f(30,20), _world));
+            _entities.Add(new Astronaut(new Vector2f(30,20), _world, 0.5f));
 
         }
 
