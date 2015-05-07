@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.Input;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,33 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             sp.Add(new Vector2(3, 5));
 
             
-
-
             _Create(x, y, sp, w);
+
+            InputManager.Channel[0].OnUp += delegate(float val)
+            {
+                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, val*-10);
+            };
+
+            InputManager.Channel[0].OnDown += delegate(float val)
+            {
+                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, val*10);
+            };
+
+            InputManager.Channel[0].OnLeft += delegate(float val)
+            {
+                _body.Rotation += val/100f;
+            };
+
+            InputManager.Channel[0].OnRight += delegate(float val)
+            {
+                _body.Rotation += val / -100f;
+            };
+
+        }
+
+        public override void Update()
+        {
+            base.Update();
         }
     }
 }
