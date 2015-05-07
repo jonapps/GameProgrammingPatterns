@@ -17,8 +17,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_ASTRONAUT = "astronaut.png";
         public static readonly String TEXTURE_EARTH = "earth.png";
         public static readonly String TEXTURE_MOON = "moon.png";
-        public static readonly String TEXTURE_SPACE1 = "space1.jpg";
-        public static readonly String TEXTURE_SPACE2 = "space2.png";
+        public static readonly String TEXTURE_SPACE1 = "space/space1.jpg";
+        public static readonly String TEXTURE_SPACE2 = "space/space2.png";
+        public static readonly String TEXTURE_SPACE3 = "space/space3.png";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -43,6 +44,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_MOON, TEXTURE_MOON);
             LoadTexture(TEXTURE_SPACE1, TEXTURE_SPACE1);
             LoadTexture(TEXTURE_SPACE2, TEXTURE_SPACE2);
+            LoadTexture(TEXTURE_SPACE3, TEXTURE_SPACE3);
         }
 
         public void LoadFont(String name, String filename)

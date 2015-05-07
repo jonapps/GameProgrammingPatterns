@@ -26,13 +26,16 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             InputManager.Init(w);
 
             _world = new World(new Vector2(0,0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 4000, 600, 0, 0, -0.05f, 0));
-            
-            
-            
-            Earth earth = new Earth(70, 30, _world, 5);
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 4000, 600, 0, 0, -0.02f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 2000, 600, 0, 0, -0.04f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 2000, 600, 0, 0, -0.06f, 0));
+
+
+
+            Earth earth = new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5);
             _entities.Add(earth);
-            _entities.Add(new Moon(earth, _world, 1));
+            _entities.Add(new Moon(earth, _world, 1.5f));
+
             //_ship = new SpaceShip(100, 100, _world);
             //_entities.Add(_ship);
             

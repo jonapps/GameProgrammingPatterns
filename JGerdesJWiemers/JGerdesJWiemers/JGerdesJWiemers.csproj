@@ -151,8 +151,9 @@
     <Content Include="Game\Assets\Graphics\astronaut.png" />
     <Content Include="Game\Assets\Graphics\earth.png" />
     <Content Include="Game\Assets\Graphics\moon.png" />
-    <Content Include="Game\Assets\Graphics\space1.jpg" />
-    <Content Include="Game\Assets\Graphics\space2.png" />
+    <Content Include="Game\Assets\Graphics\space\space1.jpg" />
+    <Content Include="Game\Assets\Graphics\space\space2.png" />
+    <Content Include="Game\Assets\Graphics\space\space3.png" />
     <Content Include="Game\Assets\Graphics\spaceshuttle.png" />
   </ItemGroup>
   <ItemGroup />

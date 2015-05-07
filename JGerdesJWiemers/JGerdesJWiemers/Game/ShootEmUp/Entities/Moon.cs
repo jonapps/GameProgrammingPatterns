@@ -28,12 +28,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
 
         public Moon(Earth earth, World world, float radius) :
-            base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_EARTH), 128, 128, earth.Body.Position.X+10, earth.Body.Position.Y+10, radius, world)
+            base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_MOON), 64, 64, earth.Body.Position.X+10, earth.Body.Position.Y+10, radius, world)
         {
-            _earth = earth;            
-            _rotateAnimation = new Animation(0, 319, 20, true, false);
-            _sprite.SetAnimation(_rotateAnimation);
-
+            _earth = earth;
 
             InputManager.Channel[0].OnAction1 += delegate(bool press)
             {
