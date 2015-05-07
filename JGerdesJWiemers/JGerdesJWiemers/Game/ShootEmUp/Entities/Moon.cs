@@ -19,7 +19,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
     {
         private Animation _rotateAnimation;
         private Earth _earth;
-        private static float MIN_DISTANCE = 10;
+        private static float MIN_DISTANCE = 20;
         private float _distance;
 
         public Moon(Earth earth, World world, float radius) :
