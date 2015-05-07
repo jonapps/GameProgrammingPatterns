@@ -19,8 +19,9 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         public SpriteCircleEntity(Texture tex, int spriteWidth, int spriteHeight, float x, float y, float radius, World w) : base(x,y,radius, w)
         {
             _sprite = new AnimatedSprite(tex, spriteWidth, spriteHeight);
-            float scale = ConvertUnits.ToSimUnits(spriteWidth) / spriteWidth * radius;
+            float scale = ConvertUnits.ToDisplayUnits(radius) * 2 / spriteWidth;
             _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(scale), ConvertUnits.ToSimUnits(scale));
+            _sprite.Origin = new Vector2f(spriteWidth * scale, spriteWidth * scale);
             _renderStates = new RenderStates(BlendMode.Alpha);
         }
 
@@ -28,11 +29,11 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             if (_body != null)
             {
-                _sprite.Position = _ConvertVectorToVector2f(_body.Position);
+                _sprite.Position = _ConvertVectorToVector2f(_body.Position) + _ConvertVectorToVector2f(_body.LinearVelocity) * extra;
                 _sprite.Rotation = _body.Rotation * 180 / (float) Math.PI;
             }
             _sprite.Draw(renderTarget, _renderStates);
-            //base.Render(renderTarget, extra);  //leave for debugging
+            base.Render(renderTarget, extra);  //leave for debugging
         }
 
         public override void Update()

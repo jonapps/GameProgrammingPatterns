@@ -58,7 +58,6 @@ namespace JGerdesJWiemers.Game
  
 
             InputManager.Init(_window);
-            InputManager.Debug();
 
             try
             {

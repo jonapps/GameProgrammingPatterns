@@ -42,7 +42,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 ld.Y = -1; 
                 var wd = _body.GetWorldVector(ld);
                 wd.Normalize();
-                wd *= val * force;
+                wd *= val * force*10;
                 _body.ApplyForce(wd);
             };
 
@@ -52,28 +52,19 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 ld.Y = 1;
                 var wd = _body.GetWorldVector(ld);
                 wd.Normalize();
-                wd *= val * force;
-                _body.ApplyForce(wd);
+                wd *= val * force*10;
+                _body.ApplyForce(wd); 
             };
 
             InputManager.Channel[1].OnLeft += delegate(float val)
             {
-                ld.X = -1;
-                ld.Y = 0;
-                var wd = _body.GetWorldVector(ld);
-                wd.Normalize();
-                wd *= val * force;
-                _body.ApplyForce(wd);
+
+                _body.ApplyAngularImpulse(force * -1);
             };
 
             InputManager.Channel[1].OnRight += delegate(float val)
             {
-                ld.X = 1;
-                ld.Y = 0;
-                var wd = _body.GetWorldVector(ld);
-                wd.Normalize();
-                wd *= val * force;
-                _body.ApplyForce(wd);
+                _body.ApplyAngularImpulse(force);
             };
 
         }
