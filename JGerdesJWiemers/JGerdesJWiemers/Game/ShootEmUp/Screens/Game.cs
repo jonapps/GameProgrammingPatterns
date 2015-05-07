@@ -1,5 +1,6 @@
 ﻿using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -18,6 +19,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public Game(RenderWindow w)
             : base(w)
         {
+            InputManager.Init(w);
+
             _world = new World(new Vector2(0,0));
             _entities.Add(new SpaceShip(20,10,_world));
             _entities.Add(new Astronaut(new Vector2f(30,20), _world));

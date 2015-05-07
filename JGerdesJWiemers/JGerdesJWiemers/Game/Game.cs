@@ -149,7 +149,8 @@ namespace JGerdesJWiemers.Game
 
                 if (updated)
                 {
-                    _Render(_accumulatedTime.AsMicroseconds() / (float)TargetElapsedTime.AsMicroseconds());
+                    float extra = _accumulatedTime.AsMilliseconds() / (float)TargetElapsedTime.AsMilliseconds();
+                    _Render(0);
                     Game.ElapsedTime = _accumulatedTime.AsMilliseconds();
                 }
             }
