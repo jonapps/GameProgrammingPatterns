@@ -1,4 +1,5 @@
-﻿using FarseerPhysics.Dynamics;
+﻿using FarseerPhysics;
+using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
@@ -24,7 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             InputManager.Init(w);
 
             _world = new World(new Vector2(0,0));
-            _entities.Add(new Earth(20, 20, _world, 5));
+            _entities.Add(new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5));
             _ship = new SpaceShip(20, 10, _world);
             _entities.Add(_ship);
             //_entities.Add(new CircleEntity(40, 10, 3, _world));
@@ -47,9 +48,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            View view = renderTarget.GetView();
-            view.Center = new Vector2f(_ship.Body.Position.X, _ship.Body.Position.Y);
-            renderTarget.SetView(view);
+            
             for (int i = 0; i < _entities.Count; ++i)
             {
                 _entities[i].Render(renderTarget, extra);
