@@ -143,8 +143,13 @@
     <Content Include="Game\Assets\Audio\Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav" />
     <Content Include="Game\Assets\Audio\game_background.wav" />
     <Content Include="Game\Assets\Audio\menu_background.wav" />
+    <Content Include="Game\Assets\Graphics\asteroids\asteroid1.png" />
+    <Content Include="Game\Assets\Graphics\asteroids\asteroid2.png" />
+    <Content Include="Game\Assets\Graphics\asteroids\asteroid3.png" />
     <Content Include="Game\Assets\Graphics\astronaut.png" />
     <Content Include="Game\Assets\Graphics\earth.png" />
+    <Content Include="Game\Assets\Graphics\moon.png" />
+    <Content Include="Game\Assets\Graphics\spaceshuttle.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

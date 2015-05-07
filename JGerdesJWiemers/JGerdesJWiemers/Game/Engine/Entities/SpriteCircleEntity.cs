@@ -20,8 +20,9 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             _sprite = new AnimatedSprite(tex, spriteWidth, spriteHeight);
             float scale = ConvertUnits.ToDisplayUnits(radius) * 2 / spriteWidth;
+            _sprite.Origin = new Vector2f(spriteWidth/2f, spriteHeight / 2f);
             _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(scale), ConvertUnits.ToSimUnits(scale));
-            _sprite.Origin = new Vector2f(spriteWidth * scale, spriteWidth * scale);
+            
             _renderStates = new RenderStates(BlendMode.Alpha);
         }
 
@@ -34,6 +35,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             }
             _sprite.Draw(renderTarget, _renderStates);
             base.Render(renderTarget, extra);  //leave for debugging
+            
         }
 
         public override void Update()
