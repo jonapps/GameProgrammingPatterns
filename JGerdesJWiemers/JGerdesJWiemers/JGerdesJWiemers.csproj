@@ -108,6 +108,7 @@
     <Compile Include="Game\ShootEmUp\Entities\Moon.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Earth.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,6 +151,8 @@
     <Content Include="Game\Assets\Graphics\astronaut.png" />
     <Content Include="Game\Assets\Graphics\earth.png" />
     <Content Include="Game\Assets\Graphics\moon.png" />
+    <Content Include="Game\Assets\Graphics\space1.jpg" />
+    <Content Include="Game\Assets\Graphics\space2.png" />
     <Content Include="Game\Assets\Graphics\spaceshuttle.png" />
   </ItemGroup>
   <ItemGroup />

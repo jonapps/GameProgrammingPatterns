@@ -22,6 +22,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             _renderStates = new RenderStates(BlendMode.Alpha);
         }
 
+
         public override void Render(RenderTarget renderTarget, float extra)
         {
             if (_body != null)

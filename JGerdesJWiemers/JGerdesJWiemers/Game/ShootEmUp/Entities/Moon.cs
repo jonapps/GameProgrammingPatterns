@@ -19,7 +19,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
     {
         private Animation _rotateAnimation;
         private Earth _earth;
-        private static float minDistance = 10;
+        private static float MIN_DISTANCE = 10;
         private float _distance;
 
         public Moon(Earth earth, World world, float radius) :
@@ -55,11 +55,23 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 TransformB = tb
             });
 
-            Vector2 force = new Vector2(dout.PointA.X - dout.PointB.X, dout.PointA.Y - dout.PointB.Y);
+            Vector2 force, forceNormal;
+            force = new Vector2(dout.PointA.X - dout.PointB.X, dout.PointA.Y - dout.PointB.Y);
             force.Normalize();
-            force = force * dout.Distance;
-            _body.ApplyForce(force);
-
+            forceNormal = new Vector2(force.Y * -1, force.X);
+            if (dout.Distance > MIN_DISTANCE)
+            {
+                force = force * dout.Distance * -1 * 20;
+                _body.ApplyForce(force);
+            }
+            else
+            {
+                force = force * dout.Distance * 20;
+                _body.ApplyForce(force);
+            }
+            //_body.ApplyForce(forceNormal*10);
+            //_body.ApplyLinearImpulse(forceNormal);
+            _body.LinearVelocity = forceNormal * 10;
             System.Console.WriteLine(dout.Distance);
 
             base.Update();
