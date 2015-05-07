@@ -18,32 +18,20 @@ namespace JGerdesJWiemers.Game.Engine
         protected Shape _renderShape;
         protected Vector2f _renderPosition;
         protected Body _body;
+        protected Fixture _fixture;
+
+
 
 
         public Entity()
         {
         }
 
-        public Body Body
-        {
-            get
-            {
-                return _body;
-            }
-            set
-            {
-                _body = value;
-            }
-        }
+        public Body Body { get{ return _body; } set { _body = value;} }
 
+        public Fixture Fixture { set { _fixture = value; } get { return _fixture; } }
 
-        public Shape RenderShape
-        {
-            get
-            {
-                return _renderShape;
-            }
-        }
+        public Shape RenderShape { get { return _renderShape; } }
         
 
         public virtual void Update()
