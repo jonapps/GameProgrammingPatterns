@@ -19,15 +19,15 @@ namespace JGerdesJWiemers.Game
 {
     class Game
     {
-        public static readonly string VERSION = "v0.9.1";
-        public static readonly string GAME_TITLE = "Pong";
+        public static readonly string VERSION = "v0.0.2";
+        public static readonly string GAME_TITLE = "ShootEmUp";
         public static int ElapsedTime = 0;
 
-        readonly TimeSpan TargetElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 60);
-        readonly TimeSpan MaxElapsedTime = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 10);
+        readonly Time TargetElapsedTime = Time.FromMicroseconds(16666);
+        readonly Time MaxElapsedTime = Time.FromMicroseconds(10000);
 
-        TimeSpan accumulatedTime;
-        TimeSpan lastTime;
+        Time _accumulatedTime;
+        Clock _clock;
 
 
         private RenderWindow _window;
@@ -128,30 +128,30 @@ namespace JGerdesJWiemers.Game
         /// </summary>
         private void Run()
         {
-            _stopWatch.Start();
+            _clock = new Clock();
+            _accumulatedTime = Time.FromMicroseconds(0);
             while (_window.IsOpen)
             {
-                TimeSpan currentTime = _stopWatch.Elapsed;
-                TimeSpan elapsedTime = currentTime - lastTime;
-                lastTime = currentTime;
+                Time elapsedTime = _clock.Restart();
 
                 if (elapsedTime > MaxElapsedTime)
                 {
                     elapsedTime = MaxElapsedTime;
                 }
-                accumulatedTime += elapsedTime;
-                bool updated = false;
-                while (accumulatedTime >= TargetElapsedTime)
+                _accumulatedTime += elapsedTime;
+                bool updated = !false;
+                while (_accumulatedTime >= TargetElapsedTime)
                 {
                     _Update();
-                    accumulatedTime -= TargetElapsedTime;
-                    updated = true;
+                    _accumulatedTime -= TargetElapsedTime;
+                    //updated = true;
                 }
 
                 if (updated)
                 {
-                    _Render(accumulatedTime.Milliseconds / (float)TargetElapsedTime.Milliseconds);
-                    Game.ElapsedTime = accumulatedTime.Milliseconds;
+                    _Render(_accumulatedTime.AsMicroseconds() / (float)TargetElapsedTime.AsMicroseconds());
+                    Game.ElapsedTime = _accumulatedTime.AsMilliseconds();
+                    Console.WriteLine(Game.ElapsedTime);
                 }
             }
         }
