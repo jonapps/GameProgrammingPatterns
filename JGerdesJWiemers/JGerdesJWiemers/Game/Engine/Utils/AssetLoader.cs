@@ -16,6 +16,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         public static readonly String TEXTURE_ASTRONAUT = "astronaut.png";
         public static readonly String TEXTURE_EARTH = "earth.png";
+        public static readonly String TEXTURE_MOON = "moon.png";
         public static readonly String TEXTURE_SPACE1 = "space1.jpg";
         public static readonly String TEXTURE_SPACE2 = "space2.png";
 
@@ -39,6 +40,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
             LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
+            LoadTexture(TEXTURE_MOON, TEXTURE_MOON);
             LoadTexture(TEXTURE_SPACE1, TEXTURE_SPACE1);
             LoadTexture(TEXTURE_SPACE2, TEXTURE_SPACE2);
         }
