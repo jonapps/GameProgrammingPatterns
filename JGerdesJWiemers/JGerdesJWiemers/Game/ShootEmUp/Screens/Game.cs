@@ -45,8 +45,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             //_entities.Add(new RectangleEntity(-10, 80, 1000, 2, _world, 0,BodyType.Static));
 
             //_entities.Add(new Astronaut(new Vector2f(30,20), _world, 0.5f));
-
-
         }
 
         public override void Update()
