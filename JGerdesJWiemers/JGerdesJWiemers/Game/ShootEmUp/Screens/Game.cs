@@ -24,7 +24,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             InputManager.Init(w);
 
             _world = new World(new Vector2(0,0));
-            _entities.Add(new Earth(20, 20, _world, 3, 1));
+            _entities.Add(new Earth(20, 20, _world, 5));
             _ship = new SpaceShip(20, 10, _world);
             _entities.Add(_ship);
             //_entities.Add(new CircleEntity(40, 10, 3, _world));

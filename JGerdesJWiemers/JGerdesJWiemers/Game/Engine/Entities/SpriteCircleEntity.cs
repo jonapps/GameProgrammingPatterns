@@ -34,7 +34,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 _sprite.Rotation = _body.Rotation * 180 / (float) Math.PI;
             }
             _sprite.Draw(renderTarget, _renderStates);
-            base.Render(renderTarget, extra);  //leave for debugging
+            //base.Render(renderTarget, extra);  //leave for debugging
             
         }
 

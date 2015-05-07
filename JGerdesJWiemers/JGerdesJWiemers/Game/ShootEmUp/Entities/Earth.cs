@@ -19,10 +19,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private Animation _rotateAnimation;
 
-        public Earth(float x, float y, World world, float radius, float scale = 1) :
+        public Earth(float x, float y, World world, float radius) :
             base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_EARTH), 128, 128, x, y, radius, world)
         {
-            _rotateAnimation = new Animation(0, 31, 1000, true, false);
+            _rotateAnimation = new Animation(0, 319, 20, true, false);
             _sprite.SetAnimation(_rotateAnimation);
         }
     }
