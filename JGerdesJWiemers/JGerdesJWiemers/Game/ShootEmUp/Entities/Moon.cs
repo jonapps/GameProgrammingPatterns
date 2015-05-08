@@ -21,8 +21,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
     {
         private Animation _rotateAnimation;
         private Earth _earth;
-        private static float MIN_DISTANCE = 20;
-        private float _moonImpulse = 100;
+        private float _moonImpulse = 10000;
         private bool _forced = false;
 
 
@@ -31,20 +30,37 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_MOON), 64, 64, earth.Body.Position.X+10, earth.Body.Position.Y+10, radius, world)
         {
             _earth = earth;
-
+            
             InputManager.Channel[0].OnAction1 += delegate(bool press)
             {
                 if (press)
                 {
                     _forced = true;
                 }
-
             };
+
+
+            _ApplyLinearVelocity(18f);
+
+            //_body.Friction = 10f;
+            //_body.Restitution = 10f;
+            
 
 
         }
 
         public override void Update()
+        {
+            //_ApplyLinearForce(10);
+            if (_forced)
+            {
+                _forced = false;
+                _ApplySpeed(_moonImpulse);
+            }
+            base.Update();
+        }
+
+        private void _ApplySpeed(float speed)
         {
             Transform ta, tb;
             DistanceProxy dpa, dpb;
@@ -73,29 +89,39 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             force = new Vector2(dout.PointA.X - dout.PointB.X, dout.PointA.Y - dout.PointB.Y);
             force.Normalize();
             forceNormal = new Vector2(force.Y * -1, force.X);
-            if (dout.Distance > MIN_DISTANCE)
-            {
-                force = force * dout.Distance * -1 * 20;
-                _body.ApplyForce(force);
-            }
-            else
-            {
-                force = force * dout.Distance * 20;
-                _body.ApplyForce(force);
-            }
-            //_body.ApplyForce(forceNormal*10);
-            //_body.ApplyLinearImpulse(forceNormal);
-            _body.LinearVelocity = forceNormal * 10;
+            _body.ApplyForce(forceNormal * speed);
+        }
 
-            if (_forced)
+        private void _ApplyLinearVelocity(float speed)
+        {
+            Transform ta, tb;
+            DistanceProxy dpa, dpb;
+            dpa = new DistanceProxy();
+            dpb = new DistanceProxy();
+
+
+            _body.GetTransform(out ta);
+            _earth.Body.GetTransform(out tb);
+
+            dpa.Set(_fixture.Shape, 0);
+            dpb.Set(_earth.Fixture.Shape, 0);
+
+            DistanceOutput dout;
+            SimplexCache ccache;
+
+            Distance.ComputeDistance(out dout, out ccache, new DistanceInput()
             {
-                _forced = false;
-                _body.ApplyForce(forceNormal * _moonImpulse);
-            }
+                ProxyA = dpa,
+                ProxyB = dpb,
+                TransformA = ta,
+                TransformB = tb
+            });
 
-            System.Console.WriteLine(dout.Distance);
-
-            base.Update();
+            Vector2 force, forceNormal;
+            force = new Vector2(dout.PointA.X - dout.PointB.X, dout.PointA.Y - dout.PointB.Y);
+            force.Normalize();
+            forceNormal = new Vector2(force.Y * -1, force.X);
+            _body.LinearVelocity = forceNormal * speed;
         }
 
     }

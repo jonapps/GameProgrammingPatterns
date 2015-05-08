@@ -16,7 +16,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         protected AnimatedSprite _sprite;
         protected RenderStates _renderStates;
 
-        public SpriteCircleEntity(Texture tex, int spriteWidth, int spriteHeight, float x, float y, float radius, World w) : base(x,y,radius, w)
+        public SpriteCircleEntity(Texture tex, int spriteWidth, int spriteHeight, float x, float y, float radius, World w, BodyType bodyType = BodyType.Dynamic) : base(x,y,radius, w, bodyType)
         {
             _sprite = new AnimatedSprite(tex, spriteWidth, spriteHeight);
             float scale = ConvertUnits.ToDisplayUnits(radius) * 2 / spriteWidth;
@@ -30,6 +30,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             if (_body != null)
             {
+                System.Console.WriteLine(_ConvertVectorToVector2f(_body.LinearVelocity));
                 _sprite.Position = _ConvertVectorToVector2f(_body.Position) + _ConvertVectorToVector2f(_body.LinearVelocity) * extra;
                 _sprite.Rotation = _body.Rotation * 180 / (float) Math.PI;
             }
