@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -29,7 +30,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             GravityController gravity = new GravityController(2f);
             gravity.AddBody(_body);
             world.AddController(gravity);
-            _body.Mass = 20;
+            _body.Rotation = 23.44f * (float)SMath.PI / 180;
 
 
         }
