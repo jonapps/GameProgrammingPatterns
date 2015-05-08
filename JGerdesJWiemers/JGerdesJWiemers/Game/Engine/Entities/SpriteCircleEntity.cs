@@ -30,13 +30,10 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             if (_body != null)
             {
-                System.Console.WriteLine(_ConvertVectorToVector2f(_body.LinearVelocity));
                 _sprite.Position = _ConvertVectorToVector2f(_body.Position) + _ConvertVectorToVector2f(_body.LinearVelocity) * extra;
                 _sprite.Rotation = _body.Rotation * 180 / (float) Math.PI;
             }
             _sprite.Draw(renderTarget, _renderStates);
-            //base.Render(renderTarget, extra);  //leave for debugging
-            
         }
 
         public override void Update()
