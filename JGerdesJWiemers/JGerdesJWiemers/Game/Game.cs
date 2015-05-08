@@ -150,6 +150,7 @@ namespace JGerdesJWiemers.Game
                 {
                     float extra = _accumulatedTime.AsMilliseconds() / (float)TargetElapsedTime.AsMilliseconds();
                     _Render(0);
+                    //System.Console.WriteLine("extra: " + extra);
                     Game.ElapsedTime = _accumulatedTime.AsMilliseconds();
                 }
             }

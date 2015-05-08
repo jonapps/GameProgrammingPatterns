@@ -38,6 +38,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new Astronaut(new Vector2f(20,-20), _world, 0.5f, 1.8f, 3.2f, 0.2f));
             _entities.Add(new Astronaut(new Vector2f(100, 95), _world, 0.5f, 2f, -5f, -0.6f));
 
+
             _entities.Add(new Asteroid(50, 10, _world, 0.5f, 10f, 14f, 0.05f));
 
             //_ship = new SpaceShip(100, 100, _world);
