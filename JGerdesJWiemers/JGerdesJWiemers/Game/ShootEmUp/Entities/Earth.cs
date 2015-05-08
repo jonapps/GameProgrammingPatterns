@@ -28,11 +28,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             GravityController gravity = new GravityController(2f);
             gravity.AddBody(_body);
-            //gravity.MaxRadius = 90f;
-
-
-
             world.AddController(gravity);
+            _body.Mass = 20;
 
 
         }

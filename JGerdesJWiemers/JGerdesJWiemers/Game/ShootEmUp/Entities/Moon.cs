@@ -41,12 +41,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
 
             _ApplyLinearVelocity(18f);
-
-            //_body.Friction = 10f;
-            //_body.Restitution = 10f;
-            
-
-
         }
 
         public override void Update()
