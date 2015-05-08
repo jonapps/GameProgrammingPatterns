@@ -32,8 +32,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _sprite.Scale = new Vector2f(_sprite.Scale.X * scale, _sprite.Scale.Y * scale);
 
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
-            _body.AngularVelocity = rotSpeed;
-            _body.Mass = 100000;
+            _body.ApplyAngularImpulse(rotSpeed);
+            _body.Mass = 10;
         }
     }
 }

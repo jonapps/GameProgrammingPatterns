@@ -29,5 +29,23 @@ namespace JGerdesJWiemers.Game.Engine.Shapes
         {
             return (uint)_points.Count;
         }
+
+        public void addPoint(Vector2f point)
+        {
+            _points.Add(point);
+            base.Update();
+        }
+
+        public void setPoint(int index, Vector2f point)
+        {
+            _points[index] = point;
+            base.Update();
+        }
+
+        public void DeletePoint(int index)
+        {
+            _points.RemoveAt(index);
+            base.Update();
+        }
     }
 }
