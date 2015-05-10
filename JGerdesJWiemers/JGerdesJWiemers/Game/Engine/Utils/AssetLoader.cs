@@ -70,16 +70,25 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return _fonts[name];
         }
 
-        public void LoadTexture(String name, String filename)
+        public Texture LoadTexture(String name, String filename)
         {
-            Texture texture = new Texture(DIR_TEXTURES+filename);
-            _textures.Add(name, texture);
+            if (!_textures.ContainsKey(name))
+            {
+                Texture texture = new Texture(DIR_TEXTURES + filename);
+                _textures.Add(name, texture);
+            }
+            return _textures[name];
 
         }
 
         public Texture getTexture(String name)
         {
             return _textures[name];
+        }
+
+        public List<Texture> getAllTextures()
+        {
+            return _textures.Values.ToList();
         }
 
         public static AssetLoader Instance

@@ -25,13 +25,18 @@ namespace JGerdesJWiemers.Game.Editor
         private Vector2f _scale;
         private bool _doUpdate;
         private int _movingPointIndex = -1;
+        private int _currentTexture = 0;
+
+        private EditorWindow _ew;
 
         public EditorScreen(RenderWindow w): base(w)
         {
+            _ew= new EditorWindow(this);
+            _ew.Show();
             _shape = new PolygonShape(new List<Vector2f>());
             _shape.FillColor = new Color(0, 0, 0, 0);
             _shape.OutlineColor = new Color(255, 255, 255, 255);
-            _shape.OutlineThickness = 2f;
+            _shape.OutlineThickness = 1f;
 
             _sprite = new AnimatedSprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTEROID1), 128, 76);
             _sprite.Position = new Vector2f(0, 0);
@@ -47,6 +52,14 @@ namespace JGerdesJWiemers.Game.Editor
             _window.MouseMoved += _window_MouseMoved;
         }
 
+        public void LoadSprite(String path, int width, int height)
+        {
+            _sprite = new AnimatedSprite(AssetLoader.Instance.LoadTexture(path, path), width, height);
+            _sprite.SetAnimation(new Animation());
+            ResetShape();
+
+        }
+
         void _window_MouseMoved(object sender, MouseMoveEventArgs e)
         {
             Vector2f mousePos = new Vector2f(e.X * _scale.X, e.Y * _scale.Y);
@@ -56,7 +69,6 @@ namespace JGerdesJWiemers.Game.Editor
             }
             
         }
-
 
 
         void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
@@ -142,7 +154,27 @@ namespace JGerdesJWiemers.Game.Editor
                 Vector2f point = _shape.GetPoint((uint)i);
                 data += "points.Add(new Vector2f("+point.X+", "+point.Y+"));\r\n";
             }
-            XClipboard.setText(data);
+            _ew.SetResult(data);
+        }
+
+        public void ResetShape()
+        {
+            _shape = new PolygonShape(new List<Vector2f>());
+            _shape.FillColor = new Color(0, 0, 0, 0);
+            _shape.OutlineColor = new Color(255, 255, 255, 255);
+            _shape.OutlineThickness = 1f;
+        }
+
+        public void ToggleAnimation(bool animate)
+        {
+            if (animate)
+            {
+                _sprite.SetAnimation(new Animation(0, _sprite.GetFrameCount()-1, 20, true, false));
+            }
+            else
+            {
+                _sprite.SetAnimation(new Animation());
+            }
         }
 
         public override void Update()
@@ -160,27 +192,3 @@ namespace JGerdesJWiemers.Game.Editor
 
 
 
-// from http://www.mycsharp.de/wbb2/thread.php?threadid=15202
-public class XClipboard
-{
-    public static void setText(string text)
-    {
-       XClipboard x = new XClipboard(text);
-
-        Thread t = new Thread(new ThreadStart(x.Dummy));
-        t.ApartmentState = ApartmentState.STA;
-        t.Start();
-    }
-
-    private XClipboard(string Text)
-    {
-        m_Text = Text;
-    }
-
-    private void Dummy()
-    {
-        System.Windows.Forms.Clipboard.SetText(m_Text);
-    }
-
-    private string m_Text;
-}

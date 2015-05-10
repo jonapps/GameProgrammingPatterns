@@ -66,6 +66,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _animationQueue.Enqueue(animation);
         }
 
+        public int GetFrameCount()
+        {
+            return _rows * _columns;
+        }
+
         private void _NextFrame()
         {
             
@@ -99,5 +104,6 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             int indexY = frame / _rows;
             base.TextureRect = new IntRect(indexX * _tileWidth, indexY * _tileHeight, _tileWidth, _tileHeight);
         }
+
     }
 }
