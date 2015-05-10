@@ -38,6 +38,7 @@ namespace JGerdesJWiemers.Game.Editor
 
         private void reset_Click(object sender, EventArgs e)
         {
+            result.Text = "";
             _es.ResetShape();
         }
 
