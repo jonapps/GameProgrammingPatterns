@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -37,13 +38,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             _Create(x, y, sp, w);
 
-            _body.Friction = 1000;
 
-            float force = 1000;
-
-
-            var ld = new Vector2(0, 0);
-
+            _body.FixedRotation = true;
+                        
             InputManager.Channel[0].OnUp += delegate(float val)
             {
                 _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, -_currentSpeed * val);
@@ -71,6 +68,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public override void Update()
         {
             base.Update();
+
+            //only calculate direction if spaceship is moving
+            if (SMath.Abs(_body.LinearVelocity.Y) >= 1 && SMath.Abs(_body.LinearVelocity.X) >= 1)
+            {
+                _body.Rotation = (float)SMath.Atan2(_body.LinearVelocity.Y, _body.LinearVelocity.X) + (float) SMath.PI / 2f;
+            }
         }
     }
 }
