@@ -17,6 +17,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_ASTRONAUT = "astronaut.png";
         public static readonly String TEXTURE_EARTH = "earth.png";
         public static readonly String TEXTURE_MOON = "moon.png";
+        public static readonly String TEXTURE_SPACESHIP = "spaceshuttle.png";
         public static readonly String TEXTURE_SPACE1 = "space/space1.jpg";
         public static readonly String TEXTURE_SPACE2 = "space/space2.png";
         public static readonly String TEXTURE_SPACE3 = "space/space3.png";
@@ -68,6 +69,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         public Font getFont(String name){
             return _fonts[name];
+        }
+
+        public Texture LoadTexture(String name)
+        {
+            return LoadTexture(name, name);
         }
 
         public Texture LoadTexture(String name, String filename)
