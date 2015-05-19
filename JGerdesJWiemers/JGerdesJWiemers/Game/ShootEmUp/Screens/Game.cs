@@ -7,6 +7,7 @@ using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
 using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -21,6 +22,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
     class Game : GameScreen, EntityHolder
     {
         private World _world;
+        private WaveManager _waveManager;
         private SpaceShip _ship;
         public Game(RenderWindow w)
             : base(w) 
@@ -32,7 +34,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 2000, 600, 0, 0, -0.04f, 0));
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 2000, 600, 0, 0, -0.06f, 0));
 
-
+            _waveManager = new WaveManager(_world);
 
             Earth earth = new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5);
             _entities.Add(earth);
@@ -40,8 +42,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new Astronaut(new Vector2f(20,-20), _world, 0.5f, 1.8f, 3.2f, 0.2f));
             _entities.Add(new Astronaut(new Vector2f(100, 95), _world, 0.5f, 2f, -5f, -0.6f));
 
-
-            _entities.Add(new Asteroid(50, 10, _world, 0.5f, 10f, 14f, 0.05f));
 
             _ship = new SpaceShip(10, 10, _world, this);
             _entities.Add(_ship);
@@ -61,6 +61,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         {
             _world.Step(WORLD_STEP_SIZE);
             _toDeleteEntities.Clear();
+            _waveManager.GenerateEntities(this);
             for (int i = 0; i < _entities.Count; ++i)
             {
                 Entity e = _entities[i];
@@ -75,6 +76,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 Entity e = _entities[i];
                 _entities.Remove(e);
             }
+
+            _world.Step(WORLD_STEP_SIZE);
         }
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
