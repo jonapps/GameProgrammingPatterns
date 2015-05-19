@@ -21,8 +21,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private float _currentSpeed = SPEED_DEFAULT;
 
-        //need to animate rotation angle without having jumps from -180 to 180
-        private float _lastAngle;
 
         public SpaceShip(float x, float y , World w)
             : base(AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 32, 48)
@@ -76,16 +74,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             if (SMath.Abs(_body.LinearVelocity.Y) >= 3 || SMath.Abs(_body.LinearVelocity.X) >= 3)
             {
                 float newAngle = (float)SMath.Atan2(_body.LinearVelocity.Y, _body.LinearVelocity.X) + (float) SMath.PI / 2f;
-                if (_lastAngle <= 0 && newAngle > SMath.PI)
-                    newAngle -= (float) SMath.PI * 2;
-                if (_lastAngle >= SMath.PI && newAngle < 0)
-                    newAngle += (float)SMath.PI * 2;
-
-                Console.WriteLine(newAngle * 180 / SMath.PI);
-
-                _lastAngle = newAngle;
-
-                _body.Rotation += (newAngle - _body.Rotation) /5f;
+                _body.Rotation = newAngle;
             }
         }
     }
