@@ -81,7 +81,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             throw new NotImplementedException();
         }
 
-        public override void AddEntity(Entity e)
+        public void AddEntity(Entity e)
         {
             _entities.Add(e);
         }
