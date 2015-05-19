@@ -18,7 +18,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         private Queue<Animation> _animationQueue;
 
         private int _currentIndex;
-        private int _timePassed;
+        private long _startTime;
 
         public AnimatedSprite(Texture tex, int tileWidth, int tileHeight, Animation animation)
             : base(tex)
@@ -28,7 +28,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _rows = (int) tex.Size.X / _tileWidth;
             _columns = (int) tex.Size.Y / _tileHeight;
 
-            _timePassed = 0;
+            _startTime = Game.ElapsedTime;
 
             _animationQueue = new Queue<Animation>();
             TextureRect = new IntRect(0, 0, _tileWidth, _tileHeight);          
@@ -43,11 +43,10 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         public new void Draw(RenderTarget renderTarget, RenderStates renderStates)
         {
-            _timePassed += Game.ElapsedFrameTime;
-            if (_timePassed >= _animationQueue.Peek().Duration)
+            if (Game.ElapsedTime - _startTime >= _animationQueue.Peek().Duration)
             {
                 _NextFrame();
-                _timePassed = 0;
+                _startTime = Game.ElapsedTime;
             }
             base.Draw(renderTarget, renderStates);
         }

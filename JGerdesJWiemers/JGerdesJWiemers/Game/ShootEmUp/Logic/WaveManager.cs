@@ -2,6 +2,7 @@
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
             Wave w1 = new Wave();
             w1.AddEntity(2000, new Asteroid(50, 10, world, 0.5f, 10f, 14f, 0.05f));
+            w1.AddEntity(1000, new Astronaut(new Vector2f(20, -20), world, 0.5f, 1.8f, 3.2f, 0.2f));
+            w1.AddEntity(3000, new Astronaut(new Vector2f(100, 95), world, 0.5f, 2f, -5f, -0.6f));
 
             _waves.Enqueue(w1);
 
