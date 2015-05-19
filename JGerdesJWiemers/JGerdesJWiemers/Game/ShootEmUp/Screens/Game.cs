@@ -1,7 +1,9 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Dynamics;
+using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
 using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
@@ -16,12 +18,12 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 {
-    class Game : GameScreen
+    class Game : GameScreen, EntityHolder
     {
         private World _world;
         private SpaceShip _ship;
         public Game(RenderWindow w)
-            : base(w)
+            : base(w) 
         {
             InputManager.Init(w);
 
@@ -41,7 +43,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _entities.Add(new Asteroid(50, 10, _world, 0.5f, 10f, 14f, 0.05f));
 
-            _ship = new SpaceShip(10, 10, _world);
+            _ship = new SpaceShip(10, 10, _world, this);
             _entities.Add(_ship);
             
             //_entities.Add(new CircleEntity(40, 10, 3, _world));
@@ -78,5 +80,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         {
             throw new NotImplementedException();
         }
+
+        public override void AddEntity(Entity e)
+        {
+            _entities.Add(e);
+        }
+
     }
 }
