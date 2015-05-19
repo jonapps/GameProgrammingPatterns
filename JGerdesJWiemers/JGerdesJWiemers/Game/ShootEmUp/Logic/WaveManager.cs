@@ -18,7 +18,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
         public void GenerateEntities(EntityHolder holder)
         {
-            
+            if (_waves.Count > 0)
+            {
+                //List<Entity> newEntities = _waves.Peek().
+            }
         }
     }
 }

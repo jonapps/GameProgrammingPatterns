@@ -103,6 +103,7 @@
     <Compile Include="Game\Engine\Graphics\AnimatedSprite.cs" />
     <Compile Include="Game\Engine\Graphics\Animation.cs" />
     <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
+    <Compile Include="Game\Engine\Graphics\Screens\Interfaces\EntityHolder.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Screen.cs" />
     <Compile Include="Game\Engine\Input\Channel.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
