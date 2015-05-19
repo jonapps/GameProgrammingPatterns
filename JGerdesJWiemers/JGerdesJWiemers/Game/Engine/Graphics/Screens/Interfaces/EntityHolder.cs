@@ -8,6 +8,6 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces
 {
     interface EntityHolder
     {
-        void AddEntity(Entity e);
+        public void AddEntity(Entity e);
     }
 }
