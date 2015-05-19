@@ -19,6 +19,18 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             _generationList = new SortedDictionary<int, Entity[]>();
         }
 
+        public Wave(SortedDictionary<int, Entity[]> generationList)
+        {
+            _generationList = generationList;
+            _length = _generationList.Keys.Last();
+        }
+
+        public Wave(SortedDictionary<int, Entity[]> generationList, int length)
+        {
+            _generationList = generationList;
+            _length = length;
+        }
+
         public void Start()
         {
             _startTime = Game.ElapsedTime;

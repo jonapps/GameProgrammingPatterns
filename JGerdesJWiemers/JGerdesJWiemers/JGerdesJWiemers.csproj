@@ -120,6 +120,7 @@
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
+    <Compile Include="Game\ShootEmUp\Logic\Wave.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
