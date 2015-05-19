@@ -60,10 +60,20 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public override void Update()
         {
             _world.Step(WORLD_STEP_SIZE);
-
+            _toDeleteEntities.Clear();
             for (int i = 0; i < _entities.Count; ++i)
             {
-                _entities[i].Update();
+                Entity e = _entities[i];
+                if (e.DeleteMe)
+                {
+                    _toDeleteEntities.Add(e);
+                }
+                e.Update();
+            }
+            for (int i = 0; i < _toDeleteEntities.Count; ++i)
+            {
+                Entity e = _entities[i];
+                _entities.Remove(e);
             }
         }
 
@@ -72,7 +82,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             
             for (int i = 0; i < _entities.Count; ++i)
             {
-                _entities[i].Render(renderTarget, extra);
+                 _entities[i].Render(renderTarget, extra);
             }
         }
 

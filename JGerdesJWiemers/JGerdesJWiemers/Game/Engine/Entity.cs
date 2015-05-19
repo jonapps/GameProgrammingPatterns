@@ -19,6 +19,7 @@ namespace JGerdesJWiemers.Game.Engine
         protected Vector2f _renderPosition;
         protected Body _body;
         protected Fixture _fixture;
+        protected bool _deleteMe = false;
 
 
 
@@ -27,12 +28,17 @@ namespace JGerdesJWiemers.Game.Engine
         {
         }
 
+        #region Getter && Setter
+
+        public bool DeleteMe { get { return _deleteMe; } }
+
         public Body Body { get{ return _body; } set { _body = value;} }
 
         public Fixture Fixture { set { _fixture = value; } get { return _fixture; } }
 
         public Shape RenderShape { get { return _renderShape; } }
-        
+
+        #endregion
 
         public virtual void Update()
         {
