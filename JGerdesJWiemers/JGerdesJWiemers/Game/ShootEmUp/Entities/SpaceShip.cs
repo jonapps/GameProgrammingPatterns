@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SMath = System.Math;
 using GameScreen = JGerdesJWiemers.Game.ShootEmUp.Screens.Game;
+using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -21,12 +22,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private static readonly float SPEED_DEFAULT = 40;
 
         private float _currentSpeed = SPEED_DEFAULT;
+        private EntityHolder _eHolder;
+        private bool _spawnBullets = false;
+        private World _world;
 
 
-        public SpaceShip(float x, float y , World w, GameScreen gscreen)
+        public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 32, 48)
         {
             _sprite.Origin = new Vector2f(16, 24);
+            _eHolder = gscreen;
+            _world = w;
             Vertices sp = new Vertices();
 
             sp.Add(new Vector2(0, -2.8f));
@@ -65,17 +71,22 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             InputManager.Channel[0].OnAction1 += delegate(bool press)
             {
-                Vector2 normalDirection = _body.LinearVelocity;
-                normalDirection.Normalize();
-                gscreen.AddEntity(new Bullet(_body.Position.X, _body.Position.Y, w, normalDirection));
+                _spawnBullets = press;
             };
-            
-
         }
+
+
+
+
 
         public override void Update()
         {
             base.Update();
+
+            if (_spawnBullets)
+            {
+                _createBullet();
+            }
 
             //only calculate direction if spaceship is moving
             if (SMath.Abs(_body.LinearVelocity.Y) >= 3 || SMath.Abs(_body.LinearVelocity.X) >= 3)
@@ -84,5 +95,22 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _body.Rotation = newAngle;
             }
         }
+
+        private Vector2 _GetDirectionNormal()
+        {
+            Vector2 normalDirection = _body.LinearVelocity;
+            normalDirection.Normalize();
+            return normalDirection;
+
+        }
+
+
+        private void _createBullet()
+        {
+            Vector2 directionNormal = _GetDirectionNormal();
+            Vector2 position = _body.Position + directionNormal*5;
+            _eHolder.AddEntity(new Bullet(position.X, position.Y, _world, directionNormal));
+        }
+
     }
 }
