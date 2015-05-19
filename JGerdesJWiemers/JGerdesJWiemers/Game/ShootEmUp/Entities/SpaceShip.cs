@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SMath = System.Math;
+using GameScreen = JGerdesJWiemers.Game.ShootEmUp.Screens.Game;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -24,7 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         //need to animate rotation angle without having jumps from -180 to 180
         private float _lastAngle;
 
-        public SpaceShip(float x, float y , World w)
+        public SpaceShip(float x, float y , World w, GameScreen gscreen)
             : base(AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 32, 48)
         {
             _sprite.Origin = new Vector2f(16, 24);
@@ -64,6 +65,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _body.LinearVelocity = new Vector2(_currentSpeed * val, _body.LinearVelocity.Y);
             };
 
+            InputManager.Channel[0].OnAction1 += delegate(bool press)
+            {
+                Vector2 normalDirection = _body.LinearVelocity;
+                normalDirection.Normalize();
+                gscreen.AddEntity(new Bullet(_body.Position.X, _body.Position.Y, w, normalDirection));
+            };
             
 
         }
