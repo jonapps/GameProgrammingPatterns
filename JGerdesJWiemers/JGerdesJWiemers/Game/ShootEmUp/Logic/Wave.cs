@@ -10,8 +10,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 {
     class Wave
     {
-        private int _startTime = 0;
-        private int _length = 0;
+        private long _startTime = 0;
+        private long _length = 0;
         private SortedDictionary<int, List<Entity>> _generationList;
 
         public Wave()
@@ -25,7 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             _length = _generationList.Keys.Last();
         }
 
-        public Wave(SortedDictionary<int, List<Entity>> generationList, int length)
+        public Wave(SortedDictionary<int, List<Entity>> generationList, long length)
         {
             _generationList = generationList;
             _length = length;
@@ -43,12 +43,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
         public void Start()
         {
-            _startTime = Game.ElapsedTime;
+            _startTime = Game.ElapsedFrameTime;
         }
 
         public List<Entity> Generate()
         {
-            int currentTime = Game.ElapsedTime - _startTime;
+            long currentTime = Game.ElapsedTime - _startTime;
             List<Entity> entities = new List<Entity>();
             List<int> toDelete = new List<int>();
 
@@ -71,7 +71,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
         public bool isOver()
         {
-            int currentTime = Game.ElapsedTime - _startTime;
+            long currentTime = Game.ElapsedTime - _startTime;
             return currentTime >= _length && _generationList.Count == 0;
         }
     }

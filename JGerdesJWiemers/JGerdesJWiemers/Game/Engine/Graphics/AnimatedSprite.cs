@@ -43,7 +43,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         public new void Draw(RenderTarget renderTarget, RenderStates renderStates)
         {
-            _timePassed += Game.ElapsedTime;
+            _timePassed += Game.ElapsedFrameTime;
             if (_timePassed >= _animationQueue.Peek().Duration)
             {
                 _NextFrame();
