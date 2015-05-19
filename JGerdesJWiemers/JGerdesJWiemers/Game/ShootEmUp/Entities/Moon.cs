@@ -82,7 +82,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             DistanceOutput dout = _CalculateDistnaceToEarth(out distance, out normal);
             distanceLength = (distance.X * distance.X + distance.Y * distance.Y);
             distanceFromOrbit = distanceLength - (_minDistance * _minDistance);
-            Console.WriteLine("distanceLength: " + distanceLength + " distanceFromOrbit: " + distanceFromOrbit + " distance: " + distance);
             distance = distance / distanceLength;
 
             
