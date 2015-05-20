@@ -12,9 +12,9 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
     class TextureContainer
     {
         public enum Type{
-            Rectangle = 0,
-            Circle = 1,
-            Polygon = 2
+            Rectangle = "Rectangle",
+            Circle = "Circle",
+            Polygon = "Polygon"
         }
 
         protected Texture _texture;
