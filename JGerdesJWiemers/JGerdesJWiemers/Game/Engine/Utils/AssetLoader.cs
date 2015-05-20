@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
+using JGerdesJWiemers.Game.Engine.Graphics;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {
@@ -30,13 +31,13 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
 
         private Dictionary<String, Font> _fonts;
-        private Dictionary<String, Texture> _textures;
+        private Dictionary<String, TextureContainer> _textures;
         
 
         private AssetLoader()
         {
             _fonts = new Dictionary<string, Font>();
-            _textures = new Dictionary<string, Texture>();
+            _textures = new Dictionary<string, TextureContainer>();
 
             LoadFont(FONT_ROBOTO_THIN, FONT_ROBOTO_THIN);
             LoadFont(FONT_ROBOTO_LIGHT, FONT_ROBOTO_LIGHT);
@@ -76,23 +77,82 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return LoadTexture(name, name);
         }
 
-        public Texture LoadTexture(String name, String filename)
+        public TextureContainer LoadTexture(String name, String filename)
         {
             if (!_textures.ContainsKey(name))
             {
-                Texture texture = new Texture(DIR_TEXTURES + filename);
-                _textures.Add(name, texture);
+                string line;
+                int counter = 0;
+                float radius = 0;
+                List<float[]> points = new List<float[]>();
+                int width = 0, height = 0;
+                Texture texture = null;
+                TextureContainer.Type type = TextureContainer.Type.Rectangle;
+                TextureContainer container;
+
+                string filepath = DIR_TEXTURES + filename;
+                System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+                string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
+
+                while ((line = file.ReadLine()) != null)
+                {
+                    System.Console.WriteLine(line);
+                    switch (counter)
+                    {
+                        case 0:
+                            texture = new Texture(directory + line);
+                            break;
+                        case 1:
+                            width = Convert.ToInt32(line);
+                            break;
+                        case 2:
+                            height = Convert.ToInt32(line);
+                            break;
+                        case 3:
+                            type = (TextureContainer.Type)Enum.Parse(typeof(TextureContainer.Type), line);
+                            if(type == TextureContainer.Type.Rectangle){
+                                container = new TextureContainer(texture, width, height);
+                                _textures.Add(name, container);
+                                return container;
+                            }
+                            break;
+                        default:
+                            if(type == TextureContainer.Type.Circle)
+                            {
+                                radius = (float)Convert.ToDecimal(line);
+                                container = new TextureContainer(texture, width, height, radius);
+                                _textures.Add(name, container);
+                                return container;
+                            }
+                            if(type == TextureContainer.Type.Polygon)
+                            {
+                                    float x, y;
+                                    string[] data = line.Split(';');
+                                    x = (float)Convert.ToDouble(data[0]);
+                                    y = (float)Convert.ToDouble(data[1]);
+                                    points.Add(new float[] { x, y });
+                            }
+                            break;
+
+                    }
+                    counter++;
+                }
+
+                file.Close();
+                container = new TextureContainer(texture, width, height, points.ToArray());
+                _textures.Add(name, container);
+                return container;
             }
             return _textures[name];
 
         }
 
-        public Texture getTexture(String name)
+        public TextureContainer getTexture(String name)
         {
             return _textures[name];
         }
 
-        public List<Texture> getAllTextures()
+        public List<TextureContainer> getAllTextures()
         {
             return _textures.Values.ToList();
         }
