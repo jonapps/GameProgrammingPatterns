@@ -1,4 +1,4 @@
 space3.png
 2000
 600
-Rectangle
+none

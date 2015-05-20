@@ -11,6 +11,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     class TextureContainer
     {
+        public static readonly string IDENTIFIER = "none";
         public int Width { get; private set; }
         public int Height { get; private set; }
         public Texture Texture { get; private set; }
@@ -28,6 +29,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
     }
 
+   
     class RectangleTextureContainer : TextureContainer
     {
         public static readonly string IDENTIFIER = "Rectangle";
@@ -74,12 +76,12 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         public PolygonTextureContainer(Texture texture, int frameWidth, int frameHeight, List<float[]> vertices)
             : base(texture, frameWidth, frameHeight)
         {
-            List<Vector2> v = new List<Vector2>();
+            Vertices v = new Vertices();
             foreach (float[] f in vertices)
             {
                 v.Add(new Vector2(f[0], f[1]));
             }
-            Vertices = (Vertices)v;
+            Vertices = v;
         }
     }
 }

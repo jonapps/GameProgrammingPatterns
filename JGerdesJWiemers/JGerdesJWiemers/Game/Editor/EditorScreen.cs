@@ -38,7 +38,8 @@ namespace JGerdesJWiemers.Game.Editor
             _shape.OutlineColor = new Color(255, 255, 255, 255);
             _shape.OutlineThickness = 1f;
 
-            _sprite = new AnimatedSprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTEROID1), 128, 76);
+            TextureContainer tex = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTEROID1);
+            _sprite = new AnimatedSprite(tex.Texture, tex.Width, tex.Height);
             _sprite.Position = new Vector2f(0, 0);
             _sprite.SetAnimation(new Animation());
 
@@ -54,7 +55,8 @@ namespace JGerdesJWiemers.Game.Editor
 
         public void LoadSprite(String path, int width, int height)
         {
-            _sprite = new AnimatedSprite(AssetLoader.Instance.LoadTexture(path, path), width, height);
+            TextureContainer tex = AssetLoader.Instance.LoadTexture(path, path);
+            _sprite = new AnimatedSprite(tex.Texture, tex.Width, tex.Height);
             _sprite.SetAnimation(new Animation());
             ResetShape();
 

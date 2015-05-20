@@ -1,4 +1,4 @@
 space1.jpg
 4000
 600
-Rectangle
+none

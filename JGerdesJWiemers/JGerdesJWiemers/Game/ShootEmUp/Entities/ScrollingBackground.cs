@@ -20,10 +20,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         protected Vector2f _start2;
         protected Vector2f _restart;
 
-        public ScrollingBackground(Texture tex, int width, int height, float x, float y, float speedX, float speedY)
-            : base(tex, width, height)
+        public ScrollingBackground(TextureContainer tex, float x, float y, float speedX, float speedY)
+            : base(tex)
         {
-            _sprite2 = new AnimatedSprite(tex, width, height);
+            float width = tex.Width,
+                  height = tex.Height;
+
+            _sprite2 = new AnimatedSprite(tex.Texture, (int)width, (int)height);
             _sprite2.Scale = new Vector2f(ConvertUnits.ToSimUnits(1), ConvertUnits.ToSimUnits(1));
 
             _speed = new Vector2f(speedX, speedY);
@@ -32,11 +35,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             float scale = 1;
             if (height < 720)
             {
-                scale = 720 / (float) height;
+                scale = 720 / height;
             }
             if (width < 1280)
             {
-                scale = Math.Max(scale, 1280 / (float) width);
+                scale = Math.Max(scale, 1280 / width);
             }
 
             //setup positions

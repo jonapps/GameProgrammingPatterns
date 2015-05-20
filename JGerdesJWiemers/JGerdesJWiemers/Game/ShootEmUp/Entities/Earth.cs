@@ -16,13 +16,13 @@ using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
-    class Earth : SpriteCircleEntity
+    class Earth : SpriteEntity
     {
 
         private Animation _rotateAnimation;
 
         public Earth(float x, float y, World world, float radius) :
-            base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_EARTH), 128, 128, x, y, radius, world, BodyType.Static)
+            base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_EARTH), 5 / ConvertUnits.ToSimUnits(64),  x, y, BodyType.Static)
         {
             _rotateAnimation = new Animation(0, 319, 20, true, false);
             _sprite.SetAnimation(_rotateAnimation);

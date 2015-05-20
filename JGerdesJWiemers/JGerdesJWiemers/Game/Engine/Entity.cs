@@ -33,7 +33,6 @@ namespace JGerdesJWiemers.Game.Engine
 
         public Fixture Fixture { set { _fixture = value; } get { return _fixture; } }
 
-        public Shape RenderShape { get { return _renderShape; } }
 
         #endregion
 

@@ -21,12 +21,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_EARTH = "earth";
         public static readonly String TEXTURE_MOON = "moon";
         public static readonly String TEXTURE_SPACESHIP = "spaceshuttle";
-        public static readonly String TEXTURE_SPACE1 = "space/space1";
-        public static readonly String TEXTURE_SPACE2 = "space/space2";
-        public static readonly String TEXTURE_SPACE3 = "space/space3";
-        public static readonly String TEXTURE_ASTEROID1 = "asteroids/asteroid1";
-        public static readonly String TEXTURE_ASTEROID2 = "asteroids/asteroid2";
-        public static readonly String TEXTURE_ASTEROID3 = "asteroids/asteroid3";
+        public static readonly String TEXTURE_SPACE1 = @"space\space1";
+        public static readonly String TEXTURE_SPACE2 = @"space\space2";
+        public static readonly String TEXTURE_SPACE3 = @"space\space3";
+        public static readonly String TEXTURE_ASTEROID1 = @"asteroids\asteroid1";
+        public static readonly String TEXTURE_ASTEROID2 = @"asteroids\asteroid2";
+        public static readonly String TEXTURE_ASTEROID3 = @"asteroids\asteroid3";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -101,7 +101,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                     switch (counter)
                     {
                         case 0:
-                            texture = new Texture(directory + line);
+                            texture = new Texture(directory + "\\" + line);
                             break;
                         case 1:
                             width = Convert.ToInt32(line);
@@ -111,7 +111,14 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                             break;
                         case 3:
                             type = line;
-                            if(type == RectangleTextureContainer.IDENTIFIER){
+                            if (type == TextureContainer.IDENTIFIER)
+                            {
+                                container = new TextureContainer(texture, width, height);
+                                _textures.Add(name, container);
+                                return container;
+                            }
+                            else if (type == RectangleTextureContainer.IDENTIFIER)
+                            {
                                 container = new RectangleTextureContainer(texture, width, height);
                                 _textures.Add(name, container);
                                 return container;
