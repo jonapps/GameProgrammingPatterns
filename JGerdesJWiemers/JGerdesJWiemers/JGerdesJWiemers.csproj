@@ -125,6 +125,8 @@
     <Compile Include="Game\ShootEmUp\Logic\Wave.cs" />
     <Compile Include="Game\ShootEmUp\Logic\WaveManager.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
+    <Compile Include="Game\ShootEmUp\Weapons\RocketLauncher.cs" />
+    <Compile Include="Game\ShootEmUp\Weapons\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

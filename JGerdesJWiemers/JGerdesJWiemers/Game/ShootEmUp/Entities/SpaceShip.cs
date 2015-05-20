@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using SMath = System.Math;
 using GameScreen = JGerdesJWiemers.Game.ShootEmUp.Screens.Game;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
+using JGerdesJWiemers.Game.ShootEmUp.Weapons;
+using JGerdesJWiemers.Game.Engine;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -20,7 +22,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
     {
 
         private static readonly float SPEED_DEFAULT = 40;
-
+        private Weapon _currentWeapon;
         private float _currentSpeed = SPEED_DEFAULT;
         private EntityHolder _eHolder;
         private bool _spawnBullets = false;
@@ -30,6 +32,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 32, 48)
         {
+            _currentWeapon = new RocketLauncher();
+
             _sprite.Origin = new Vector2f(16, 24);
             _eHolder = gscreen;
             _world = w;
@@ -109,7 +113,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             Vector2 directionNormal = _GetDirectionNormal();
             Vector2 position = _body.Position + directionNormal*5;
-            _eHolder.AddEntity(new Bullet(position.X, position.Y, _world, directionNormal));
+            Entity e = _currentWeapon.Shoot(position.X, position.Y, _world, directionNormal);
+            if (e != null)
+            {
+                _eHolder.AddEntity(e);
+            }
+            
         }
 
     }
