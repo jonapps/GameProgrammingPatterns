@@ -85,12 +85,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             {
                 string line;
                 int counter = 0;
-                float radius = 0;
                 List<float[]> points = new List<float[]>();
                 int width = 0, height = 0;
                 Texture texture = null;
-                TextureContainer.Type type = TextureContainer.Type.Rectangle;
                 TextureContainer container;
+                string type = "undefined";
 
                 string filepath = DIR_TEXTURES + filename + "." + DATA_FILE_ENDING;
                 System.IO.StreamReader file = new System.IO.StreamReader(filepath);
@@ -111,22 +110,22 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                             height = Convert.ToInt32(line);
                             break;
                         case 3:
-                            type = (TextureContainer.Type)Enum.Parse(typeof(TextureContainer.Type), line);
-                            if(type == TextureContainer.Type.Rectangle){
-                                container = new TextureContainer(texture, width, height);
+                            type = line;
+                            if(type == RectangleTextureContainer.IDENTIFIER){
+                                container = new RectangleTextureContainer(texture, width, height);
                                 _textures.Add(name, container);
                                 return container;
                             }
                             break;
                         default:
-                            if(type == TextureContainer.Type.Circle)
+                            if(type == CircleTextureContainer.IDENTIFIER)
                             {
-                                radius = (float)Convert.ToDecimal(line);
-                                container = new TextureContainer(texture, width, height, radius);
+                                float radius = (float)Convert.ToDecimal(line);
+                                container = new CircleTextureContainer(texture, width, height, radius);
                                 _textures.Add(name, container);
                                 return container;
                             }
-                            if(type == TextureContainer.Type.Polygon)
+                            if(type == PolygonTextureContainer.IDENTIFIER)
                             {
                                     float x, y;
                                     string[] data = line.Split(';');
@@ -141,7 +140,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 }
 
                 file.Close();
-                container = new TextureContainer(texture, width, height, points.ToArray());
+                container = new PolygonTextureContainer(texture, width, height, points);
                 _textures.Add(name, container);
                 return container;
             }

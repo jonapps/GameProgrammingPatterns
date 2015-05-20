@@ -11,68 +11,75 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     class TextureContainer
     {
-        public enum Type{
-            Rectangle = "Rectangle",
-            Circle = "Circle",
-            Polygon = "Polygon"
-        }
-
-        protected Texture _texture;
-        protected int _width;
-        protected int _height;
-        protected Type _type;
-        protected Vertices _vertices;
-        protected float _radius;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public Texture Texture { get; private set; }
 
         public TextureContainer(Texture texture)
-        {
-            _texture = texture;
-            _type = Type.Rectangle;
-            _width = (int)texture.Size.X;
-            _height = (int)texture.Size.Y;
-        }
-
-        public TextureContainer(Texture texture, float[][] vertices)
-            : this(texture, (int)texture.Size.X, (int)texture.Size.Y, vertices)
-        {
-            
-        }
-
-        public TextureContainer(Texture texture, float radius)
-            : this(texture, (int)texture.Size.X, (int)texture.Size.Y, radius)
-        {
-
-        }
+            :this( texture, (int)texture.Size.X, (int)texture.Size.Y)
+        {}
 
         public TextureContainer(Texture texture, int frameWidth, int frameHeight)
         {
-            _texture = texture;
-            _type = Type.Rectangle;
-            _width = frameWidth;
-            _height = frameHeight;
+            Texture = texture;
+            Width = frameWidth;
+            Height = frameHeight;
         }
 
-        public TextureContainer(Texture texture, int frameWidth, int frameHeight, float[][] vertices)
+    }
+
+    class RectangleTextureContainer : TextureContainer
+    {
+        public static readonly string IDENTIFIER = "Rectangle";
+
+         public RectangleTextureContainer(Texture texture, int frameWidth, int frameHeight)
+            :base(texture, frameWidth, frameHeight)
+         {}
+
+         public RectangleTextureContainer(Texture texture)
+             : base(texture)
+         {}
+    }
+
+    class CircleTextureContainer : TextureContainer
+    {
+        public static readonly string IDENTIFIER = "Circle";
+        public float Radius { get; private set; }
+
+        public CircleTextureContainer(Texture texture, float radius)
+            :base(texture)
         {
-            _texture = texture;
-            _type = Type.Polygon;
-            _width = frameWidth;
-            _height = frameHeight;
-            _vertices = new Vertices();
-            foreach(float[] point in vertices){
-                _vertices.Add(new Vector2(point[0], point[1]));
+            Radius = radius;
+        }
+
+        public CircleTextureContainer(Texture texture, int frameWidth, int frameHeight, float radius)
+            :base(texture, frameWidth, frameHeight)
+        {
+            Radius = radius;
+        }
+    }
+
+
+    class PolygonTextureContainer : TextureContainer
+    {
+        public static readonly string IDENTIFIER = "Polygon";
+        public Vertices Vertices { get; private set; }
+
+        public PolygonTextureContainer(Texture texture, List<Vector2> vertices)
+            :base(texture)
+        {
+            Vertices = (Vertices)vertices;
+        }
+
+        public PolygonTextureContainer(Texture texture, int frameWidth, int frameHeight, List<float[]> vertices)
+            : base(texture, frameWidth, frameHeight)
+        {
+            List<Vector2> v = new List<Vector2>();
+            foreach (float[] f in vertices)
+            {
+                v.Add(new Vector2(f[0], f[1]));
             }
-
+            Vertices = (Vertices)v;
         }
-
-        public TextureContainer(Texture texture, int frameWidth, int frameHeight, float radius)
-        {
-            _texture = texture;
-            _type = Type.Circle;
-            _width = frameWidth;
-            _height = frameHeight;
-            _radius = radius;
-        }
-
     }
 }
