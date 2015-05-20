@@ -10,21 +10,23 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 {
     class AssetLoader
     {
+        public static readonly String DATA_FILE_ENDING = "txt";
+
         public static readonly String FONT_ROBOTO_THIN = "Roboto-Thin.ttf";
         public static readonly String FONT_ROBOTO_LIGHT = "Roboto-Light.ttf";
         public static readonly String FONT_ROBOTO_REGULAR = "Roboto-Regular.ttf";
         public static readonly String FONT_ROBOTO_MEDIUM = "Roboto-Medium.ttf";
 
-        public static readonly String TEXTURE_ASTRONAUT = "astronaut.png";
-        public static readonly String TEXTURE_EARTH = "earth.png";
-        public static readonly String TEXTURE_MOON = "moon.png";
-        public static readonly String TEXTURE_SPACESHIP = "spaceshuttle.png";
-        public static readonly String TEXTURE_SPACE1 = "space/space1.jpg";
-        public static readonly String TEXTURE_SPACE2 = "space/space2.png";
-        public static readonly String TEXTURE_SPACE3 = "space/space3.png";
-        public static readonly String TEXTURE_ASTEROID1 = "asteroids/asteroid1.png";
-        public static readonly String TEXTURE_ASTEROID2 = "asteroids/asteroid2.png";
-        public static readonly String TEXTURE_ASTEROID3 = "asteroids/asteroid3.png";
+        public static readonly String TEXTURE_ASTRONAUT = "astronaut";
+        public static readonly String TEXTURE_EARTH = "earth";
+        public static readonly String TEXTURE_MOON = "moon";
+        public static readonly String TEXTURE_SPACESHIP = "spaceshuttle";
+        public static readonly String TEXTURE_SPACE1 = "space/space1";
+        public static readonly String TEXTURE_SPACE2 = "space/space2";
+        public static readonly String TEXTURE_SPACE3 = "space/space3";
+        public static readonly String TEXTURE_ASTEROID1 = "asteroids/asteroid1";
+        public static readonly String TEXTURE_ASTEROID2 = "asteroids/asteroid2";
+        public static readonly String TEXTURE_ASTEROID3 = "asteroids/asteroid3";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -72,7 +74,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return _fonts[name];
         }
 
-        public Texture LoadTexture(String name)
+        public TextureContainer LoadTexture(String name)
         {
             return LoadTexture(name, name);
         }
@@ -90,7 +92,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 TextureContainer.Type type = TextureContainer.Type.Rectangle;
                 TextureContainer container;
 
-                string filepath = DIR_TEXTURES + filename;
+                string filepath = DIR_TEXTURES + filename + "." + DATA_FILE_ENDING;
                 System.IO.StreamReader file = new System.IO.StreamReader(filepath);
                 string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
 
