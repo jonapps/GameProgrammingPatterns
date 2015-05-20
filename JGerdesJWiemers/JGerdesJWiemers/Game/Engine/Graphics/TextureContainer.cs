@@ -74,7 +74,5 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _radius = radius;
         }
 
-        
-
     }
 }

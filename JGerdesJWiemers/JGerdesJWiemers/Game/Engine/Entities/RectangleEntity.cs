@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.Engine.Entities
 {
-    class RectangleEntity : Entity
+    class RectangleEntity : ShapeEntity
     {
 
         /// <summary>
         /// 
         /// </summary>
-        public RectangleEntity(float x, float y, float width, float height, World w, float rotation = 0, BodyType bodyType = BodyType.Dynamic) : base()
+        public RectangleEntity(float x, float y, float width, float height, World w, float rotation = 0, BodyType bodyType = BodyType.Dynamic) : base(null)
         {
             _body = BodyFactory.CreateRectangle(w, width, height, 1f, new Vector2(x, y), rotation, bodyType, this);
             _renderShape = new RectangleShape(new Vector2f(width, height));

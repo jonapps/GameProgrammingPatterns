@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace JGerdesJWiemers.Game.Engine.Entities
 {
 
-    class CircleEntity : Entity
+    class CircleEntity : ShapeEntity
     {
         protected float _rotationSpeed;
 
@@ -24,7 +24,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         /// <param name="y"></param>
         /// <param name="r"></param>
         /// <param name="w"></param>
-        public CircleEntity(float x, float y, float r, World w, BodyType bodyType = BodyType.Dynamic) : base()
+        public CircleEntity(float x, float y, float r, World w, BodyType bodyType = BodyType.Dynamic) : base(null)
         {
             _rotationSpeed = 0f;
             _body = BodyFactory.CreateCircle(w, r, 1f, new Vector2(x, y), bodyType, this);

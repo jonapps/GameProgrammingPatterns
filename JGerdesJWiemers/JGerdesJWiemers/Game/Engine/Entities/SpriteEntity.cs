@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         protected AnimatedSprite _sprite;
         protected RenderStates _renderStates;
 
-        public SpriteEntity(Texture tex, int width, int height) : base()
+        public SpriteEntity(TextureContainer textureContainer) : base()
         {
             _sprite = new AnimatedSprite(tex, width, height);
             _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(1), ConvertUnits.ToSimUnits(1));
