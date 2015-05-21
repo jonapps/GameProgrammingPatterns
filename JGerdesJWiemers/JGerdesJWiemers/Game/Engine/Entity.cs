@@ -14,9 +14,6 @@ namespace JGerdesJWiemers.Game.Engine
 {
     abstract class Entity : IUpdateable, IRenderable
     {
-
-        protected Shape _renderShape;
-        protected Vector2f _renderPosition;
         protected Body _body;
         protected Fixture _fixture;
         protected bool _deleteMe = false;
@@ -36,7 +33,6 @@ namespace JGerdesJWiemers.Game.Engine
 
         public Fixture Fixture { set { _fixture = value; } get { return _fixture; } }
 
-        public Shape RenderShape { get { return _renderShape; } }
 
         #endregion
 
@@ -47,9 +43,7 @@ namespace JGerdesJWiemers.Game.Engine
 
         public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            _renderShape.Position = _ConvertVectorToVector2f(_body.Position) + _ConvertVectorToVector2f(_body.LinearVelocity) * extra;
-            _renderShape.Rotation = _body.Rotation * 180 / (float)Math.PI;
-            renderTarget.Draw(_renderShape);
+            
         }
 
 

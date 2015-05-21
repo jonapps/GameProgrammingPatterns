@@ -31,9 +31,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             Settings.MaxPolygonVertices = 32;
             _world = new World(new Vector2(0,0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 4000, 600, 0, 0, -0.02f, 0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 2000, 600, 0, 0, -0.04f, 0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 2000, 600, 0, 0, -0.06f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 0, 0, -0.02f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 0, 0, -0.04f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 0, 0, -0.06f, 0));
 
             _waveManager = new WaveManager(_world);
 

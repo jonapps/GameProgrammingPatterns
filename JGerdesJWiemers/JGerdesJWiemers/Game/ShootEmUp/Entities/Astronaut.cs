@@ -19,21 +19,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private Animation _rotateAnimation;
 
-        public Astronaut(Vector2f position, World world, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0)
-            : base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 64, 83)
+        public Astronaut(Vector2f position, World world, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0)
+            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 0.5f, position.X, position.Y)
         {
-            Vertices vertices = new Vertices();
-            //TODO: fit to sprite
-            float w = ConvertUnits.ToSimUnits(scale * 64);
-            float h = ConvertUnits.ToSimUnits(scale * 83);
-            vertices.Add(new Vector2(0, 0));
-            vertices.Add(new Vector2(w, 0));
-            vertices.Add(new Vector2(w, h));
-            vertices.Add(new Vector2(0, h));
-            _Create(position.X, position.Y, vertices, world);
-
-            _sprite.Scale = new Vector2f(_sprite.Scale.X * scale, _sprite.Scale.Y * scale);
-
             _rotateAnimation = new Animation(0, 70, 20, true, false);
             _sprite.SetAnimation(_rotateAnimation);
 
