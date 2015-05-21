@@ -3,6 +3,7 @@ using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Shapes;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -18,6 +19,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
     {
         protected AnimatedSprite _sprite;
         protected RenderStates _renderStates;
+        private PolygonShape _shape;
 
         public SpriteEntity(World world, TextureContainer textureContainer, float scale = 1, float x = 0, float y = 0, BodyType bodyType = BodyType.Dynamic) : 
             this(textureContainer, scale)
@@ -40,12 +42,16 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             {
                 PolygonTextureContainer pTextureContainer = (PolygonTextureContainer)textureContainer;
                 Vertices verts = new Vertices();
+                List<Vector2f> poly = new List<Vector2f>();
                 foreach (Vector2 v in pTextureContainer.Vertices)
                 {
                     verts.Add(new Vector2(ConvertUnits.ToSimUnits(v.X * scale), ConvertUnits.ToSimUnits(v.Y * scale)));
+                    poly.Add(new Vector2f(ConvertUnits.ToSimUnits(v.X * scale), ConvertUnits.ToSimUnits(v.Y * scale)));
                 }
                 _body = BodyFactory.CreatePolygon(world, verts, 1f, new Vector2(x, y), 0, bodyType, this);
                 _fixture = FixtureFactory.AttachPolygon(verts, 1f, _body, this);
+
+                _shape = new PolygonShape(poly);
             }
 
         }
@@ -68,6 +74,12 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 _sprite.Rotation = _body.Rotation * 180 / (float) Math.PI;
             }
 
+            if (_shape != null)
+            {
+                _shape.Position = new Vector2f(_body.Position.X, _body.Position.Y);
+                _shape.Rotation = _body.Rotation * 180 / (float)Math.PI;
+                renderTarget.Draw(_shape);
+            }
             _sprite.Draw(renderTarget, _renderStates);
             
         }
