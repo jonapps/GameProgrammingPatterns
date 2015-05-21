@@ -95,6 +95,7 @@
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\PolygonEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
+    <Compile Include="Game\Engine\Entities\ShapeEntity.cs" />
     <Compile Include="Game\Engine\Entities\SpriteCircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\SpriteEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Interfaces\EntityHolder.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Screen.cs" />
+    <Compile Include="Game\Engine\Graphics\TextureContainer.cs" />
     <Compile Include="Game\Engine\Input\Channel.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />

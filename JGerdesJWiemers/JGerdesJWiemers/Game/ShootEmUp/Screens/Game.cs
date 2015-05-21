@@ -29,19 +29,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         {
             InputManager.Init(w);
 
+            Settings.MaxPolygonVertices = 32;
             _world = new World(new Vector2(0,0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 4000, 600, 0, 0, -0.02f, 0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 2000, 600, 0, 0, -0.04f, 0));
-            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 2000, 600, 0, 0, -0.06f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 0, 0, -0.02f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 0, 0, -0.04f, 0));
+            _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 0, 0, -0.06f, 0));
 
             _waveManager = new WaveManager(_world);
 
             Earth earth = new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5);
             _entities.Add(earth);
             _entities.Add(new Moon(earth, _world, 1.5f));
-            _entities.Add(new Astronaut(new Vector2f(20,-20), _world, 0.5f, 1.8f, 3.2f, 0.2f));
-            _entities.Add(new Astronaut(new Vector2f(100, 95), _world, 0.5f, 2f, -5f, -0.6f));
-
 
             _ship = new SpaceShip(10, 10, _world, this);
             _entities.Add(_ship);

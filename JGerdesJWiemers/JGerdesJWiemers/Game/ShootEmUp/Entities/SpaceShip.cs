@@ -30,27 +30,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
 
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
-            : base(AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 32, 48)
+            : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)
         {
-            _currentWeapon = new RocketLauncher();
 
+            _currentWeapon = new RocketLauncher();
             _sprite.Origin = new Vector2f(16, 24);
             _eHolder = gscreen;
             _world = w;
-            Vertices sp = new Vertices();
-
-            sp.Add(new Vector2(0, -2.8f));
-            sp.Add(new Vector2(-0.7f, 1));
-            sp.Add(new Vector2(-2, 1.8f));
-            sp.Add(new Vector2(-2, 2.4f));
-            sp.Add(new Vector2(0, 2.6f));
-            sp.Add(new Vector2(2, 2.4f));
-            sp.Add(new Vector2(2, 1.8f));
-            sp.Add(new Vector2(0.7f, 1));
-
-            _Create(x, y, sp, w);
-
-
             _body.FixedRotation = true;
                         
             InputManager.Channel[0].OnUp += delegate(float val)

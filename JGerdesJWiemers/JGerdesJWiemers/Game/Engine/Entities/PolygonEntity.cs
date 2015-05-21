@@ -18,6 +18,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
     {
 
         private Vertices _vertices;
+        private Shape _renderShape;
 
         /// <summary>
         /// 
@@ -69,6 +70,11 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             
             base.Update();
+        }
+
+        public override void Render(RenderTarget renderTarget, float extra)
+        {
+            renderTarget.Draw(_renderShape);
         }
     }
 }

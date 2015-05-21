@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
-    class Moon : SpriteCircleEntity
+    class Moon : SpriteEntity
     {
         private Animation _rotateAnimation;
         private Earth _earth;
@@ -28,7 +28,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private float _minDistance = 20;
 
         public Moon(Earth earth, World world, float radius) :
-            base(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_MOON), 64, 64, earth.Body.Position.X+10, earth.Body.Position.Y+10, radius, world)
+            base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_MOON), radius / ConvertUnits.ToSimUnits(32), earth.Body.Position.X + 10, earth.Body.Position.Y + 10)
         {
             _earth = earth;
             _body.Mass = 10f;

@@ -4,39 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
+using JGerdesJWiemers.Game.Engine.Graphics;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {
     class AssetLoader
     {
+        public static readonly String DATA_FILE_ENDING = "txt";
+
         public static readonly String FONT_ROBOTO_THIN = "Roboto-Thin.ttf";
         public static readonly String FONT_ROBOTO_LIGHT = "Roboto-Light.ttf";
         public static readonly String FONT_ROBOTO_REGULAR = "Roboto-Regular.ttf";
         public static readonly String FONT_ROBOTO_MEDIUM = "Roboto-Medium.ttf";
 
-        public static readonly String TEXTURE_ASTRONAUT = "astronaut.png";
-        public static readonly String TEXTURE_EARTH = "earth.png";
-        public static readonly String TEXTURE_MOON = "moon.png";
-        public static readonly String TEXTURE_SPACESHIP = "spaceshuttle.png";
-        public static readonly String TEXTURE_SPACE1 = "space/space1.jpg";
-        public static readonly String TEXTURE_SPACE2 = "space/space2.png";
-        public static readonly String TEXTURE_SPACE3 = "space/space3.png";
-        public static readonly String TEXTURE_ASTEROID1 = "asteroids/asteroid1.png";
-        public static readonly String TEXTURE_ASTEROID2 = "asteroids/asteroid2.png";
-        public static readonly String TEXTURE_ASTEROID3 = "asteroids/asteroid3.png";
+        public static readonly String TEXTURE_ASTRONAUT = "astronaut";
+        public static readonly String TEXTURE_EARTH = "earth";
+        public static readonly String TEXTURE_MOON = "moon";
+        public static readonly String TEXTURE_SPACESHIP = "spaceshuttle";
+        public static readonly String TEXTURE_SPACE1 = @"space\space1";
+        public static readonly String TEXTURE_SPACE2 = @"space\space2";
+        public static readonly String TEXTURE_SPACE3 = @"space\space3";
+        public static readonly String TEXTURE_ASTEROID1 = @"asteroids\asteroid1";
+        public static readonly String TEXTURE_ASTEROID2 = @"asteroids\asteroid2";
+        public static readonly String TEXTURE_ASTEROID3 = @"asteroids\asteroid3";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
 
         private Dictionary<String, Font> _fonts;
-        private Dictionary<String, Texture> _textures;
+        private Dictionary<String, TextureContainer> _textures;
         
 
         private AssetLoader()
         {
             _fonts = new Dictionary<string, Font>();
-            _textures = new Dictionary<string, Texture>();
+            _textures = new Dictionary<string, TextureContainer>();
 
             LoadFont(FONT_ROBOTO_THIN, FONT_ROBOTO_THIN);
             LoadFont(FONT_ROBOTO_LIGHT, FONT_ROBOTO_LIGHT);
@@ -71,28 +74,93 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return _fonts[name];
         }
 
-        public Texture LoadTexture(String name)
+        public TextureContainer LoadTexture(String name)
         {
             return LoadTexture(name, name);
         }
 
-        public Texture LoadTexture(String name, String filename)
+        public TextureContainer LoadTexture(String name, String filename)
         {
             if (!_textures.ContainsKey(name))
             {
-                Texture texture = new Texture(DIR_TEXTURES + filename);
-                _textures.Add(name, texture);
+                string line;
+                int counter = 0;
+                List<float[]> points = new List<float[]>();
+                int width = 0, height = 0;
+                Texture texture = null;
+                TextureContainer container;
+                string type = "undefined";
+
+                string filepath = DIR_TEXTURES + filename + "." + DATA_FILE_ENDING;
+                System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+                string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
+
+                while ((line = file.ReadLine()) != null)
+                {
+                    System.Console.WriteLine(line);
+                    switch (counter)
+                    {
+                        case 0:
+                            texture = new Texture(directory + "\\" + line);
+                            break;
+                        case 1:
+                            width = Convert.ToInt32(line);
+                            break;
+                        case 2:
+                            height = Convert.ToInt32(line);
+                            break;
+                        case 3:
+                            type = line;
+                            if (type == TextureContainer.IDENTIFIER)
+                            {
+                                container = new TextureContainer(texture, width, height);
+                                _textures.Add(name, container);
+                                return container;
+                            }
+                            else if (type == RectangleTextureContainer.IDENTIFIER)
+                            {
+                                container = new RectangleTextureContainer(texture, width, height);
+                                _textures.Add(name, container);
+                                return container;
+                            }
+                            break;
+                        default:
+                            if(type == CircleTextureContainer.IDENTIFIER)
+                            {
+                                float radius = (float)Convert.ToDecimal(line);
+                                container = new CircleTextureContainer(texture, width, height, radius);
+                                _textures.Add(name, container);
+                                return container;
+                            }
+                            if(type == PolygonTextureContainer.IDENTIFIER)
+                            {
+                                    float x, y;
+                                    string[] data = line.Split(';');
+                                    x = (float)Convert.ToDouble(data[0]);
+                                    y = (float)Convert.ToDouble(data[1]);
+                                    points.Add(new float[] { x, y });
+                            }
+                            break;
+
+                    }
+                    counter++;
+                }
+
+                file.Close();
+                container = new PolygonTextureContainer(texture, width, height, points);
+                _textures.Add(name, container);
+                return container;
             }
             return _textures[name];
 
         }
 
-        public Texture getTexture(String name)
+        public TextureContainer getTexture(String name)
         {
             return _textures[name];
         }
 
-        public List<Texture> getAllTextures()
+        public List<TextureContainer> getAllTextures()
         {
             return _textures.Values.ToList();
         }

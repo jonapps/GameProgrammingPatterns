@@ -20,21 +20,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private Vector2 _direction;
 
         public Bullet(float x, float y, World w, Vector2 direction)
-            : base(AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 32, 48)
+            : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 0.5f, x, y)
         {
-            _sprite.Origin = new Vector2f(16, 24);
-            _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(0.5), ConvertUnits.ToSimUnits(0.5));
-            Vertices bl = new Vertices();
-            bl.Add(new Vector2(0, -1.4f));
-            bl.Add(new Vector2(-0.35f, 0.5f));
-            bl.Add(new Vector2(-1, 0.9f));
-            bl.Add(new Vector2(-1, 1.2f));
-            bl.Add(new Vector2(0, 1.3f));
-            bl.Add(new Vector2(1, 1.2f));
-            bl.Add(new Vector2(1, 0.9f));
-            bl.Add(new Vector2(0.35f, 0.5f));
-
-            _Create(x, y, bl, w);
             _body.IsBullet = true;
             _direction = direction;
             _body.ApplyForce(direction * _speed);
