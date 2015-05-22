@@ -15,6 +15,8 @@ using GameScreen = JGerdesJWiemers.Game.ShootEmUp.Screens.Game;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
 using JGerdesJWiemers.Game.ShootEmUp.Weapons;
 using JGerdesJWiemers.Game.Engine;
+using FarseerPhysics.Controllers;
+using FarseerPhysics;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -32,12 +34,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)
         {
-
+            _fixture.CollisionCategories = Category.Cat1;
             _currentWeapon = new RocketLauncher();
             _sprite.Origin = new Vector2f(16, 24);
             _eHolder = gscreen;
             _world = w;
             _body.FixedRotation = true;
+            _body.IgnoreGravity = true;
                         
             InputManager.Channel[0].OnUp += delegate(float val)
             {
@@ -86,19 +89,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             }
         }
 
-        private Vector2 _GetDirectionNormal()
-        {
-            Vector2 normalDirection = _body.LinearVelocity;
-            normalDirection.Normalize();
-            return normalDirection;
-
-        }
-
 
         private void _createBullet()
         {
-            Vector2 directionNormal = _GetDirectionNormal();
+            Vector2 directionNormal = new Vector2((float)System.Math.Cos(_body.Rotation - System.Math.PI / 2), (float)System.Math.Sin(_body.Rotation - System.Math.PI / 2));
             Vector2 position = _body.Position + directionNormal*5;
+            System.Console.WriteLine(_body.Rotation);
             Entity e = _currentWeapon.Shoot(position.X, position.Y, _world, directionNormal);
             if (e != null)
             {

@@ -29,6 +29,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             GravityController gravity = new GravityController(0.2f);
             gravity.AddBody(_body);
+            gravity.AddDisabledCategory(Category.Cat1);
             world.AddController(gravity);
             _body.Rotation = 23.44f * (float)SMath.PI / 180;
 
