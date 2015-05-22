@@ -71,10 +71,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             InputManager.Channel[0].OnAction2 += delegate(bool pressed)
             {
-                //until inputs are managed by screens and not globally anymore
-                if (! (_screenManager.Top() is EarthScreen))
+                Vector2f distance = new Vector2f(earth.Body.Position.X - _ship.Body.Position.X, earth.Body.Position.Y - _ship.Body.Position.Y);
+                //only land if next to earth
+                if (distance.Length2() < 10 * 10)
                 {
-                    _screenManager.Push(new EarthScreen(_window));
+                    //until inputs are managed by screens and not globally anymore
+                    if (!(_screenManager.Top() is EarthScreen))
+                    {
+                        _screenManager.Push(new EarthScreen(_window));
+                    }
                 }
             };
         }
