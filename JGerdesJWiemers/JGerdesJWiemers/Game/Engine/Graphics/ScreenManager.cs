@@ -25,15 +25,17 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _screens.Push(s);
         }
 
-        public Screen Pop(Screen s)
+        public Screen Pop()
         {
-            return _screens.Pop();
+            Screen old = _screens.Pop();
+            old.Exit();
+            return old;
         }
 
         public Screen Switch(Screen s)
         {
-            Screen old = _screens.Pop();
-            _screens.Push(s);
+            Screen old = Pop();
+            Push(s);
             return old;
 
         }
