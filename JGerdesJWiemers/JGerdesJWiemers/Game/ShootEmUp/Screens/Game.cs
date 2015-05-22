@@ -109,11 +109,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            
-            for (int i = 0; i < _entities.Count; ++i)
-            {
-                 _entities[i].Render(renderTarget, extra);
-            }
+
+            base.Render(renderTarget, extra);
         }
 
         public override void Exit()

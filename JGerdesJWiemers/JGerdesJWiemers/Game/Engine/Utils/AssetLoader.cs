@@ -19,6 +19,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         public static readonly String TEXTURE_ASTRONAUT = "astronaut";
         public static readonly String TEXTURE_EARTH = "earth";
+        public static readonly String TEXTURE_EARTH_BIG = "earth_big";
         public static readonly String TEXTURE_MOON = "moon";
         public static readonly String TEXTURE_SPACESHIP = "spaceshuttle";
         public static readonly String TEXTURE_SPACE1 = @"space\space1";
@@ -48,6 +49,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
             LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
+            LoadTexture(TEXTURE_EARTH_BIG, TEXTURE_EARTH_BIG);
             LoadTexture(TEXTURE_MOON, TEXTURE_MOON);
             LoadTexture(TEXTURE_SPACE1, TEXTURE_SPACE1);
             LoadTexture(TEXTURE_SPACE2, TEXTURE_SPACE2);
