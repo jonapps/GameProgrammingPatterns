@@ -32,8 +32,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         public class AstronautDef : EntityDef
         {
-            public AstronautDef() : base() { }
-
+            public AstronautDef(float xPos = 0, float yPos = 0, float xSpeed = 0, float ySpeed = 0, float scale = 1, float rotationSpeed = 0)
+                : base(xPos, yPos, xSpeed, ySpeed, scale, rotationSpeed)
+            { }
             public override Engine.Entity Spawn(World world)
             {
                 Astronaut astronaut = new Astronaut(world, new Vector2f(Position.X, Position.Y), Speed.X, Speed.Y, RotationSpeed);

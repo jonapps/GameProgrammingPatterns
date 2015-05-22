@@ -38,9 +38,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public class EarthDef : EntityDef
         {
             public float Radius { get; set; }
-            public EarthDef() : base() 
+            public EarthDef(float radius, float xPos = 0, float yPos = 0, float xSpeed = 0, float ySpeed = 0, float scale = 1, float rotationSpeed = 0)
+                : base(xPos, yPos, xSpeed, ySpeed, scale, rotationSpeed)
             {
-                Radius = 5;
+                Radius = radius;
             }
 
             public override Engine.Entity Spawn(World world)

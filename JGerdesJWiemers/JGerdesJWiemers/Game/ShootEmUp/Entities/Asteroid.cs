@@ -43,16 +43,16 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             };
 
 
-            public AsteroidDef() 
-                : base()
+            public AsteroidDef(float xPos = 0, float yPos = 0, float xSpeed = 0, float ySpeed = 0, float scale = 1, float rotationSpeed = 0)
+                : base(xPos, yPos, xSpeed, ySpeed, scale, rotationSpeed)
             {
                 Random rand = new Random();
                 Array values = Enum.GetValues(typeof(Type));
                 AsteroidType = (Type)values.GetValue(rand.Next(values.Length));
             }
 
-            public AsteroidDef(Type type)
-                : base()
+            public AsteroidDef(Type type, float xPos = 0, float yPos = 0, float xSpeed = 0, float ySpeed = 0, float scale = 1, float rotationSpeed = 0)
+                : base(xPos, yPos, xSpeed, ySpeed, scale, rotationSpeed)
             {
                 AsteroidType = type;
             }

@@ -60,12 +60,12 @@ namespace JGerdesJWiemers.Game.Engine
             public Vector2 Speed { get; set; }
             public float RotationSpeed { get; set; }
 
-            public EntityDef()
+            public EntityDef(float xPosition = 0, float yPosition = 0, float xSpeed = 0, float ySpeed = 0, float scale = 1, float rotationSpeed = 0)
             {
-                Position = new Vector2(0, 0);
-                Scale = 1;
-                Speed = new Vector2(0, 0);
-                RotationSpeed = 0;
+                Position = new Vector2(xPosition, yPosition);
+                Speed = new Vector2(xSpeed, ySpeed);
+                Scale = scale;
+                RotationSpeed = rotationSpeed;
             }
 
             public abstract Entity Spawn(World world);

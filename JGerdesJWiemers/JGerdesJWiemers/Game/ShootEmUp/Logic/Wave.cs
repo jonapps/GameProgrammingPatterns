@@ -12,30 +12,30 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
     {
         private long _startTime = 0;
         private long _length = 0;
-        private SortedDictionary<int, List<Entity>> _generationList;
+        private SortedDictionary<int, List<Entity.EntityDef>> _generationList;
 
         public Wave()
         {
-            _generationList = new SortedDictionary<int, List<Entity>>();
+            _generationList = new SortedDictionary<int, List<Entity.EntityDef>>();
         }
 
-        public Wave(SortedDictionary<int, List<Entity>> generationList)
+        public Wave(SortedDictionary<int, List<Entity.EntityDef>> generationList)
         {
             _generationList = generationList;
             _length = _generationList.Keys.Last();
         }
 
-        public Wave(SortedDictionary<int, List<Entity>> generationList, long length)
+        public Wave(SortedDictionary<int, List<Entity.EntityDef>> generationList, long length)
         {
             _generationList = generationList;
             _length = length;
         }
 
-        public void AddEntity(int time, Entity e)
+        public void AddEntityDef(int time, Entity.EntityDef e)
         {
             if (!_generationList.ContainsKey(time))
             {
-                _generationList.Add(time, new List<Entity>());
+                _generationList.Add(time, new List<Entity.EntityDef>());
             }
 
             _generationList[time].Add(e);
@@ -52,11 +52,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             List<Entity> entities = new List<Entity>();
             List<int> toDelete = new List<int>();
 
-            foreach(KeyValuePair<int, List<Entity>> entry in _generationList)
+            foreach(KeyValuePair<int, List<Entity.EntityDef>> entry in _generationList)
             {
                 if (entry.Key <= currentTime)
                 {
-                    entities.AddRange(entry.Value);
+                    foreach (Entity.EntityDef def in entry.Value)
+                    {
+                        entities.Add(EntityFactory.Instance.Spawn(def));
+                    }
+                    toDelete.Add(entry.Key);
                 }
             }
             

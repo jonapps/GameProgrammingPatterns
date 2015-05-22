@@ -21,9 +21,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             _waves = new Queue<Wave>();
 
             Wave w1 = new Wave();
-            w1.AddEntity(2000, new Asteroid(world, 50, 10, AssetLoader.TEXTURE_ASTEROID1, 0.5f, 10f, 14f, 0.05f));
-            w1.AddEntity(1000, new Astronaut(world, new Vector2f(20, -20), 1.8f, 3.2f, 0.2f));
-            w1.AddEntity(3000, new Astronaut(world, new Vector2f(100, 95), 2f, -5f, -0.6f));
+
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(50, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(1000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
+            w1.AddEntityDef(1000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
 
             _waves.Enqueue(w1);
 

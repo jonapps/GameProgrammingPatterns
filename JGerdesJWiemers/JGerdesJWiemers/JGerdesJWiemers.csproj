@@ -99,6 +99,7 @@
     <Compile Include="Game\Engine\Entities\SpriteCircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\SpriteEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
+    <Compile Include="Game\Engine\EntityFactory.cs" />
     <Compile Include="Game\Engine\Exceptions\NotEnoughVerticesException.cs" />
     <Compile Include="Game\Engine\Exceptions\NotInitialisatedException.cs" />
     <Compile Include="Game\Engine\Graphics\AnimatedSprite.cs" />
