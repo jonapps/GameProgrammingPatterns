@@ -37,22 +37,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _waveManager = new WaveManager(_world);
 
-            Earth earth = new Earth(ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), _world, 5);
+            Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), 5);
             _entities.Add(earth);
-            _entities.Add(new Moon(earth, _world, 1.5f));
+            _entities.Add(new Moon(_world, earth, 1.5f));
 
             _ship = new SpaceShip(10, 10, _world, this);
             _entities.Add(_ship);
             
-            //_entities.Add(new CircleEntity(40, 10, 3, _world));
-            //_entities.Add(new CircleEntity(45, 10, 3, _world));
-            //_entities.Add(new CircleEntity(45, 25, 1, _world));
-            //_entities.Add(new CircleEntity(45, 10, 1, _world));
-            //_entities.Add(new CircleEntity(50, 10, 3, _world));
-            //_entities.Add(new CircleEntity(55, 10, 3, _world));
-            //_entities.Add(new RectangleEntity(-10, 80, 1000, 2, _world, 0,BodyType.Static));
-
-            //_entities.Add(new Astronaut(new Vector2f(30,20), _world, 0.5f));
         }
 
         public override void Update()

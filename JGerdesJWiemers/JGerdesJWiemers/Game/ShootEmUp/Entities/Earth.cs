@@ -21,7 +21,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private Animation _rotateAnimation;
 
-        public Earth(float x, float y, World world, float radius) :
+        public Earth(World world, float x, float y, float radius) :
             base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_EARTH), 5 / ConvertUnits.ToSimUnits(64),  x, y, BodyType.Static)
         {
             _rotateAnimation = new Animation(0, 319, 20, true, false);
@@ -33,7 +33,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             world.AddController(gravity);
             _body.Rotation = 23.44f * (float)SMath.PI / 180;
 
+        }
 
+        public class EarthDef : EntityDef
+        {
+            public float Radius { get; set; }
+            public EarthDef() : base() 
+            {
+                Radius = 5;
+            }
+
+            public override Engine.Entity Spawn(World world)
+            {
+                Earth earth = new Earth(world, Position.X, Position.Y, Radius);
+                return earth;
+            }
         }
     }
 }

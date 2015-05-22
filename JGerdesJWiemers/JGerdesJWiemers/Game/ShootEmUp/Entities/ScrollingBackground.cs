@@ -1,8 +1,11 @@
 ﻿using FarseerPhysics;
+using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Graphics;
 using SFML.System;
+using SMath = System.Math;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,18 +42,18 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             }
             if (width < 1280)
             {
-                scale = Math.Max(scale, 1280 / width);
+                scale = SMath.Max(scale, 1280 / width);
             }
 
             //setup positions
             _start1 = new Vector2f(x, y);
             _start2 = _start1 + new Vector2f(
-                        ConvertUnits.ToSimUnits(width * Math.Sign(speedX * -1)), 
-                        ConvertUnits.ToSimUnits(height * Math.Sign(speedY * -1))
+                        ConvertUnits.ToSimUnits(width * SMath.Sign(speedX * -1)), 
+                        ConvertUnits.ToSimUnits(height * SMath.Sign(speedY * -1))
             );
             _restart = _start1 + new Vector2f(
-                        ConvertUnits.ToSimUnits(width * Math.Sign(speedX)),
-                        ConvertUnits.ToSimUnits(height * Math.Sign(speedY))
+                        ConvertUnits.ToSimUnits(width * SMath.Sign(speedX)),
+                        ConvertUnits.ToSimUnits(height * SMath.Sign(speedY))
             );
 
             _sprite2.Position = _start1;
@@ -85,6 +88,18 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _sprite2.Position = _start2;
             }
 
+        }
+
+        public class BackgroundDef : EntityDef
+        {
+            string TextureContainerName;
+            public BackgroundDef() : base() { }
+
+            public override Engine.Entity Spawn(World world)
+            {
+                ScrollingBackground bg = new ScrollingBackground(AssetLoader.Instance.getTexture(TextureContainerName), Position.X, Position.Y, Speed.X, Speed.Y);
+                return bg;
+            }
         }
     }
 }

@@ -24,5 +24,44 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.ApplyAngularImpulse(rotSpeed);
             _body.Mass = 10;
         }
+
+        public class AsteroidDef : EntityDef
+        {
+            public enum Type
+            {
+                Asteroid1,
+                Asteroid2,
+                Asteroid3
+            }
+            public Type AsteroidType { get; set; }
+
+            private static Dictionary<Type, String> types = new Dictionary<Type, string>()
+            {
+                {Type.Asteroid1, AssetLoader.TEXTURE_ASTEROID1},
+                {Type.Asteroid2, AssetLoader.TEXTURE_ASTEROID2},
+                {Type.Asteroid3, AssetLoader.TEXTURE_ASTEROID3}
+            };
+
+
+            public AsteroidDef() 
+                : base()
+            {
+                Random rand = new Random();
+                Array values = Enum.GetValues(typeof(Type));
+                AsteroidType = (Type)values.GetValue(rand.Next(values.Length));
+            }
+
+            public AsteroidDef(Type type)
+                : base()
+            {
+                AsteroidType = type;
+            }
+            
+            public override Engine.Entity Spawn(World world)
+            {
+                Asteroid asteroid = new Asteroid(world, Position.X, Position.Y, types[AsteroidType], Scale, Speed.X, Speed.Y, RotationSpeed);
+                return asteroid;
+            }
+        }
     }
 }
