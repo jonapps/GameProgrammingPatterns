@@ -41,13 +41,17 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             : this(tex, tileWidth, tileHeight, new Animation()) { }
 
 
-        public new void Draw(RenderTarget renderTarget, RenderStates renderStates)
+        public void Update()
         {
             if (Game.ElapsedTime - _startTime >= _animationQueue.Peek().Duration)
             {
                 _NextFrame();
                 _startTime = Game.ElapsedTime;
             }
+        }
+
+        public new void Draw(RenderTarget renderTarget, RenderStates renderStates)
+        {
             base.Draw(renderTarget, renderStates);
         }
 
