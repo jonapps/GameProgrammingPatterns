@@ -44,6 +44,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             InputManager.Init(w);
 
+            _window.LostFocus += delegate(object sender, EventArgs e)
+            {
+                if(! (_screenManager.Top() is PauseScreen))
+                    _screenManager.Push(new PauseScreen(_window));
+            };
+
             Settings.MaxPolygonVertices = 32;
             _world = new World(new Vector2(0,0));
             EntityFactory.Instance.Init(_world);
