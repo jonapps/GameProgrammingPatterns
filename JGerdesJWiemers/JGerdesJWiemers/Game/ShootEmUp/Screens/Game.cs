@@ -53,6 +53,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 0, 0, -0.06f, 0));
 
             _waveManager = new WaveManager(_world);
+            _waveManager.OnWaveOver += delegate(Wave wave)
+            {
+                if (!_waveManager.HasNext())
+                    Console.WriteLine("All waves are over!");
+                else
+                    _waveManager.Next();
+
+            };
 
             Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), 5);
             _entities.Add(earth);

@@ -14,7 +14,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 {
     class WaveManager
     {
+
+        public delegate void WaveEventHandler(Wave wave);
+        public event WaveEventHandler OnWaveStarted;
+        public event WaveEventHandler OnWaveOver;
+
         private Queue<Wave> _waves;
+
 
         public WaveManager(World world)
         {
@@ -31,14 +37,35 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
         }
 
+        public bool HasNext()
+        {
+            return _waves.Count > 0;
+        }
+
         public void Start()
         {
-            _waves.Peek().Start();
+            if (HasNext())
+            {
+                _waves.Peek().Start();
+
+                if (OnWaveStarted != null)
+                    OnWaveStarted(_waves.Peek());
+            }
+        }
+
+        public void Next()
+        {
+            if (HasNext())
+            {
+                _waves.Dequeue();
+            }
+
+            Start();
         }
 
         public void GenerateEntities(EntityHolder holder)
         {
-            if (_waves.Count > 0)
+            if (HasNext())
             {
                 Wave currentWave = _waves.Peek();
                 List<Entity> newEntities = currentWave.Generate();
@@ -48,13 +75,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
                 }
                 if (currentWave.isOver())
                 {
-                    _waves.Dequeue();
-                    Console.WriteLine("Welle vorbei");
-                    if (_waves.Count > 0)
-                    {
-
-                        _waves.Peek().Start();
-                    }
+                    if (OnWaveOver != null)
+                        OnWaveOver(currentWave);
+                    
                 }
             }
         }
