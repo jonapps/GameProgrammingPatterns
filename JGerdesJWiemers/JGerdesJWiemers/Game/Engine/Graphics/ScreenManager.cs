@@ -48,7 +48,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            for (int i = 0, s = _screens.Count(); i < s; ++i)
+            for (int i = _screens.Count() - 1; i >= 0; --i)
                 _screens.ElementAt(i).Render(renderTarget, extra);
         }
 
