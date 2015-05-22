@@ -28,8 +28,22 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.ApplyLinearImpulse(direction * _speed);
             _body.Rotation = rotation;
             _body.CollisionCategories = EntityCategory.Bullet;
-
+            _body.OnCollision += _OnCollision;
+            
         }
+
+        private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            if (fixtureA.Body.UserData is SpaceShip || fixtureB.Body.UserData is SpaceShip)
+            {
+                return false;
+            }
+
+            _deleteMe = true;
+            return true;
+        }
+
+
 
         public override void Update()
         {
