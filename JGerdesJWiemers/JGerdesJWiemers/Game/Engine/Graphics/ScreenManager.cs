@@ -12,47 +12,50 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 {
     class ScreenManager : Screen
     {
-        private Screen _currentScreen;
+        private Stack<Screen> _screens;
 
-        public Screen CurrentScreen
-        {
-            get
-            {
-                return _currentScreen;
-            }
-
-            set
-            {
-                if (value != null)
-                {
-                    if(_currentScreen != null){
-                        _currentScreen.Exit();
-                    }
-                    _currentScreen = value;
-                    _currentScreen.Manager = this;
-                }
-            }
-        }
-
+        
         public ScreenManager(RenderWindow w)
             : base(w){
+                _screens = new Stack<Screen>();
+        }
+
+        public void Push(Screen s)
+        {
+            _screens.Push(s);
+        }
+
+        public Screen Pop(Screen s)
+        {
+            return _screens.Pop();
+        }
+
+        public Screen Switch(Screen s)
+        {
+            Screen old = _screens.Pop();
+            _screens.Push(s);
+            return old;
 
         }
 
         public override void Update()
         {
-            _currentScreen.Update();
+            _screens.Peek().Update();
         }
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
-            _currentScreen.Render(renderTarget, extra);
+            for (int i = 0, s = _screens.Count(); i < s; ++i)
+                _screens.ElementAt(i).Render(renderTarget, extra);
         }
 
 
         public override void Exit()
         {
-            _currentScreen.Exit();
+            while (_screens.Count > 0)
+            {
+                _screens.Pop().Exit();
+            }
         }
     }
 }

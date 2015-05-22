@@ -52,7 +52,7 @@ namespace JGerdesJWiemers.Game
             _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();
             this._screenManager = new ScreenManager(_window);
-            this._screenManager.CurrentScreen = new GameScreen.Game(_window);
+            this._screenManager.Push(new GameScreen.Game(_window));
             //this._screenManager.CurrentScreen = new Editor.EditorScreen(_window);
             _window.SetActive();
             _window.Closed += this._OnClose;
