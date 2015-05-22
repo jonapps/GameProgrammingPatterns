@@ -68,6 +68,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _ship = new SpaceShip(10, 10, _world, this);
             _entities.Add(_ship);
+
+            InputManager.Channel[0].OnAction2 += delegate(bool pressed)
+            {
+                //until inputs are managed by screens and not globally anymore
+                if (! (_screenManager.Top() is EarthScreen))
+                {
+                    _screenManager.Push(new EarthScreen(_window));
+                }
+            };
         }
 
         public override void Update()

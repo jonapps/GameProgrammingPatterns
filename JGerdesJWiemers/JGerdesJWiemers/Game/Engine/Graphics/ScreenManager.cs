@@ -41,6 +41,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         }
 
+        public Screen Top()
+        {
+            return _screens.Peek();
+        }
+
         public override void Update()
         {
             _screens.Peek().Update();

@@ -67,7 +67,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _channel[0].KeyLeft = Keyboard.Key.A;
                 _channel[0].KeyRight = Keyboard.Key.D;
                 _channel[0].KeyAction1 = Keyboard.Key.Space;
-                _channel[0].KeyAction2 = Keyboard.Key.BackSpace;
+                _channel[0].KeyAction2 = Keyboard.Key.L;
                 _channel[0].KeyAction3 = Keyboard.Key.A;
                 _channel[0].KeyAction4 = Keyboard.Key.D;
 
