@@ -51,5 +51,26 @@ namespace JGerdesJWiemers.Game.Engine
         {
             return new Vector2f(vec.X, vec.Y);
         }
+
+
+        public abstract class EntityDef
+        {
+            public Vector2 Position { get; set; }
+            public float Scale { get; set; }
+            public Vector2 Speed { get; set; }
+            public float RotationSpeed { get; set; }
+
+            public EntityDef()
+            {
+                Position = new Vector2(0, 0);
+                Scale = 1;
+                Speed = new Vector2(0, 0);
+                RotationSpeed = 0;
+            }
+
+            public abstract Entity Spawn(World world);
+        }
+
+
     }
 }

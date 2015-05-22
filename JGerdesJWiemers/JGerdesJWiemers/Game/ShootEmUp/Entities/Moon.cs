@@ -27,7 +27,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private bool _forced = false;
         private float _minDistance = 20;
 
-        public Moon(Earth earth, World world, float radius) :
+        public Moon(World world, Earth earth, float radius) :
             base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_MOON), radius / ConvertUnits.ToSimUnits(32), earth.Body.Position.X + 10, earth.Body.Position.Y + 10)
         {
             _earth = earth;
@@ -115,5 +115,25 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             normal = new Vector2(distance.Y * -1, distance.X);
             return dout;
         }
+
+        public class MoonDef : EntityDef
+        {
+            public float Radius { get; set; }
+            public Earth Earth { get; set; }
+            public MoonDef(Earth örz)
+                : base()
+            {
+                Radius = 5;
+                Earth = örz;
+
+            }
+
+            public override Engine.Entity Spawn(World world)
+            {
+                Moon moon = new Moon(world, Earth, Radius);
+                return moon;
+            }
+        }
+
     }
 }
