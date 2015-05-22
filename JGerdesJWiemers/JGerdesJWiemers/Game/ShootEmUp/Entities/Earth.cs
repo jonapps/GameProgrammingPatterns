@@ -27,11 +27,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _rotateAnimation = new Animation(0, 319, 20, true, false);
             _sprite.SetAnimation(_rotateAnimation);
 
-            GravityController gravity = new GravityController(0.2f);
+            GravityController gravity = new GravityController(1f);
             gravity.AddBody(_body);
-            gravity.AddDisabledCategory(Category.Cat1);
+            gravity.Strength = 10;
+            gravity.GravityType = GravityType.DistanceSquared;
+            gravity.AddDisabledCategory(EntityCategory.SpaceShip);
             world.AddController(gravity);
             _body.Rotation = 23.44f * (float)SMath.PI / 180;
+            _body.CollisionCategories = EntityCategory.Earth;
 
         }
 

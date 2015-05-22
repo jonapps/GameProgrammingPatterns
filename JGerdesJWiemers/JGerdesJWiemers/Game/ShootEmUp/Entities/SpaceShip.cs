@@ -25,6 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private static readonly float SPEED_DEFAULT = 40;
         private Weapon _currentWeapon;
+
         private float _currentSpeed = SPEED_DEFAULT;
         private EntityHolder _eHolder;
         private bool _spawnBullets = false;
@@ -34,7 +35,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)
         {
-            _fixture.CollisionCategories = Category.Cat1;
+            _fixture.CollisionCategories = EntityCategory.SpaceShip;
             _currentWeapon = new RocketLauncher();
             _sprite.Origin = new Vector2f(16, 24);
             _eHolder = gscreen;
@@ -93,14 +94,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private void _createBullet()
         {
             Vector2 directionNormal = new Vector2((float)System.Math.Cos(_body.Rotation - System.Math.PI / 2), (float)System.Math.Sin(_body.Rotation - System.Math.PI / 2));
-            Vector2 position = _body.Position + directionNormal*5;
-            System.Console.WriteLine(_body.Rotation);
-            Entity e = _currentWeapon.Shoot(position.X, position.Y, _world, directionNormal);
+            Vector2 position = _body.Position + directionNormal*1;
+            Entity e = _currentWeapon.Shoot(position.X, position.Y, _world, directionNormal, _body.Rotation);
             if (e != null)
             {
                 _eHolder.AddEntity(e);
             }
-            
         }
 
     }

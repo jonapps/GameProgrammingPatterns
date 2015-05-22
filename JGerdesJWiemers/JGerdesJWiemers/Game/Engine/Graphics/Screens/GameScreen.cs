@@ -18,13 +18,13 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         public static readonly float WORLD_STEP_SIZE = 1 / 60f;
 
         protected List<Entity> _entities;
-        protected List<Entity> _toDeleteEntities;
+        protected List<int> _toDeleteEntities;
         protected View _originalView;
 
         public GameScreen(RenderWindow w) : base(w)
         {
             _entities = new List<Entity>();
-            _toDeleteEntities = new List<Entity>();
+            _toDeleteEntities = new List<int>();
             _originalView = _window.GetView();
             ConvertUnits.SetDisplayUnitToSimUnitRatio(8f);
             float width = ConvertUnits.ToSimUnits(_window.Size.X);

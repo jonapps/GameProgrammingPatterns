@@ -20,13 +20,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
             _clock.Restart();
         }
 
-        public override Entity Shoot(float x, float y, World w,Vector2 direction)
+        public override Entity Shoot(float x, float y, World w, Vector2 direction, float rotation)
         {
             if (_clock.ElapsedTime.AsMilliseconds() > _toShoot)
             {
                 _clock.Restart();
-                Bullet e = new Bullet(x, y, w, direction);
-                return e;
+                return new Bullet(x, y, w, direction, rotation);
             }
             return null;
         }

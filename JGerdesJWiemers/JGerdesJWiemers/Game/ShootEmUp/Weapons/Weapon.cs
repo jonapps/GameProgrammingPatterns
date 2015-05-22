@@ -20,6 +20,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
             _clock = new Clock();
         }
 
-        public abstract Entity Shoot(float x, float y, World w, Vector2 direction);
+        public abstract Entity Shoot(float x, float y, World w, Vector2 direction, float rotation);
     }
 }

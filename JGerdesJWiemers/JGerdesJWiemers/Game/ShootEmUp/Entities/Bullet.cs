@@ -1,5 +1,6 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Common;
+using FarseerPhysics.Common.PhysicsLogic;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Utils;
@@ -19,13 +20,29 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private float _speed = 10000000000f;
         private Vector2 _direction;
 
-        public Bullet(float x, float y, World w, Vector2 direction)
+        public Bullet(float x, float y, World w, Vector2 direction, float rotation)
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 0.5f, x, y)
         {
             _body.IsBullet = true;
             _direction = direction;
-            _body.ApplyForce(direction * _speed);
+            _body.ApplyLinearImpulse(direction * _speed);
+            _body.Rotation = rotation;
+            _body.CollisionCategories = EntityCategory.Bullet;
+            _body.OnCollision += _OnCollision;
+            
         }
+
+        private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            if (fixtureA.Body.UserData is SpaceShip || fixtureB.Body.UserData is SpaceShip)
+            {
+                return false;
+            }
+
+            _deleteMe = true;
+            return true;
+        }
+
 
 
         public override void Update()
