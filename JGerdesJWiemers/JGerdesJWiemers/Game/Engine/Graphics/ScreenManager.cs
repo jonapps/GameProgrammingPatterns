@@ -22,6 +22,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         public void Push(Screen s)
         {
+            s.Manager = this;
             _screens.Push(s);
         }
 
