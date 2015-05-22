@@ -121,51 +121,19 @@ namespace JGerdesJWiemers.Game.Engine.Input
         {
             if (e.Code == KeyUp)
             {
-                if(_upWatch.IsRunning)
-                {
-                    OnUp(Math.Min(0.1f+_upWatch.ElapsedMilliseconds/MAX_PRESSED_TIME,1));
-                }
-                else
-                {
-                    _upWatch.Start();
-                    OnUp(0.3f);    
-                }
+                OnUp(1f);
             }
             if (e.Code == KeyDown)
             {
-                if(_downWatch.IsRunning)
-                {
-                    OnDown(Math.Min(0.1f + _downWatch.ElapsedMilliseconds / MAX_PRESSED_TIME, 1));
-                }
-                else
-                {
-                    _downWatch.Start();
-                    OnDown(0.3f);    
-                }
+                OnDown(1f);  
             }
             if (e.Code == KeyLeft)
             {
-                if(_leftWatch.IsRunning)
-                {
-                    OnLeft(Math.Min(0.1f + _leftWatch.ElapsedMilliseconds / MAX_PRESSED_TIME, 1));
-                }
-                else
-                {
-                    _leftWatch.Start();
-                    OnLeft(0.3f);    
-                }
+                OnLeft(1f);  
             }
             if (e.Code == KeyRight)
             {
-                if(_rightWatch.IsRunning)
-                {
-                    OnRight(Math.Min(0.1f + _rightWatch.ElapsedMilliseconds / MAX_PRESSED_TIME, 1));
-                }
-                else
-                {
-                    _rightWatch.Start();
-                    OnRight(0.3f);    
-                }
+                OnRight(1f);
             }
             if (e.Code == KeyAction1)
             {

@@ -17,6 +17,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+namespace JGerdesJWiemers.Game.ShootEmUp
+{
+    public static class EntityCategory
+    {
+        public static Category SpaceShip = Category.Cat1;
+        public static Category Bullet = Category.Cat2;
+        public static Category Asteroit = Category.Cat3;
+        public static Category Earth = Category.Cat4;
+        public static Category Moon = Category.Cat5;
+        public static Category Astronaut = Category.Cat6;
+    }
+}
+
 namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 {
     class Game : GameScreen, EntityHolder
@@ -27,6 +41,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public Game(RenderWindow w)
             : base(w) 
         {
+
             InputManager.Init(w);
 
             Settings.MaxPolygonVertices = 32;
@@ -52,7 +67,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             //_entities.Add(new CircleEntity(55, 10, 3, _world));
             //_entities.Add(new RectangleEntity(-10, 80, 1000, 2, _world, 0,BodyType.Static));
 
-            //_entities.Add(new Astronaut(new Vector2f(30,20), _world, 0.5f));
+            //_entities.Add(new Astronaut(new Vector2f(30,20), _world, 0.5f
         }
 
         public override void Update()
@@ -65,14 +80,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 Entity e = _entities[i];
                 if (e.DeleteMe)
                 {
-                    _toDeleteEntities.Add(e);
+                    _toDeleteEntities.Add(i);
                 }
                 e.Update();
             }
             for (int i = 0; i < _toDeleteEntities.Count; ++i)
             {
-                Entity e = _entities[i];
-                _entities.Remove(e);
+                _world.RemoveBody(_entities[_toDeleteEntities[i]].Body);
+                _entities.RemoveAt(_toDeleteEntities[i]); 
             }
 
             _world.Step(WORLD_STEP_SIZE);
