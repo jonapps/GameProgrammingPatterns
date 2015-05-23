@@ -1,4 +1,0 @@
-earth_big.png
-344
-698
-Rectangle

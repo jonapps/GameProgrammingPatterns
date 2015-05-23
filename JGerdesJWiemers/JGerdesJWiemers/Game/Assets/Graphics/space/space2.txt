@@ -1,4 +1,0 @@
-space2.png
-2000
-600
-none

@@ -1,0 +1,7 @@
+{
+	"ImageTitle": "moon.png",
+	"Width": 64,
+	"Height": 64,
+    "Type": "Circle",
+    "Radius":  32
+}

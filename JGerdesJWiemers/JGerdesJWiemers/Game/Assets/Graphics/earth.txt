@@ -1,5 +1,0 @@
-earth.png
-128
-128
-Circle
-64

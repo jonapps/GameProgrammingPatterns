@@ -1,5 +1,0 @@
-moon.png
-64
-64
-Circle
-32

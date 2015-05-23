@@ -1,4 +1,0 @@
-astronaut.png
-64
-83
-Rectangle

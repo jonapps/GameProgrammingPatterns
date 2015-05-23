@@ -5,12 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using JGerdesJWiemers.Game.Engine.Utils.Helper;
+using FarseerPhysics.Common;
+using Microsoft.Xna.Framework;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {
     class AssetLoader
     {
-        public static readonly String DATA_FILE_ENDING = "txt";
+        public static readonly String DATA_FILE_ENDING = "json";
 
         public static readonly String FONT_ROBOTO_THIN = "Roboto-Thin.ttf";
         public static readonly String FONT_ROBOTO_LIGHT = "Roboto-Light.ttf";
@@ -86,74 +91,58 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         {
             if (!_textures.ContainsKey(name))
             {
-                string line;
-                int counter = 0;
-                List<float[]> points = new List<float[]>();
                 int width = 0, height = 0;
                 Texture texture = null;
-                TextureContainer container;
+                TextureContainer container = null;
                 string type = "undefined";
 
                 string filepath = DIR_TEXTURES + filename + "." + DATA_FILE_ENDING;
                 System.IO.StreamReader file = new System.IO.StreamReader(filepath);
                 string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
-
-                while ((line = file.ReadLine()) != null)
-                {
-                    System.Console.WriteLine(line);
-                    switch (counter)
-                    {
-                        case 0:
-                            texture = new Texture(directory + "\\" + line);
-                            break;
-                        case 1:
-                            width = Convert.ToInt32(line);
-                            break;
-                        case 2:
-                            height = Convert.ToInt32(line);
-                            break;
-                        case 3:
-                            type = line;
-                            if (type == TextureContainer.IDENTIFIER)
-                            {
-                                container = new TextureContainer(texture, width, height);
-                                _textures.Add(name, container);
-                                return container;
-                            }
-                            else if (type == RectangleTextureContainer.IDENTIFIER)
-                            {
-                                container = new RectangleTextureContainer(texture, width, height);
-                                _textures.Add(name, container);
-                                return container;
-                            }
-                            break;
-                        default:
-                            if(type == CircleTextureContainer.IDENTIFIER)
-                            {
-                                float radius = (float)Convert.ToDecimal(line);
-                                container = new CircleTextureContainer(texture, width, height, radius);
-                                _textures.Add(name, container);
-                                return container;
-                            }
-                            if(type == PolygonTextureContainer.IDENTIFIER)
-                            {
-                                    float x, y;
-                                    string[] data = line.Split(';');
-                                    x = (float)Convert.ToDouble(data[0]);
-                                    y = (float)Convert.ToDouble(data[1]);
-                                    points.Add(new float[] { x, y });
-                            }
-                            break;
-
-                    }
-                    counter++;
-                }
-
+                string completeFile = file.ReadToEnd();
                 file.Close();
-                container = new PolygonTextureContainer(texture, width, height, points);
-                _textures.Add(name, container);
-                return container;
-            }
+
+                SpriteAsset spriteAsset = JsonConvert.DeserializeObject<SpriteAsset>(completeFile);
+                texture = new Texture(directory + "\\" + spriteAsset.ImageTitle);
+                type = spriteAsset.Type;
+                width = spriteAsset.Width;
+                height = spriteAsset.Height;
+
+                if (type == TextureContainer.IDENTIFIER)
+                {
+                    container = new TextureContainer(texture, width, height);
+                    _textures.Add(name, container);
+                    return container;
+                }
+                else if (type == RectangleTextureContainer.IDENTIFIER)
+                {
+                    container = new RectangleTextureContainer(texture, width, height);
+                    _textures.Add(name, container);
+                    return container;
+                } 
+                else if (type == CircleTextureContainer.IDENTIFIER)
+                {
+                    float radius = spriteAsset.Radius;
+                    container = new CircleTextureContainer(texture, width, height, radius);
+                    _textures.Add(name, container);
+                    return container;
+                } 
+                else if (type == PolygonTextureContainer.IDENTIFIER)
+                {
+                    Vertices vert = new Vertices();
+
+                    foreach (SpriteVectorAsset sva in spriteAsset.Vertices)
+                    {
+                        vert.Add(new Vector2(sva.X, sva.Y));
+                    }
+
+                    container = new PolygonTextureContainer(texture, width, height, vert);
+                }
+                if(container != null){
+                    _textures.Add(name, container);
+                    return container;
+                }
+            }   
             return _textures[name];
 
         }

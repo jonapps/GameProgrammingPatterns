@@ -73,14 +73,9 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             Vertices = (Vertices)vertices;
         }
 
-        public PolygonTextureContainer(Texture texture, int frameWidth, int frameHeight, List<float[]> vertices)
+        public PolygonTextureContainer(Texture texture, int frameWidth, int frameHeight, Vertices v)
             : base(texture, frameWidth, frameHeight)
         {
-            Vertices v = new Vertices();
-            foreach (float[] f in vertices)
-            {
-                v.Add(new Vector2(f[0], f[1]));
-            }
             Vertices = v;
         }
     }
