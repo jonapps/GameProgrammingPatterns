@@ -29,7 +29,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             GravityController gravity = new GravityController(1f);
             gravity.AddBody(_body);
-            gravity.Strength = 10;
+            gravity.Strength = 1;
             gravity.GravityType = GravityType.DistanceSquared;
             gravity.AddDisabledCategory(EntityCategory.SpaceShip);
             world.AddController(gravity);

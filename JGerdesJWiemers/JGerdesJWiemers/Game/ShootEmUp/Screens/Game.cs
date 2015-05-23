@@ -68,7 +68,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             };
 
-            Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), 5);
+            Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), 4);
             _entities.Add(earth);
             _entities.Add(new Moon(_world, earth, 1.5f));
 
@@ -104,15 +104,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 }
                 e.Update();
             }
+            _toDeleteEntities.Sort((a, b) => b - a);
             for (int i = 0; i < _toDeleteEntities.Count; ++i)
             {
                 _world.RemoveBody(_entities[_toDeleteEntities[i]].Body);
-                _entities.RemoveAt(_toDeleteEntities[i]); 
+                _entities.RemoveAt(_toDeleteEntities[i]);
             }
-
-            _world.Step(WORLD_STEP_SIZE);
         }
-
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
 

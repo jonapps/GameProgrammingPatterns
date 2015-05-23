@@ -36,7 +36,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)
         {
             _fixture.CollisionCategories = EntityCategory.SpaceShip;
-            _currentWeapon = new RocketLauncher();
+            _currentWeapon = new DoubleGatlinGun();
             _sprite.Origin = new Vector2f(16, 24);
             _eHolder = gscreen;
             _world = w;
@@ -67,6 +67,23 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             {
                 _spawnBullets = press;
             };
+
+            InputManager.Channel[0].OnAction3 += delegate(bool press)
+            {
+                if (_currentWeapon is DoubleGatlinGun)
+                {
+                    _currentWeapon = new RocketLauncher();
+                }
+                else if (_currentWeapon is GatlinGun)
+                {
+                    _currentWeapon = new DoubleGatlinGun();
+                }
+                else
+                {
+                    _currentWeapon = new GatlinGun();
+                }
+                
+            };
         }
 
 
@@ -95,9 +112,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             Vector2 directionNormal = new Vector2((float)System.Math.Cos(_body.Rotation - System.Math.PI / 2), (float)System.Math.Sin(_body.Rotation - System.Math.PI / 2));
             Vector2 position = _body.Position + directionNormal*1;
-            Entity e = _currentWeapon.Shoot(position.X, position.Y, _world, directionNormal, _body.Rotation);
-            if (e != null)
-            {
+            List<Entity> el = _currentWeapon.Shoot(position.X, position.Y, _world, directionNormal, _body.Rotation);
+            foreach (Entity e in el){
                 _eHolder.AddEntity(e);
             }
         }

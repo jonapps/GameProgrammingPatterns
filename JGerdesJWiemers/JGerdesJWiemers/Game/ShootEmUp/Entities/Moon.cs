@@ -33,13 +33,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _earth = earth;
             _body.Mass = 10f;
             
-            InputManager.Channel[0].OnAction1 += delegate(bool press)
-            {
-                if (press)
-                {
-                    _forced = true;
-                }
-            };
+         
             _ApplyLinearVelocity(18f);
         }
         public override void Update()

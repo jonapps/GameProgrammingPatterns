@@ -12,22 +12,23 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
 {
-    class RocketLauncher : Weapon
+    class GatlinGun : Weapon
     {
 
-        public RocketLauncher()
+        public GatlinGun()
         {
-            _toShoot = 200;
+            _toShoot = 100;
             _clock.Restart();
         }
 
         public override List<Entity> Shoot(float x, float y, World w, Vector2 direction, float rotation)
         {
-            _bullets.Clear();  
+
+            _bullets.Clear();
             if (_clock.ElapsedTime.AsMilliseconds() > _toShoot)
             {
                 _clock.Restart();
-                _bullets.Add(new Rocket(x, y, w, direction, rotation, 0.5f));
+                _bullets.Add(new Rounds(x, y, w, direction, rotation, 0.5f));
             }
             return _bullets;
         }

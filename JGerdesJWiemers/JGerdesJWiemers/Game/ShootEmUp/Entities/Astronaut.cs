@@ -18,6 +18,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
     {
 
         private Animation _rotateAnimation;
+        private int damage = 100;
 
         public Astronaut(World world, Vector2f position, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0)
             : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 0.5f, position.X, position.Y)
@@ -28,6 +29,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             //_body.ApplyLinearImpulse(new Vector2(10f, 1f));
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.AngularVelocity = rotSpeed;
+            _body.Mass = 1;
         }
 
         public class AstronautDef : EntityDef

@@ -22,6 +22,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_EARTH_BIG = "earth_big";
         public static readonly String TEXTURE_MOON = "moon";
         public static readonly String TEXTURE_SPACESHIP = "spaceshuttle";
+        public static readonly String GATLINGUN_BULLET = "gatlinGunBullet";
         public static readonly String TEXTURE_SPACE1 = @"space\space1";
         public static readonly String TEXTURE_SPACE2 = @"space\space2";
         public static readonly String TEXTURE_SPACE3 = @"space\space3";

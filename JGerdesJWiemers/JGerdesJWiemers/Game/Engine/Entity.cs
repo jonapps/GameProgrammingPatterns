@@ -17,6 +17,7 @@ namespace JGerdesJWiemers.Game.Engine
         protected Body _body;
         protected Fixture _fixture;
         protected bool _deleteMe = false;
+        protected bool _debug = Game.DEBUG;
 
 
 

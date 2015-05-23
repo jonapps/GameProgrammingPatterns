@@ -68,8 +68,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _channel[0].KeyRight = Keyboard.Key.D;
                 _channel[0].KeyAction1 = Keyboard.Key.Space;
                 _channel[0].KeyAction2 = Keyboard.Key.L;
-                _channel[0].KeyAction3 = Keyboard.Key.A;
-                _channel[0].KeyAction4 = Keyboard.Key.D;
+                _channel[0].KeyAction3 = Keyboard.Key.X;
+                _channel[0].KeyAction4 = Keyboard.Key.Y;
 
                 _channel[0].AxisUpDown = Joystick.Axis.Y;
                 _channel[0].AxisLeftRight = Joystick.Axis.X;

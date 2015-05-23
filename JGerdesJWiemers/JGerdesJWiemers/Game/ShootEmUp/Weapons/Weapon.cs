@@ -14,12 +14,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
     {
         protected Clock _clock;
         protected float _toShoot;
+        protected List<Entity> _bullets;
 
         public Weapon()
         {
             _clock = new Clock();
+            _bullets = new List<Entity>();
         }
 
-        public abstract Entity Shoot(float x, float y, World w, Vector2 direction, float rotation);
+        public abstract List<Entity> Shoot(float x, float y, World w, Vector2 direction, float rotation);
     }
 }

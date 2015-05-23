@@ -23,6 +23,7 @@ namespace JGerdesJWiemers.Game
         public static readonly string GAME_TITLE = "ShootEmUp";
         public static int ElapsedFrameTime = 0;
         public static long ElapsedTime = 0;
+        public static bool DEBUG = false;
 
         readonly Time TargetElapsedTime = Time.FromMicroseconds(16666);
         readonly Time MaxElapsedTime = Time.FromMicroseconds(10000);
@@ -53,6 +54,7 @@ namespace JGerdesJWiemers.Game
             this._stopWatch = new Stopwatch();
             this._screenManager = new ScreenManager(_window);
             this._screenManager.Push(new GameScreen.Game(_window));
+            //this._screenManager.Push(new Editor.EditorScreen(_window));
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.SetVerticalSyncEnabled(true);
@@ -156,5 +158,7 @@ namespace JGerdesJWiemers.Game
                 }
             }
         }
+
+
     }
 }

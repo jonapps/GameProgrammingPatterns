@@ -28,9 +28,35 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
             Wave w1 = new Wave();
 
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(50, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(60, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(70, 100, 10f, 14f, 0.5f, 0.05f));
+
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(80, 30, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(90, 40, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(100, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(110, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(120, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(130, 10, 10f, 14f, 0.5f, 0.05f));
             w1.AddEntityDef(1000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
             w1.AddEntityDef(1000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
+
+            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(80, 30, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(90, 40, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(100, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(110, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(120, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(130, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
+
+            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(80, 30, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(90, 40, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(100, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(110, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(120, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(130, 10, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(6000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
+            w1.AddEntityDef(5000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
 
             _waves.Enqueue(w1);
 

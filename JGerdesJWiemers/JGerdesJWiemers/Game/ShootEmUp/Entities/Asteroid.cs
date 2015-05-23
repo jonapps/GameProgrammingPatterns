@@ -19,10 +19,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public Asteroid(World world, float x, float y, string textureName, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0)
             : base(world, AssetLoader.Instance.getTexture(textureName), scale)
         {
-
+            _body.CollisionCategories = EntityCategory.Asteroit;
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.ApplyAngularImpulse(rotSpeed);
-            _body.Mass = 10;
+            _body.Mass = 100;
         }
 
         public class AsteroidDef : EntityDef

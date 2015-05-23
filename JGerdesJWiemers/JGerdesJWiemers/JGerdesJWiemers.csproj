@@ -120,6 +120,8 @@
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Asteroid.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Bullet.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\Bullets\Rounds.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\Bullets\Rocket.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Moon.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Earth.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
@@ -130,6 +132,8 @@
     <Compile Include="Game\ShootEmUp\Screens\EarthScreen.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
     <Compile Include="Game\ShootEmUp\Screens\PauseScreen.cs" />
+    <Compile Include="Game\ShootEmUp\Weapons\DoubleGatlinGun.cs" />
+    <Compile Include="Game\ShootEmUp\Weapons\GatlinGun.cs" />
     <Compile Include="Game\ShootEmUp\Weapons\RocketLauncher.cs" />
     <Compile Include="Game\ShootEmUp\Weapons\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +187,7 @@
       <DependentUpon>EditorWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
