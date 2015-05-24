@@ -28,35 +28,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
             Wave w1 = new Wave();
 
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(60, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(70, 100, 10f, 14f, 0.5f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(60, -10, 1f, 1f, 2, 1f, 0.05f));
+            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(70, 100, 1f, 3f, 1, 0.5f, 0.05f));
 
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(80, 30, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(90, 40, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(100, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(110, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(120, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(2000, new Asteroid.AsteroidDef(130, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(1000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
-            w1.AddEntityDef(1000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
-
-            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(80, 30, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(90, 40, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(100, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(110, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(120, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Asteroid.AsteroidDef(130, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
-
-            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(80, 30, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(90, 40, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(100, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(110, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(120, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Asteroid.AsteroidDef(130, 10, 10f, 14f, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
-            w1.AddEntityDef(5000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
+            w1.AddEntityDef(3000, new Asteroid.AsteroidDef(-20, 30, 2f, 0f, 2, 0.8f, 0.05f));
+            w1.AddEntityDef(3000, new Asteroid.AsteroidDef(-20, 60, 2f, -2f, 1, 0.6f, 0.05f));
+           
+            w1.AddEntityDef(8000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.5f, 0.05f));
+            w1.AddEntityDef(14000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.5f, -0.06f));
 
             _waves.Enqueue(w1);
 
@@ -89,23 +68,25 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             Start();
         }
 
-        public void GenerateEntities(EntityHolder holder)
+        public List<Entity> GenerateEntities()
         {
+            List<Entity> newEntities;
             if (HasNext())
             {
                 Wave currentWave = _waves.Peek();
-                List<Entity> newEntities = currentWave.Generate();
-                foreach (Entity e in newEntities)
-                {
-                    holder.AddEntity(e);
-                }
+                newEntities = currentWave.Generate();
+                
                 if (currentWave.isOver())
                 {
                     if (OnWaveOver != null)
                         OnWaveOver(currentWave);
-                    
                 }
             }
+            else
+            {
+                newEntities = new List<Entity>();
+            }
+            return newEntities;
         }
     }
 }

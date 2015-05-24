@@ -52,7 +52,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             Settings.MaxPolygonVertices = 32;
             _world = new World(new Vector2(0,0));
-            EntityFactory.Instance.Init(_world);
+            EntityFactory.Instance.Init(_world, (EntityHolder) this);
 
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE1), 0, 0, -0.02f, 0));
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 0, 0, -0.04f, 0));
@@ -94,7 +94,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         {
             _world.Step(WORLD_STEP_SIZE);
             _toDeleteEntities.Clear();
-            _waveManager.GenerateEntities(this);
+            _waveManager.GenerateEntities();
             for (int i = 0; i < _entities.Count; ++i)
             {
                 Entity e = _entities[i];

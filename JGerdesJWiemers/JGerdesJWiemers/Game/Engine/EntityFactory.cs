@@ -1,5 +1,6 @@
 ﻿using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Exceptions;
+using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace JGerdesJWiemers.Game.Engine
         private static EntityFactory _instance;
 
         private World _world;
+        private EntityHolder _holder;
 
         public Entity Spawn(Entity.EntityDef def)
         {
@@ -20,12 +22,15 @@ namespace JGerdesJWiemers.Game.Engine
             {
                 throw new NotInitialisatedException();
             }
-            return def.Spawn(_world);
+            Entity e = def.Spawn(_world);
+            _holder.AddEntity(e);
+            return e;
         }
 
-        public void Init(World world)
+        public void Init(World world, EntityHolder holder)
         {
             _world = world;
+            _holder = holder;
         }
 
         public static EntityFactory Instance
