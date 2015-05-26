@@ -20,8 +20,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private Animation _rotateAnimation;
         private int damage = 100;
 
-        public Astronaut(World world, Vector2f position, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0)
-            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), 0.5f, position.X, position.Y)
+        public Astronaut(World world, Vector2f position, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0, float scale = 0.5f)
+            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), scale, position.X, position.Y)
         {
             _rotateAnimation = new Animation(0, 70, 20, true, false);
             _sprite.SetAnimation(_rotateAnimation);
@@ -51,7 +51,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             { }
             public override Engine.Entity Spawn(World world)
             {
-                Astronaut astronaut = new Astronaut(world, new Vector2f(Position.X, Position.Y), Speed.X, Speed.Y, RotationSpeed);
+                Astronaut astronaut = new Astronaut(world, new Vector2f(Position.X, Position.Y), Speed.X, Speed.Y, RotationSpeed, Scale);
                 return astronaut;
             }
         }
