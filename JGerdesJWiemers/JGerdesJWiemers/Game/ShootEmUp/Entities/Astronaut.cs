@@ -30,6 +30,18 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.AngularVelocity = rotSpeed;
             _body.Mass = 1;
+
+            _body.OnCollision += _OnCollision;
+        }
+
+        bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            if (fixtureA.Body.UserData is SpaceShip || fixtureB.Body.UserData is SpaceShip)
+            {
+                _deleteMe = true;
+                //TODO: set score
+            }
+            return true;
         }
 
         public class AstronautDef : EntityDef
