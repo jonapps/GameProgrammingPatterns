@@ -52,6 +52,7 @@ namespace JGerdesJWiemers.Game
             this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default, settings);
             _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();
+            InputManager.Instance.Init(_window);
             this._screenManager = new ScreenManager(_window);
             this._screenManager.Push(new GameScreen.Game(_window));
             //this._screenManager.Push(new Editor.EditorScreen(_window));
@@ -60,8 +61,10 @@ namespace JGerdesJWiemers.Game
             _window.SetVerticalSyncEnabled(true);
  
 
-
-            InputManager.Init(_window);
+            _window.JoystickButtonPressed += delegate(object s, JoystickButtonEventArgs e)
+            {
+                Console.WriteLine(e.Button);
+            };
 
             try
             {

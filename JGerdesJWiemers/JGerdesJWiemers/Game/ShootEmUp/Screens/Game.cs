@@ -42,8 +42,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             : base(w) 
         {
 
-            InputManager.Init(w);
-
             _window.LostFocus += delegate(object sender, EventArgs e)
             {
                 if(! (_screenManager.Top() is PauseScreen))
@@ -75,19 +73,22 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _ship = new SpaceShip(10, 10, _world, this);
             _entities.Add(_ship);
 
-            InputManager.Channel[0].OnAction2 += delegate(bool pressed)
-            {
+
+            _input.On("land", delegate(InputEvent e, int channel){
                 Vector2f distance = new Vector2f(earth.Body.Position.X - _ship.Body.Position.X, earth.Body.Position.Y - _ship.Body.Position.Y);
                 //only land if next to earth
                 if (distance.Length2() < 10 * 10)
-                {
-                    //until inputs are managed by screens and not globally anymore
-                    if (!(_screenManager.Top() is EarthScreen))
-                    {
-                        _screenManager.Push(new EarthScreen(_window));
-                    }
-                }
-            };
+                    _screenManager.Push(new EarthScreen(_window));
+                return true;
+            });
+
+            _input.On("return", delegate(InputEvent e, int channel)
+            {
+                if (!(_screenManager.Top() is PauseScreen))
+                    _screenManager.Push(new PauseScreen(_window));
+                return true;
+            });
+            
         }
 
         public override void Update()
@@ -139,6 +140,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public void AddEntity(Entity e)
         {
             _entities.Add(e);
+        }
+
+        public override bool OnInputEvent(string name, InputEvent e, int channel)
+        {
+            if (!base.OnInputEvent(name, e, channel))
+            {
+                return _ship.OnInputEvent(name, e, channel);
+            }
+            return false;
         }
 
     }

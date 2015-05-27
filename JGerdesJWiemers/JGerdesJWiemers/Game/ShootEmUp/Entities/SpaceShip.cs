@@ -20,7 +20,7 @@ using FarseerPhysics;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
-    class SpaceShip : SpriteEntity
+    class SpaceShip : SpriteEntity, InputHandler
     {
 
         private static readonly float SPEED_DEFAULT = 40;
@@ -30,11 +30,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private EntityHolder _eHolder;
         private bool _spawnBullets = false;
         private World _world;
+        private InputMapper _input;
 
 
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)
         {
+            _input = new InputMapper();
             _fixture.CollisionCategories = EntityCategory.SpaceShip;
             _currentWeapon = new DoubleGatlinGun();
             _sprite.Origin = new Vector2f(16, 24);
@@ -42,33 +44,37 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _world = w;
             _body.FixedRotation = true;
             _body.IgnoreGravity = true;
-                        
-            InputManager.Channel[0].OnUp += delegate(float val)
-            {
-                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, -_currentSpeed * val);
-            };
 
-            InputManager.Channel[0].OnDown += delegate(float val)
+            _input.On("up", delegate(InputEvent e, int channel)
             {
-                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, _currentSpeed * val);
-            };
+                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, -_currentSpeed * ((JoystickEvent)e).Value);
+                return true;
+            });
 
-            InputManager.Channel[0].OnLeft += delegate(float val)
+            _input.On("down", delegate(InputEvent e, int channel)
             {
-                _body.LinearVelocity = new Vector2(-_currentSpeed * val, _body.LinearVelocity.Y);
-            };
+                _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, _currentSpeed *  ((JoystickEvent)e).Value);
+                return true;
+            });
 
-            InputManager.Channel[0].OnRight += delegate(float val)
+            _input.On("left", delegate(InputEvent e, int channel)
             {
-                _body.LinearVelocity = new Vector2(_currentSpeed * val, _body.LinearVelocity.Y);
-            };
+                _body.LinearVelocity = new Vector2(-_currentSpeed * ((JoystickEvent)e).Value, _body.LinearVelocity.Y);
+                return true;
+            });
 
-            InputManager.Channel[0].OnAction1 += delegate(bool press)
+            _input.On("right", delegate(InputEvent e, int channel)
             {
-                _spawnBullets = press;
-            };
+                _body.LinearVelocity = new Vector2(_currentSpeed * ((JoystickEvent)e).Value, _body.LinearVelocity.Y);
+                return true;
+            });
 
-            InputManager.Channel[0].OnAction3 += delegate(bool press)
+            _input.On("shoot", delegate(InputEvent e, int channel)
+            {
+                _spawnBullets = ((KeyEvent)e).Pressed;
+                return true;
+            });
+            _input.On("weaponSwitch", delegate(InputEvent e, int channel)
             {
                 if (_currentWeapon is DoubleGatlinGun)
                 {
@@ -82,8 +88,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 {
                     _currentWeapon = new GatlinGun();
                 }
-                
-            };
+                return true;
+            });
         }
 
 
@@ -118,5 +124,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             }
         }
 
+
+        public bool OnInputEvent(string name, InputEvent e, int channel)
+        {
+            return _input.OnInputEvent(name, e, channel);
+        }
     }
 }

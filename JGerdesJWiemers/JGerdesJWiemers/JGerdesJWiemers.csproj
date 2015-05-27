@@ -112,8 +112,10 @@
     <Compile Include="Game\Engine\Graphics\Screens\Interfaces\EntityHolder.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Screen.cs" />
     <Compile Include="Game\Engine\Graphics\TextureContainer.cs" />
-    <Compile Include="Game\Engine\Input\Channel.cs" />
+    <Compile Include="Game\Engine\Input\InputEvent.cs" />
+    <Compile Include="Game\Engine\Input\InputHandler.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
+    <Compile Include="Game\Engine\Input\InputMapper.cs" />
     <Compile Include="Game\Engine\IUpdateable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Engine\Shapes\PolygonShape.cs" />
@@ -135,7 +137,6 @@
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
-    <Compile Include="Game\ShootEmUp\Input\InputManager.cs" />
     <Compile Include="Game\ShootEmUp\Logic\Wave.cs" />
     <Compile Include="Game\ShootEmUp\Logic\WaveManager.cs" />
     <Compile Include="Game\ShootEmUp\Screens\EarthScreen.cs" />
