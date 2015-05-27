@@ -13,6 +13,5 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper
         public Keyboard.Key OnUp { get; set; }
         public Keyboard.Key OnLeft { get; set; }
         public Keyboard.Key OnRight { get; set; }
-
     }
 }

@@ -11,6 +11,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets
 {
     class Rocket : Bullet
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="w"></param>
+        /// <param name="direction"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
         public Rocket(float x, float y, World w, Vector2 direction, float rotation, float scale)
             : base(x, y, w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), direction, rotation, 0.5f, 1000f)
         {

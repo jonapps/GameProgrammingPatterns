@@ -21,10 +21,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private static int SPLIT_EXPLOSION_SPEED_MULTIPLIER = 5;
         private static int SPLIT_MIN_CHILDS = 2;
         private static int SPLIT_MAX_CHILDS = 3;
-
-
-
-
         private int _splitLevel;
         private float _scale;
 
