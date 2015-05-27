@@ -20,6 +20,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         {
             _window = window;
             _input = new InputMapper();
+
         }
 
         public ScreenManager Manager
@@ -34,6 +35,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         /// Updates screen 
         /// </summary>
         public abstract void Update();
+
+        /// <summary>
+        /// gets called after the regular update
+        /// </summary>
+        public abstract void PastUpdate();
 
         /// <summary>
         /// Renders content of screen on provided render target

@@ -94,7 +94,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public override void Update()
         {
             _world.Step(WORLD_STEP_SIZE);
-            _toDeleteEntities.Clear();
             _waveManager.GenerateEntities();
             for (int i = 0; i < _entities.Count; ++i)
             {
@@ -105,18 +104,33 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 }
                 e.Update();
             }
+           
+        }
+
+        public override void PastUpdate()
+        {
+            for (int i = 0; i < _entities.Count; ++i)
+            {
+                _entities[i].PastUpdate();
+            }
+
             _toDeleteEntities.Sort((a, b) => b - a);
             for (int i = 0; i < _toDeleteEntities.Count; ++i)
             {
                 _world.RemoveBody(_entities[_toDeleteEntities[i]].Body);
                 _entities.RemoveAt(_toDeleteEntities[i]);
             }
+            _toDeleteEntities.Clear();
         }
+
+
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
 
             base.Render(renderTarget, extra);
         }
+
+       
 
         public override void Exit()
         {

@@ -64,6 +64,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             _screens.Peek().Update();
         }
 
+        public override void PastUpdate()
+        {
+            _screens.Peek().PastUpdate();
+        }
+
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             for (int i = _screens.Count() - 1; i >= 0; --i)

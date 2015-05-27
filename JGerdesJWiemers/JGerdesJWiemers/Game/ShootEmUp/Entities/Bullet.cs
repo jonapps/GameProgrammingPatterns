@@ -3,6 +3,7 @@ using FarseerPhysics.Collision;
 using FarseerPhysics.Common;
 using FarseerPhysics.Common.PhysicsLogic;
 using FarseerPhysics.Dynamics;
+using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
@@ -24,7 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         protected World _world;
         protected float _blastRadius;
         protected float _blastStrength;
-
+        protected bool _blow = false;
         protected AABB _aabb;
 
         //debug rect
@@ -56,13 +57,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 return false;
             }
 
-            _deleteMe = true;
+            _blow = true;
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void _Blast()
         {
-            
             _aabb.LowerBound = _body.WorldCenter - new Vector2(_blastRadius,_blastRadius);
             _aabb.UpperBound = _body.WorldCenter + new Vector2(_blastRadius,_blastRadius);
             List<Fixture> bodies = _world.QueryAABB(ref _aabb);
@@ -71,25 +74,39 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             {
                 _ApplyBlastImpulse(bodies[i].Body, _body.WorldCenter);
             }
+            _deleteMe = true;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="blastCenter"></param>
         private void _ApplyBlastImpulse(Body body, Vector2 blastCenter)
         {
             Vector2 impulse = new Vector2();
             impulse.X = blastCenter.X - body.WorldCenter.X ;
             impulse.Y = blastCenter.Y - body.WorldCenter.Y;
             impulse *= (_blastStrength - body.WorldCenter.Length()) * -1;
+
+            Entity e = body.UserData as Entity;
+            e.ApplyDamage((int)_blastStrength);
             body.ApplyForce(impulse);
+            
         }
 
         public override void Update()
         {
-            if (_deleteMe)
+            base.Update();
+        }
+
+        internal override void PastUpdate()
+        {
+            base.PastUpdate();
+            if (_blow)
             {
                 _Blast();
             }
-            base.Update();
         }
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
@@ -103,6 +120,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 renderTarget.Draw(_debugrect);
             }
             
+        }
+
+        public override void ApplyDamage(int dmg)
+        {
+            base.ApplyDamage(dmg);
+            if (_health <= 0)
+            {
+                _blow = true;
+            }
         }
     }
 }

@@ -34,13 +34,18 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public override void Update()
         {
-
-            foreach (Entity e in _entities)
+            for (int i = 0; i < _entities.Count; ++i)
             {
-                e.Update();
+                _entities[i].Update();
             }
+        }
 
-
+        public override void PastUpdate()
+        {
+            for (int i = 0; i < _entities.Count; ++i)
+            {
+                _entities[i].PastUpdate();
+            }
         }
 
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
@@ -58,5 +63,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         {
             
         }
+
+
     }
 }

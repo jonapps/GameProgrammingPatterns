@@ -56,6 +56,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _infoText.Color = new Color(255, 255, 255, (byte)(System.Math.Sin(JGerdesJWiemers.Game.Game.ElapsedTime / 200f) * 128 + 128));
         }
 
+        public override void PastUpdate()
+        {
+
+        }
+
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             renderTarget.SetView(_view);

@@ -22,6 +22,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private static int SPLIT_MIN_CHILDS = 2;
         private static int SPLIT_MAX_CHILDS = 3;
 
+
+
+
         private int _splitLevel;
         private float _scale;
 
@@ -31,37 +34,52 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             _body.CollisionCategories = EntityCategory.Asteroit;
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
-            //_body.ApplyAngularImpulse(rotSpeed);
-            //_body.Mass = 100;
+            _body.ApplyAngularImpulse(rotSpeed);
+            _body.Mass = 100;
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
-            _body.OnCollision +=_OnCollision;
+            //_body.OnCollision +=_OnCollision;
             _splitLevel = splitLevel;
             _scale = scale;
            
         }
 
-        bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        //bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        //{
+        //    if (fixtureA.Body.UserData is Bullet || fixtureB.Body.UserData is Bullet)
+        //    {
+                
+        //    }
+        //    return true;
+        //}
+
+        internal override void PastUpdate()
         {
-            if (fixtureA.Body.UserData is Bullet || fixtureB.Body.UserData is Bullet)
+            base.PastUpdate();
+            if (_health <= 0)
             {
-                if (_splitLevel > 0)
-                {
-                    AsteroidDef def;
-                    Random rand = new Random();
-                    int count = rand.Next(SPLIT_MIN_CHILDS, SPLIT_MAX_CHILDS);
-                    for (int i = 0; i < count; i++)
-                    {
-                        double degree = i * (SMath.PI * 2) / count;
-                        Vector2 speed = new Vector2((float)SMath.Cos(degree), (float)SMath.Sin(degree));
-                        def = new AsteroidDef(_body.WorldCenter.X + speed.X, _body.WorldCenter.Y + speed.Y, 
-                            speed.X * SPLIT_EXPLOSION_SPEED_MULTIPLIER, speed.X * SPLIT_EXPLOSION_SPEED_MULTIPLIER, _splitLevel - 1, _scale / 2f, 0);
-                        EntityFactory.Instance.Spawn(def);
-                    }
-                }
-                _deleteMe = true;
-                _splitLevel = 0;
+                _Split();
             }
-            return true;
+
+        }
+
+        private void _Split()
+        {
+            if (_splitLevel > 0)
+            {
+                AsteroidDef def;
+                Random rand = new Random();
+                int count = rand.Next(SPLIT_MIN_CHILDS, SPLIT_MAX_CHILDS);
+                for (int i = 0; i < count; i++)
+                {
+                    double degree = i * (SMath.PI * 2) / count;
+                    Vector2 speed = new Vector2((float)SMath.Cos(degree), (float)SMath.Sin(degree));
+                    def = new AsteroidDef(_body.WorldCenter.X + speed.X, _body.WorldCenter.Y + speed.Y,
+                        speed.X * SPLIT_EXPLOSION_SPEED_MULTIPLIER, speed.X * SPLIT_EXPLOSION_SPEED_MULTIPLIER, _splitLevel - 1, _scale / 2f, 0);
+                    EntityFactory.Instance.Spawn(def);
+                }
+            }
+            _deleteMe = true;
+            _splitLevel = 0;
         }
 
         public class AsteroidDef : EntityDef

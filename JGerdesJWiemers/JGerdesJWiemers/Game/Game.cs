@@ -150,6 +150,7 @@ namespace JGerdesJWiemers.Game
                 while (_accumulatedTime >= TargetElapsedTime)
                 {
                     _Update();
+                    _PastUpdate();
                     _accumulatedTime -= TargetElapsedTime;
                     //updated = true;
                 }
@@ -160,6 +161,11 @@ namespace JGerdesJWiemers.Game
                     Game.ElapsedFrameTime = _accumulatedTime.AsMilliseconds();
                 }
             }
+        }
+
+        private void _PastUpdate()
+        {
+            this._screenManager.PastUpdate();
         }
 
 
