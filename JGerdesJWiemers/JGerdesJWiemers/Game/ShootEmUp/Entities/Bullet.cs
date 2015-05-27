@@ -44,12 +44,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         /// <param name="rotation"></param>
         /// <param name="scale"></param>
         /// <param name="speed"></param>
-        public Bullet(float x, float y, World w, TextureContainer texture, Vector2 direction, float rotation, float scale, float speed)
+        public Bullet(float x, float y, World w, TextureContainer texture, Vector2 direction, float rotation, float scale)
             : base(w, texture, 0.5f, x, y)
         {
             _body.IsBullet = true;
             _direction = direction;
-            _body.ApplyLinearImpulse(direction * speed);
             _body.Rotation = rotation;
             _body.CollisionCategories = EntityCategory.Bullet;
             _body.OnCollision += _OnCollision;
@@ -58,6 +57,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             // debug rect
             _debugrect = new RectangleShape(new Vector2f(ConvertUnits.ToSimUnits(texture.Width), ConvertUnits.ToSimUnits(texture.Height)));
             _debugrect.Origin = new Vector2f(ConvertUnits.ToSimUnits(texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
+        }
+
+
+
+        protected virtual void Start()
+        {
+            _body.ApplyLinearImpulse(_direction * _speed);
         }
 
         /// <summary>

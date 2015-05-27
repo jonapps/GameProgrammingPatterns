@@ -21,10 +21,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets
         /// <param name="rotation"></param>
         /// <param name="scale"></param>
         public Rounds(float x, float y, World w, Vector2 direction, float rotation, float scale)
-            : base(x, y, w, AssetLoader.Instance.LoadTexture(AssetLoader.GATLINGUN_BULLET), direction, rotation, scale, 700f)
+            : base(x, y, w, AssetLoader.Instance.LoadTexture(AssetLoader.GATLINGUN_BULLET), direction, rotation, scale)
         {
             _blastRadius = 1;
             _blastStrength = 1;
+            _speed = 1000;
+            base.Start();
         }
     }
 }
