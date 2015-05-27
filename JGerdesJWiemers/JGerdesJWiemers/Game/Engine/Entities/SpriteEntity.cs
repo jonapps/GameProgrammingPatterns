@@ -43,9 +43,10 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             {
                 PolygonTextureContainer pTextureContainer = (PolygonTextureContainer)textureContainer;
                 Vertices verts = new Vertices();
+                Vector2 c = new Vector2(textureContainer.Width * scale * 0.5f, textureContainer.Height * scale * 0.5f); //center of polygon
                 foreach (Vector2 v in pTextureContainer.Vertices)
                 {
-                    verts.Add(ConvertUnits.ToSimUnits(v.X * scale, v.Y * scale));
+                    verts.Add(ConvertUnits.ToSimUnits(v.X * scale - c.X, v.Y * scale - c.Y));
                 }
                 _body = BodyFactory.CreatePolygon(world, verts, 1f, new Vector2(x, y), 0, bodyType, this);
                 _fixture = FixtureFactory.AttachPolygon(verts, 1f, _body, this);
@@ -85,7 +86,8 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             }
 
 
-            if (Game.DEBUG) { 
+            if (Game.DEBUG && _spriteCenter != null && _bodyCenter != null)
+            { 
                 _bodyCenter.Position = _ConvertVectorToVector2f(_body.WorldCenter);
                 _spriteCenter.Position = _sprite.Position;
 

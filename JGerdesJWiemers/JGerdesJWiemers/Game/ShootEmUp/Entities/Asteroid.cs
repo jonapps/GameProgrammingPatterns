@@ -31,10 +31,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             _body.CollisionCategories = EntityCategory.Asteroit;
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
-            _body.ApplyAngularImpulse(rotSpeed);
-            _body.Mass = 100;
+            //_body.ApplyAngularImpulse(rotSpeed);
+            //_body.Mass = 100;
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
-            _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.OnCollision +=_OnCollision;
             _splitLevel = splitLevel;
             _scale = scale;
