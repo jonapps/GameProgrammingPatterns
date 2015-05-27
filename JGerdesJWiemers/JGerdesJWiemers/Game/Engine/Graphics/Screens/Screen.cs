@@ -18,32 +18,6 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         public Screen(RenderWindow window)
         {
             _window = window;
-
-            //_window.KeyPressed += delegate(object sender, KeyEventArgs e)
-            //{
-            //    if (_screenManager.CurrentScreen == this)
-            //    {
-            //        if (!_silentClicked)
-            //        {
-            //            if (e.Code == Keyboard.Key.X)
-            //            {
-            //                System.Console.WriteLine("button event");
-            //                AudioManager.Instance.Silent = !AudioManager.Instance.Silent;
-            //            }
-            //        }
-            //    }
-            //};
-
-            //_window.KeyReleased += delegate(object sender, KeyEventArgs e)
-            //{
-            //    if (_screenManager.CurrentScreen == this)
-            //    {
-            //        if (e.Code == Keyboard.Key.X)
-            //        {
-            //            _silentClicked = false;
-            //        }
-            //    } 
-            //};
         }
 
         public ScreenManager Manager
@@ -58,6 +32,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         /// Updates screen 
         /// </summary>
         public abstract void Update();
+
+        /// <summary>
+        /// gets called after the regular update
+        /// </summary>
+        public abstract void PastUpdate();
 
         /// <summary>
         /// Renders content of screen on provided render target

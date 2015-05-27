@@ -50,6 +50,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _earth.Position = new Vector2f(_earth.Position.X - _earth.Position.X / 10f, _earth.Position.Y);
         }
 
+        public override void PastUpdate()
+        {
+            
+        }
+
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             renderTarget.SetView(_view);

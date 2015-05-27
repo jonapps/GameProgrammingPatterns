@@ -18,13 +18,12 @@ namespace JGerdesJWiemers.Game.Engine
         protected Fixture _fixture;
         protected bool _deleteMe = false;
         protected bool _debug = Game.DEBUG;
+        protected int _health = 100;
 
 
+        
 
 
-        public Entity()
-        {
-        }
 
         #region Getter && Setter
 
@@ -42,10 +41,7 @@ namespace JGerdesJWiemers.Game.Engine
 
         }
 
-        public virtual void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
-        {
-            
-        }
+        public abstract void Render(SFML.Graphics.RenderTarget renderTarget, float extra);
 
 
         protected Vector2f _ConvertVectorToVector2f(Vector2 vec)
@@ -72,6 +68,18 @@ namespace JGerdesJWiemers.Game.Engine
             public abstract Entity Spawn(World world);
         }
 
+        internal virtual void PastUpdate()
+        {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dmg"></param>
+        public virtual void ApplyDamage(int dmg)
+        {
+            _health -= dmg;
+        }
     }
 }
