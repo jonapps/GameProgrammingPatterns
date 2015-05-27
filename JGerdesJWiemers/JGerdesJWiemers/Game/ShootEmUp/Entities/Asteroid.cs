@@ -38,6 +38,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.OnCollision +=_OnCollision;
             _splitLevel = splitLevel;
             _scale = scale;
+           
         }
 
         bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)

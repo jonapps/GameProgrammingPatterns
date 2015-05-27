@@ -119,6 +119,7 @@
     <Compile Include="Game\Engine\Shapes\PolygonShape.cs" />
     <Compile Include="Game\Engine\Utils\Helper\Asset.cs" />
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\GameSettingsAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\SpriteVectorAsset.cs" />
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Engine\Utils\Helper\SpriteAsset.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
+    <Compile Include="Game\ShootEmUp\Input\InputManager.cs" />
     <Compile Include="Game\ShootEmUp\Logic\Wave.cs" />
     <Compile Include="Game\ShootEmUp\Logic\WaveManager.cs" />
     <Compile Include="Game\ShootEmUp\Screens\EarthScreen.cs" />

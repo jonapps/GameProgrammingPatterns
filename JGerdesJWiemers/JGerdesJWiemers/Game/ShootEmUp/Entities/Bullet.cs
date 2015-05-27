@@ -48,6 +48,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _debugrect.Origin = new Vector2f(ConvertUnits.ToSimUnits(texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
         }
 
+
         private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
             if (fixtureA.Body.UserData is SpaceShip || fixtureB.Body.UserData is SpaceShip || fixtureA.Body.UserData is Bullet && fixtureB.Body.UserData is Bullet)
