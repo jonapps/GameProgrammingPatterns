@@ -141,6 +141,7 @@
     <Compile Include="Game\ShootEmUp\Logic\WaveManager.cs" />
     <Compile Include="Game\ShootEmUp\Screens\EarthScreen.cs" />
     <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
+    <Compile Include="Game\ShootEmUp\Screens\GameOverScreen.cs" />
     <Compile Include="Game\ShootEmUp\Screens\PauseScreen.cs" />
     <Compile Include="Game\ShootEmUp\Weapons\DoubleGatlinGun.cs" />
     <Compile Include="Game\ShootEmUp\Weapons\GatlinGun.cs" />

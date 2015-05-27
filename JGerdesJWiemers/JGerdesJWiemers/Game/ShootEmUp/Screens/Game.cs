@@ -91,6 +91,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             
         }
 
+        public void GameOver()
+        {
+            while (_screenManager.Top() != this)
+                _screenManager.Pop();
+
+            _screenManager.Switch(new GameOverScreen(_window));
+        }
+
         public override void Update()
         {
             _world.Step(WORLD_STEP_SIZE);
@@ -104,6 +112,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 }
                 e.Update();
             }
+            GameOver();
            
         }
 
@@ -134,7 +143,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Exit()
         {
-            throw new NotImplementedException();
+            //TODO
         }
 
         public void AddEntity(Entity e)

@@ -60,9 +60,12 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         {
             Screen old = _screens.Pop().screen;
             old.Exit();
-            ScreenData top = _screens.Peek();
-            top.render = true;
-            top.update = true;
+            if (_screens.Count > 0)
+            {
+                ScreenData top = _screens.Peek();
+                top.render = true;
+                top.update = true;
+            }
             return old;
         }
 
