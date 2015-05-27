@@ -137,6 +137,7 @@
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
     <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />
     <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
+    <Compile Include="Game\ShootEmUp\Logic\GameManager.cs" />
     <Compile Include="Game\ShootEmUp\Logic\Wave.cs" />
     <Compile Include="Game\ShootEmUp\Logic\WaveManager.cs" />
     <Compile Include="Game\ShootEmUp\Screens\EarthScreen.cs" />

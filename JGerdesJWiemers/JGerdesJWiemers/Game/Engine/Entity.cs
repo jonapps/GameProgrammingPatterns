@@ -27,7 +27,7 @@ namespace JGerdesJWiemers.Game.Engine
 
         #region Getter && Setter
 
-        public bool DeleteMe { get { return _deleteMe; } }
+        public bool DeleteMe { get { return _deleteMe; } set { _deleteMe = value; } }
 
         public Body Body { get{ return _body; } set { _body = value;} }
 

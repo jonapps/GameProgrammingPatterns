@@ -1,4 +1,5 @@
 ﻿using FarseerPhysics;
+using FarseerPhysics.Collision;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
@@ -57,16 +58,22 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 0, 0, -0.06f, 0));
 
             _waveManager = new WaveManager(_world);
-            _waveManager.OnWaveOver += delegate(Wave wave)
-            {
-                if (!_waveManager.HasNext())
-                    Console.WriteLine("All waves are over!");
-                else
-                    _waveManager.Next();
 
+            _waveManager.OnWaveCompleted += delegate(Wave wave)
+            {
+                Console.WriteLine("wave is over!");
             };
 
-            Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(720 / 2f), 4);
+            //_waveManager.OnWaveOver += delegate(Wave wave)
+            //{
+            //    if (!_waveManager.HasNext())
+            //        Console.WriteLine("All waves are over!");
+            //    else
+            //        _waveManager.Next();
+
+            //};
+
+            Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(600), 4);
             _entities.Add(earth);
             _entities.Add(new Moon(_world, earth, 1.5f));
 
@@ -91,13 +98,33 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             
         }
 
+        private void _CheckEntitiesOffScreen(Entity e)
+        {
+            //AABB aabb = new AABB();
+            //aabb.UpperBound = new Vector2(ConvertUnits.ToSimUnits(-100), ConvertUnits.ToSimUnits(-100));
+            //aabb.LowerBound = new Vector2(ConvertUnits.ToSimUnits(1380), ConvertUnits.ToSimUnits(860));
+            //_world.QueryAABB()
+            if (e.Body == null)
+            {
+                return;
+            }
+            float x = ConvertUnits.ToDisplayUnits(e.Body.Position.X);
+            float y = ConvertUnits.ToDisplayUnits(e.Body.Position.Y);
+            if ((x < -100 || x > 1380) || (y < -100 || y > 860))
+            {
+                e.DeleteMe = true;
+            }
+        }
+
         public override void Update()
         {
+
             _world.Step(WORLD_STEP_SIZE);
-            _waveManager.GenerateEntities();
+            _waveManager.Update();
             for (int i = 0; i < _entities.Count; ++i)
             {
                 Entity e = _entities[i];
+                _CheckEntitiesOffScreen(e);
                 if (e.DeleteMe)
                 {
                     _toDeleteEntities.Add(i);
