@@ -32,6 +32,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private World _world;
         private InputMapper _input;
 
+        private int _bulletSpace = 1000;
+
 
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)

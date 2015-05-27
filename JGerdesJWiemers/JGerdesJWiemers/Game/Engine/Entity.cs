@@ -20,14 +20,9 @@ namespace JGerdesJWiemers.Game.Engine
         protected bool _debug = Game.DEBUG;
         protected int _health = 100;
 
-
-        
-
-
-
         #region Getter && Setter
 
-        public bool DeleteMe { get { return _deleteMe; } }
+        public bool DeleteMe { get { return _deleteMe; } set { _deleteMe = value; } }
 
         public Body Body { get{ return _body; } set { _body = value;} }
 

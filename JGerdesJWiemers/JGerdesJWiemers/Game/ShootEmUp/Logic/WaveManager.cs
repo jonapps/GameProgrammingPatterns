@@ -12,18 +12,21 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 {
-    class WaveManager
+    class WaveManager : EntityHolder
     {
 
         public delegate void WaveEventHandler(Wave wave);
         public event WaveEventHandler OnWaveStarted;
         public event WaveEventHandler OnWaveOver;
-
+        public event WaveEventHandler OnWaveCompleted;
         private Queue<Wave> _waves;
+
+        private List<Entity> _entities;
 
 
         public WaveManager(World world)
         {
+            _entities = new List<Entity>();
             _waves = new Queue<Wave>();
 
             Wave w1 = new Wave();
@@ -36,6 +39,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
            
             w1.AddEntityDef(6000, new Astronaut.AstronautDef(20, -20, 1.8f, 3.2f, 0.3f, 0.05f));
             w1.AddEntityDef(15000, new Astronaut.AstronautDef(100, 95, 2f, -5f, 0.3f, -0.06f));
+
 
             _waves.Enqueue(w1);
 
@@ -67,7 +71,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             Start();
         }
 
-        public List<Entity> GenerateEntities()
+        public void GenerateEntities()
         {
             List<Entity> newEntities;
             if (HasNext())
@@ -80,12 +84,38 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
                     if (OnWaveOver != null)
                         OnWaveOver(currentWave);
                 }
+                _entities.AddRange(newEntities);
             }
-            else
+        }
+
+
+        private void _CheckEntities()
+        {
+            bool allDead = true;
+            for (int i = 0; i < _entities.Count; ++i)
             {
-                newEntities = new List<Entity>();
+                if (!_entities[i].DeleteMe)
+                {
+                    allDead = false;
+                }
             }
-            return newEntities;
+            if (allDead && _entities.Count > 0)
+            {
+                OnWaveCompleted(_waves.Peek());
+            }
+        }
+
+        internal void Update()
+        {
+            GenerateEntities();
+            _CheckEntities();
+        }
+
+
+
+        void EntityHolder.AddEntity(Entity e)
+        {
+            _entities.Add(e);
         }
     }
 }

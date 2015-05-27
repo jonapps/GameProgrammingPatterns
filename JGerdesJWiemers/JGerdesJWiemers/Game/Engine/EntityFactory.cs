@@ -14,7 +14,7 @@ namespace JGerdesJWiemers.Game.Engine
         private static EntityFactory _instance;
 
         private World _world;
-        private EntityHolder _holder;
+        private List<EntityHolder> _holder;
 
         public Entity Spawn(Entity.EntityDef def)
         {
@@ -23,11 +23,14 @@ namespace JGerdesJWiemers.Game.Engine
                 throw new NotInitialisatedException();
             }
             Entity e = def.Spawn(_world);
-            _holder.AddEntity(e);
+            foreach (EntityHolder eh in _holder)
+            {
+                eh.AddEntity(e);
+            }
             return e;
         }
 
-        public void Init(World world, EntityHolder holder)
+        public void Init(World world, List<EntityHolder> holder)
         {
             _world = world;
             _holder = holder;
