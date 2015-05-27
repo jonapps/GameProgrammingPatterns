@@ -25,6 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets
         {
             _blastRadius = 10;
             _blastStrength = 60;
+            _speed = 100;
         }
     }
 }

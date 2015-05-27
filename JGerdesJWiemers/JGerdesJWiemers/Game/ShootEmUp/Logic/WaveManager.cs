@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 {
-    class WaveManager
+    class WaveManager : EntityHolder
     {
 
         public delegate void WaveEventHandler(Wave wave);
@@ -109,6 +109,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
         {
             GenerateEntities();
             _CheckEntities();
+        }
+
+
+
+        void EntityHolder.AddEntity(Entity e)
+        {
+            _entities.Add(e);
         }
     }
 }
