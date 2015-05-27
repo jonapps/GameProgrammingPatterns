@@ -64,6 +64,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _waveManager.OnWaveCompleted += delegate(Wave wave)
             {
                 Console.WriteLine("wave is over!");
+                GameOver();
             };
 
             //_waveManager.OnWaveOver += delegate(Wave wave)
@@ -98,6 +99,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 return true;
             });
             
+        }
+
+
+        public void GameOver()
+        {
+            while (_screenManager.Top() != this)
+                _screenManager.Pop();
+
+            _screenManager.Switch(new GameOverScreen(_window));
         }
 
         private void _CheckEntitiesOffScreen(Entity e)
@@ -163,7 +173,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Exit()
         {
-            throw new NotImplementedException();
+            //TODO
         }
 
         public void AddEntity(Entity e)

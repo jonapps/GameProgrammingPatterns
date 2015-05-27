@@ -25,8 +25,10 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_ASTRONAUT = "astronaut";
         public static readonly String TEXTURE_EARTH = "earth";
         public static readonly String TEXTURE_EARTH_BIG = "earth_big";
+        public static readonly String TEXTURE_EARTH_TOP = "earth_top";
         public static readonly String TEXTURE_MOON = "moon";
         public static readonly String TEXTURE_SPACESHIP = "spaceshuttle";
+        public static readonly String TEXTURE_SPACESHIP_LARGE = "spaceshuttle_large";
         public static readonly String GATLINGUN_BULLET = "gatlinGunBullet";
         public static readonly String TEXTURE_SPACE1 = @"space\space1";
         public static readonly String TEXTURE_SPACE2 = @"space\space2";
@@ -56,10 +58,13 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
             LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
             LoadTexture(TEXTURE_EARTH_BIG, TEXTURE_EARTH_BIG);
+            LoadTexture(TEXTURE_EARTH_TOP, TEXTURE_EARTH_TOP);
             LoadTexture(TEXTURE_MOON, TEXTURE_MOON);
             LoadTexture(TEXTURE_SPACE1, TEXTURE_SPACE1);
             LoadTexture(TEXTURE_SPACE2, TEXTURE_SPACE2);
             LoadTexture(TEXTURE_SPACE3, TEXTURE_SPACE3);
+            LoadTexture(TEXTURE_SPACESHIP, TEXTURE_SPACESHIP);
+            LoadTexture(TEXTURE_SPACESHIP_LARGE, TEXTURE_SPACESHIP_LARGE);
             LoadTexture(TEXTURE_ASTEROID1, TEXTURE_ASTEROID1);
             LoadTexture(TEXTURE_ASTEROID2, TEXTURE_ASTEROID2);
             LoadTexture(TEXTURE_ASTEROID3, TEXTURE_ASTEROID3);
