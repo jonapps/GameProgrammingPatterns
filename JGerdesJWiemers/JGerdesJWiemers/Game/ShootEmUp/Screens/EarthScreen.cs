@@ -73,6 +73,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             return true; //consume all inputs
         }
 
+        public override bool DoRenderBelow()
+        {
+            return true;
+        }
+
 
     }
 }

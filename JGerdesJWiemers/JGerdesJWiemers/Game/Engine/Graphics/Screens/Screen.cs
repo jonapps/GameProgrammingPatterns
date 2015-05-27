@@ -51,6 +51,15 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public abstract void Exit();
 
+        public virtual bool DoRenderBelow()
+        {
+            return false;
+        }
+        public virtual bool DoUpdateBelow()
+        {
+            return false;
+        }
+
 
         public virtual bool OnInputEvent(string name, InputEvent e, int channel)
         {
