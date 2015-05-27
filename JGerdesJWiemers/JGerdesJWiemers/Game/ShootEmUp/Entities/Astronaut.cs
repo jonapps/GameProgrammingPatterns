@@ -18,7 +18,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
     {
 
         private Animation _rotateAnimation;
-        private int damage = 100;
 
         public Astronaut(World world, Vector2f position, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0, float scale = 0.5f)
             : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_ASTRONAUT), scale, position.X, position.Y)

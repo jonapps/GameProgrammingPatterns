@@ -38,6 +38,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public SpaceShip(float x, float y , World w, EntityHolder gscreen)
             : base(w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), 1, x, y)
         {
+            
             _input = new InputMapper();
             _fixture.CollisionCategories = EntityCategory.SpaceShip;
             _currentWeapon = new DoubleGatlinGun();
@@ -46,7 +47,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _world = w;
             _body.FixedRotation = true;
             _body.IgnoreGravity = true;
-
             _input.On("up", delegate(InputEvent e, int channel)
             {
                 _body.LinearVelocity = new Vector2(_body.LinearVelocity.X, -_currentSpeed * ((JoystickEvent)e).Value);
