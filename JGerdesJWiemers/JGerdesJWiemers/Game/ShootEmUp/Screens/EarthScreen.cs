@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Graphics;
 using SFML.System;
@@ -19,7 +20,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public EarthScreen(RenderWindow w)
             :base(w){
-            _window.KeyPressed += window_KeyPressed;
             _background = new RectangleShape(new Vector2f(1280, 720));
             _background.Position = new Vector2f(0, 0);
             _background.FillColor = new Color(0, 0, 0, 180);
@@ -35,15 +35,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             Vector2f size = new Vector2f(w.Size.X, w.Size.Y);
             _view = new View(size / 2f,size);
 
-        }
-
-        void window_KeyPressed(object sender, SFML.Window.KeyEventArgs e)
-        {
-            if (e.Code == SFML.Window.Keyboard.Key.Return)
+            _input.On("land", delegate(InputEvent e, int channel)
             {
                 _screenManager.Pop();
-            }
+                return true;
+            });
+
         }
+
 
         public override void Update()
         {
@@ -60,7 +59,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Exit()
         {
-            _window.KeyPressed -= window_KeyPressed;
+
+        }
+
+        public override bool OnInputEvent(string name, InputEvent e, int channel)
+        {
+            base.OnInputEvent(name, e, channel);
+            return true; //consume all inputs
         }
 
 

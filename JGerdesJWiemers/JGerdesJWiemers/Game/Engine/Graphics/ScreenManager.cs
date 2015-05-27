@@ -18,6 +18,19 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         public ScreenManager(RenderWindow w)
             : base(w){
                 _screens = new Stack<Screen>();
+                InputManager.Instance.InputHandler += _InputHandler;
+        }
+
+        bool _InputHandler(string name, InputEvent e, int channel)
+        {
+            for (int i = 0, c = _screens.Count; i < c; ++i)
+            {
+                if (_screens.ElementAt(i).OnInputEvent(name, e, channel))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Push(Screen s)

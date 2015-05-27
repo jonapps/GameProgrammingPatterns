@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.Input;
 using SFML.Graphics;
 using SFML.Window;
 using System;
@@ -9,41 +10,16 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 {
-    abstract class Screen
+    abstract class Screen : InputHandler
     {
         protected RenderWindow _window;
         protected ScreenManager _screenManager;
-
+        protected InputMapper _input;
 
         public Screen(RenderWindow window)
         {
             _window = window;
-
-            //_window.KeyPressed += delegate(object sender, KeyEventArgs e)
-            //{
-            //    if (_screenManager.CurrentScreen == this)
-            //    {
-            //        if (!_silentClicked)
-            //        {
-            //            if (e.Code == Keyboard.Key.X)
-            //            {
-            //                System.Console.WriteLine("button event");
-            //                AudioManager.Instance.Silent = !AudioManager.Instance.Silent;
-            //            }
-            //        }
-            //    }
-            //};
-
-            //_window.KeyReleased += delegate(object sender, KeyEventArgs e)
-            //{
-            //    if (_screenManager.CurrentScreen == this)
-            //    {
-            //        if (e.Code == Keyboard.Key.X)
-            //        {
-            //            _silentClicked = false;
-            //        }
-            //    } 
-            //};
+            _input = new InputMapper();
         }
 
         public ScreenManager Manager
@@ -68,5 +44,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
 
         public abstract void Exit();
+
+
+        public virtual bool OnInputEvent(string name, InputEvent e, int channel)
+        {
+            return _input.OnInputEvent(name, e, channel);
+        }
     }
 }

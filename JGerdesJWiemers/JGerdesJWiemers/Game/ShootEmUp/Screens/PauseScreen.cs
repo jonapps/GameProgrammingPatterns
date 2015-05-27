@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Graphics;
 using SFML.System;
@@ -21,7 +22,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public PauseScreen(RenderWindow w)
             : base(w)
         {
-            _window.KeyPressed += window_KeyPressed;
             _background = new RectangleShape(new Vector2f(1280, 720));
             _background.Position = new Vector2f(0, 0);
             _background.FillColor = new Color(0, 0, 0, 150);
@@ -42,15 +42,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _infoText.Origin = new Vector2f(infoBounds.Width, infoBounds.Height) / 2f;
             _infoText.Position = new Vector2f(1280 / 2f, 720 / 2f + infoBounds.Height / 2f + pauseBounds.Height / 2f + 10);
 
-
-        }
-
-        void window_KeyPressed(object sender, SFML.Window.KeyEventArgs e)
-        {
-            if (e.Code == SFML.Window.Keyboard.Key.Return || e.Code == SFML.Window.Keyboard.Key.Space)
+            _input.On("return", delegate(InputEvent e, int channel)
             {
                 _screenManager.Pop();
-            }
+                return true;
+            });
+
+
         }
 
         public override void Update()
@@ -68,7 +66,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Exit()
         {
-            _window.KeyPressed -= window_KeyPressed;
+        }
+
+        public override bool OnInputEvent(string name, InputEvent e, int channel)
+        {
+            base.OnInputEvent(name, e, channel);
+            return true; //consume all inputs
         }
 
 
