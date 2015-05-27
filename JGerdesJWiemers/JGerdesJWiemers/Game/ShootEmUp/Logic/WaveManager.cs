@@ -39,7 +39,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
             _waves.Enqueue(w1);
 
-
         }
 
         public bool HasNext()

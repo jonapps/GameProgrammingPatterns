@@ -33,20 +33,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.ApplyAngularImpulse(rotSpeed);
             _body.Mass = 100;
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
-            //_body.OnCollision +=_OnCollision;
             _splitLevel = splitLevel;
             _scale = scale;
            
         }
 
-        //bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
-        //{
-        //    if (fixtureA.Body.UserData is Bullet || fixtureB.Body.UserData is Bullet)
-        //    {
-                
-        //    }
-        //    return true;
-        //}
+
 
         internal override void PastUpdate()
         {
@@ -55,7 +47,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             {
                 _Split();
             }
-
         }
 
         private void _Split()

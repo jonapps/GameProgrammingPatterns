@@ -55,7 +55,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.OnCollision += _OnCollision;
             _world = w;
             _aabb = new AABB();
-
             // debug rect
             _debugrect = new RectangleShape(new Vector2f(ConvertUnits.ToSimUnits(texture.Width), ConvertUnits.ToSimUnits(texture.Height)));
             _debugrect.Origin = new Vector2f(ConvertUnits.ToSimUnits(texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
@@ -74,7 +73,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             {
                 return false;
             }
-
             _blow = true;
             return true;
         }
@@ -110,7 +108,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             Entity e = body.UserData as Entity;
             e.ApplyDamage((int)_blastStrength);
             body.ApplyForce(impulse);
-            
         }
 
         /// <summary>
@@ -139,14 +136,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
         {
             base.Render(renderTarget, extra);
-
-
             if (_debug)
             {
                 _debugrect.Position = _ConvertVectorToVector2f(_body.WorldCenter);
                 renderTarget.Draw(_debugrect);
             }
-            
         }
 
         /// <summary>
