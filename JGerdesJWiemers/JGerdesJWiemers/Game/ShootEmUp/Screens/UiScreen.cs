@@ -106,21 +106,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _bulletAmount = new Text(scoreText);
             _bulletAmount.CharacterSize = 18;
-            _bulletAmount.Position = _bg.Position + new Vector2f(70, -57);
+            _bulletAmount.Position = _bg.Position + new Vector2f(60, -57);
             _texts.Add(_bulletAmount);
 
             Text bulletX = new Text(_bulletAmount);
             bulletX.DisplayedString = "x";
             bulletX.CharacterSize = 10;
-            bulletX.Position = _bg.Position + new Vector2f(63, -50);
+            bulletX.Position = _bg.Position + new Vector2f(53, -50);
             _texts.Add(bulletX);
 
             _rocketAmount = new Text(_bulletAmount);
-            _rocketAmount.Position = _bg.Position + new Vector2f(70, -30);
+            _rocketAmount.Position = _bg.Position + new Vector2f(60, -30);
             _texts.Add(_rocketAmount);
 
             Text rocketX = new Text(bulletX);
-            rocketX.Position = _bg.Position + new Vector2f(63, -23);
+            rocketX.Position = _bg.Position + new Vector2f(53, -23);
             _texts.Add(rocketX);
 
             _weapons = new List<AnimatedSprite>();
@@ -182,6 +182,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             GameManager.Instance.OnPlayerHealthChange += delegate(int newval)
             {
                 UpdateShipHealth(newval);
+            };
+
+            GameManager.Instance.OnCurrentWeaponChange += delegate(int index)
+            {
+                SetCurrentWeapon(index);
+            };
+
+            GameManager.Instance.OnRoundsChange += delegate(int amount)
+            {
+                UpdateBulletAmount(amount);
+            };
+
+            GameManager.Instance.OnRocketsChange += delegate(int amount)
+            {
+                UpdateRocketAmount(amount);
             };
         }
 
