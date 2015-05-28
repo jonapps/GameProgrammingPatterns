@@ -43,6 +43,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_ASTEROID1 = @"asteroids\asteroid1";
         public static readonly String TEXTURE_ASTEROID2 = @"asteroids\asteroid2";
         public static readonly String TEXTURE_ASTEROID3 = @"asteroids\asteroid3";
+        public static readonly String TEXTURE_EXPLOSION1 = @"explosions\explosion1";
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
@@ -82,6 +83,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_ASTEROID1, TEXTURE_ASTEROID1);
             LoadTexture(TEXTURE_ASTEROID2, TEXTURE_ASTEROID2);
             LoadTexture(TEXTURE_ASTEROID3, TEXTURE_ASTEROID3);
+            LoadTexture(TEXTURE_EXPLOSION1, TEXTURE_EXPLOSION1);
         }
 
         public void LoadFont(String name, String filename)

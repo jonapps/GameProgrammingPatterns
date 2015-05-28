@@ -132,6 +132,7 @@
     <Compile Include="Game\ShootEmUp\Entities\Bullet.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Bullets\Rounds.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Bullets\Rocket.cs" />
+    <Compile Include="Game\ShootEmUp\Entities\Explosion.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Moon.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Earth.cs" />
     <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
