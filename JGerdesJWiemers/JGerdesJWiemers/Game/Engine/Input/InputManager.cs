@@ -140,6 +140,22 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     if(pressed)
                         InputHandler("return", new KeyEvent(pressed), (int)e.JoystickId);
                     break;
+                case 12:
+                    if (pressed)
+                        InputHandler("test1", new KeyEvent(pressed), (int)e.JoystickId);
+                    break;
+                case 13:
+                    if (pressed)
+                        InputHandler("test2", new KeyEvent(pressed), (int)e.JoystickId);
+                    break;
+                case 14:
+                    if (pressed)
+                        InputHandler("test3", new KeyEvent(pressed), (int)e.JoystickId);
+                    break;
+                case 15:
+                    if (pressed)
+                        InputHandler("test4", new KeyEvent(pressed), (int)e.JoystickId);
+                    break;
             }
         }
 
