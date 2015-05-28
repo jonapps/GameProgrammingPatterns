@@ -69,6 +69,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _score = new Text(scoreText);
             UpdateScore(0);
             _score.Position = _bg.Position + new Vector2f(320, -62);
+            _texts.Add(_score);
 
             Text astroText = new Text(scoreText);
             astroText.Position = _bg.Position + new Vector2f(118, -44);
@@ -102,6 +103,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
 
             UpdateShipHealth(100);
+            UpdateEarthHealth(100);
 
             //test
             int i = 100;
