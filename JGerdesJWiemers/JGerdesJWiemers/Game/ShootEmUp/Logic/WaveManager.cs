@@ -43,11 +43,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 
             Wave w2 = new Wave();
             w2.AddEntityDef(0, new Astronaut.AstronautDef(20, -10, 1.8f, 3.2f, 0.3f, 0.05f));
-            w2.AddEntityDef(0, new Astronaut.AstronautDef(100, -10, 2f, -5f, 0.3f, -0.06f));
+            w2.AddEntityDef(0, new Astronaut.AstronautDef(500, -10, 2f, -5f, 0.3f, -0.06f));
             w1.AddEntityDef(3000, new Asteroid.AsteroidDef(70, -10, 1f, 3f, 1, 0.5f, 0.05f));
             w1.AddEntityDef(4000, new Asteroid.AsteroidDef(70, -10, 1f, 3f, 1, 0.5f, 0.05f));
             w1.AddEntityDef(10000, new Asteroid.AsteroidDef(70, -10, 1f, 3f, 1, 0.5f, 0.05f));
-            w1.AddEntityDef(6000, new Astronaut.AstronautDef(20, -10, 1.8f, 3.2f, 0.3f, 0.05f));
+            w1.AddEntityDef(6000, new Astronaut.AstronautDef(1000, -10, -1.8f, 3.2f, 0.3f, 0.05f));
 
 
             Wave w3 = new Wave();

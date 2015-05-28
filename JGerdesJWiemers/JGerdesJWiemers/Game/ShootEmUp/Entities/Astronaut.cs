@@ -2,6 +2,7 @@
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Contacts;
+using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
@@ -45,6 +46,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             if (fixtureB.Body.UserData is SpaceShip)
             {
                 //_body.Enabled = false;
+                String[] files = new String[]{
+                    AssetLoader.AUDIO_ASTRONAUT1,
+                    AssetLoader.AUDIO_ASTRONAUT2,
+                    AssetLoader.AUDIO_ASTRONAUT3
+                };
+                Random rand = new Random();
+                AudioManager.Instance.Play(files[rand.Next(0,2)]);
                 _deleteMe = true;
                 GameManager.Instance.AddAstronauts(1);
             }

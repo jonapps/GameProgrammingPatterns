@@ -88,7 +88,7 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             catch (Exception e)
             {
                 //todo
-                System.Console.WriteLine("SoundError");
+                //System.Console.WriteLine("SoundError");
             }
             
         }

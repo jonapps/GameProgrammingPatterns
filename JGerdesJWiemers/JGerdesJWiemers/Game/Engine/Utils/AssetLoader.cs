@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using FarseerPhysics.Common;
 using Microsoft.Xna.Framework;
+using JGerdesJWiemers.Game.Engine.Audio;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {
@@ -48,6 +49,10 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_ASTEROID2 = @"asteroids\asteroid2";
         public static readonly String TEXTURE_ASTEROID3 = @"asteroids\asteroid3";
         public static readonly String TEXTURE_EXPLOSION1 = @"explosions\explosion1";
+
+        public static readonly String AUDIO_ASTRONAUT1 = @"Assets\Audio\astronaut1.wav";
+        public static readonly String AUDIO_ASTRONAUT2 = @"Assets\Audio\astronaut2.wav";
+        public static readonly String AUDIO_ASTRONAUT3 = @"Assets\Audio\astronaut3.wav";
 
         public static readonly String CONFIG_INPUT = "input.json";
 
@@ -95,6 +100,10 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_ASTEROID2, TEXTURE_ASTEROID2);
             LoadTexture(TEXTURE_ASTEROID3, TEXTURE_ASTEROID3);
             LoadTexture(TEXTURE_EXPLOSION1, TEXTURE_EXPLOSION1);
+
+            AudioManager.Instance.AddSound(AUDIO_ASTRONAUT1, AUDIO_ASTRONAUT1);
+            AudioManager.Instance.AddSound(AUDIO_ASTRONAUT2, AUDIO_ASTRONAUT2);
+            AudioManager.Instance.AddSound(AUDIO_ASTRONAUT3, AUDIO_ASTRONAUT3);
         }
 
         public void LoadFont(String name, String filename)
