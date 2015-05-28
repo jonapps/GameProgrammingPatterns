@@ -31,6 +31,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         private Text _astronauts;
         private Text _earthHealth;
         private Text _shipHealth;
+        private Text _bulletAmount;
+        private Text _rocketAmount;
+        private List<AnimatedSprite> _weapons;
 
         public UiScreen(RenderWindow w)
             :base(w)
@@ -101,6 +104,47 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _shipHealth.Position = _bg.Position + new Vector2f(1068, -29);
             _texts.Add(_shipHealth);
 
+            _bulletAmount = new Text(scoreText);
+            _bulletAmount.CharacterSize = 18;
+            _bulletAmount.Position = _bg.Position + new Vector2f(60, -57);
+            _texts.Add(_bulletAmount);
+
+            Text bulletX = new Text(_bulletAmount);
+            bulletX.DisplayedString = "x";
+            bulletX.CharacterSize = 10;
+            bulletX.Position = _bg.Position + new Vector2f(53, -50);
+            _texts.Add(bulletX);
+
+            _rocketAmount = new Text(_bulletAmount);
+            _rocketAmount.Position = _bg.Position + new Vector2f(60, -30);
+            _texts.Add(_rocketAmount);
+
+            Text rocketX = new Text(bulletX);
+            rocketX.Position = _bg.Position + new Vector2f(53, -23);
+            _texts.Add(rocketX);
+
+            _weapons = new List<AnimatedSprite>();
+
+            _weapons.Add(new AnimatedSprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_SINGLE)));
+            _weapons.Add(new AnimatedSprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_DOUBLE)));
+            _weapons.Add(new AnimatedSprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_MISSILE)));
+
+            _weapons[0].Position = _bg.Position + new Vector2f(40, -55);
+            _weapons[1].Position = _bg.Position + new Vector2f(40, -39);
+            _weapons[2].Position = _bg.Position + new Vector2f(40, -18);
+
+            foreach (AnimatedSprite s in _weapons)
+            {
+                s.CenterOrigin();
+                s.Color = new Color(0, 255, 0, 200);
+                s.Scale *= 0.5f;
+            }
+
+
+
+            UpdateBulletAmount(0);
+            UpdateRocketAmount(0);
+            SetCurrentWeapon(0);
 
             UpdateShipHealth(100);
             UpdateEarthHealth(100);
@@ -139,6 +183,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             {
                 UpdateShipHealth(newval);
             };
+
+            GameManager.Instance.OnCurrentWeaponChange += delegate(int index)
+            {
+                SetCurrentWeapon(index);
+            };
+
+            GameManager.Instance.OnRoundsChange += delegate(int amount)
+            {
+                UpdateBulletAmount(amount);
+            };
+
+            GameManager.Instance.OnRocketsChange += delegate(int amount)
+            {
+                UpdateRocketAmount(amount);
+            };
         }
 
 
@@ -147,6 +206,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _score.DisplayedString = "" + score;
             FloatRect bounds = _score.GetLocalBounds();
             _score.Origin = new Vector2f(bounds.Width, 0);
+            
         }
 
         public void UpdateAstronauts(int astronauts)
@@ -179,9 +239,41 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _shipHealth.Origin = new Vector2f(bounds.Width, 0);
         }
 
+        public void UpdateBulletAmount(int amount)
+        {
+            _bulletAmount.DisplayedString = "" + amount;
+        }
+
+        public void UpdateRocketAmount(int amount)
+        {
+            _rocketAmount.DisplayedString = "" + amount;
+        }
+
+        public void SetCurrentWeapon(int index)
+        {
+            for (int i = 0, c = _weapons.Count; i < c; ++i)
+            {
+                AnimatedSprite current = _weapons[i];
+                if (i == index){
+                   current.SetAnimation(new Animation(0,current.GetFrameCount() - 1, 200, true, false));
+                   current.Color = new Color(255, 255, 255, 200);
+                }
+                else
+                {
+                    current.SetAnimation(new Animation());
+                    current.Color = new Color(0, 255, 0, 200);
+                }
+                    
+            }
+        }
+
         public override void Update()
         {
             _earth.Update();
+            foreach (AnimatedSprite s in _weapons)
+            {
+                s.Update();
+            }
             
         }
 
@@ -199,6 +291,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             foreach (Text t in _texts)
             {
                 renderTarget.Draw(t);
+            }
+            foreach (AnimatedSprite s in _weapons)
+            {
+                renderTarget.Draw(s);
             }
         }
 

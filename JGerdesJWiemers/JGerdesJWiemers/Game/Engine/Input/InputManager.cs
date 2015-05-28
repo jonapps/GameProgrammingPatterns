@@ -90,7 +90,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     InputHandler("land", new KeyEvent(pressed), 0);
                     break;
                 case Keyboard.Key.X:
-                    InputHandler("weaponSwitch", new KeyEvent(pressed), 0);
+                    if (pressed)
+                        InputHandler("weaponSwitch", new KeyEvent(pressed), 0);
                     break;
                 case Keyboard.Key.Space:
                     InputHandler("shoot", new KeyEvent(pressed), 0);
@@ -141,7 +142,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
             {
                 InputHandler("shoot", new KeyEvent(pressed), (int)e.JoystickId);
             }
-            else if (e.Button == _config.WeaponSwitch)
+            else if (e.Button == _config.WeaponSwitch && pressed)
             {
                 InputHandler("weaponSwitch", new KeyEvent(pressed), (int)e.JoystickId);
             }

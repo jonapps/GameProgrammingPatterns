@@ -128,7 +128,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             if ((_roundsLeft - amount) > 0)
             {
                 _roundsLeft -= amount;
-                if (OnRocketsChange != null) OnRocketsChange(_roundsLeft);
+                if (OnRocketsChange != null) OnRoundsChange(_roundsLeft);
                 return amount;
             } 
             return 0;

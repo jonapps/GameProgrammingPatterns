@@ -43,6 +43,13 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         public AnimatedSprite(Texture tex, int tileWidth, int tileHeight)
             : this(tex, tileWidth, tileHeight, new Animation()) { }
 
+        public AnimatedSprite(TextureContainer cont)
+            : this(cont.Texture, cont.Width, cont.Height) { }
+
+        public void CenterOrigin()
+        {
+            Origin = new SFML.System.Vector2f(_tileWidth / 2f, _tileHeight / 2f);
+        }
 
         public void Update()
         {
