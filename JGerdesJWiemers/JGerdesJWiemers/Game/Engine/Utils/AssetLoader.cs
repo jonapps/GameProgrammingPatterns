@@ -57,6 +57,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadFont(FONT_ROBOTO_REGULAR, FONT_ROBOTO_REGULAR);
             LoadFont(FONT_ROBOTO_MEDIUM, FONT_ROBOTO_MEDIUM);
 
+            LoadTexture(TEXTURE_UI, TEXTURE_UI);
+
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
             LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
             LoadTexture(TEXTURE_EARTH_BIG, TEXTURE_EARTH_BIG);
@@ -67,10 +69,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_SPACE3, TEXTURE_SPACE3);
             LoadTexture(TEXTURE_SPACESHIP, TEXTURE_SPACESHIP);
             LoadTexture(TEXTURE_SPACESHIP_LARGE, TEXTURE_SPACESHIP_LARGE);
-            LoadTexture(TEXTURE_SPACESHIP_LARGE, TEXTURE_SPACESHIP_LARGE);
             LoadTexture(TEXTURE_ASTEROID1, TEXTURE_ASTEROID1);
             LoadTexture(TEXTURE_ASTEROID2, TEXTURE_ASTEROID2);
-            LoadTexture(TEXTURE_UI, TEXTURE_UI);
+            LoadTexture(TEXTURE_ASTEROID3, TEXTURE_ASTEROID3);
         }
 
         public void LoadFont(String name, String filename)

@@ -44,17 +44,37 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             return false;
         }
 
-        public void Push(Screen s)
+        private void _RevalidateStates()
+        {
+            bool render = true;
+            bool update = true;
+
+            ScreenData last = _screens.Peek();
+            last.render = render;
+            last.update = update;
+            ScreenData current;
+
+            for (int i = 1, c = _screens.Count; i < c; i++)
+            {
+                current = _screens.ElementAt(i);
+                current.render = render = render && last.screen.DoRenderBelow();
+                current.update = update = update && last.screen.DoUpdateBelow();
+                last = current;
+            }
+        }
+
+        private void _Push(Screen s, bool revalidate)
         {
             s.Manager = this;
-            if (_screens.Count > 0)
-            {
-                ScreenData top = _screens.Peek();
-                top.render = s.DoRenderBelow();
-                top.update = s.DoUpdateBelow();
-            }
             _screens.Push(new ScreenData(s));
+            if (revalidate)
+                _RevalidateStates();
             s.Create();
+        }
+        
+        public void Push(Screen s)
+        {
+            _Push(s, true);
         }
 
         public Screen Pop()
@@ -62,18 +82,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             Screen old = _screens.Pop().screen;
             old.Exit();
             if (_screens.Count > 0)
-            {
-                ScreenData top = _screens.Peek();
-                top.render = true;
-                top.update = true;
-            }
+                _RevalidateStates();
             return old;
         }
 
         public Screen Switch(Screen s)
         {
             Screen old = Pop();
-            Push(s);
+            _Push(s, false);
             return old;
 
         }
