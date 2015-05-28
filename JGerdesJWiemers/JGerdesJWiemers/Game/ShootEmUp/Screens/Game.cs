@@ -106,10 +106,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public void GameOver()
         {
-            while (_screenManager.Top() != this)
-                _screenManager.Pop();
+            if (!(_screenManager.Top() is GameOverScreen))
+            {
+                _screenManager.PopTo(this);
+                _screenManager.Switch(new GameOverScreen(_window));
+            }
 
-            _screenManager.Switch(new GameOverScreen(_window));
+            
         }
 
         private void _CheckEntitiesOffScreen(Entity e)

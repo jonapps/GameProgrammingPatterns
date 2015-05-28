@@ -86,6 +86,29 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             return old;
         }
 
+        public void PopTo(Screen screen)
+        {
+            if (Contains(screen))
+            {
+                while (_screens.Peek().screen != screen)
+                {
+                    Pop();
+                }
+            }
+        }
+
+        public bool Contains(Screen screen)
+        {
+            foreach (ScreenData sd in _screens)
+            {
+                if (sd.screen == screen)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public Screen Switch(Screen s)
         {
             Screen old = Pop();
@@ -96,7 +119,10 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         public Screen Top()
         {
-            return _screens.Peek().screen;
+            if (_screens.Count > 0)
+                return _screens.Peek().screen;
+            else
+                return null;
         }
 
         public override void Update()
