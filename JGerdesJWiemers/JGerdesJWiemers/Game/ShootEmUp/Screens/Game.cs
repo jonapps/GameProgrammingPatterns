@@ -49,6 +49,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                     _screenManager.Push(new PauseScreen(_window));
             };
 
+            
+
             Settings.MaxPolygonVertices = 32;
             _world = new World(new Vector2(0,0));
 
@@ -99,6 +101,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 return true;
             });
             
+        }
+
+        public override void Create()
+        {
+            _screenManager.Push(new UiScreen(_window));
         }
 
 

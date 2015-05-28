@@ -22,6 +22,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String FONT_ROBOTO_REGULAR = "Roboto-Regular.ttf";
         public static readonly String FONT_ROBOTO_MEDIUM = "Roboto-Medium.ttf";
 
+        public static readonly String TEXTURE_UI = "UI";
+
         public static readonly String TEXTURE_ASTRONAUT = "astronaut";
         public static readonly String TEXTURE_EARTH = "earth";
         public static readonly String TEXTURE_EARTH_BIG = "earth_big";
@@ -65,9 +67,10 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_SPACE3, TEXTURE_SPACE3);
             LoadTexture(TEXTURE_SPACESHIP, TEXTURE_SPACESHIP);
             LoadTexture(TEXTURE_SPACESHIP_LARGE, TEXTURE_SPACESHIP_LARGE);
+            LoadTexture(TEXTURE_SPACESHIP_LARGE, TEXTURE_SPACESHIP_LARGE);
             LoadTexture(TEXTURE_ASTEROID1, TEXTURE_ASTEROID1);
             LoadTexture(TEXTURE_ASTEROID2, TEXTURE_ASTEROID2);
-            LoadTexture(TEXTURE_ASTEROID3, TEXTURE_ASTEROID3);
+            LoadTexture(TEXTURE_UI, TEXTURE_UI);
         }
 
         public void LoadFont(String name, String filename)
