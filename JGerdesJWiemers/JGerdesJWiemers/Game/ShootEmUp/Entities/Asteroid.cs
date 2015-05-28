@@ -35,7 +35,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
             _splitLevel = splitLevel;
             _scale = scale;
-           
+            _health = 10;
         }
 
 
