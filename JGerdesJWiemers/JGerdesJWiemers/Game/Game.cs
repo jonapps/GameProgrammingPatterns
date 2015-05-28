@@ -13,6 +13,7 @@ using SFML.System;
 using JGerdesJWiemers.Game.Engine.Input;
 using FarseerPhysics;
 using GameScreen = JGerdesJWiemers.Game.ShootEmUp.Screens;
+using JGerdesJWiemers.Game.ShootEmUp.Screens;
 
 
 namespace JGerdesJWiemers.Game
@@ -54,7 +55,7 @@ namespace JGerdesJWiemers.Game
             this._stopWatch = new Stopwatch();
             InputManager.Instance.Init(_window);
             this._screenManager = new ScreenManager(_window);
-            this._screenManager.Push(new GameScreen.Game(_window));
+            this._screenManager.Push(new TitleScreen(_window));
             //this._screenManager.Push(new Editor.EditorScreen(_window));
             _window.SetActive();
             _window.Closed += this._OnClose;
