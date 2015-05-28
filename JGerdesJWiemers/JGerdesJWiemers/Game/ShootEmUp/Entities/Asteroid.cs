@@ -27,7 +27,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private static int SPLIT_MAX_CHILDS = 3;
         private int _splitLevel;
         private float _scale;
-        private bool _hadImpact = false;
+
 
 
         public Asteroid(World world, float x, float y, string textureName, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0, int splitLevel = 0)
@@ -53,16 +53,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 contact.Enabled = false;
                 return false;
             }
-            if (fb.Body.UserData is Earth && !_hadImpact)
+            if (fb.Body.UserData is Earth)
             {
                 Earth earth = fb.Body.UserData as Earth;
-                _hadImpact = true;
                 earth.ApplyDamage((int)_body.Mass);
                 // doesnt work?.. dont know why
                 //fa.Body.Enabled = false;
                 _deleteMe = true;
             }
-            else if (fb.Body.UserData is SpaceShip && !_hadImpact)
+            else if (fb.Body.UserData is SpaceShip)
             {
                 SpaceShip sp = fb.Body.UserData as SpaceShip;
                 sp.ApplyDamage((int)_body.Mass);
