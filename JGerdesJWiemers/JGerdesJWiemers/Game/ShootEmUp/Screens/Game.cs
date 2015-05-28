@@ -59,7 +59,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE3), 0, 0, -0.04f, 0));
             _entities.Add(new ScrollingBackground(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPACE2), 0, 0, -0.06f, 0));
 
-
+            _CreateSpaceShip();
 
             _waveManager.OnWavesCompleted += delegate(Wave wave)
             {
@@ -73,16 +73,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             };
             _entities.Add(earth);
             _entities.Add(new Moon(_world, earth, 1.5f));
-
-            _ship = new SpaceShip(10, 10, _world, this);
-            _ship.OnDestroy += delegate() 
-            {
-                Console.WriteLine("spaceship down");
-            };
-
-            _entities.Add(_ship);
-
-
             _input.On("land", delegate(InputEvent e, int channel){
                 Vector2f distance = new Vector2f(earth.Body.Position.X - _ship.Body.Position.X, earth.Body.Position.Y - _ship.Body.Position.Y);
                 //only land if next to earth
@@ -98,6 +88,25 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 return true;
             });
             
+        }
+
+        private void _CreateSpaceShip()
+        {
+            _ship = new SpaceShip(70, 70, _world, this);
+            _ship.OnDestroy += delegate()
+            {
+                Console.WriteLine("spaceship down");
+                if (GameManager.Instance.NewShip())
+                {
+                    _CreateSpaceShip();
+                }
+                else
+                {
+                    GameOver();
+                }
+            };
+
+            _entities.Add(_ship);
         }
 
         public override void Create()

@@ -43,6 +43,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             if (OnAstronautChange != null) OnAstronautChange(_astronauts);
         }
 
+        public bool NewShip()
+        {
+            if (_astronauts > 0)
+            {
+                _astronauts--;
+                if (OnAstronautChange != null) OnAstronautChange(_astronauts);
+                return true;
+            }
+            return false;
+        }
+
         public void SetEarthHealth(int health)
         {
             _earthHealth = health;

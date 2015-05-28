@@ -192,7 +192,7 @@
     <Content Include="Game\Assets\Graphics\astronaut.png" />
     <Content Include="Game\Assets\Graphics\earth.png" />
     <Content Include="Game\Assets\Graphics\earth_big.png" />
-    <Content Include="Game\Assets\Graphics\moon.png" />
+    <Content Include="Game\Assets\Graphics\asteroids\moon.png" />
     <Content Include="Game\Assets\Graphics\space\space1.jpg" />
     <Content Include="Game\Assets\Graphics\space\space2.png" />
     <Content Include="Game\Assets\Graphics\space\space3.png" />
