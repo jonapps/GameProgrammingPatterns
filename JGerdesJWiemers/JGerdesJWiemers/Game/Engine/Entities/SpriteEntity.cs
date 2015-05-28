@@ -30,7 +30,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 float w = ConvertUnits.ToSimUnits(textureContainer.Width * scale);
                 float h = ConvertUnits.ToSimUnits(textureContainer.Height * scale);
                 _body = BodyFactory.CreateRectangle(world, w, h, 1f, new Vector2(x, y), 0, bodyType, this);
-                _fixture = FixtureFactory.AttachRectangle(w, h, 1f, new Vector2(0,0), _body, this);
+                _fixture = FixtureFactory.AttachRectangle(w, h, 1f, new Vector2(0, 0), _body, this);
             }
             else if (textureContainer is CircleTextureContainer)
             {

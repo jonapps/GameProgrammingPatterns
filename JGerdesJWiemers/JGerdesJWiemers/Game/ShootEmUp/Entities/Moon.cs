@@ -34,17 +34,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.Mass = 10f;
             
          
-            _ApplyLinearVelocity(18f);
+            //_ApplyLinearVelocity(18f);
         }
         public override void Update()
         {
             if (_forced)
             {
                 _forced = false;
-                _ApplySpeed(_moonImpulse);
+                //_ApplySpeed(_moonImpulse);
                 
             }
-            _ForceOrbit();
+            //_ForceOrbit();
 
             base.Update();
         }

@@ -148,7 +148,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 {
                     _toDeleteEntities.Add(i);
                 }
-                e.Update();
+                else
+                {
+                    e.Update();
+                }
+                
             }
            
         }
@@ -157,7 +161,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         {
             for (int i = 0; i < _entities.Count; ++i)
             {
-                _entities[i].PastUpdate();
+                if (!_entities[i].DeleteMe)
+                {
+                    _entities[i].PastUpdate();
+                }
             }
 
             _toDeleteEntities.Sort((a, b) => b - a);
