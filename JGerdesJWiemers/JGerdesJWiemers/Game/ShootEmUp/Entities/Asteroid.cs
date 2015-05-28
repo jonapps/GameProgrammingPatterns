@@ -5,6 +5,7 @@ using FarseerPhysics.Dynamics.Contacts;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using Microsoft.Xna.Framework;
 using SFML.System;
 using System;
@@ -78,6 +79,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             if (_splitLevel > 0)
             {
+                GameManager.Instance.AddScore(100);
                 List<Asteroid> newAsteroids = new List<Asteroid>();
                 AsteroidDef def;
                 Random rand = new Random();

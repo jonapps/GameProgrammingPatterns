@@ -67,7 +67,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _texts.Add(scoreText);
 
             _score = new Text(scoreText);
-            UpdateScore(GameManager.Instance.Score);
+            UpdateScore(0);
             _score.Position = _bg.Position + new Vector2f(320, -62);
 
             Text astroText = new Text(scoreText);
@@ -76,7 +76,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _texts.Add(astroText);
 
             _astronauts = new Text(scoreText);
-            UpdateAstronauts(GameManager.Instance.Astronauts);
+            UpdateAstronauts(0);
             _astronauts.Position = _bg.Position + new Vector2f(320, -44);
             _texts.Add(_astronauts);
 
@@ -86,7 +86,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _texts.Add(waveText);
 
             _wave = new Text(scoreText);
-            UpdateWave(GameManager.Instance.CurrentWave);
+            UpdateWave(0);
             _wave.Position = _bg.Position + new Vector2f(320, -26);
             _texts.Add(_wave);
 
@@ -111,6 +111,27 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 UpdateEarthHealth(i);
                 return false;
             });
+
+
+            GameManager.Instance.OnAstronautChange += delegate(int newval)
+            {
+                UpdateAstronauts(newval);
+            };
+
+            GameManager.Instance.OnEarthHealthChange += delegate(int newval)
+            {
+                UpdateEarthHealth(newval);
+            };
+
+            GameManager.Instance.OnScoreChange += delegate(int newval)
+            {
+                UpdateScore(newval);
+            };
+
+            GameManager.Instance.OnWaveChange += delegate(int newval)
+            {
+                UpdateWave(newval);
+            };
 
         }
 
@@ -154,7 +175,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public override void Update()
         {
             _earth.Update();
-            UpdateEarthHealth(GameManager.Instance.EarthHealth);
             
         }
 
