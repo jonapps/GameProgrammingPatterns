@@ -1,5 +1,6 @@
 ﻿using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets;
 using JGerdesJWiemers.Game.ShootEmUp.Logic;
@@ -15,7 +16,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
 {
     class RocketLauncher : Weapon
     {
-
+        
         public RocketLauncher()
         {
             _toShoot = 800;

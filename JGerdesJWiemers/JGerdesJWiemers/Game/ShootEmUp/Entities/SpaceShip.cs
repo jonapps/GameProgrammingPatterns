@@ -42,7 +42,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             
             _input = new InputMapper();
             _fixture.CollisionCategories = EntityCategory.SpaceShip;
-            _currentWeapon = new DoubleGatlinGun();
+            _currentWeapon = new GatlinGun();
+            GameManager.Instance.SetCurrentWeapon(0);
             _sprite.Origin = new Vector2f(16, 24);
             _eHolder = gscreen;
             _world = w;
@@ -123,7 +124,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             GameManager.Instance.SetPlayerHealth(_health);
         }
 
-
         public override void ApplyDamage(int dmg)
         {
             base.ApplyDamage(dmg);
@@ -135,9 +135,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 EntityFactory.Instance.Spawn(new Explosion.ExplosionDef(_body.Position.X, _body.Position.Y, 0, 0, 1.2f, 0));
             }
         }
-
-
-
 
         public override void Update()
         {
@@ -152,7 +149,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void _createBullet()
         {
             Vector2 directionNormal = new Vector2((float)System.Math.Cos(_body.Rotation - System.Math.PI / 2), (float)System.Math.Sin(_body.Rotation - System.Math.PI / 2));
@@ -163,7 +162,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="e"></param>
+        /// <param name="channel"></param>
+        /// <returns></returns>
         public bool OnInputEvent(string name, InputEvent e, int channel)
         {
             return _input.OnInputEvent(name, e, channel);

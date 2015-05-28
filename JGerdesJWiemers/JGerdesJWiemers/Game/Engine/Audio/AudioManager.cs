@@ -15,11 +15,14 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         private static AudioManager _instance;
         private Sound _sound;
 
+        private List<Sound> _plaingSounds;
+
         private bool _silent = false;
         
 
         private AudioManager()
         {
+            _plaingSounds = new List<Sound>();
             _sounds = new Dictionary<String, Sound>();
             _sound = new Sound();
             _stoppedLoopSounds = new List<string>();
@@ -104,13 +107,17 @@ namespace JGerdesJWiemers.Game.Engine.Audio
                 if (!_silent)
                 {
                     Sound s = _sounds[key];
-                    s.Play();
-                    s.Loop = loop;
-                    s.Volume = volume;
-
+                    Sound ns = new Sound();
+                    ns.SoundBuffer = s.SoundBuffer;
+                    ns.Loop = loop;
+                    ns.Volume = volume;
+                    ns.Play();
+                    _plaingSounds.Add(ns);
+                    //s.
+                    //s.Loop = loop;
+                    //s.Volume = volume;
+                    //s.Play();
                 }
-                
-
             }
             catch (Exception e)
             {
