@@ -72,7 +72,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 GameOver();
             };
             _entities.Add(earth);
-            _entities.Add(new Moon(_world, earth, 1.5f));
+            //_entities.Add(new Moon(_world, earth, 1.5f));
             _input.On("land", delegate(InputEvent e, int channel){
                 Vector2f distance = new Vector2f(earth.Body.Position.X - _ship.Body.Position.X, earth.Body.Position.Y - _ship.Body.Position.Y);
                 //only land if next to earth

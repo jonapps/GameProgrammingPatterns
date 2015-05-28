@@ -140,10 +140,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 s.Scale *= 0.5f;
             }
 
-
-
-            UpdateBulletAmount(0);
-            UpdateRocketAmount(0);
+            UpdateBulletAmount(GameManager.Instance.GetRoundsLeft());
+            UpdateRocketAmount(GameManager.Instance.GetRocketsLeft());
             SetCurrentWeapon(0);
 
             UpdateShipHealth(100);
