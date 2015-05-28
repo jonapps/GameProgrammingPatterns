@@ -98,7 +98,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         public override void Exit()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override bool DoRenderBelow()
