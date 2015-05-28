@@ -62,6 +62,18 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 case Keyboard.Key.D:
                     InputHandler("right", new JoystickEvent(pressed ? 1 : 0), 0);
                     break;
+                case Keyboard.Key.Up:
+                    InputHandler("rotUp", new JoystickEvent(pressed ? 1 : 0), 0);
+                    break;
+                case Keyboard.Key.Down:
+                    InputHandler("rotDown", new JoystickEvent(pressed ? 1 : 0), 0);
+                    break;
+                case Keyboard.Key.Left:
+                    InputHandler("rotLeft", new JoystickEvent(pressed ? 1 : 0), 0);
+                    break;
+                case Keyboard.Key.Right:
+                    InputHandler("rotRight", new JoystickEvent(pressed ? 1 : 0), 0);
+                    break;
                 case Keyboard.Key.L:
                     InputHandler("land", new KeyEvent(pressed), 0);
                     break;
@@ -81,6 +93,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
   
         void _JoystickMoved(object sender, JoystickMoveEventArgs e)
         {
+            Console.WriteLine(e.ToString());
             switch (e.Axis)
             {
                 case Joystick.Axis.Y:
@@ -94,6 +107,18 @@ namespace JGerdesJWiemers.Game.Engine.Input
                         InputHandler("left", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
                     else
                         InputHandler("right", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
+                    break;
+                case Joystick.Axis.R:
+                    if (e.Position <= 0)
+                        InputHandler("rotLeft", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
+                    else
+                        InputHandler("rotRight", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
+                    break;
+                case Joystick.Axis.Z:
+                    if (e.Position <= 0)
+                        InputHandler("rotUp", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
+                    else
+                        InputHandler("rotDown", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
                     break;
             }
         }

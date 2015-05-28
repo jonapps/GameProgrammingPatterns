@@ -31,6 +31,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private bool _spawnBullets = false;
         private World _world;
         private InputMapper _input;
+        private Vector2 _rotation;
 
         private int _bulletSpace = 1000;
 
@@ -71,6 +72,30 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 return true;
             });
 
+            _input.On("rotUp", delegate(InputEvent e, int channel)
+            {
+                _rotation = new Vector2(_rotation.X, -((JoystickEvent)e).Value);
+                return true;
+            });
+
+            _input.On("rotDown", delegate(InputEvent e, int channel)
+            {
+                _rotation = new Vector2(_rotation.X, ((JoystickEvent)e).Value);
+                return true;
+            });
+
+            _input.On("rotLeft", delegate(InputEvent e, int channel)
+            {
+                _rotation = new Vector2(-((JoystickEvent)e).Value, _rotation.Y);
+                return true;
+            });
+
+            _input.On("rotRight", delegate(InputEvent e, int channel)
+            {
+                _rotation = new Vector2(((JoystickEvent)e).Value, _rotation.Y);
+                return true;
+            });
+
             _input.On("shoot", delegate(InputEvent e, int channel)
             {
                 _spawnBullets = ((KeyEvent)e).Pressed;
@@ -107,12 +132,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 _createBullet();
             }
 
-            //only calculate direction if spaceship is moving
-            if (SMath.Abs(_body.LinearVelocity.Y) >= 3 || SMath.Abs(_body.LinearVelocity.X) >= 3)
-            {
-                float newAngle = (float)SMath.Atan2(_body.LinearVelocity.Y, _body.LinearVelocity.X) + (float) SMath.PI / 2f;
-                _body.Rotation = newAngle;
-            }
+            _body.Rotation = (float)SMath.Atan2(_rotation.Y, _rotation.X) + (float)SMath.PI / 2f;
+
         }
 
 
