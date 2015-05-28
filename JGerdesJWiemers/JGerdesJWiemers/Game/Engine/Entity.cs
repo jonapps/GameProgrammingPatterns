@@ -69,7 +69,7 @@ namespace JGerdesJWiemers.Game.Engine
         }
 
         /// <summary>
-        /// 
+        /// To Apply dmg to any entity 
         /// </summary>
         /// <param name="dmg"></param>
         public virtual void ApplyDamage(int dmg)

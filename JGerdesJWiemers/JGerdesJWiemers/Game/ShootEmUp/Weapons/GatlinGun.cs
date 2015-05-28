@@ -1,5 +1,6 @@
 ﻿using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets;
 using JGerdesJWiemers.Game.ShootEmUp.Logic;
@@ -15,9 +16,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
 {
     class GatlinGun : Weapon
     {
+        public static String GATLINGUN_SHOOT = "GATLINGUN_SHOOT";
 
         public GatlinGun()
         {
+            AudioManager.Instance.AddSound(GATLINGUN_SHOOT, "Assets/Audio/GATLINGUN_SHOOT.wav");
             _toShoot = 100;
             _clock.Restart();
         }
@@ -29,6 +32,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
             {
                 if (GameManager.Instance.ReduceRounds(1) == 1)
                 {
+                    AudioManager.Instance.Play(GATLINGUN_SHOOT);
                     _clock.Restart();
                     _bullets.Add(new Rounds(x, y, w, direction, rotation, 0.5f));
                 }
