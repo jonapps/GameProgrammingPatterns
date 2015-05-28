@@ -103,6 +103,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                
             }
             _deleteMe = true;
+            EntityFactory.Instance.Spawn(new Explosion.ExplosionDef(_body.Position.X, _body.Position.Y, 0, 0, 1, 0));
         }
 
         /// <summary>
