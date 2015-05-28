@@ -108,12 +108,21 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return _fonts[name];
         }
 
-        public String GetConfigContent(String name)
+        public String ReadConfig(String name)
         {
             String filepath = DIR_SETTINGS + "\\" +name;
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             String content = file.ReadToEnd();
+            file.Close();
             return content;
+        }
+
+        public void WriteConfig(String name, String content)
+        {
+            String filepath = DIR_SETTINGS + "\\" + name;
+            System.IO.StreamWriter file = new System.IO.StreamWriter(filepath);
+            file.Write(content);
+            file.Close();
         }
 
         public TextureContainer LoadTexture(String name)

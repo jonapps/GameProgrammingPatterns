@@ -48,8 +48,14 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _key(false, sender, e);
             };
 
-            String data = AssetLoader.Instance.GetConfigContent(AssetLoader.CONFIG_INPUT);
+            String data = AssetLoader.Instance.ReadConfig(AssetLoader.CONFIG_INPUT);
             _config = new InputConfig(JsonConvert.DeserializeObject<InputConfig.JsonFormat>(data));
+        }
+
+        public void SaveConfig()
+        {
+            String data = JsonConvert.SerializeObject(new InputConfig.JsonFormat(_config));
+            AssetLoader.Instance.WriteConfig(AssetLoader.CONFIG_INPUT, data);
         }
 
         void _key(bool pressed, object sender, KeyEventArgs e)
