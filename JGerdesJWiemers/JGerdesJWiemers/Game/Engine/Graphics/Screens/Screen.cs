@@ -31,6 +31,12 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             }
         }
 
+
+        public virtual void Create()
+        {
+
+        }
+
         /// <summary>
         /// Updates screen 
         /// </summary>

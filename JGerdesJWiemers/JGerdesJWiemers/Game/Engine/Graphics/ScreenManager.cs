@@ -54,6 +54,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 top.update = s.DoUpdateBelow();
             }
             _screens.Push(new ScreenData(s));
+            s.Create();
         }
 
         public Screen Pop()
