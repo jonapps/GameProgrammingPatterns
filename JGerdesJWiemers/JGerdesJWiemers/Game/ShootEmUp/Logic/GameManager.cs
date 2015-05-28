@@ -83,9 +83,61 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             if (OnScoreChange != null) OnScoreChange(_score);
         }
 
+        public void SetRoundsLeft(int rounds)
+        {
+            _roundsLeft = rounds;
+            if (OnRoundsChange != null) OnRoundsChange(_roundsLeft);
+        }
+
+        public void SetRocketsLeft(int rockets)
+        {
+            _rocketsLeft = rockets;
+            if (OnRocketsChange != null) OnRocketsChange(_rocketsLeft);
+        }
+
+        public void SetCurrentWeapon(int newWeapon)
+        {
+            _currentWeapon = newWeapon;
+            if (OnCurrentWeaponChange != null) OnCurrentWeaponChange(_currentWeapon);
+        }
+
+        public int GetRoundsLeft()
+        {
+            return _roundsLeft;
+        }
+
+        public int GetRocketsLeft()
+        {
+            return _rocketsLeft;
+        }
+
+
+        public int ReduceRockets(int amount)
+        {
+            if ((_rocketsLeft - amount) > 0)
+            {
+                _rocketsLeft -= amount;
+                if (OnRocketsChange != null) OnRocketsChange(_rocketsLeft);
+                return amount;
+            }
+            return 0;
+        }
+
+        public int ReduceRounds(int amount)
+        {
+            if ((_roundsLeft - amount) > 0)
+            {
+                _roundsLeft -= amount;
+                if (OnRocketsChange != null) OnRocketsChange(_roundsLeft);
+                return amount;
+            } 
+            return 0;
+        }
+
+
         private GameManager()
         {
-
+            
         }
         public static GameManager Instance
         {

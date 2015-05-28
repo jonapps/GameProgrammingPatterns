@@ -73,6 +73,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
                 Next();
             };
 
+            Start();
+
         }
 
         public bool HasNext()
@@ -85,7 +87,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             if (HasNext())
             {
                 _waves.Peek().Start();
-
+                GameManager.Instance.SetRocketsLeft(20);
+                GameManager.Instance.SetRoundsLeft(1000);
                 if (OnWaveStarted != null)
                     OnWaveStarted(_waves.Peek());
             }
@@ -102,10 +105,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             {
                 OnWavesCompleted(null);
             }
-
-
-
-            
         }
 
 
