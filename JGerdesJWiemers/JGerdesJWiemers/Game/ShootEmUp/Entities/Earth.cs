@@ -6,6 +6,7 @@ using FarseerPhysics.Dynamics.Contacts;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using Microsoft.Xna.Framework;
 using SFML.System;
 using System;
@@ -37,6 +38,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             world.AddController(gravity);
             _body.Rotation = 23.44f * (float)SMath.PI / 180;
             _body.CollisionCategories = EntityCategory.Earth;
+            GameManager.Instance.EarthHealth = _health;
 
         }
 
@@ -44,6 +46,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             base.ApplyDamage(dmg);
             Console.WriteLine("Earth health: "+_health);
+            GameManager.Instance.EarthHealth = _health;
             if (_health <= 0)
             {
                 OnEarthDestroyed();

@@ -137,6 +137,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public override void Update()
         {
             _earth.Update();
+            UpdateEarthHealth(GameManager.Instance.EarthHealth);
             
         }
 

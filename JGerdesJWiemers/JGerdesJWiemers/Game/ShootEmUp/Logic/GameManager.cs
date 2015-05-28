@@ -12,6 +12,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
         public int Score { get; set; }
         public int CurrentWave { get; set; }
         public int Astronauts { get; set; }
+        public int EarthHealth { get; set; }
 
 
         private static GameManager _instance = null;
