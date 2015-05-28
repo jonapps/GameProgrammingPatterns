@@ -4,6 +4,7 @@ using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using Microsoft.Xna.Framework;
 using SFML.System;
 using System;
@@ -37,8 +38,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             if (fixtureA.Body.UserData is SpaceShip || fixtureB.Body.UserData is SpaceShip)
             {
+                _body.Enabled = false;
                 _deleteMe = true;
-                //TODO: set score
+                GameManager.Instance.AddAstronauts(1);
             }
             return true;
         }

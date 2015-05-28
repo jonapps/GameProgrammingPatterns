@@ -38,14 +38,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             world.AddController(gravity);
             _body.Rotation = 23.44f * (float)SMath.PI / 180;
             _body.CollisionCategories = EntityCategory.Earth;
+            Console.WriteLine("Earth health: " + _health);
             GameManager.Instance.SetEarthHealth(_health);
-
         }
 
         public override void ApplyDamage(int dmg)
         {
+            Console.WriteLine("Earth health: " + _health + " Damage dealed: " +dmg);
             base.ApplyDamage(dmg);
-            Console.WriteLine("Earth health: "+_health);
             GameManager.Instance.SetEarthHealth(_health);
             if (_health <= 0)
             {
