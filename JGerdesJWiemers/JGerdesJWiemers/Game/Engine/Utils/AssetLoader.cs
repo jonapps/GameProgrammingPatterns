@@ -26,6 +26,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_UI = "UI";
         public static readonly String TEXTURE_UI_EARTH = "ui_earth";
         public static readonly String TEXTURE_UI_SHUTTLE = "ui_spaceshuttle";
+        public static readonly String TEXTURE_UI_SINGLE = @"ui\single";
+        public static readonly String TEXTURE_UI_DOUBLE = @"ui\double";
+        public static readonly String TEXTURE_UI_MISSILE = @"ui\missile";
 
         public static readonly String TEXTURE_ASTRONAUT = "astronaut";
         public static readonly String TEXTURE_EARTH = "earth";
@@ -71,6 +74,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_UI, TEXTURE_UI);
             LoadTexture(TEXTURE_UI_EARTH, TEXTURE_UI_EARTH);
             LoadTexture(TEXTURE_UI_SHUTTLE, TEXTURE_UI_SHUTTLE);
+            LoadTexture(TEXTURE_UI_SINGLE, TEXTURE_UI_SINGLE);
+            LoadTexture(TEXTURE_UI_DOUBLE, TEXTURE_UI_DOUBLE);
+            LoadTexture(TEXTURE_UI_MISSILE, TEXTURE_UI_MISSILE);
 
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
             LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
