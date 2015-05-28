@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SMath = System.Math;
 using JGame = JGerdesJWiemers.Game.Game;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 {
@@ -44,8 +45,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _header.Origin = new Vector2f(_header.GetLocalBounds().Width / 2f, 0);
             _header.Position = new Vector2f(1280 / 2f, 32);
 
-            _score = new Text("[SCORE]", AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT));
-            _score.CharacterSize = 32;
+            _score = new Text(""+GameManager.Instance.GetScore(), AssetLoader.Instance.getFont(AssetLoader.FONT_DIGITAL));
+            _score.CharacterSize = 64;
             _score.Origin = new Vector2f(_score.GetLocalBounds().Width / 2f, 0);
             _score.Position = new Vector2f(1280 / 2f, 128);
 

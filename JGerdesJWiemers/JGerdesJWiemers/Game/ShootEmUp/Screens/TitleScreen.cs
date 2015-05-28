@@ -21,6 +21,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         private Sprite _moon;
         private bool _moonFront;
         private Text _start;
+        private RectangleShape _rect;
 
         private Clock _clock;
 
@@ -50,6 +51,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _start.Origin = new Vector2f(bounds.Width, bounds.Height) / 2f;
             _start.Position = new Vector2f(1280 / 2f, 480);
 
+            _rect = new RectangleShape(new Vector2f(1280, 64));
+            _rect.Origin = new Vector2f(1280 / 2f, 64 / 2f);
+            _rect.Position = new Vector2f(1280 / 2f, 490);
+            _rect.FillColor = new Color(0, 0, 0, 160);
+
             _clock = new Clock();
             _clock.Restart();
         }
@@ -62,7 +68,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _moonFront = sin < 0;
             _moon.Scale = new Vector2f((sin + 1) / 3f + 0.33f, (sin + 1) / 3f + 0.33f);
 
-            _moon.Position = _earth.Position + new Vector2f((float)cos * 500, (float)cos * 100);
+            _moon.Position = _earth.Position + new Vector2f((float)cos * 500, (float)cos * 150);
 
             _start.Color = new Color(255, 255, 255, (byte)(128 + 128 * SMath.Cos(_clock.ElapsedTime.AsMilliseconds() / 200.0)));
         }
@@ -79,6 +85,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 renderTarget.Draw(_moon);
 
             renderTarget.Draw(_earth);
+            renderTarget.Draw(_rect);
             renderTarget.Draw(_start);
 
             if(!_moonFront)

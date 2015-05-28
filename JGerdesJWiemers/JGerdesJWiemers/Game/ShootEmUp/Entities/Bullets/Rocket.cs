@@ -23,7 +23,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets
         /// <param name="rotation"></param>
         /// <param name="scale"></param>
         public Rocket(float x, float y, World w, Vector2 direction, float rotation, float scale)
-            : base(x, y, w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_SPACESHIP), direction, rotation, 0.5f)
+            : base(x, y, w, AssetLoader.Instance.LoadTexture(AssetLoader.TEXTURE_MISSILE), direction, rotation, 0.8f)
         {
             _blastRadius = 10;
             _blastStrength = 60;
