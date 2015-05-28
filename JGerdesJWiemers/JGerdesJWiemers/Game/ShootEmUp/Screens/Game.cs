@@ -2,6 +2,7 @@
 using FarseerPhysics.Collision;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens.Interfaces;
@@ -63,13 +64,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _waveManager.OnWavesCompleted += delegate(Wave wave)
             {
-                GameOver();
+                GameOver("Everything cleared!");
             };
 
             Earth earth = new Earth(_world, ConvertUnits.ToSimUnits(1280 / 2f), ConvertUnits.ToSimUnits(600), 4);
             earth.OnEarthDestroyed += delegate()
             {
-                GameOver();
+                GameOver("Houston, we have a problem!");
+                AudioManager.Instance.Play(AssetLoader.AUDIO_HOUSTON);
             };
             _entities.Add(earth);
             //_entities.Add(new Moon(_world, earth, 1.5f));
@@ -102,7 +104,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 }
                 else
                 {
-                    GameOver();
+                    GameOver("Houston, we have a problem!");
+                    AudioManager.Instance.Play(AssetLoader.AUDIO_HOUSTON);
                 }
             };
 
@@ -115,12 +118,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         }
 
 
-        public void GameOver()
+        public void GameOver(String title)
         {
             if (!(_screenManager.Top() is GameOverScreen))
             {
                 _screenManager.PopTo(this);
-                _screenManager.Switch(new GameOverScreen(_window));
+                _screenManager.Switch(new GameOverScreen(_window, title));
             }
 
             

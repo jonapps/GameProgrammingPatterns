@@ -53,6 +53,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String AUDIO_ASTRONAUT1 = @"Assets\Audio\astronaut1.wav";
         public static readonly String AUDIO_ASTRONAUT2 = @"Assets\Audio\astronaut2.wav";
         public static readonly String AUDIO_ASTRONAUT3 = @"Assets\Audio\astronaut3.wav";
+        public static readonly String AUDIO_HOUSTON = @"Assets\Audio\houston-problem.wav";
 
         public static readonly String CONFIG_INPUT = "input.json";
 
@@ -104,6 +105,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             AudioManager.Instance.AddSound(AUDIO_ASTRONAUT1, AUDIO_ASTRONAUT1);
             AudioManager.Instance.AddSound(AUDIO_ASTRONAUT2, AUDIO_ASTRONAUT2);
             AudioManager.Instance.AddSound(AUDIO_ASTRONAUT3, AUDIO_ASTRONAUT3);
+            AudioManager.Instance.AddSound(AUDIO_HOUSTON, AUDIO_HOUSTON);
         }
 
         public void LoadFont(String name, String filename)

@@ -97,6 +97,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
                 _waves.Peek().Start();
                 GameManager.Instance.SetRocketsLeft(20);
                 GameManager.Instance.SetRoundsLeft(1000);
+                GameManager.Instance.SetWave(GameManager.Instance.GetWave() + 1);
                 if (OnWaveStarted != null)
                     OnWaveStarted(_waves.Peek());
             }

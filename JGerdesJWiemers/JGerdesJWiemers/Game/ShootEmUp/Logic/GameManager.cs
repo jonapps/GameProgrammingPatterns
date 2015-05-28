@@ -71,6 +71,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             return _score;
         }
 
+        public int GetWave()
+        {
+            return _currentWave;
+        }
+
         public void AddScore(int score)
         {
             _score += score;

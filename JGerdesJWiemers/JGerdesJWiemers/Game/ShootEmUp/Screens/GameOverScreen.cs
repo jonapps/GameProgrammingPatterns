@@ -25,7 +25,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         Vector2f _earthDestination;
         bool _eartIsUp = false;
 
-        public GameOverScreen(RenderWindow w)
+        public GameOverScreen(RenderWindow w, String title)
             : base(w)
         {
             _background = new RectangleShape(new Vector2f(1280, 720));
@@ -40,7 +40,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _spaceship.Origin = new Vector2f(_spaceship.GetLocalBounds().Width / 2f, _spaceship.GetLocalBounds().Height / 2f);
             _spaceship.Position = new Vector2f(900, 500);
 
-            _header = new Text("GameOver", AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT));
+            _header = new Text(title, AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_LIGHT));
             _header.CharacterSize = 48;
             _header.Origin = new Vector2f(_header.GetLocalBounds().Width / 2f, 0);
             _header.Position = new Vector2f(1280 / 2f, 32);
@@ -58,6 +58,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 _screenManager.Switch(new TitleScreen(_window));
                 return true;
             });
+
 
         }
 

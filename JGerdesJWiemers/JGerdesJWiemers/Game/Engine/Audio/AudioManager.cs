@@ -81,14 +81,9 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         /// <param name="pathToSound">Path to the Soundfile</param>
         public void AddSound(String key, String pathToSound)
         {
-            try
+            if (!_sounds.ContainsKey(key))
             {
                 _sounds.Add(key, new Sound(new SoundBuffer(pathToSound)));
-            }
-            catch (Exception e)
-            {
-                //todo
-                //System.Console.WriteLine("SoundError");
             }
             
         }
@@ -113,6 +108,7 @@ namespace JGerdesJWiemers.Game.Engine.Audio
                     ns.Volume = volume;
                     ns.Play();
                     _plaingSounds.Add(ns);
+                   
                     //s.
                     //s.Loop = loop;
                     //s.Volume = volume;
