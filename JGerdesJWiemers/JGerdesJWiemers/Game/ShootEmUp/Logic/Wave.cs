@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using SFML.System;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,28 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 {
     class Wave
     {
+        private List<Entity> _entities;
+
         private long _startTime = 0;
         private long _length = 0;
         private SortedDictionary<int, List<Entity.EntityDef>> _generationList;
 
         public Wave()
         {
+            _entities = new List<Entity>();
             _generationList = new SortedDictionary<int, List<Entity.EntityDef>>();
         }
 
         public Wave(SortedDictionary<int, List<Entity.EntityDef>> generationList)
         {
+            _entities = new List<Entity>();
             _generationList = generationList;
             _length = _generationList.Keys.Last();
         }
 
         public Wave(SortedDictionary<int, List<Entity.EntityDef>> generationList, long length)
         {
+            _entities = new List<Entity>();
             _generationList = generationList;
             _length = length;
         }
@@ -46,6 +52,20 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             _startTime = Game.ElapsedFrameTime;
         }
 
+
+        private bool _CheckAllEntitiesDead()
+        {
+            bool allDead = true;
+            for (int i = 0; i < _entities.Count; ++i)
+            {
+                if (!_entities[i].DeleteMe)
+                {
+                    allDead = false;
+                }
+            }
+            return allDead;
+        }
+
         public List<Entity> Generate()
         {
             long currentTime = Game.ElapsedTime - _startTime;
@@ -58,9 +78,16 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
                 {
                     foreach (Entity.EntityDef def in entry.Value)
                     {
-                        entities.Add(EntityFactory.Instance.Spawn(def));
+                        Entity e = EntityFactory.Instance.Spawn(def);
+                        entities.Add(e);
+                        _entities.Add(e);
+                        if(e is Asteroid){
+                            (e as Asteroid).OnSplit += _AddListOfAsteroid;
+                        }
+                        
                     }
                     toDelete.Add(entry.Key);
+                    
                 }
             }
             
@@ -73,10 +100,20 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             return entities;
         }
 
+        private void _AddListOfAsteroid(List<Asteroid> la)
+        {
+            _entities.AddRange(la);
+            foreach (Asteroid a in la)
+            {
+                a.OnSplit += _AddListOfAsteroid;
+            }
+        }
+
         public bool isOver()
         {
             long currentTime = Game.ElapsedTime - _startTime;
-            return currentTime >= _length && _generationList.Count == 0;
+            bool over = (currentTime >= _length && _generationList.Count == 0) && _CheckAllEntitiesDead();
+            return over;
         }
     }
 }

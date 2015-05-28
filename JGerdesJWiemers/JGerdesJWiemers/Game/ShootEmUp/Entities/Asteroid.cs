@@ -18,6 +18,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
     class Asteroid : SpriteEntity
     {
+        public delegate void AstroidSplit(List<Asteroid> la);
+        public event AstroidSplit OnSplit;
 
         private static int SPLIT_EXPLOSION_SPEED_MULTIPLIER = 5;
         private static int SPLIT_MIN_CHILDS = 2;
@@ -76,6 +78,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             if (_splitLevel > 0)
             {
+                List<Asteroid> newAsteroids = new List<Asteroid>();
                 AsteroidDef def;
                 Random rand = new Random();
                 int count = rand.Next(SPLIT_MIN_CHILDS, SPLIT_MAX_CHILDS);
@@ -85,8 +88,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                     Vector2 speed = new Vector2((float)SMath.Cos(degree), (float)SMath.Sin(degree));
                     def = new AsteroidDef(_body.WorldCenter.X + speed.X, _body.WorldCenter.Y + speed.Y,
                         speed.X * SPLIT_EXPLOSION_SPEED_MULTIPLIER, speed.X * SPLIT_EXPLOSION_SPEED_MULTIPLIER, _splitLevel - 1, _scale / 2f, 0);
-                    EntityFactory.Instance.Spawn(def);
+                    newAsteroids.Add((Asteroid)EntityFactory.Instance.Spawn(def));
                 }
+                OnSplit(newAsteroids);
             }
             _deleteMe = true;
             _splitLevel = 0;
