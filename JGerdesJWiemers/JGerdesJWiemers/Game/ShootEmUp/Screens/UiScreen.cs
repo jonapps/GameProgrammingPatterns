@@ -16,6 +16,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
     class UiScreen : Screen
     {
         private static readonly string TEXT_PRE_SCORE = "Score: ";
+        private static readonly string TEXT_PRE_ASTRONAUTS = "Astronauts: ";
+        private static readonly string TEXT_PRE_WAVE = "Wave: ";
 
         private Sprite _bg;
         private Sprite _shuttle;
@@ -23,6 +25,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         private View _view;
         private List<Text> _texts;
         private Text _score;
+        private Text _wave;
+        private Text _astronauts;
 
         public UiScreen(RenderWindow w)
             :base(w)
@@ -38,14 +42,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _earth.SetAnimation(new Animation(0, 15, 500, true, false));
             _earth.Texture.Smooth = false;
             _earth.Scale *= 1.6f;
-            _earth.Color = new Color(0, 255, 0, 200);
+            _earth.Color = new Color(0, 255, 0, 160);
 
             _shuttle = new Sprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_SHUTTLE).Texture);
             _shuttle.Origin = new Vector2f(_shuttle.GetLocalBounds().Width / 2f, _shuttle.GetLocalBounds().Height / 2f);
             _shuttle.Texture.Smooth = false;
             _shuttle.Scale *= 1.6f;
             _shuttle.Position = _bg.Position + new Vector2f(1040, -34);
-            _shuttle.Color = new Color(0, 255, 0, 200);
+            _shuttle.Color = new Color(0, 255, 0, 160);
 
             Vector2f size = new Vector2f(w.Size.X, w.Size.Y);
             _view = new View(size / 2f, size);
@@ -61,6 +65,26 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _score = new Text(scoreText);
             UpdateScore(GameManager.Instance.Score);
             _score.Position = _bg.Position + new Vector2f(320, -62);
+
+            Text astroText = new Text(scoreText);
+            astroText.Position = _bg.Position + new Vector2f(118, -44);
+            astroText.DisplayedString = TEXT_PRE_ASTRONAUTS;
+            _texts.Add(astroText);
+
+            _astronauts = new Text(scoreText);
+            UpdateAstronauts(GameManager.Instance.Astronauts);
+            _astronauts.Position = _bg.Position + new Vector2f(320, -44);
+            _texts.Add(_astronauts);
+
+            Text waveText = new Text(scoreText);
+            waveText.Position = _bg.Position + new Vector2f(118, -26);
+            waveText.DisplayedString = TEXT_PRE_WAVE;
+            _texts.Add(waveText);
+
+            _wave = new Text(scoreText);
+            UpdateWave(GameManager.Instance.CurrentWave);
+            _wave.Position = _bg.Position + new Vector2f(320, -26);
+            _texts.Add(_wave);
             
             _texts.Add(_score);
 
@@ -71,6 +95,30 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _score.DisplayedString = "" + score;
             FloatRect bounds = _score.GetLocalBounds();
             _score.Origin = new Vector2f(bounds.Width, 0);
+        }
+
+        public void UpdateAstronauts(int astronauts)
+        {
+            _astronauts.DisplayedString = "" + astronauts;
+            FloatRect bounds = _astronauts.GetLocalBounds();
+            _astronauts.Origin = new Vector2f(bounds.Width, 0);
+        }
+
+        public void UpdateWave(int wave)
+        {
+            _wave.DisplayedString = "" + wave;
+            FloatRect bounds = _wave.GetLocalBounds();
+            _wave.Origin = new Vector2f(bounds.Width, 0);
+        }
+
+        public void UpdateEarthHealth(int health)
+        {
+            _earth.Color = _HealthToColor(health, 100);
+        }
+
+        public void UpdateShipHealth(int health)
+        {
+            _shuttle.Color = _HealthToColor(health, 100);
         }
 
         public override void Update()
@@ -109,6 +157,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public override bool DoUpdateBelow()
         {
             return true;
+        }
+
+
+        private Color _HealthToColor(float health, int max)
+        {
+            byte red = (byte)(255 * (max / health));
+            health = max - health;
+            byte green = (byte)(255 * (max / health));
+            return new Color(red, green, 0, 200);
         }
     }
 }
