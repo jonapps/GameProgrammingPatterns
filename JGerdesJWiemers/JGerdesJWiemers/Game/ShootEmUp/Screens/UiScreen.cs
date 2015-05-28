@@ -1,6 +1,7 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -21,6 +22,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         private AnimatedSprite _earth;
         private View _view;
         private List<Text> _texts;
+        private Text _score;
 
         public UiScreen(RenderWindow w)
             :base(w)
@@ -50,18 +52,31 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _texts = new List<Text>();
 
-            Text score = new Text(TEXT_PRE_SCORE, AssetLoader.Instance.getFont(AssetLoader.FONT_DIGITAL));
-            score.Color = new Color(0, 255, 96);
-            score.CharacterSize = 14;
-            score.Position = _bg.Position + new Vector2f(118, -62);
+            Text scoreText = new Text(TEXT_PRE_SCORE, AssetLoader.Instance.getFont(AssetLoader.FONT_DIGITAL));
+            scoreText.Color = new Color(0, 255, 96);
+            scoreText.CharacterSize = 14;
+            scoreText.Position = _bg.Position + new Vector2f(118, -62);
+            _texts.Add(scoreText);
 
-            _texts.Add(score);
+            _score = new Text(scoreText);
+            UpdateScore(GameManager.Instance.Score);
+            _score.Position = _bg.Position + new Vector2f(320, -62);
+            
+            _texts.Add(_score);
 
+        }
+
+        public void UpdateScore(int score)
+        {
+            _score.DisplayedString = "" + score;
+            FloatRect bounds = _score.GetLocalBounds();
+            _score.Origin = new Vector2f(bounds.Width, 0);
         }
 
         public override void Update()
         {
             _earth.Update();
+            
         }
 
         public override void PastUpdate()

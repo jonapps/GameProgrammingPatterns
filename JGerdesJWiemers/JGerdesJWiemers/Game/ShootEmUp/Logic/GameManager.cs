@@ -14,19 +14,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
         public int Astronauts { get; set; }
 
 
-        public static GameManager Instance = null;
+        private static GameManager _instance = null;
         private GameManager()
         {
 
         }
-
-        public static GameManager GetInstance()
+        public static GameManager Instance
         {
-            if (Instance == null)
+            get
             {
-                new GameManager();
+                if (_instance == null)
+                {
+                    _instance = new GameManager();
+                }
+                return _instance;
             }
-            return Instance;
         }
     }
 }
