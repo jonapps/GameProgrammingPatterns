@@ -24,6 +24,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String FONT_DIGITAL = "digital-7-mono.ttf";
 
         public static readonly String TEXTURE_UI = "UI";
+        public static readonly String TEXTURE_UI_EARTH = "ui_earth";
+        public static readonly String TEXTURE_UI_SHUTTLE = "ui_spaceshuttle";
 
         public static readonly String TEXTURE_ASTRONAUT = "astronaut";
         public static readonly String TEXTURE_EARTH = "earth";
@@ -60,6 +62,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadFont(FONT_DIGITAL, FONT_DIGITAL);
 
             LoadTexture(TEXTURE_UI, TEXTURE_UI);
+            LoadTexture(TEXTURE_UI_EARTH, TEXTURE_UI_EARTH);
+            LoadTexture(TEXTURE_UI_SHUTTLE, TEXTURE_UI_SHUTTLE);
 
             LoadTexture(TEXTURE_ASTRONAUT, TEXTURE_ASTRONAUT);
             LoadTexture(TEXTURE_EARTH, TEXTURE_EARTH);
