@@ -16,13 +16,19 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
         public event GameScoreChange OnWaveChange;
         public event GameScoreChange OnEarthHealthChange;
         public event GameScoreChange OnPlayerHealthChange;
+        public event GameScoreChange OnCurrentWeaponChange;
+        public event GameScoreChange OnRoundsChange;
+        public event GameScoreChange OnRocketsChange;
+
 
         private int _score = 0;
         private int _currentWave = 0;
         private int _astronauts = 0;
         private int _earthHealth = 0;
         private int _playerHealth = 0;
-
+        private int _currentWeapon = 0;
+        private int _roundsLeft = 0;
+        private int _rocketsLeft = 0;
 
         public void SetPlayerHealth(int health)
         {
@@ -101,6 +107,9 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             _astronauts = 0;
             _earthHealth = 0;
             _playerHealth = 0;
+            _currentWeapon = 0;
+            _roundsLeft = 0;
+            _rocketsLeft = 0;
             
         }
 
