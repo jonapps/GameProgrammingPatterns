@@ -36,10 +36,6 @@ namespace JGerdesJWiemers.Game
         private RenderWindow _window;
         private Stopwatch _stopWatch;
         private ScreenManager _screenManager;
-        private Font _roboto = null;
-        private long _millsSinceSec;
-        private int _fps;
-        private Text _fpsText;
         
 
      
@@ -63,20 +59,7 @@ namespace JGerdesJWiemers.Game
             _window.SetVerticalSyncEnabled(true);
  
 
-            _window.JoystickButtonPressed += delegate(object s, JoystickButtonEventArgs e)
-            {
-                Console.WriteLine(e.Button);
-            };
-
-            try
-            {
-                _roboto = new Font(@"Assets\Fonts\Roboto-Light.ttf");
-            }
-            catch (SFML.LoadingFailedException lfe)
-            {
-                /// todo
-            }
-            _fpsText = new Text("fps: " + _fps, _roboto);
+           
             this.Run();
         }
 
@@ -113,11 +96,6 @@ namespace JGerdesJWiemers.Game
             this._screenManager.Update();
         }
 
-        private void _DrawFPS()
-        {
-
-            _window.Draw(_fpsText);
-        }
          
         /// <summary>
         /// 
