@@ -29,6 +29,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         private Text _score;
         private Text _wave;
         private Text _astronauts;
+        private Text _earthHealth;
+        private Text _shipHealth;
 
         public UiScreen(RenderWindow w)
             :base(w)
@@ -87,10 +89,19 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             UpdateWave(GameManager.Instance.CurrentWave);
             _wave.Position = _bg.Position + new Vector2f(320, -26);
             _texts.Add(_wave);
-            
-            _texts.Add(_score);
+
+            _earthHealth = new Text(scoreText);
+            _earthHealth.CharacterSize = 20;
+            _earthHealth.Position = _bg.Position + new Vector2f(1000, -29);
+            _earthHealth.Color = new Color(240, 240, 255);
+            _texts.Add(_earthHealth);
+
+            _shipHealth = new Text(_earthHealth);
+            _shipHealth.Position = _bg.Position + new Vector2f(1068, -29);
+            _texts.Add(_shipHealth);
 
 
+            UpdateShipHealth(100);
 
             //test
             int i = 100;
@@ -127,11 +138,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public void UpdateEarthHealth(int health)
         {
             _earth.Color = _HealthToColor(health, 100);
+            _earthHealth.DisplayedString = (100 - health) + "%";
+            FloatRect bounds = _earthHealth.GetLocalBounds();
+            _earthHealth.Origin = new Vector2f(bounds.Width, 0);
         }
 
         public void UpdateShipHealth(int health)
         {
             _shuttle.Color = _HealthToColor(health, 100);
+            _shipHealth.DisplayedString = (100 - health) + "%";
+            FloatRect bounds = _shipHealth.GetLocalBounds();
+            _shipHealth.Origin = new Vector2f(bounds.Width, 0);
         }
 
         public override void Update()
@@ -184,7 +201,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             byte bRed = (byte)SMath.Min(255, SMath.Max(0, red));
             byte bGreen = (byte)SMath.Min(255, SMath.Max(0, green));
 
-            return new Color(bRed, bGreen, 0, 200);
+            return new Color(bRed, bGreen, 0, 100);
         }
     }
 }
