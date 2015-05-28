@@ -2,6 +2,7 @@
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using Microsoft.Xna.Framework;
 using SFML.System;
 using System;
@@ -26,14 +27,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
             _bullets.Clear();
             if (_clock.ElapsedTime.AsMilliseconds() > _toShoot)
             {
-                Vector2 directionNormal = new Vector2(direction.Y * -1, direction.X);
-                float x1 = (directionNormal * 2).X + x;
-                float y1 = (directionNormal * 2).Y + y;
-                float x2 = (directionNormal * -2).X + x;
-                float y2 = (directionNormal * -2).Y + y;
-                _clock.Restart();
-                _bullets.Add(new Rounds(x1, y1, w, direction, rotation, 0.5f));
-                _bullets.Add(new Rounds(x2, y2, w, direction, rotation, 0.5f));
+                if (GameManager.Instance.ReduceRounds(2) == 2)
+                {
+                    Vector2 directionNormal = new Vector2(direction.Y * -1, direction.X);
+                    float x1 = (directionNormal * 2).X + x;
+                    float y1 = (directionNormal * 2).Y + y;
+                    float x2 = (directionNormal * -2).X + x;
+                    float y2 = (directionNormal * -2).Y + y;
+                    _clock.Restart();
+                    _bullets.Add(new Rounds(x1, y1, w, direction, rotation, 0.5f));
+                    _bullets.Add(new Rounds(x2, y2, w, direction, rotation, 0.5f));
+                }
             }
             return _bullets;
         }

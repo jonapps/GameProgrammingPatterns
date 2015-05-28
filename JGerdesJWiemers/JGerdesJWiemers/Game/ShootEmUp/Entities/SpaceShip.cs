@@ -108,14 +108,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 if (_currentWeapon is DoubleGatlinGun)
                 {
                     _currentWeapon = new RocketLauncher();
+                    GameManager.Instance.SetCurrentWeapon(2);
                 }
                 else if (_currentWeapon is GatlinGun)
                 {
                     _currentWeapon = new DoubleGatlinGun();
+                    GameManager.Instance.SetCurrentWeapon(1);
                 }
                 else
                 {
                     _currentWeapon = new GatlinGun();
+                    GameManager.Instance.SetCurrentWeapon(0);
                 }
                 return true;
             });

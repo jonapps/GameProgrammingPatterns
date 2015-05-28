@@ -2,6 +2,7 @@
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.ShootEmUp.Entities;
 using JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using Microsoft.Xna.Framework;
 using SFML.System;
 using System;
@@ -23,12 +24,16 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
 
         public override List<Entity> Shoot(float x, float y, World w, Vector2 direction, float rotation)
         {
-            _bullets.Clear();  
+            _bullets.Clear();
             if (_clock.ElapsedTime.AsMilliseconds() > _toShoot)
-            {
-                _clock.Restart();
-                _bullets.Add(new Rocket(x, y, w, direction, rotation, 0.5f));
-            }
+                {
+                    if (GameManager.Instance.ReduceRockets(1) == 1)
+                    {
+                        
+                        _clock.Restart();
+                        _bullets.Add(new Rocket(x, y, w, direction, rotation, 0.5f));
+                    }
+                }
             return _bullets;
         }
     }
