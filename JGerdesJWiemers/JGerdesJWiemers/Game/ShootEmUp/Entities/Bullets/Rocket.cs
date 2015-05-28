@@ -1,4 +1,5 @@
 ﻿using FarseerPhysics.Dynamics;
+using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Utils;
 using Microsoft.Xna.Framework;
 using System;
@@ -28,6 +29,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities.Bullets
             _blastStrength = 60;
             _speed = 100;
             base.Start();
+        }
+
+        protected override void _Blast()
+        {
+            base._Blast();
+
+            EntityFactory.Instance.Spawn(new Explosion.ExplosionDef(_body.Position.X, _body.Position.Y, 0, 0, 1.2f, 0));
         }
     }
 }
