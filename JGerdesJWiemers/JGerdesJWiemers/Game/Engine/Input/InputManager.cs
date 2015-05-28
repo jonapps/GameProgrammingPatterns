@@ -93,7 +93,6 @@ namespace JGerdesJWiemers.Game.Engine.Input
   
         void _JoystickMoved(object sender, JoystickMoveEventArgs e)
         {
-            Console.WriteLine(e.ToString());
             switch (e.Axis)
             {
                 case Joystick.Axis.Y:

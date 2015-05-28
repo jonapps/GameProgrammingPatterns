@@ -1,5 +1,6 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.ShootEmUp.Logic;
 using SFML.Graphics;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 {
@@ -88,6 +90,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             
             _texts.Add(_score);
 
+
+
+            //test
+            int i = 100;
+            _input.On("test1", delegate(InputEvent e, int c){
+                i -= 1;
+                Console.WriteLine(i);
+                UpdateEarthHealth(i);
+                return false;
+            });
+
         }
 
         public void UpdateScore(int score)
@@ -162,10 +175,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
         private Color _HealthToColor(float health, int max)
         {
-            byte red = (byte)(255 * (max / health));
+            //sqrt needed for gamma correction
+            double green = (255 * SMath.Sqrt(health / max));
             health = max - health;
-            byte green = (byte)(255 * (max / health));
-            return new Color(red, green, 0, 200);
+            double red = (255 * SMath.Sqrt(health / max));
+
+            byte bRed = (byte)SMath.Min(255, SMath.Max(0, red));
+            byte bGreen = (byte)SMath.Min(255, SMath.Max(0, green));
+
+            return new Color(bRed, bGreen, 0, 200);
         }
     }
 }
