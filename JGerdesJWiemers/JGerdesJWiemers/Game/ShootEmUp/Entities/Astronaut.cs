@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
@@ -34,13 +35,24 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.OnCollision += _OnCollision;
         }
 
-        bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        bool _OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
         {
-            if (fixtureA.Body.UserData is SpaceShip || fixtureB.Body.UserData is SpaceShip)
+            if (_deleteMe)
             {
-                _body.Enabled = false;
+                contact.Enabled = false;
+                return false;
+            }
+            if (fixtureB.Body.UserData is SpaceShip)
+            {
+                //_body.Enabled = false;
                 _deleteMe = true;
                 GameManager.Instance.AddAstronauts(1);
+            }
+            else if (fixtureB.Body.UserData is Bullet)
+            {
+                //_body.Enabled = false;
+                _deleteMe = true;
+                GameManager.Instance.ReduceScore(50);
             }
             return true;
         }

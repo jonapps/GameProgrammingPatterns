@@ -8,6 +8,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
 {
     class GameManager
     {
+        private static GameManager _instance = null;
 
         public delegate void GameScoreChange(int newVal);
         public event GameScoreChange OnScoreChange;
@@ -29,11 +30,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             if (OnPlayerHealthChange != null) OnPlayerHealthChange(health);
         }
 
-        public void AddScore(int score)
-        {
-            _score += score;
-            if (OnScoreChange != null) OnScoreChange(_score);
-        }
 
         public void SetWave(int wave)
         {
@@ -58,8 +54,18 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             return _score;
         }
 
+        public void AddScore(int score)
+        {
+            _score += score;
+            if (OnScoreChange != null) OnScoreChange(_score);
+        }
 
-        private static GameManager _instance = null;
+        public void ReduceScore(int reduce)
+        {
+            _score -= reduce;
+            if (OnScoreChange != null) OnScoreChange(_score);
+        }
+
         private GameManager()
         {
 
@@ -75,5 +81,17 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
                 return _instance;
             }
         }
+
+
+        public void Reset()
+        {
+            _score = 0;
+            _currentWave = 0;
+            _astronauts = 0;
+            _earthHealth = 0;
+            _playerHealth = 0;
+            
+        }
+
     }
 }

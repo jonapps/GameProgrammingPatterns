@@ -39,18 +39,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.CollisionCategories = EntityCategory.Asteroit;
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.ApplyAngularImpulse(rotSpeed);
-            _body.Mass = 33 * (_splitLevel + 1);
+            _body.Mass = 34 * (_splitLevel + 1);
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
             _scale = scale;
-            _health = 10;
+            _health = 5 * (_splitLevel + 1);
             _fixture.OnCollision += _OnCollision;
         }
 
         private bool _OnCollision(Fixture fa, Fixture fb, Contact contact)
         {
-            
-
-            if (fb.Body.UserData is Earth)
+            if (_deleteMe)
+            {
+                contact.Enabled = false;
+                return false;
+            }
+            if (fb.Body.UserData is Earth && !_hadImpact)
             {
                 Earth earth = fb.Body.UserData as Earth;
                 _hadImpact = true;
@@ -58,14 +61,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 // doesnt work?.. dont know why
                 //fa.Body.Enabled = false;
                 _deleteMe = true;
-            } 
-            else if (fb.Body.UserData is SpaceShip)
+            }
+            else if (fb.Body.UserData is SpaceShip && !_hadImpact)
             {
                 SpaceShip sp = fb.Body.UserData as SpaceShip;
                 sp.ApplyDamage((int)_body.Mass);
                 _deleteMe = true;
             }
-
             return true;
         }
 

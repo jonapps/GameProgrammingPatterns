@@ -23,7 +23,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
     class SpaceShip : SpriteEntity, InputHandler
     {
-
+        public delegate void SpaceShipDestroned();
+        public event SpaceShipDestroned OnDestroy;
         private static readonly float SPEED_DEFAULT = 40;
         private Weapon _currentWeapon;
 
@@ -124,13 +125,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         public override void ApplyDamage(int dmg)
         {
-            Console.WriteLine("Earth health: " + _health + " Damage dealed: " + dmg);
             base.ApplyDamage(dmg);
             GameManager.Instance.SetPlayerHealth(_health);
-            //if (_health <= 0)
-            //{
-            //    OnEarthDestroyed();
-            //}
+            if (_health <= 0)
+            {
+                _deleteMe = true;
+                OnDestroy();
+                EntityFactory.Instance.Spawn(new Explosion.ExplosionDef(_body.Position.X, _body.Position.Y, 0, 0, 1.2f, 0));
+            }
         }
 
 
