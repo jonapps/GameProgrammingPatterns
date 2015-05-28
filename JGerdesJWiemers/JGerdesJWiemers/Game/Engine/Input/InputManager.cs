@@ -1,11 +1,14 @@
 ﻿
 using JGerdesJWiemers.Game.Engine.Exceptions;
+using JGerdesJWiemers.Game.Engine.Utils;
+using Newtonsoft.Json;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.Engine.Input
 {
@@ -17,6 +20,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
         public delegate bool OnInputEvent(string name, InputEvent e, int channel);
 
         private Window _window;
+        private InputConfig _config;
         public event OnInputEvent InputHandler;
 
         public void Init(Window w)
@@ -44,6 +48,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _key(false, sender, e);
             };
 
+            String data = AssetLoader.Instance.GetConfigContent(AssetLoader.CONFIG_INPUT);
+            _config = new InputConfig(JsonConvert.DeserializeObject<InputConfig.JsonFormat>(data));
         }
 
         void _key(bool pressed, object sender, KeyEventArgs e)
@@ -93,69 +99,51 @@ namespace JGerdesJWiemers.Game.Engine.Input
   
         void _JoystickMoved(object sender, JoystickMoveEventArgs e)
         {
-            switch (e.Axis)
+            if(e.Axis == _config.Vertical.Axis)
             {
-                case Joystick.Axis.Y:
-                    if (e.Position <= 0)
-                        InputHandler("up", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    else
-                        InputHandler("down", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    break;
-                case Joystick.Axis.X:
-                    if (e.Position <= 0)
-                        InputHandler("left", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    else
-                        InputHandler("right", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    break;
-                case Joystick.Axis.R:
-                    if (e.Position <= 0)
-                        InputHandler("rotLeft", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    else
-                        InputHandler("rotRight", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    break;
-                case Joystick.Axis.Z:
-                    if (e.Position <= 0)
-                        InputHandler("rotUp", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    else
-                        InputHandler("rotDown", new JoystickEvent(Math.Abs(e.Position) / 100f), (int)e.JoystickId);
-                    break;
+                if (e.Position <= 0)
+                    InputHandler("up", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+                else
+                    InputHandler("down", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+            } 
+            else if(e.Axis == _config.Horizontal.Axis) 
+            {
+                if (e.Position <= 0)
+                    InputHandler("left", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+                else
+                    InputHandler("right", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+            } 
+            else if(e.Axis == _config.RotationHorizontal.Axis) 
+            {
+                if (e.Position <= 0)
+                    InputHandler("rotLeft", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+                else
+                    InputHandler("rotRight", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+            } 
+            else if(e.Axis == _config.RotationVertical.Axis)
+            {
+                if (e.Position <= 0)
+                    InputHandler("rotUp", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
+                else
+                    InputHandler("rotDown", new JoystickEvent(SMath.Abs(e.Position) / 100f), (int)e.JoystickId);
             }
         }
 
         void _joystick(bool pressed, object sender, JoystickButtonEventArgs e)
         {
-            switch (e.Button)
+            if (e.Button == _config.Shoot)
             {
-                case 3:
-                    InputHandler("land", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 5:
-                    InputHandler("weaponSwitch", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 4:
-                    InputHandler("shoot", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 9:
-                    if(pressed)
-                        InputHandler("return", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 12:
-                    if (pressed)
-                        InputHandler("test1", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 13:
-                    if (pressed)
-                        InputHandler("test2", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 14:
-                    if (pressed)
-                        InputHandler("test3", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
-                case 15:
-                    if (pressed)
-                        InputHandler("test4", new KeyEvent(pressed), (int)e.JoystickId);
-                    break;
+                InputHandler("shoot", new KeyEvent(pressed), (int)e.JoystickId);
             }
+            else if (e.Button == _config.WeaponSwitch)
+            {
+                InputHandler("weaponSwitch", new KeyEvent(pressed), (int)e.JoystickId);
+            }
+            else if (e.Button == _config.Return && pressed)
+            {
+                InputHandler("return", new KeyEvent(pressed), (int)e.JoystickId);
+            }
+           
         }
 
         public static InputManager Instance

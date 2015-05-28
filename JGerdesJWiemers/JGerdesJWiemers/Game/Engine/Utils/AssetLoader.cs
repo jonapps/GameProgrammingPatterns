@@ -46,9 +46,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_ASTEROID3 = @"asteroids\asteroid3";
         public static readonly String TEXTURE_EXPLOSION1 = @"explosions\explosion1";
 
+        public static readonly String CONFIG_INPUT = "input.json";
+
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
+        private readonly String DIR_SETTINGS = @"Assets\Configuration";
 
         private Dictionary<String, Font> _fonts;
         private Dictionary<String, TextureContainer> _textures;
@@ -103,6 +106,14 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         public Font getFont(String name){
             return _fonts[name];
+        }
+
+        public String GetConfigContent(String name)
+        {
+            String filepath = DIR_SETTINGS + "\\" +name;
+            System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+            String content = file.ReadToEnd();
+            return content;
         }
 
         public TextureContainer LoadTexture(String name)

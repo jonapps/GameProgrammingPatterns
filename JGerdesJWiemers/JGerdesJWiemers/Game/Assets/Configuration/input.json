@@ -1,0 +1,22 @@
+{
+	"Vertical" : {
+		"Axis": "Y",
+		"Deadzone": 10
+	},
+	"Horizontal" : {
+		"Axis": "X",
+		"Deadzone": 10
+	},
+	"RotationVertical" : {
+		"Axis": "Z",
+		"Deadzone": 10
+	},
+	"RotationHorizontal": {
+		"Axis": "R",
+		"Deadzone": 10
+	},
+	"Shoot": 4,
+	"WeaponSwitch": 5,
+	"Return": 9
+
+}

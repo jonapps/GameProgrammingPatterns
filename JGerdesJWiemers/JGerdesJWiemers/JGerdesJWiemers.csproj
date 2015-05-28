@@ -112,6 +112,7 @@
     <Compile Include="Game\Engine\Graphics\Screens\Interfaces\EntityHolder.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Screen.cs" />
     <Compile Include="Game\Engine\Graphics\TextureContainer.cs" />
+    <Compile Include="Game\Engine\Input\InputConfig.cs" />
     <Compile Include="Game\Engine\Input\InputEvent.cs" />
     <Compile Include="Game\Engine\Input\InputHandler.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
