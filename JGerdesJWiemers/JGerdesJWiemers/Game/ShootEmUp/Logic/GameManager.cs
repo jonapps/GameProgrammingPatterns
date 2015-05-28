@@ -14,11 +14,20 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
         public event GameScoreChange OnAstronautChange;
         public event GameScoreChange OnWaveChange;
         public event GameScoreChange OnEarthHealthChange;
+        public event GameScoreChange OnPlayerHealthChange;
 
         private int _score = 0;
         private int _currentWave = 0;
         private int _astronauts = 0;
         private int _earthHealth = 0;
+        private int _playerHealth = 0;
+
+
+        public void SetPlayerHealth(int health)
+        {
+            _playerHealth = health;
+            if (OnPlayerHealthChange != null) OnPlayerHealthChange(health);
+        }
 
         public void AddScore(int score)
         {

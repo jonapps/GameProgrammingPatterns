@@ -135,7 +135,12 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
                 UpdateWave(newval);
             };
 
+            GameManager.Instance.OnPlayerHealthChange += delegate(int newval)
+            {
+                UpdateShipHealth(newval);
+            };
         }
+
 
         public void UpdateScore(int score)
         {

@@ -17,6 +17,7 @@ using JGerdesJWiemers.Game.ShootEmUp.Weapons;
 using JGerdesJWiemers.Game.Engine;
 using FarseerPhysics.Controllers;
 using FarseerPhysics;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
@@ -117,8 +118,20 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 }
                 return true;
             });
+            GameManager.Instance.SetPlayerHealth(_health);
         }
 
+
+        public override void ApplyDamage(int dmg)
+        {
+            Console.WriteLine("Earth health: " + _health + " Damage dealed: " + dmg);
+            base.ApplyDamage(dmg);
+            GameManager.Instance.SetPlayerHealth(_health);
+            //if (_health <= 0)
+            //{
+            //    OnEarthDestroyed();
+            //}
+        }
 
 
 

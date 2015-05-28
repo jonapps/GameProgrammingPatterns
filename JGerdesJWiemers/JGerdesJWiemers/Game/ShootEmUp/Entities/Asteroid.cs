@@ -27,7 +27,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private static int SPLIT_MAX_CHILDS = 3;
         private int _splitLevel;
         private float _scale;
-        private bool _worldImpact = false;
+        private bool _hadImpact = false;
 
 
         public Asteroid(World world, float x, float y, string textureName, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0, int splitLevel = 0)
@@ -48,21 +48,24 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
         private bool _OnCollision(Fixture fa, Fixture fb, Contact contact)
         {
-            Earth earth = null;
+            
 
             if (fb.Body.UserData is Earth)
             {
-                earth = fb.Body.UserData as Earth;
-            }
-
-            if (earth != null && !_worldImpact)
-            {
-                _worldImpact = true;
+                Earth earth = fb.Body.UserData as Earth;
+                _hadImpact = true;
                 earth.ApplyDamage((int)_body.Mass);
                 // doesnt work?.. dont know why
                 //fa.Body.Enabled = false;
                 _deleteMe = true;
+            } 
+            else if (fb.Body.UserData is SpaceShip)
+            {
+                SpaceShip sp = fb.Body.UserData as SpaceShip;
+                sp.ApplyDamage((int)_body.Mass);
+                _deleteMe = true;
             }
+
             return true;
         }
 
@@ -81,7 +84,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             if (_splitLevel > 0)
             {
-                GameManager.Instance.AddScore(100);
+                
                 List<Asteroid> newAsteroids = new List<Asteroid>();
                 AsteroidDef def;
                 Random rand = new Random();
@@ -96,6 +99,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 }
                 OnSplit(newAsteroids);
             }
+            GameManager.Instance.AddScore(100);
             _deleteMe = true;
             _splitLevel = 0;
         }
