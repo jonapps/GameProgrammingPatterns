@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Utils;
@@ -28,14 +29,36 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         public Asteroid(World world, float x, float y, string textureName, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0, int splitLevel = 0)
             : base(world, AssetLoader.Instance.getTexture(textureName), scale)
         {
+            _splitLevel = splitLevel +1;
             _body.CollisionCategories = EntityCategory.Asteroit;
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.ApplyAngularImpulse(rotSpeed);
-            _body.Mass = 100;
+            _body.Mass = 100 / _splitLevel;
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
             _splitLevel = splitLevel;
             _scale = scale;
             _health = 10;
+            _body.OnCollision += _OnCollision;
+        }
+
+        private bool _OnCollision(Fixture fa, Fixture fb, Contact contact)
+        {
+            Earth earth = null;
+            if (fa.Body.UserData is Earth)
+            {
+                earth = fa.Body.UserData as Earth;
+            }
+            else if (fb.Body.UserData is Earth)
+            {
+                earth = fb.Body.UserData as Earth;
+            }
+
+            if (earth != null)
+            {
+                earth.ApplyDamage((int)_body.Mass);
+                _deleteMe = true;
+            }
+            return true;
         }
 
 

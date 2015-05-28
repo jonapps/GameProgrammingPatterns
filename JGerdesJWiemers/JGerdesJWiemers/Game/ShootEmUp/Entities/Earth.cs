@@ -2,6 +2,7 @@
 using FarseerPhysics.Common;
 using FarseerPhysics.Controllers;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
@@ -18,7 +19,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
     class Earth : SpriteEntity
     {
-
+        public delegate void EarthEventHandler();
+        public event EarthEventHandler OnEarthDestroyed;
         private Animation _rotateAnimation;
 
         public Earth(World world, float x, float y, float radius) :
@@ -37,6 +39,20 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.CollisionCategories = EntityCategory.Earth;
 
         }
+
+        public override void ApplyDamage(int dmg)
+        {
+            base.ApplyDamage(dmg);
+            Console.WriteLine("Earth health: "+_health);
+            if (_health <= 0)
+            {
+                OnEarthDestroyed();
+            }
+        }
+
+
+
+
 
         public class EarthDef : EntityDef
         {
