@@ -27,7 +27,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         private static int SPLIT_MAX_CHILDS = 3;
         private int _splitLevel;
         private float _scale;
-        private bool _worldImpact = false;
+
 
 
         public Asteroid(World world, float x, float y, string textureName, float scale = 1, float xSpeed = 0, float ySpeed = 0, float rotSpeed = 0, int splitLevel = 0)
@@ -39,28 +39,32 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _body.CollisionCategories = EntityCategory.Asteroit;
             _body.LinearVelocity = new Vector2(xSpeed, ySpeed);
             _body.ApplyAngularImpulse(rotSpeed);
-            _body.Mass = 33 * (_splitLevel + 1);
+            _body.Mass = 34 * (_splitLevel + 1);
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
             _scale = scale;
-            _health = 10;
+            _health = 5 * (_splitLevel + 1);
             _fixture.OnCollision += _OnCollision;
         }
 
         private bool _OnCollision(Fixture fa, Fixture fb, Contact contact)
         {
-            Earth earth = null;
-
+            if (_deleteMe)
+            {
+                contact.Enabled = false;
+                return false;
+            }
             if (fb.Body.UserData is Earth)
             {
-                earth = fb.Body.UserData as Earth;
-            }
-
-            if (earth != null && !_worldImpact)
-            {
-                _worldImpact = true;
+                Earth earth = fb.Body.UserData as Earth;
                 earth.ApplyDamage((int)_body.Mass);
                 // doesnt work?.. dont know why
                 //fa.Body.Enabled = false;
+                _deleteMe = true;
+            }
+            else if (fb.Body.UserData is SpaceShip)
+            {
+                SpaceShip sp = fb.Body.UserData as SpaceShip;
+                sp.ApplyDamage((int)_body.Mass);
                 _deleteMe = true;
             }
             return true;
@@ -81,7 +85,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         {
             if (_splitLevel > 0)
             {
-                GameManager.Instance.AddScore(100);
+                
                 List<Asteroid> newAsteroids = new List<Asteroid>();
                 AsteroidDef def;
                 Random rand = new Random();
@@ -96,6 +100,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 }
                 OnSplit(newAsteroids);
             }
+            GameManager.Instance.AddScore(100);
             _deleteMe = true;
             _splitLevel = 0;
         }

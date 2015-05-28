@@ -42,16 +42,14 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         public Game(RenderWindow w)
             : base(w) 
         {
+            // reset all globals 
+            GameManager.Instance.Reset();
 
             _window.LostFocus += delegate(object sender, EventArgs e)
             {
                 if(! (_screenManager.Top() is PauseScreen))
                     _screenManager.Push(new PauseScreen(_window));
             };
-
-            
-
-            Settings.MaxPolygonVertices = 32;
             _world = new World(new Vector2(0,0));
 
             _waveManager = new WaveManager(_world);
@@ -63,9 +61,8 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
 
 
-            _waveManager.OnWaveCompleted += delegate(Wave wave)
+            _waveManager.OnWavesCompleted += delegate(Wave wave)
             {
-                Console.WriteLine("wave is over!");
                 GameOver();
             };
 
@@ -78,6 +75,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _entities.Add(new Moon(_world, earth, 1.5f));
 
             _ship = new SpaceShip(10, 10, _world, this);
+            _ship.OnDestroy += delegate() 
+            {
+                Console.WriteLine("spaceship down");
+            };
+
             _entities.Add(_ship);
 
 

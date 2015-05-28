@@ -49,7 +49,8 @@ namespace JGerdesJWiemers.Game
         public void Start()
         {
             ContextSettings settings = new ContextSettings();
-            settings.AntialiasingLevel = 8;
+            settings.AntialiasingLevel = 16;
+            Settings.MaxPolygonVertices = 32;
             this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default, settings);
             _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();

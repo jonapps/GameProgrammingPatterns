@@ -17,12 +17,14 @@ using JGerdesJWiemers.Game.ShootEmUp.Weapons;
 using JGerdesJWiemers.Game.Engine;
 using FarseerPhysics.Controllers;
 using FarseerPhysics;
+using JGerdesJWiemers.Game.ShootEmUp.Logic;
 
 namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 {
     class SpaceShip : SpriteEntity, InputHandler
     {
-
+        public delegate void SpaceShipDestroned();
+        public event SpaceShipDestroned OnDestroy;
         private static readonly float SPEED_DEFAULT = 40;
         private Weapon _currentWeapon;
 
@@ -117,8 +119,21 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                 }
                 return true;
             });
+            GameManager.Instance.SetPlayerHealth(_health);
         }
 
+
+        public override void ApplyDamage(int dmg)
+        {
+            base.ApplyDamage(dmg);
+            GameManager.Instance.SetPlayerHealth(_health);
+            if (_health <= 0)
+            {
+                _deleteMe = true;
+                OnDestroy();
+                EntityFactory.Instance.Spawn(new Explosion.ExplosionDef(_body.Position.X, _body.Position.Y, 0, 0, 1.2f, 0));
+            }
+        }
 
 
 
