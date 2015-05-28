@@ -72,7 +72,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     InputHandler("shoot", new KeyEvent(pressed), 0);
                     break;
                 case Keyboard.Key.Return:
-                    InputHandler("return", new KeyEvent(pressed), 0);
+                    if(pressed)
+                        InputHandler("return", new KeyEvent(pressed), 0);
                     break;
             }
         }
@@ -111,7 +112,8 @@ namespace JGerdesJWiemers.Game.Engine.Input
                     InputHandler("shoot", new KeyEvent(pressed), (int)e.JoystickId);
                     break;
                 case 9:
-                    InputHandler("return", new KeyEvent(pressed), (int)e.JoystickId);
+                    if(pressed)
+                        InputHandler("return", new KeyEvent(pressed), (int)e.JoystickId);
                     break;
             }
         }
