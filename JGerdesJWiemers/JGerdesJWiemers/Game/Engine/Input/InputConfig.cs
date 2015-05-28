@@ -38,6 +38,22 @@ namespace JGerdesJWiemers.Game.Engine.Input
             public int Shoot { get; set; }
             public int WeaponSwitch { get; set; }
             public int Return { get; set; }
+
+            public JsonFormat()
+            {
+
+            }
+
+            public JsonFormat(InputConfig config)
+            {
+                Vertical = new AxisConfig.JsonFormat(config.Vertical);
+                Vertical = new AxisConfig.JsonFormat(config.Vertical);
+                Vertical = new AxisConfig.JsonFormat(config.Vertical);
+                Vertical = new AxisConfig.JsonFormat(config.Vertical);
+                Shoot = (int)config.Shoot;
+                WeaponSwitch = (int)config.WeaponSwitch;
+                Return = (int)config.Return;
+            }
         }
     }
 
@@ -69,6 +85,24 @@ namespace JGerdesJWiemers.Game.Engine.Input
         {
             public String Axis { get; set; }
             public int Deadzone { get; set; }
+
+            public JsonFormat()
+            {
+
+            }
+
+            public JsonFormat(AxisConfig conf)
+            {
+                Axis = "to set";
+                foreach(String key in MAPPING.Keys)
+                {
+                    if (MAPPING[key] == conf.Axis)
+                    {
+                        Axis = key;
+                    }
+                }
+                Deadzone = conf.Deadzone;
+            }
         }
     }
 }
