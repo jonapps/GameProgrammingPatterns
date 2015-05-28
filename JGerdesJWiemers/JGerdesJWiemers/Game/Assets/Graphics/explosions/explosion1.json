@@ -1,6 +1,6 @@
 {
 	"ImageTitle": "explosion1.png",
-	"Width": 160,
-	"Height": 160,
+	"Width": 64,
+	"Height": 64,
 	"Type" : "Rectangle"
 }

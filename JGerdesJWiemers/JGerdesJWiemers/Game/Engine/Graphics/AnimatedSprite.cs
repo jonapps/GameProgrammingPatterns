@@ -20,6 +20,9 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
         private int _currentIndex;
         private long _startTime;
 
+        public delegate void AnimationEventHandler(Animation animation);
+        public event AnimationEventHandler OnAnimationEnded;
+
         public AnimatedSprite(Texture tex, int tileWidth, int tileHeight, Animation animation)
             : base(tex)
         {
@@ -80,6 +83,10 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             //reached last frame of current animation
             if (_currentIndex + 1 >= _animationQueue.Peek().Frames.Length)
             {
+                if (!_animationQueue.Peek().Loop && OnAnimationEnded != null)
+                {
+                    OnAnimationEnded(_animationQueue.Peek());
+                }
                 //if there is another animation in queue, play it! (also remove current animation)
                 if (_animationQueue.Count > 1)
                 {

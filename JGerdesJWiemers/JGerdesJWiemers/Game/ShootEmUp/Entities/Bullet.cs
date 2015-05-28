@@ -86,7 +86,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
         /// <summary>
         /// 
         /// </summary>
-        private void _Blast()
+        protected virtual void _Blast()
         {
             _aabb.LowerBound = _body.WorldCenter - new Vector2(_blastRadius,_blastRadius);
             _aabb.UpperBound = _body.WorldCenter + new Vector2(_blastRadius,_blastRadius);
@@ -103,7 +103,6 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
                
             }
             _deleteMe = true;
-            EntityFactory.Instance.Spawn(new Explosion.ExplosionDef(_body.Position.X, _body.Position.Y, 0, 0, 1, 0));
         }
 
         /// <summary>

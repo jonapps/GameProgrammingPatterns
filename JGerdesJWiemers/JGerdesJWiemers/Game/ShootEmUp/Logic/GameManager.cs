@@ -44,6 +44,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Logic
             if (OnEarthHealthChange != null) OnEarthHealthChange(_earthHealth);
         }
 
+        public int GetScore()
+        {
+            return _score;
+        }
+
 
         private static GameManager _instance = null;
         private GameManager()

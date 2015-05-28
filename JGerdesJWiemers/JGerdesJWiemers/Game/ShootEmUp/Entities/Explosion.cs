@@ -26,7 +26,13 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
 
             _body.Position = new Vector2(x, y) - _body.LocalCenter;
             _body.Enabled = false;
-            _sprite.SetAnimation(new Animation(0, 18, 30, false, false));
+            _sprite.SetAnimation(new Animation(0, 15, 30, false, false));
+            _sprite.OnAnimationEnded += _OnAnimationEnded;
+        }
+
+        void _OnAnimationEnded(Animation animation)
+        {
+            _deleteMe = true;
         }
 
       
