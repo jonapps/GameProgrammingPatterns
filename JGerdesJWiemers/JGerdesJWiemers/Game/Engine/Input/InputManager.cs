@@ -130,10 +130,10 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 case 3:
                     InputHandler("land", new KeyEvent(pressed), (int)e.JoystickId);
                     break;
-                case 0:
+                case 5:
                     InputHandler("weaponSwitch", new KeyEvent(pressed), (int)e.JoystickId);
                     break;
-                case 1:
+                case 4:
                     InputHandler("shoot", new KeyEvent(pressed), (int)e.JoystickId);
                     break;
                 case 9:
