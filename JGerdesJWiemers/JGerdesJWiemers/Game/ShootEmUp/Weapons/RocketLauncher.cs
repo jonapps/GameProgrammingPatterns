@@ -17,7 +17,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Weapons
 
         public RocketLauncher()
         {
-            _toShoot = 200;
+            _toShoot = 800;
             _clock.Restart();
         }
 

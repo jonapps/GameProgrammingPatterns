@@ -92,9 +92,15 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Entities
             _aabb.UpperBound = _body.WorldCenter + new Vector2(_blastRadius,_blastRadius);
             List<Fixture> bodies = _world.QueryAABB(ref _aabb);
             int bodyCount = bodies.Count;
+            Body lastBody = null;
             for (int i = 0; i < bodyCount; ++i)
             {
-                _ApplyBlastImpulse(bodies[i].Body, _body.WorldCenter);
+                if(lastBody != bodies[i].Body)
+                {
+                    _ApplyBlastImpulse(bodies[i].Body, _body.WorldCenter);
+                    lastBody = bodies[i].Body;
+                }
+               
             }
             _deleteMe = true;
         }
