@@ -54,7 +54,7 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 
             _input.On("return", delegate(InputEvent e, int channel)
             {
-                _screenManager.Switch(new Game(_window));
+                _screenManager.Switch(new TitleScreen(_window));
                 return true;
             });
 
