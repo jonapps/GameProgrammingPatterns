@@ -21,6 +21,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String FONT_ROBOTO_LIGHT = "Roboto-Light.ttf";
         public static readonly String FONT_ROBOTO_REGULAR = "Roboto-Regular.ttf";
         public static readonly String FONT_ROBOTO_MEDIUM = "Roboto-Medium.ttf";
+        public static readonly String FONT_DIGITAL = "digital-7-mono.ttf";
 
         public static readonly String TEXTURE_UI = "UI";
 
@@ -56,6 +57,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadFont(FONT_ROBOTO_LIGHT, FONT_ROBOTO_LIGHT);
             LoadFont(FONT_ROBOTO_REGULAR, FONT_ROBOTO_REGULAR);
             LoadFont(FONT_ROBOTO_MEDIUM, FONT_ROBOTO_MEDIUM);
+            LoadFont(FONT_DIGITAL, FONT_DIGITAL);
 
             LoadTexture(TEXTURE_UI, TEXTURE_UI);
 

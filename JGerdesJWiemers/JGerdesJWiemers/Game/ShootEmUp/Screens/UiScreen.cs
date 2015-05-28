@@ -13,8 +13,11 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
 {
     class UiScreen : Screen
     {
+        private static readonly string TEXT_PRE_SCORE = "Score: ";
+
         private Sprite _bg;
         private View _view;
+        private List<Text> _texts;
 
         public UiScreen(RenderWindow w)
             :base(w)
@@ -24,6 +27,16 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
             _bg.Position = new Vector2f(0, 720);
             Vector2f size = new Vector2f(w.Size.X, w.Size.Y);
             _view = new View(size / 2f, size);
+
+            _texts = new List<Text>();
+
+            Text score = new Text(TEXT_PRE_SCORE, AssetLoader.Instance.getFont(AssetLoader.FONT_DIGITAL));
+            score.Color = new Color(0, 255, 96);
+            score.CharacterSize = 14;
+            score.Position = _bg.Position + new Vector2f(118, -62);
+
+            _texts.Add(score);
+
         }
 
         public override void Update()
@@ -40,6 +53,10 @@ namespace JGerdesJWiemers.Game.ShootEmUp.Screens
         {
             renderTarget.SetView(_view);
             renderTarget.Draw(_bg);
+            foreach (Text t in _texts)
+            {
+                renderTarget.Draw(t);
+            }
         }
 
         public override void Exit()
