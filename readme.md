@@ -6,9 +6,10 @@ von Jonathan Wiemers und Jonas Gerdes
  - Input für den Controller auswählen
      - für xinput den Inhalt von input.xinput.json in input.json kopieren (JGerdesJWiemers\Game\Assets\Configuration)
      - für andere controller den Inhalt der input.json so ändern das die Achsen stimmen :P
-     - Hint: Wenn man am Code nichts ändert werden die Assets nicht erneut in das Bin Verzeichnis kopiert. Das muss dan händisch gemacht werden.
+     - Hint: Wenn man am Code nichts ändert werden die Assets nicht erneut in das Bin Verzeichnis kopiert. Das muss dann händisch gemacht werden.
 ### Besondere Features
  - Editor um die Polygone für Sprites zu erstellen
+ - Update und PastUpdate um neue Physic Änderungen erst später anzuwenden
  - Screenstack
   - jeder Screen auf dem Stack legt fest, ob der Screen darunter gerendert und/oder aktualisiert wird
  - animierte Sprites
