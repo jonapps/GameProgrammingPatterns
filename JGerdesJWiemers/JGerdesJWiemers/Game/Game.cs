@@ -20,7 +20,7 @@ namespace JGerdesJWiemers.Game
 {
     class Game
     {
-        public static readonly string VERSION = "v0.0.2";
+        public static readonly string VERSION = "v1.0";
         public static readonly string GAME_TITLE = "ShootEmUp";
         public static int ElapsedFrameTime = 0;
         public static long ElapsedTime = 0;

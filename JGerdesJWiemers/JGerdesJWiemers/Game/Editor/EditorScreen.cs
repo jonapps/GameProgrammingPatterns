@@ -191,7 +191,6 @@ namespace JGerdesJWiemers.Game.Editor
 
         public override void PastUpdate()
         {
-            throw new NotImplementedException();
         }
     }
 }
