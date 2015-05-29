@@ -8,6 +8,7 @@ von Jonathan Wiemers und Jonas Gerdes
      - für andere controller den Inhalt der input.json so ändern das die Achsen stimmen :P
      - Hint: Wenn man am Code nichts ändert werden die Assets nicht erneut in das Bin Verzeichnis kopiert. Das muss dan händisch gemacht werden.
 ### Besondere Features
+ - Editor um die Polygone für Sprites zu erstellen
  - Screenstack
   - jeder Screen auf dem Stack legt fest, ob der Screen darunter gerendert und/oder aktualisiert wird
  - animierte Sprites
