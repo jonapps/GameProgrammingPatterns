@@ -22,12 +22,11 @@ namespace JGerdesJWiemers.Game
     {
         public static readonly string VERSION = "v1.0";
         public static readonly string GAME_TITLE = "ShootEmUp";
-        public static int ElapsedFrameTime = 0;
         public static long ElapsedTime = 0;
         public static bool DEBUG = !true;
 
-        readonly Time TargetElapsedTime = Time.FromMicroseconds(16666);
-        readonly Time MaxElapsedTime = Time.FromMicroseconds(10000);
+        public static readonly Time TargetElapsedTime = Time.FromMilliseconds(16);
+        readonly Time MaxElapsedTime = Time.FromMilliseconds(25);
 
         Time _accumulatedTime;
         Clock _clock;
@@ -120,26 +119,19 @@ namespace JGerdesJWiemers.Game
             {
                 Time elapsedTime = _clock.Restart();
                 Game.ElapsedTime += elapsedTime.AsMilliseconds();
-
+                Console.WriteLine(Game.ElapsedFrameTime);
                 if (elapsedTime > MaxElapsedTime)
                 {
                     elapsedTime = MaxElapsedTime;
                 }
                 _accumulatedTime += elapsedTime;
-                bool updated = !false;
                 while (_accumulatedTime >= TargetElapsedTime)
                 {
                     _Update();
                     _PastUpdate();
                     _accumulatedTime -= TargetElapsedTime;
-                    //updated = true;
                 }
-
-                if (updated)
-                {
-                    _Render(_accumulatedTime.AsSeconds());
-                    Game.ElapsedFrameTime = _accumulatedTime.AsMilliseconds();
-                }
+                _Render(_accumulatedTime.AsSeconds());
             }
         }
 
