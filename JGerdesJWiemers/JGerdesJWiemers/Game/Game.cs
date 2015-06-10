@@ -12,8 +12,8 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using SFML.System;
 using JGerdesJWiemers.Game.Engine.Input;
 using FarseerPhysics;
-using GameScreen = JGerdesJWiemers.Game.ShootEmUp.Screens;
-using JGerdesJWiemers.Game.ShootEmUp.Screens;
+using GameScreen = JGerdesJWiemers.Game.TowerDefence.Screens;
+using JGerdesJWiemers.Game.TowerDefence.Screens;
 
 
 namespace JGerdesJWiemers.Game
