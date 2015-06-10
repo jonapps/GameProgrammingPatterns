@@ -18,27 +18,27 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             :base(w)
         {
             _map = new Map(24, 16, 48);
-            w.MouseButtonPressed += _MouseButtonPressed;
             w.MouseMoved += w_MouseMoved;
         }
 
         void w_MouseMoved(object sender, MouseMoveEventArgs e)
         {
+            Shape s = _map.GetTileAt(new Vector2f(e.X, e.Y));
             if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Right))
             {
-                Vector2f mapped = _map.ScreenToMap(new Vector2f(e.X, e.Y));
-                Console.Write("\r("+e.X+",\t"+e.Y+"\t) on map: (\t"+mapped.X+",\t"+mapped.Y+")                     ");
+                if (s != null)
+                    s.FillColor = new Color(255, 128, 128, 120);
             }
+            if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Left))
+            {
+                if (s != null)
+                    s.FillColor = new Color(128, 128, 255, 120);
+            }
+            Vector2i tile = _map.GetTileIndexAt(new Vector2f(e.X, e.Y));
+            Console.Write("\rTile@(" + e.X + "," + e.Y + "):\tx:" + tile.X + "\ty:" + tile.Y);
+          
         }
 
-        void _MouseButtonPressed(object sender, MouseButtonEventArgs e)
-        {
-            if (e.Button == Mouse.Button.Left)
-            {
-                Vector2i tile = _map.GetTileIndexAt(new Vector2f(e.X, e.Y));
-                Console.WriteLine("Tile@("+e.X+","+e.Y+"):\tx:"+tile.X+"\ty:"+tile.Y);
-            }
-        }
 
         public override void Update()
         {

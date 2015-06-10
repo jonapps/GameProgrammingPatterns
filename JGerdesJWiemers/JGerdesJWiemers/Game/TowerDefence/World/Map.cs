@@ -72,6 +72,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
             return result;
 
         }
+
+        public Shape GetTileAt(Vector2f screenPoint)
+        {
+            Vector2i index = GetTileIndexAt(screenPoint);
+            if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
+                return tiles[index.X, index.Y];
+            else
+                return null;
+        }
     
         public void Render(RenderTarget renderTarget, float extra)
         {
