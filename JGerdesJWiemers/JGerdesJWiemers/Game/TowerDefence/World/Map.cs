@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Shapes;
 using SFML.Graphics;
 using SFML.System;
 using System;
@@ -11,41 +12,54 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
 {
     class Map : IRenderable
     {
-        private Sprite[,] tiles;
+        private PolygonShape[,] tiles;
         private Vector2i mapSize;
         private Vector2i tileSize; 
 
-        public Map(int width, int height, int tileWidth = 64, int tileHeight = 32)
+        public Map(int width, int height, int tileSize = 32)
+            : this(width, height, tileSize, tileSize) { }
+        public Map(int width, int height, int tileWidth, int tileHeight)
         {
-            tiles = new Sprite[width, height];
-            tileSize = new Vector2i(tileWidth, tileHeight);
+
+            tiles = new PolygonShape[width, height];
             mapSize = new Vector2i(width, height);
-            Texture tex = new Texture(@"Assets\Graphics\tiles\grassdirt.png");
+            tileSize = new Vector2i(tileWidth, tileHeight);
+
+            List<Vector2f> points;
+            Color fill = new Color(255, 255, 255, 100);
+            Color bound = new Color(255, 255, 255);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Sprite tile = new Sprite(tex);
-                    tile.Position = MapToScreen(new Vector2f(x, y));
-                    tiles[x, y] = tile;
+                    points = new List<Vector2f>();
+                    points.Add(MapToScreen(new Vector2f(x * tileWidth, y * tileHeight)));
+                    points.Add(MapToScreen(new Vector2f((x+1) * tileWidth, y * tileHeight)));
+                    points.Add(MapToScreen(new Vector2f((x+1) * tileWidth, (y+1) * tileHeight)));
+                    points.Add(MapToScreen(new Vector2f(x * tileWidth, (y+1) * tileHeight)));
+                    PolygonShape s = new PolygonShape(points);
+                    s.FillColor = fill;
+                    s.OutlineColor = bound;
+                    s.OutlineThickness = 0.5f;
+                    tiles[x, y] = s;
 
                 }
             }
         }
 
-        public Vector2f MapToScreen(Vector2f mapPoint)
+        public Vector2f ScreenToMap(Vector2f mapPoint)
         {
             Vector2f result = new Vector2f();
-            result.X = (mapPoint.X - mapPoint.Y) * (tileSize.X / 2f);
-            result.Y = (mapPoint.X + mapPoint.Y) * (tileSize.Y / 2f);
+            result.X = 0.5f * mapPoint.X + mapPoint.Y;
+            result.Y = -0.5f * mapPoint.X + mapPoint.Y;
             return result;
         }
 
-        public Vector2f ScreenToMap(Vector2f screenPoint)
+        public Vector2f MapToScreen(Vector2f screenPoint)
         {
             Vector2f result = new Vector2f();
-            result.X = 0.5f * screenPoint.X - screenPoint.Y;
-            result.Y = 0.5f * screenPoint.X - screenPoint.Y;
+            result.X = screenPoint.X - screenPoint.Y;
+            result.Y = 0.5f * screenPoint.X + 0.5f * screenPoint.Y;
             return result;
         }
 
