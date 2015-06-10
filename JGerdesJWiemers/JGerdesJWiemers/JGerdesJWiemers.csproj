@@ -129,29 +129,6 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Asteroid.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Bullet.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Bullets\Rounds.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Bullets\Rocket.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Explosion.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Moon.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Earth.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\Astronaut.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\ScrollingBackground.cs" />
-    <Compile Include="Game\ShootEmUp\Entities\SpaceShip.cs" />
-    <Compile Include="Game\ShootEmUp\Logic\GameManager.cs" />
-    <Compile Include="Game\ShootEmUp\Logic\Wave.cs" />
-    <Compile Include="Game\ShootEmUp\Logic\WaveManager.cs" />
-    <Compile Include="Game\ShootEmUp\Screens\EarthScreen.cs" />
-    <Compile Include="Game\ShootEmUp\Screens\Game.cs" />
-    <Compile Include="Game\ShootEmUp\Screens\GameOverScreen.cs" />
-    <Compile Include="Game\ShootEmUp\Screens\PauseScreen.cs" />
-    <Compile Include="Game\ShootEmUp\Screens\TitleScreen.cs" />
-    <Compile Include="Game\ShootEmUp\Screens\UiScreen.cs" />
-    <Compile Include="Game\ShootEmUp\Weapons\DoubleGatlinGun.cs" />
-    <Compile Include="Game\ShootEmUp\Weapons\GatlinGun.cs" />
-    <Compile Include="Game\ShootEmUp\Weapons\RocketLauncher.cs" />
-    <Compile Include="Game\ShootEmUp\Weapons\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
