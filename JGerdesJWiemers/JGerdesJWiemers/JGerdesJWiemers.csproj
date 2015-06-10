@@ -129,6 +129,8 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
+    <Compile Include="Game\TowerDefence\World\Map.cs" />
+    <Compile Include="Game\TowerDefence\World\Tile.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
