@@ -59,15 +59,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //Vector2i tile = _map.GetTileIndexAt(new Vector2f(e.X, e.Y));
             
             //Console.WriteLine("Tile@(" + e.X + "," + e.Y + "):\tx:" + tile.X + "\ty:" + tile.Y);
-            
-            
-            
         }
 
 
         public override void Update()
         {
-            Console.WriteLine("test");
+            //Console.Clear();
             Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
             _mouseCircle.Position = new Vector2f(InputManager.Instance.MousePosition.X, InputManager.Instance.MousePosition.Y);
             //Console.WriteLine(_mouseCircle.Position.ToString());

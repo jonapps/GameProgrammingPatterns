@@ -9,10 +9,11 @@ using SFML.Window;
 using SFML.System;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 
 namespace JGerdesJWiemers.Game.Engine
 {
-    abstract class Entity : IUpdateable, IRenderable
+    abstract class Entity : IDrawable
     {
         protected Body _body;
         protected Fixture _fixture;
@@ -63,10 +64,6 @@ namespace JGerdesJWiemers.Game.Engine
             public abstract Entity Spawn(World world);
         }
 
-        internal virtual void PastUpdate()
-        {
-
-        }
 
         /// <summary>
         /// To Apply dmg to any entity 

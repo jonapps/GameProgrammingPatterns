@@ -73,12 +73,28 @@ namespace JGerdesJWiemers.Game.Engine.Input
             
             Vector2i mpos = Mouse.GetPosition();
             Vector2i center = new Vector2i(_window.Position.X + (int)_window.Size.X / 2, _window.Position.Y + (int)_window.Size.Y / 2);
-            Vector2i delta = mpos - center;
             if (mpos.X == center.X && mpos.Y == center.Y)
             {
                 return;
             }
+            Vector2i delta = mpos - center;
             MousePosition += delta * 2;
+            if (MousePosition.X <= 0)
+            {
+                MousePosition.X = 0;
+            }
+            if (MousePosition.Y <= 0)
+            {
+                MousePosition.Y = 0;
+            }
+            if (MousePosition.X >= _window.Size.X)
+            {
+                MousePosition.X = (int)_window.Size.X;
+            }
+            if (MousePosition.Y >= _window.Size.Y)
+            {
+                MousePosition.Y = (int)_window.Size.Y;
+            }
             Mouse.SetPosition(center);
         }
 
