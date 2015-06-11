@@ -4,17 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SFML.System;
 
-namespace JGerdesJWiemers.Game.Engine.Graphics
+namespace JGerdesJWiemers.Game.Engine.Interfaces
 {
-    interface IRenderable
+    interface IDrawable : Drawable
     {
+        void Update();
+
+        void PastUpdate();
+
         /// <summary>
         /// Renders on provided render target
         /// </summary>
         /// <param name="renderTarget">target to render to</param>
         /// <param name="extra">value between 0 and 1 for extrapolation</param>
-        void Render(RenderTarget renderTarget, float extra);
+        void PreRender(float extra);
+
+
+        void Render();
     }
 }

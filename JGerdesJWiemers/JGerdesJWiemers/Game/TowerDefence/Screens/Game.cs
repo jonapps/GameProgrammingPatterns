@@ -64,7 +64,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Update()
         {
-            Console.Clear();
+            //Console.Clear();
             Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
             _mouseCircle.Position = new Vector2f(InputManager.Instance.MousePosition.X, InputManager.Instance.MousePosition.Y);
             //Console.WriteLine(_mouseCircle.Position.ToString());
