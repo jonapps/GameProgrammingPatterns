@@ -14,12 +14,12 @@ namespace JGerdesJWiemers.Game.TowerDefence
     class Monster : SpriteEntity
     {
         public Monster(FarseerPhysics.Dynamics.World w)
-            : base(w, new RectangleTextureContainer(new Texture(@"Assets/Graphics/guy.png"),39, 69), 1)
+            : base(w, new CircleTextureContainer(new Texture(@"Assets/Graphics/guy.png"), 39, 69, 16), 1)
         {
             _sprite.SetAnimation(new Animation(0, 7, 20, true, false));
             _sprite.Scale = new Vector2f(1, 1);
-            _body.Position = new Vector2(1, 1);
-            _body.LinearVelocity = new Vector2(5, 5);
+            //_body.Position = new Vector2(20, 20);
+            _body.LinearVelocity = new Vector2(15, 15);
         }
 
         public override void Update()

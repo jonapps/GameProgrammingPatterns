@@ -46,6 +46,16 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 r = ConvertUnits.ToSimUnits(r * scale);
                 _body = BodyFactory.CreateCircle(world, r, 1f, new Vector2(x, y), bodyType, this);
                 _fixture = FixtureFactory.AttachCircle(r, 1f, _body, this);
+
+                r = ((CircleTextureContainer)textureContainer).Radius * scale;
+                List<Vector2f> points = new List<Vector2f>();
+                int pointCount = 20;
+                double degPerPoint = (Math.PI * 2) / pointCount;
+                for (int i = 0; i < pointCount; i++)
+                {
+                    points.Add(Map.MapToScreen((float)Math.Cos(i*degPerPoint) * r, (float)Math.Sin(i*degPerPoint) * r));
+                }
+                _colliderShape = new PolygonShape(points);
             }
             else if (textureContainer is PolygonTextureContainer)
             {
@@ -67,7 +77,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             : base()
         {
             _sprite = new AnimatedSprite(textureContainer.Texture, textureContainer.Width, textureContainer.Height);
-            _sprite.Origin = new Vector2f(textureContainer.Width / 2f, textureContainer.Height / 2f);
+            _sprite.Origin = new Vector2f(textureContainer.Width / 2f, textureContainer.Height);
             _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(scale), ConvertUnits.ToSimUnits(scale));
         }
 
