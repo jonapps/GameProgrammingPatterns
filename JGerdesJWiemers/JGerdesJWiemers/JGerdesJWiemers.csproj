@@ -88,13 +88,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Editor\EditorScreen.cs" />
-    <Compile Include="Game\Editor\EditorWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Game\Editor\EditorWindow.Designer.cs">
-      <DependentUpon>EditorWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Game\Engine\Audio\AudioManager.cs" />
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
     <Compile Include="Game\Engine\Entities\Input\MouseCursor.cs" />
@@ -176,11 +169,6 @@
     <Content Include="Game\Assets\Graphics\space\space2.png" />
     <Content Include="Game\Assets\Graphics\space\space3.png" />
     <Content Include="Game\Assets\Graphics\spaceshuttle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Game\Editor\EditorWindow.resx">
-      <DependentUpon>EditorWindow.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

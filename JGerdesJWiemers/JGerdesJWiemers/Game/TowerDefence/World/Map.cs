@@ -95,11 +95,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
             
         }
 
-        public void PreRender(float extra)
-        {
-            
-        }
-
         public void Draw(RenderTarget target, RenderStates states)
         {
             for (int x = 0; x < mapSize.X; x++)
@@ -110,6 +105,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
 
                 }
             }
+        }
+
+
+        public void PreDraw(float extra)
+        {
+            
         }
     }
 }

@@ -26,20 +26,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
             _position = InputManager.Instance.MousePosition;
         }
 
-        public void PastUpdate()
-        {
-           
-        }
-
-        public void PreRender(float extra)
-        {
-            
-        }
-
-        public void Render()
-        {
-            
-        }
+        
 
         public void Draw(RenderTarget target, RenderStates states)
         {
@@ -50,6 +37,17 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
         private Vector2f _ConvertVector2iToVector2f(Vector2i v)
         {
             return new Vector2f(v.X, v.Y);
+        }
+
+
+        public void PastUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PreDraw(float extra)
+        {
+            throw new NotImplementedException();
         }
     }
 }

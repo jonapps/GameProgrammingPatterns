@@ -101,7 +101,8 @@ namespace JGerdesJWiemers.Game
         private void _Render(float delta)
         {
             _window.Clear();
-            this._screenManager.Render(_window, delta);
+            this._screenManager.PreDraw(delta);
+            _window.Draw(this._screenManager);
             _window.Display();
 
         }

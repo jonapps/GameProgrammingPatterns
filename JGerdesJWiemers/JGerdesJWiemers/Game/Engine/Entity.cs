@@ -32,14 +32,7 @@ namespace JGerdesJWiemers.Game.Engine
 
         #endregion
 
-        public virtual void Update()
-        {
-
-        }
-
-        public abstract void Render(SFML.Graphics.RenderTarget renderTarget, float extra);
-
-
+        
         protected Vector2f _ConvertVectorToVector2f(Vector2 vec)
         {
             return new Vector2f(vec.X, vec.Y);
@@ -72,6 +65,33 @@ namespace JGerdesJWiemers.Game.Engine
         public virtual void ApplyDamage(int dmg)
         {
             _health -= dmg;
+        }
+
+
+        public virtual void PastUpdate()
+        {
+
+        }
+
+        public virtual void PreDraw(float extra)
+        {
+
+        }
+
+        public virtual void Draw(RenderTarget target, RenderStates states)
+        {
+            Render(target, 0);
+        }
+
+        //TODO: remove this
+        public virtual void Render(RenderTarget target, float extra)
+        {
+
+        }
+
+        public virtual void Update()
+        {
+
         }
     }
 }

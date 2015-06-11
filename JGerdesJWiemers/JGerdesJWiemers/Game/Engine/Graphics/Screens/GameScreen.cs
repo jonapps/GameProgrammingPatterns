@@ -48,19 +48,27 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             }
         }
 
-        public override void Render(float extra)
-        {
-            foreach (IDrawable e in _drawables)
-            {
-                _window.Draw(e);
-            }
-        }
-
         public override void Exit()
         {
             
         }
 
 
+
+        public override void PreDraw(float extra)
+        {
+            foreach (IDrawable e in _drawables)
+            {
+                e.PreDraw(extra);
+            }
+        }
+
+        public override void Draw(RenderTarget target, RenderStates states)
+        {
+            foreach (IDrawable e in _drawables)
+            {
+                _window.Draw(e);
+            }
+        }
     }
 }

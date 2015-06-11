@@ -145,13 +145,23 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             }
         }
 
-        public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
+        public override void PreDraw(float extra)
+        {
+            for (int i = _screens.Count() - 1; i >= 0; --i)
+            {
+                ScreenData current = _screens.ElementAt(i);
+                if (current.render)
+                    current.screen.PreDraw(extra);
+            }
+        }
+
+        public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)
         {
             for (int i = _screens.Count() - 1; i >= 0; --i)
             {
                 ScreenData current = _screens.ElementAt(i);
                 if(current.render)
-                    current.screen.Render(renderTarget, extra);
+                    renderTarget.Draw(current.screen, states);
             }
         }
 

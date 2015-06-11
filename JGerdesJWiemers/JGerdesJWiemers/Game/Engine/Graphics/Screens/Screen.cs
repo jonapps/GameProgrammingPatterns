@@ -1,5 +1,6 @@
 ﻿using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.Engine.Input;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 using SFML.Graphics;
 using SFML.Window;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 {
-    abstract class Screen : InputHandler
+    abstract class Screen : InputHandler, IDrawable
     {
         protected RenderWindow _window;
         protected ScreenManager _screenManager;
@@ -37,22 +38,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         }
 
-        /// <summary>
-        /// Updates screen 
-        /// </summary>
-        public abstract void Update();
 
-        /// <summary>
-        /// gets called after the regular update
-        /// </summary>
-        public abstract void PastUpdate();
-
-        /// <summary>
-        /// Renders content of screen on provided render target
-        /// </summary>
-        /// <param name="renderTarget">target to render content of screen to</param>
-        /// <param name="extra">value between 0 and 1 for extrapolation</param>
-        public abstract void Render(RenderTarget renderTarget, float extra);
 
 
         public abstract void Exit();
@@ -71,5 +57,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         {
             return _input.OnInputEvent(name, e, channel);
         }
+
+
+        public abstract void Update();
+
+        public abstract void PastUpdate();
+
+        public abstract void PreDraw(float extra);
+
+        public abstract void Draw(RenderTarget target, RenderStates states);
     }
 }
