@@ -33,10 +33,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
                 for (int y = 0; y < height; y++)
                 {
                     points = new List<Vector2f>();
-                    points.Add(MapToScreen(new Vector2f(x * tileWidth, y * tileHeight)));
-                    points.Add(MapToScreen(new Vector2f((x+1) * tileWidth, y * tileHeight)));
-                    points.Add(MapToScreen(new Vector2f((x+1) * tileWidth, (y+1) * tileHeight)));
-                    points.Add(MapToScreen(new Vector2f(x * tileWidth, (y+1) * tileHeight)));
+                    points.Add(MapToScreen(x * tileWidth, y * tileHeight));
+                    points.Add(MapToScreen((x+1) * tileWidth, y * tileHeight));
+                    points.Add(MapToScreen((x+1) * tileWidth, (y+1) * tileHeight));
+                    points.Add(MapToScreen(x * tileWidth, (y+1) * tileHeight));
                     PolygonShape s = new PolygonShape(points);
                     s.FillColor = fill;
                     s.OutlineColor = bound;
@@ -47,35 +47,36 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
             }
         }
 
-        public Vector2f ScreenToMap(Vector2f mapPoint)
+        public static Vector2f ScreenToMap(float screenX, float screenY)
         {
             Vector2f result = new Vector2f();
-            result.X = 0.5f * mapPoint.X + mapPoint.Y;
-            result.Y = -0.5f * mapPoint.X + mapPoint.Y;
+            result.X = 0.5f * screenX + screenY;
+            result.Y = -0.5f * screenX + screenY;
             return result;
         }
 
-        public Vector2f MapToScreen(Vector2f screenPoint)
+        public Vector2f MapToScreen(float mapX, float mapY)
         {
             Vector2f result = new Vector2f();
-            result.X = screenPoint.X - screenPoint.Y;
-            result.Y = 0.5f * screenPoint.X + 0.5f * screenPoint.Y;
+            result.X = mapX - mapY;
+            result.Y = 0.5f * mapX + 0.5f * mapY;
             return result;
         }
 
-        public Vector2i GetTileIndexAt(Vector2f screenPoint)
+        public Vector2i GetTileIndexAt(float screenX, float screenY)
         {
-            Vector2f mapped = ScreenToMap(screenPoint);
+            Vector2f mapped = ScreenToMap(screenX, screenY);
             Vector2i result = new Vector2i();
             result.X = ((int)mapped.X) / tileSize.X;
             result.Y = ((int)mapped.Y) / tileSize.Y;
+            float x =  SFML.Window.Mouse.GetPosition().X;
             return result;
 
         }
 
-        public Shape GetTileAt(Vector2f screenPoint)
+        public Shape GetTileAt(float screenX, float screenY)
         {
-            Vector2i index = GetTileIndexAt(screenPoint);
+            Vector2i index = GetTileIndexAt(screenX, screenY);
             if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
                 return tiles[index.X, index.Y];
             else
