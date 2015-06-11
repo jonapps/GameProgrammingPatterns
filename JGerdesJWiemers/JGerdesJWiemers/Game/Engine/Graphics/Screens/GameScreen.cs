@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -17,15 +18,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public static readonly float WORLD_STEP_SIZE = 1 / 60f;
 
-        protected List<Entity> _entities;
+        protected List<IDrawable> _drawables;
         protected List<int> _toDeleteEntities;
         protected View _view;
 
         public GameScreen(RenderWindow w) : base(w)
         {
-            _entities = new List<Entity>();
+            _drawables = new List<IDrawable>();
             _toDeleteEntities = new List<int>();
-            ConvertUnits.SetDisplayUnitToSimUnitRatio(8f);
             float width = ConvertUnits.ToSimUnits(_window.Size.X);
             float height = ConvertUnits.ToSimUnits(_window.Size.Y);
             _view = new View(new Vector2f(width / 2f, height / 2f), new Vector2f(width, height));
@@ -34,29 +34,26 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public override void Update()
         {
-            for (int i = 0; i < _entities.Count; ++i)
+            for (int i = 0; i < _drawables.Count; ++i)
             {
-                _entities[i].Update();
+                _drawables[i].Update();
             }
         }
 
         public override void PastUpdate()
         {
-            for (int i = 0; i < _entities.Count; ++i)
+            for (int i = 0; i < _drawables.Count; ++i)
             {
-                _entities[i].PastUpdate();
+                _drawables[i].PastUpdate();
             }
         }
 
-        public override void Render(SFML.Graphics.RenderTarget renderTarget, float extra)
+        public override void Render(float extra)
         {
-            View _originalView = renderTarget.GetView();
-            renderTarget.SetView(_view);
-            foreach (Entity e in _entities)
+            foreach (IDrawable e in _drawables)
             {
-                e.Render(renderTarget, extra);
+                _window.Draw(e);
             }
-            renderTarget.SetView(_originalView);
         }
 
         public override void Exit()
