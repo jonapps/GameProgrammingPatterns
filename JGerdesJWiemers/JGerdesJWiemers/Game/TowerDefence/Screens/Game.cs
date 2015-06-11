@@ -1,7 +1,9 @@
-﻿using JGerdesJWiemers.Game.Engine.Entities.Input;
+﻿using FarseerPhysics.Dynamics;
+using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.Entities.Input;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
-using JGerdesJWiemers.Game.TowerDefence.World;
+using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -15,8 +17,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
     class Game : GameScreen
     {
+        public static readonly float WORLD_STEP_SIZE = 1 / 60f;
+
+
         private MouseCursor _cursor;
         private Map _map;
+        private World _world;
         public Game(RenderWindow w)
             :base(w)
         {
@@ -25,7 +31,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             w.SetMouseCursorVisible(false);
             _cursor = new MouseCursor();
 
+
+            _world = new World(new Vector2(0,0));
             _drawables.Add(_map);
+
+            _drawables.Add(new Monster(_world));
         }
 
         void w_MouseMoved(object sender, MouseMoveEventArgs e)
@@ -65,6 +75,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Update()
         {
+            _world.Step(WORLD_STEP_SIZE);
+            base.Update();
             //Console.Clear();
             Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
             //_mouseCircle.Position = new Vector2f(InputManager.Instance.MousePosition.X, InputManager.Instance.MousePosition.Y);
@@ -73,7 +85,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void PastUpdate()
         {
-            
+            base.PastUpdate();
         }
 
         public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)

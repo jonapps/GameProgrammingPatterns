@@ -68,30 +68,12 @@ namespace JGerdesJWiemers.Game.Engine
         }
 
 
-        public virtual void PastUpdate()
-        {
+        public abstract void PastUpdate();
 
-        }
+        public abstract void PreDraw(float extra);
 
-        public virtual void PreDraw(float extra)
-        {
+        public abstract void Draw(RenderTarget target, RenderStates states);
 
-        }
-
-        public virtual void Draw(RenderTarget target, RenderStates states)
-        {
-            Render(target, 0);
-        }
-
-        //TODO: remove this
-        public virtual void Render(RenderTarget target, float extra)
-        {
-
-        }
-
-        public virtual void Update()
-        {
-
-        }
+        public abstract void Update();
     }
 }

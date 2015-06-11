@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.Game.TowerDefence.World
+namespace JGerdesJWiemers.Game.TowerDefence
 {
     class Map : IDrawable 
     {
@@ -56,7 +56,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
             return result;
         }
 
-        public Vector2f MapToScreen(float mapX, float mapY)
+        public static Vector2f MapToScreen(float mapX, float mapY)
         {
             Vector2f result = new Vector2f();
             result.X = mapX - mapY;
