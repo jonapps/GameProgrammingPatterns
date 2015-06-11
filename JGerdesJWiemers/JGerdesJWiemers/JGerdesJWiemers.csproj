@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Game\Engine\Audio\AudioManager.cs" />
     <Compile Include="Game\Engine\Entities\CircleEntity.cs" />
+    <Compile Include="Game\Engine\Entities\Input\MouseCursor.cs" />
     <Compile Include="Game\Engine\Entities\PolygonEntity.cs" />
     <Compile Include="Game\Engine\Entities\RectangleEntity.cs" />
     <Compile Include="Game\Engine\Entities\ShapeEntity.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="Game\Engine\Exceptions\NotInitialisatedException.cs" />
     <Compile Include="Game\Engine\Graphics\AnimatedSprite.cs" />
     <Compile Include="Game\Engine\Graphics\Animation.cs" />
-    <Compile Include="Game\Engine\Graphics\IRenderable.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Interfaces\EntityHolder.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\Screen.cs" />
     <Compile Include="Game\Engine\Graphics\TextureContainer.cs" />
@@ -117,7 +117,7 @@
     <Compile Include="Game\Engine\Input\InputHandler.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
     <Compile Include="Game\Engine\Input\InputMapper.cs" />
-    <Compile Include="Game\Engine\IUpdateable.cs" />
+    <Compile Include="Game\Engine\Interfaces\IDrawable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Engine\Shapes\PolygonShape.cs" />
     <Compile Include="Game\Engine\Utils\Helper\Asset.cs" />
