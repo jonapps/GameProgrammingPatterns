@@ -57,7 +57,6 @@ namespace JGerdesJWiemers.Game.Engine.Input
             Mouse.SetPosition(center);
             MousePosition = center - _window.Position;
 
-
             String data = AssetLoader.Instance.ReadConfig(AssetLoader.CONFIG_INPUT);
             _config = new InputConfig(JsonConvert.DeserializeObject<InputConfig.JsonFormat>(data));
         }
@@ -70,7 +69,6 @@ namespace JGerdesJWiemers.Game.Engine.Input
         /// <param name="e"></param>
         void _window_MouseMoved(object sender, MouseMoveEventArgs e)
         {
-            
             Vector2i mpos = Mouse.GetPosition();
             Vector2i center = new Vector2i(_window.Position.X + (int)_window.Size.X / 2, _window.Position.Y + (int)_window.Size.Y / 2);
             if (mpos.X == center.X && mpos.Y == center.Y)
@@ -78,23 +76,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 return;
             }
             Vector2i delta = mpos - center;
-            MousePosition += delta * 2;
-            if (MousePosition.X <= 0)
-            {
-                MousePosition.X = 0;
-            }
-            if (MousePosition.Y <= 0)
-            {
-                MousePosition.Y = 0;
-            }
-            if (MousePosition.X >= _window.Size.X)
-            {
-                MousePosition.X = (int)_window.Size.X;
-            }
-            if (MousePosition.Y >= _window.Size.Y)
-            {
-                MousePosition.Y = (int)_window.Size.Y;
-            }
+            MousePosition += delta;
             Mouse.SetPosition(center);
         }
 

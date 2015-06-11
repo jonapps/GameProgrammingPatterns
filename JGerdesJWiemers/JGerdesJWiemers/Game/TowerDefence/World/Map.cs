@@ -102,7 +102,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
                 for (int y = 0; y < mapSize.Y; y++)
                 {
                     target.Draw(tiles[x, y], states);
-
                 }
             }
         }

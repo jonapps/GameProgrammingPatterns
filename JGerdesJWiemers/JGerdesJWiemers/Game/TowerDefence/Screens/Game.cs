@@ -23,7 +23,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
            
             _map = new Map(24, 16, 48);
             w.SetMouseCursorVisible(false);
-            _cursor = new MouseCursor();
+            _cursor = new MouseCursor(_window);
 
             _drawables.Add(_map);
         }
@@ -65,10 +65,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Update()
         {
-            //Console.Clear();
+            Console.Clear();
             Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
-            //_mouseCircle.Position = new Vector2f(InputManager.Instance.MousePosition.X, InputManager.Instance.MousePosition.Y);
-            //Console.WriteLine(_mouseCircle.Position.ToString());
+            _cursor.Update();
         }
 
         public override void PastUpdate()
@@ -79,6 +78,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)
         {
             base.Draw(renderTarget, states);
+            renderTarget.Draw(_cursor);
         }
 
         public override void Exit()
