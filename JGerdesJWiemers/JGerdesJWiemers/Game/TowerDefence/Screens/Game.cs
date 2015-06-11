@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+﻿using JGerdesJWiemers.Game.Engine.Entities.Input;
+using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.TowerDefence.World;
 using SFML.Graphics;
@@ -12,19 +13,17 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
-    class Game : Screen
+    class Game : GameScreen
     {
-        private CircleShape _mouseCircle;
+        private MouseCursor _cursor;
         private Map _map;
         public Game(RenderWindow w)
             :base(w)
         {
            
             _map = new Map(24, 16, 48);
-            //w.MouseMoved += w_MouseMoved;
-            (w as Window).SetMouseCursorVisible(false);
-            _mouseCircle = new CircleShape(5);
-
+            w.SetMouseCursorVisible(false);
+            _cursor = new MouseCursor();
         }
 
         void w_MouseMoved(object sender, MouseMoveEventArgs e)

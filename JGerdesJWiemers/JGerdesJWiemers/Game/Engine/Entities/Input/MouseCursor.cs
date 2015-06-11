@@ -43,7 +43,13 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            
+            _pointer.Position = _ConvertVector2iToVector2f(_position);
+            target.Draw(_pointer);
+        }
+
+        private Vector2f _ConvertVector2iToVector2f(Vector2i v)
+        {
+            return new Vector2f(v.X, v.Y);
         }
     }
 }
