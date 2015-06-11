@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
 using SFML.Graphics;
 using SFML.System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.TowerDefence.World
 {
-    class Map : IRenderable
+    class Map : IDrawable 
     {
         private PolygonShape[,] tiles;
         private Vector2i mapSize;
@@ -82,14 +83,30 @@ namespace JGerdesJWiemers.Game.TowerDefence.World
             else
                 return null;
         }
-    
-        public void Render(RenderTarget renderTarget, float extra)
+   
+
+        public void Update()
+        {
+            
+        }
+
+        public void PastUpdate()
+        {
+            
+        }
+
+        public void PreRender(float extra)
+        {
+            
+        }
+
+        public void Draw(RenderTarget target, RenderStates states)
         {
             for (int x = 0; x < mapSize.X; x++)
             {
                 for (int y = 0; y < mapSize.Y; y++)
                 {
-                    renderTarget.Draw(tiles[x, y]);
+                    target.Draw(tiles[x, y], states);
 
                 }
             }
