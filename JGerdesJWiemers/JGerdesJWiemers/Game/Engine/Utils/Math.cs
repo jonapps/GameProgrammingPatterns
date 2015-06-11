@@ -20,6 +20,17 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return (float) System.Math.Sqrt(vec.Length2());
         }
 
+        public static float Length2(this Vector2i vec)
+        {
+            return vec.X * vec.X + vec.Y * vec.Y;
+        }
+
+        public static float Length(this Vector2i vec)
+        {
+            return (float)System.Math.Sqrt(vec.Length2());
+        }
+
+
         public static float DistanceTo(this Vector2f v1, Vector2f v2)
         {
             return (v1 - v2).Length();

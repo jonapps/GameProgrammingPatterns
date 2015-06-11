@@ -2,6 +2,7 @@
 using JGerdesJWiemers.Game.Engine.Exceptions;
 using JGerdesJWiemers.Game.Engine.Utils;
 using Newtonsoft.Json;
+using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace JGerdesJWiemers.Game.Engine.Input
 
     class InputManager
     {
+        public Vector2i MousePosition = new Vector2i(0, 0);
+
+
         private static InputManager _instance;
 
         public delegate bool OnInputEvent(string name, InputEvent e, int channel);
@@ -48,8 +52,34 @@ namespace JGerdesJWiemers.Game.Engine.Input
                 _key(false, sender, e);
             };
 
+            _window.MouseMoved += _window_MouseMoved;
+            Vector2i center = new Vector2i(_window.Position.X + (int)_window.Size.X / 2, _window.Position.Y + (int)_window.Size.Y / 2);
+            Mouse.SetPosition(center);
+            MousePosition = center - _window.Position;
+
+
             String data = AssetLoader.Instance.ReadConfig(AssetLoader.CONFIG_INPUT);
             _config = new InputConfig(JsonConvert.DeserializeObject<InputConfig.JsonFormat>(data));
+        }
+
+        /// <summary>
+        /// capture mouse in the middle of the screen.
+        /// using own mouse position and calculate delta movement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void _window_MouseMoved(object sender, MouseMoveEventArgs e)
+        {
+            
+            Vector2i mpos = Mouse.GetPosition();
+            Vector2i center = new Vector2i(_window.Position.X + (int)_window.Size.X / 2, _window.Position.Y + (int)_window.Size.Y / 2);
+            Vector2i delta = mpos - center;
+            if (mpos.X == center.X && mpos.Y == center.Y)
+            {
+                return;
+            }
+            MousePosition += delta * 2;
+            Mouse.SetPosition(center);
         }
 
         public void SaveConfig()
