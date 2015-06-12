@@ -64,20 +64,36 @@ namespace JGerdesJWiemers.Game.TowerDefence
             return result;
         }
 
-        public Vector2i GetTileIndexAt(float screenX, float screenY)
+        public Vector2i GetTileIndexAtScreenPoint(float screenX, float screenY)
         {
             Vector2f mapped = ScreenToMap(screenX, screenY);
+            return GetTileIndexAtMapPoint(mapped.X, mapped.Y);
+
+        }
+
+        public Vector2i GetTileIndexAtMapPoint(float mapX, float mapY)
+        {
+           
             Vector2i result = new Vector2i();
-            result.X = ((int)mapped.X) / tileSize.X;
-            result.Y = ((int)mapped.Y) / tileSize.Y;
-            float x =  SFML.Window.Mouse.GetPosition().X;
+            result.X = ((int)mapX) / tileSize.X;
+            result.Y = ((int)mapY) / tileSize.Y;
+            float x = SFML.Window.Mouse.GetPosition().X;
             return result;
 
         }
 
-        public Shape GetTileAt(float screenX, float screenY)
+        public Shape GetTileAtScreenPoint(float screenX, float screenY)
         {
-            Vector2i index = GetTileIndexAt(screenX, screenY);
+            Vector2i index = GetTileIndexAtScreenPoint(screenX, screenY);
+            if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
+                return tiles[index.X, index.Y];
+            else
+                return null;
+        }
+
+        public Shape GetTileAtMapPoint(float mapX, float mapY)
+        {
+            Vector2i index = GetTileIndexAtMapPoint(mapX, mapY);
             if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
                 return tiles[index.X, index.Y];
             else

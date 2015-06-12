@@ -13,18 +13,28 @@ namespace JGerdesJWiemers.Game.TowerDefence
 {
     class Monster : SpriteEntity
     {
-        public Monster(FarseerPhysics.Dynamics.World w)
+        private Map _map;
+        public Monster(FarseerPhysics.Dynamics.World w, Map map)
             : base(w, new CircleTextureContainer(new Texture(@"Assets/Graphics/guy.png"), 39, 69, 16), 1)
         {
-            _sprite.SetAnimation(new Animation(0, 7, 20, true, false));
-            _sprite.Scale = new Vector2f(1, 1);
+            _sprite.SetAnimation(new Animation(0, 7, 100, true, false));
+
+            _map = map;
+            
+            //_sprite.Scale = new Vector2f(1, 1);
             //_body.Position = new Vector2(20, 20);
-            _body.LinearVelocity = new Vector2(15, 15);
+            _sprite.Origin = new Vector2f(39 / 2f, 59);
+            _body.Position = new Vector2(2, 2);
+            _body.LinearVelocity = new Vector2(1, 0);
         }
 
         public override void Update()
         {
-            
+            base.Update();
+            Vector2 pos = getPositionInPixel();
+            Shape tile = _map.GetTileAtMapPoint(pos.X, pos.Y);
+            if (tile != null)
+                tile.FillColor = new Color(255, 128, 128);
         }
     }
 }

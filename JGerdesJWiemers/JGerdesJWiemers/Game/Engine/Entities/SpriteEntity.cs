@@ -78,7 +78,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             _sprite = new AnimatedSprite(textureContainer.Texture, textureContainer.Width, textureContainer.Height);
             _sprite.Origin = new Vector2f(textureContainer.Width / 2f, textureContainer.Height);
-            _sprite.Scale = new Vector2f(ConvertUnits.ToSimUnits(scale), ConvertUnits.ToSimUnits(scale));
+            _sprite.Scale = new Vector2f(scale, scale);
         }
 
         public override void Update()
@@ -93,8 +93,9 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         public override void PreDraw(float extra)
         {
-            _sprite.Position = new Vector2f(_body.WorldCenter.X + _body.LinearVelocity.X * extra, _body.WorldCenter.Y + _body.LinearVelocity.Y * extra);
-            _colliderShape.Position = new Vector2f(_body.WorldCenter.X, _body.WorldCenter.Y);
+            Vector2 positionInPixel = getPositionInPixel();
+            _sprite.Position = Map.MapToScreen(positionInPixel.X, positionInPixel.Y);
+            _colliderShape.Position = Map.MapToScreen(positionInPixel.X, positionInPixel.Y);
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -102,6 +103,11 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             if (Game.DEBUG)
                 target.Draw(_colliderShape);
             target.Draw(_sprite, states);
+        }
+
+        protected Vector2 getPositionInPixel()
+        {
+            return ConvertUnits.ToDisplayUnits(_body.WorldCenter);
         }
 
     }

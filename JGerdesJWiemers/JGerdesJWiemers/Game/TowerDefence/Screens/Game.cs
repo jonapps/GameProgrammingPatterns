@@ -35,7 +35,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _world = new World(new Vector2(0,0));
             _drawables.Add(_map);
 
-            _drawables.Add(new Monster(_world));
+            _drawables.Add(new Monster(_world, _map));
         }
 
         void w_MouseMoved(object sender, MouseMoveEventArgs e)
@@ -78,8 +78,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _world.Step(WORLD_STEP_SIZE);
             base.Update();
             //Console.Clear();
-            Console.Clear();
-            Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
+            //Console.Clear();
+            //Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
             _cursor.Update();
         }
 
