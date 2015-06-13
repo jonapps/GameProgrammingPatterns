@@ -120,6 +120,7 @@
     <Compile Include="Game\TowerDefence\Monster.cs" />
     <Compile Include="Game\TowerDefence\Map.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
+    <Compile Include="Game\TowerDefence\Tile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

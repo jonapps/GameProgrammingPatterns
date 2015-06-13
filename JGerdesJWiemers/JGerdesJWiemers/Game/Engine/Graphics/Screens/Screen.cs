@@ -16,6 +16,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         protected RenderWindow _window;
         protected ScreenManager _screenManager;
         protected InputMapper _input;
+        protected Shader _shader;
 
         public Screen(RenderWindow window)
         {
@@ -29,6 +30,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             set
             {
                 _screenManager = value;
+            }
+        }
+
+        public Shader Shader
+        {
+            get
+            {
+                return _shader;
             }
         }
 

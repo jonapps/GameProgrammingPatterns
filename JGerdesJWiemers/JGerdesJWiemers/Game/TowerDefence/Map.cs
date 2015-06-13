@@ -13,7 +13,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
 {
     class Map : IDrawable 
     {
-        private PolygonShape[,] tiles;
+        private Tile[,] tiles;
         private Vector2i mapSize;
         private Vector2i tileSize; 
 
@@ -22,28 +22,26 @@ namespace JGerdesJWiemers.Game.TowerDefence
         public Map(int width, int height, int tileWidth, int tileHeight)
         {
 
-            tiles = new PolygonShape[width, height];
+            tiles = new Tile[width, height];
             mapSize = new Vector2i(width, height);
             tileSize = new Vector2i(tileWidth, tileHeight);
+            Texture tex1 = new Texture(@"Assets/Graphics/tiles/grass.png");
+            Texture tex2 = new Texture(@"Assets/Graphics/tiles/grassdirt.png");
+            Texture tex;
+            Random rand = new Random();
 
-            List<Vector2f> points;
-            Color fill = new Color(255, 255, 255, 100);
-            Color bound = new Color(255, 255, 255);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    points = new List<Vector2f>();
-                    points.Add(MapToScreen(x * tileWidth, y * tileHeight));
-                    points.Add(MapToScreen((x+1) * tileWidth, y * tileHeight));
-                    points.Add(MapToScreen((x+1) * tileWidth, (y+1) * tileHeight));
-                    points.Add(MapToScreen(x * tileWidth, (y+1) * tileHeight));
-                    PolygonShape s = new PolygonShape(points);
-                    s.FillColor = fill;
-                    s.OutlineColor = bound;
-                    s.OutlineThickness = 0.5f;
-                    tiles[x, y] = s;
-
+                    if(rand.Next(2) == 0){
+                        tex = tex2;
+                    }
+                    else
+                    {
+                        tex = tex1;
+                    }
+                    tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, tex);
                 }
             }
         }
@@ -82,7 +80,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         }
 
-        public Shape GetTileAtScreenPoint(float screenX, float screenY)
+        public Tile GetTileAtScreenPoint(float screenX, float screenY)
         {
             Vector2i index = GetTileIndexAtScreenPoint(screenX, screenY);
             if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
@@ -91,7 +89,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
                 return null;
         }
 
-        public Shape GetTileAtMapPoint(float mapX, float mapY)
+        public Tile GetTileAtMapPoint(float mapX, float mapY)
         {
             Vector2i index = GetTileIndexAtMapPoint(mapX, mapY);
             if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)

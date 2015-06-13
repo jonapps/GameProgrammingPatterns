@@ -32,9 +32,9 @@ namespace JGerdesJWiemers.Game.TowerDefence
         {
             base.Update();
             Vector2 pos = getPositionInPixel();
-            Shape tile = _map.GetTileAtMapPoint(pos.X, pos.Y);
+            Tile tile = _map.GetTileAtMapPoint(pos.X, pos.Y);
             if (tile != null)
-                tile.FillColor = new Color(255, 128, 128);
+                tile.mark();
         }
     }
 }

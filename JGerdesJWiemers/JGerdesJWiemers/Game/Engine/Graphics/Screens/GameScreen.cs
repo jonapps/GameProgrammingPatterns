@@ -67,7 +67,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         {
             foreach (IDrawable e in _drawables)
             {
-                _window.Draw(e);
+                target.Draw(e, states);
             }
         }
     }

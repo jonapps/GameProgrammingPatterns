@@ -13,6 +13,8 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
     class ScreenManager : Screen
     {
         private Stack<ScreenData> _screens;
+
+        private RenderTexture _renderTexture;
         private class ScreenData
         {
             public bool render = true;
@@ -30,6 +32,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             : base(w){
                 _screens = new Stack<ScreenData>();
                 InputManager.Instance.InputHandler += _InputHandler;
+                _renderTexture = new RenderTexture(w.Size.X, w.Size.Y);
         }
 
         bool _InputHandler(string name, InputEvent e, int channel)
@@ -160,8 +163,20 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             for (int i = _screens.Count() - 1; i >= 0; --i)
             {
                 ScreenData current = _screens.ElementAt(i);
-                if(current.render)
-                    renderTarget.Draw(current.screen, states);
+                if (current.render)
+                {
+                    _renderTexture.Clear();
+                    _renderTexture.Display();
+                    _renderTexture.Draw(current.screen, states);
+
+                    RenderStates screenStates = new RenderStates(states);
+                    if (current.screen.Shader != null)
+                    {
+                        screenStates.Shader = current.screen.Shader;
+                    }
+                    renderTarget.Draw(new Sprite(_renderTexture.Texture), screenStates);
+                }
+                    
             }
         }
 
