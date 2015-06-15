@@ -129,6 +129,12 @@
     <None Include="Game\Assets\Fonts\Roboto-Medium.ttf" />
     <None Include="Game\Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="Game\Assets\Fonts\Roboto-Thin.ttf" />
+    <None Include="Game\Assets\Shader\blur3.frag" />
+    <None Include="Game\Assets\Shader\blur.frag" />
+    <None Include="Game\Assets\Shader\blur2.frag" />
+    <None Include="Game\Assets\Shader\edge.frag" />
+    <None Include="Game\Assets\Shader\pixelate.frag" />
+    <None Include="Game\Assets\Shader\wave.vert" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
