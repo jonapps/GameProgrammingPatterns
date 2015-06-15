@@ -23,27 +23,28 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private MouseCursor _cursor;
         private Map _map;
         private World _world;
+        private View _view;
         public Game(RenderWindow w)
             :base(w)
         {
-           
-            _map = new Map(24, 16, 48);
+
+            _map = new Map(24, 24, 48);
+            _view = _window.GetView();
+
             w.SetMouseCursorVisible(false);
-            _cursor = new MouseCursor(_window);
-
-
+            _cursor = new MouseCursor(_window, _view);
             _world = new World(new Vector2(0,0));
             _drawables.Add(_map);
 
             _drawables.Add(new Monster(_world, _map));
 
-            String shaderPath = @"Assets\Shader\";
-            _shader = new Shader(null, shaderPath + "blur3.frag");
+            //String shaderPath = @"Assets\Shader\";
+            //_shader = new Shader(null, shaderPath + "blur3.frag");
 
             //_shader.SetParameter("blur_radius", 0.08F);
             //_shader.SetParameter("resolution", 1280, 720);
-            _shader.SetParameter("dir", 1, 0);
-            _shader.SetParameter("radius", 0.0015f);
+            //_shader.SetParameter("dir", 1, 0);
+            //_shader.SetParameter("radius", 0.0015f);
         }
 
         void w_MouseMoved(object sender, MouseMoveEventArgs e)
@@ -85,14 +86,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             _world.Step(WORLD_STEP_SIZE);
             base.Update();
-            //Console.Clear();
-            //Console.Clear();
-            //Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
             _cursor.Update();
-            if(InputManager.Instance.MousePosition.X > 300)
-                _shader.SetParameter("radius", (InputManager.Instance.MousePosition.X-300) * 0.00001F);
-            else
-                _shader.SetParameter("radius", 0);
+            //if(InputManager.Instance.MousePosition.X > 300)
+            //    _shader.SetParameter("radius", (InputManager.Instance.MousePosition.X-300) * 0.00001F);
+            //else
+            //    _shader.SetParameter("radius", 0);
         }
 
         public override void PastUpdate()
@@ -102,8 +100,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)
         {
-            //states = new RenderStates(states);
-            //states.Shader = _shader;
+            _window.SetView(_view);
             base.Draw(renderTarget, states);
             renderTarget.Draw(_cursor);
         }

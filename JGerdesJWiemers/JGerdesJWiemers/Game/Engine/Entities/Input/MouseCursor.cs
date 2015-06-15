@@ -17,34 +17,53 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
         private CircleShape _pointer;
         private Window _window;
         private int _radius = 3;
+        private View _view;
+        private float _scrollSpeed = 10;
 
-        public MouseCursor(Window w)  
+        public MouseCursor(Window w, View v)  
         {
             _window = w;
             _pointer = new CircleShape(_radius);
             _position = InputManager.Instance.MousePosition;
             _pointer.Origin = new Vector2f(_radius,_radius);
+            _view = v;
+            
         }
 
         public void Update()
         {
             _position = InputManager.Instance.MousePosition;
-            if (_position.X <= 0)
+            Vector2f center = _view.Center;
+            float viewWidth = _view.Size.X / 2;
+            float viewHeigh = _view.Size.Y / 2;
+            float left, top, right, bottom;
+            left = center.X - viewWidth;
+            top = center.Y - viewHeigh;
+            right = center.X + viewWidth;
+            bottom = center.Y + viewHeigh;
+            if (_position.X <= left +_radius)
             {
-                _position.X = _radius;
+                _view.Center = center - new Vector2f(_scrollSpeed, 0);
+                _position.X = (int)left + _radius - (int)_scrollSpeed;
             }
-            if (_position.Y <= 0)
+            if (_position.Y <= top + _radius)
             {
-                _position.Y = _radius;
+                _position.Y = (int)top + _radius - (int)_scrollSpeed;
+                _view.Center = center - new Vector2f(0, _scrollSpeed);
+
             }
-            if (_position.X >= _window.Size.X)
+            if (_position.X >= right - _radius)
             {
-                _position.X = (int)_window.Size.X - _radius;
+                _position.X = (int)right - _radius + (int)_scrollSpeed;
+                _view.Center = center + new Vector2f(_scrollSpeed, 0);
+
             }
-            if (_position.Y >= _window.Size.Y)
+            if (_position.Y >= bottom - _radius)
             {
-                _position.Y = (int)_window.Size.Y - _radius;
+                _position.Y = (int)bottom - _radius + (int)_scrollSpeed;
+                _view.Center = center + new Vector2f(0, _scrollSpeed);
             }
+
             InputManager.Instance.MousePosition = _position;
         }
 

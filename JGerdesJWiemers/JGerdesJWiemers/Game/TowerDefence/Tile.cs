@@ -14,10 +14,10 @@ namespace JGerdesJWiemers.Game.TowerDefence
     {
         Sprite _sprite;
        
-        public Tile(float x, float y, float width, float height, Texture tex)
+        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
         {
             _sprite = new Sprite(tex);
-            _sprite.Position = Map.MapToScreen(x * width, y * height);
+            _sprite.Position = Map.MapToScreen(x * width + mapCenter, y * height);
             _sprite.Origin = new Vector2f(width, 0);
 
             

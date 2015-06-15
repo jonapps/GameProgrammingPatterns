@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Entities;
+﻿using FarseerPhysics;
+using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -24,7 +25,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
             //_sprite.Scale = new Vector2f(1, 1);
             //_body.Position = new Vector2(20, 20);
             _sprite.Origin = new Vector2f(39 / 2f, 59);
-            _body.Position = new Vector2(2, 2);
+            _body.Position = new Vector2(2 + ConvertUnits.ToSimUnits(_map.MapOffsetX), 2);
             _body.LinearVelocity = new Vector2(1, 0);
         }
 

@@ -15,13 +15,14 @@ namespace JGerdesJWiemers.Game.TowerDefence
     {
         private Tile[,] tiles;
         private Vector2i mapSize;
-        private Vector2i tileSize; 
+        private Vector2i tileSize;
+        public int MapOffsetX { get; set; }
 
         public Map(int width, int height, int tileSize = 32)
             : this(width, height, tileSize, tileSize) { }
         public Map(int width, int height, int tileWidth, int tileHeight)
         {
-
+            MapOffsetX = 0;
             tiles = new Tile[width, height];
             mapSize = new Vector2i(width, height);
             tileSize = new Vector2i(tileWidth, tileHeight);
@@ -41,7 +42,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
                     {
                         tex = tex1;
                     }
-                    tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, tex);
+                    tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, tex, MapOffsetX);
                 }
             }
         }

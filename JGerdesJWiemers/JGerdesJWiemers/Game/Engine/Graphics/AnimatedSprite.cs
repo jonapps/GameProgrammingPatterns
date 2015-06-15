@@ -53,7 +53,6 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
 
         public void Update()
         {
-            Console.WriteLine(Game.ElapsedTime);
             if (Game.ElapsedTime - _startTime >= _animationQueue.Peek().Duration)
             {
                 _NextFrame();

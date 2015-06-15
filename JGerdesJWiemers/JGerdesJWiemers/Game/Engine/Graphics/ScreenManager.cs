@@ -7,6 +7,7 @@ using SFML.Window;
 using JGerdesJWiemers.Game.Engine.Input;
 using SFML.Graphics;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+using SFML.System;
 
 namespace JGerdesJWiemers.Game.Engine.Graphics
 {
@@ -27,12 +28,18 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             }
         }
 
+        private Vector2u _rTexSize = new Vector2u(2489, 1400);
+        
+
         
         public ScreenManager(RenderWindow w)
             : base(w){
                 _screens = new Stack<ScreenData>();
                 InputManager.Instance.InputHandler += _InputHandler;
-                _renderTexture = new RenderTexture(w.Size.X, w.Size.Y);
+                _renderTexture = new RenderTexture(_rTexSize.X, _rTexSize.Y);
+                View view = new View(new FloatRect(-_rTexSize.X / 2, -200, _rTexSize.X, _rTexSize.Y));
+                _renderTexture.SetView(view);
+                //_window.SetView(view);
         }
 
         bool _InputHandler(string name, InputEvent e, int channel)
