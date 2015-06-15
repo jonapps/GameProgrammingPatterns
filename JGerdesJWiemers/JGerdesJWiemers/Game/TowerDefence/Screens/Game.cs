@@ -90,7 +90,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //Console.Write("\rMousePosition@ X(" + InputManager.Instance.MousePosition.X + "):\tY(" + InputManager.Instance.MousePosition.Y + ")");
             _cursor.Update();
             if(InputManager.Instance.MousePosition.X > 300)
-                _shader.SetParameter("radius", (InputManager.Instance.MousePosition.X-300) * 0.00005F);
+                _shader.SetParameter("radius", (InputManager.Instance.MousePosition.X-300) * 0.00001F);
             else
                 _shader.SetParameter("radius", 0);
         }
