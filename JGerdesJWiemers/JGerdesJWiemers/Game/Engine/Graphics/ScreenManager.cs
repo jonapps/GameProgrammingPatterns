@@ -28,18 +28,15 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             }
         }
 
-        private Vector2u _rTexSize = new Vector2u(2489, 1400);
-        
-
+       
         
         public ScreenManager(RenderWindow w)
             : base(w){
                 _screens = new Stack<ScreenData>();
                 InputManager.Instance.InputHandler += _InputHandler;
-                _renderTexture = new RenderTexture(_rTexSize.X, _rTexSize.Y);
-                View view = new View(new FloatRect(-_rTexSize.X / 2, -200, _rTexSize.X, _rTexSize.Y));
-                _renderTexture.SetView(view);
-                //_window.SetView(view);
+                _renderTexture = new RenderTexture(_window.Size.X, _window.Size.Y);
+                _view = new View(new FloatRect(0, 0, _window.Size.X, _window.Size.Y));
+                _view.Viewport = new FloatRect(0, 0, 1, 1);
         }
 
         bool _InputHandler(string name, InputEvent e, int channel)
@@ -174,6 +171,8 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 {
                     _renderTexture.Clear();
                     _renderTexture.Display();
+                    _renderTexture.SetView(current.screen.View);
+                    _renderTexture.Clear();
                     _renderTexture.Draw(current.screen, states);
 
                     RenderStates screenStates = new RenderStates(states);
@@ -181,6 +180,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                     {
                         screenStates.Shader = current.screen.Shader;
                     }
+                    renderTarget.SetView(_view);
                     renderTarget.Draw(new Sprite(_renderTexture.Texture), screenStates);
                 }
                     

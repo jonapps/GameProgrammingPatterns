@@ -119,6 +119,7 @@
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
     <Compile Include="Game\TowerDefence\Monster.cs" />
     <Compile Include="Game\TowerDefence\Map.cs" />
+    <Compile Include="Game\TowerDefence\Screens\CursorScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
     <Compile Include="Game\TowerDefence\Tile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

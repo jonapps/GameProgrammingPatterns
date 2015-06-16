@@ -20,15 +20,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         protected List<IDrawable> _drawables;
         protected List<int> _toDeleteEntities;
-        protected View _view;
 
         public GameScreen(RenderWindow w) : base(w)
         {
             _drawables = new List<IDrawable>();
             _toDeleteEntities = new List<int>();
-            float width = ConvertUnits.ToSimUnits(_window.Size.X);
-            float height = ConvertUnits.ToSimUnits(_window.Size.Y);
-            _view = new View(new Vector2f(width / 2f, height / 2f), new Vector2f(width, height));
             
         }
 

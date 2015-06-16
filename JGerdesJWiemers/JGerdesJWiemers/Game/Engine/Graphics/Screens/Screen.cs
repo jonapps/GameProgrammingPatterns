@@ -17,10 +17,13 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         protected ScreenManager _screenManager;
         protected InputMapper _input;
         protected Shader _shader;
+        protected View _view;
 
         public Screen(RenderWindow window)
         {
             _window = window;
+            _view = new View(new FloatRect(0, 0, _window.Size.X, _window.Size.Y));
+            _view.Viewport = new FloatRect(0, 0, 1, 1);
             _input = new InputMapper();
 
         }
@@ -38,6 +41,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             get
             {
                 return _shader;
+            }
+        }
+
+        public View View
+        {
+            get
+            {
+                return _view;
             }
         }
 

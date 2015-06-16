@@ -53,6 +53,7 @@ namespace JGerdesJWiemers.Game
             InputManager.Instance.Init(_window);
             this._screenManager = new ScreenManager(_window);
             this._screenManager.Push(new GameScreen.Game(_window));
+            this._screenManager.Push(new CursorScreen(_window));
             //this._screenManager.Push(new Editor.EditorScreen(_window));
             _window.SetActive();
             _window.Closed += this._OnClose;
@@ -91,6 +92,7 @@ namespace JGerdesJWiemers.Game
 
             _window.DispatchEvents();
             this._screenManager.Update();
+
         }
 
          
