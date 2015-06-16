@@ -39,15 +39,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 _drawables.Add(new Monster(_world, _map));
             });
-
-
-            //String shaderPath = @"Assets\Shader\";
-            //_shader = new Shader(null, shaderPath + "blur3.frag");
-
-            //_shader.SetParameter("blur_radius", 0.08F);
-            //_shader.SetParameter("resolution", 1280, 720);
-            //_shader.SetParameter("dir", 1, 0);
-            //_shader.SetParameter("radius", 0.0015f);
             _window.MouseButtonPressed += _window_MouseButtonPressed;
         }
 
