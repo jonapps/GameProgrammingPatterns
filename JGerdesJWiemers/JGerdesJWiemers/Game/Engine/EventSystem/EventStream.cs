@@ -58,12 +58,14 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
 
         private void _NotifyAll(String eventName, EngineEvent eventData)
         {
-            List<EventListener> callbacks = _events[eventName];
-            for (int i = 0; i < callbacks.Count; ++i)
+            if (_events.ContainsKey(eventName))
             {
-                callbacks[i].DynamicInvoke(eventData);
-            } 
+                List<EventListener> callbacks = _events[eventName];
+                for (int i = 0; i < callbacks.Count; ++i)
+                {
+                    callbacks[i].DynamicInvoke(eventData);
+                } 
+            }
         }
-
     }
 }
