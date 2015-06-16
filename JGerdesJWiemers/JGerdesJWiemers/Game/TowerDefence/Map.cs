@@ -70,6 +70,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         }
 
+
         public Vector2i GetTileIndexAtMapPoint(float mapX, float mapY)
         {
            
@@ -88,6 +89,16 @@ namespace JGerdesJWiemers.Game.TowerDefence
                 return tiles[index.X, index.Y];
             else
                 return null;
+        }
+
+        public Tile GetTileAtScreenPoint(Vector2f screenPoint)
+        {
+            return GetTileAtScreenPoint(screenPoint.X, screenPoint.Y);
+        }
+
+        public Tile GetTileAtScreenPoint(Vector2i screenPoint)
+        {
+            return GetTileAtScreenPoint(screenPoint.X, screenPoint.Y);
         }
 
         public Tile GetTileAtMapPoint(float mapX, float mapY)
