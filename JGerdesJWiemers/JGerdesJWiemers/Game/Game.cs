@@ -23,7 +23,7 @@ namespace JGerdesJWiemers.Game
         public static readonly string VERSION = "v1.0";
         public static readonly string GAME_TITLE = "ShootEmUp";
         public static long ElapsedTime = 0;
-        public static bool DEBUG = true;
+        public static bool DEBUG = !true;
 
         public static readonly Time TargetElapsedTime = Time.FromMilliseconds(16);
         readonly Time MaxElapsedTime = Time.FromMilliseconds(25);
