@@ -10,10 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.Game.TowerDefence
+namespace JGerdesJWiemers.Game.TowerDefence.Entities
 {
     class Monster : SpriteEntity
     {
+        public static String EVENT_SPAWN = "monster.spawn";
+
+
         private Map _map;
         public Monster(FarseerPhysics.Dynamics.World w, Map map)
             : base(w, new CircleTextureContainer(new Texture(@"Assets/Graphics/guy.png"), 39, 69, 16), 1)

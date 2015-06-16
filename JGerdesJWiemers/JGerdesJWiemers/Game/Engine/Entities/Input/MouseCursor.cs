@@ -31,7 +31,6 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
         public void Update()
         {
             _position = InputManager.Instance.MousePosition;
-            
             float left, top, right, bottom;
             left = 0;
             top = 0;
@@ -45,20 +44,16 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
             if (_position.Y <= top + _radius)
             {
                 _position.Y = (int)top + _radius;
-
             }
             if (_position.X >= right - _radius)
             {
                 _position.X = (int)right - _radius;
-
             }
             if (_position.Y >= bottom - _radius)
             {
                 _position.Y = (int)bottom - _radius;
             }
-
             InputManager.Instance.MousePosition = _position;
-            
         }
 
         

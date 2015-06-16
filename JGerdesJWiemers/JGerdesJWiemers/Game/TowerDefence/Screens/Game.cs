@@ -1,8 +1,11 @@
 ﻿using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Entities.Input;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
+using JGerdesJWiemers.Game.TowerDefence.Entities;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -28,22 +31,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
 
             _map = new Map(24, 24, 48);
-            //_view = _window.GetView();
-
-
             w.SetMouseCursorVisible(false);
             _world = new World(new Vector2(0,0));
             _drawables.Add(_map);
+            EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
+            {
+                _drawables.Add(new Monster(_world, _map)); 
+            });
 
-            _drawables.Add(new Monster(_world, _map));
-
-            //String shaderPath = @"Assets\Shader\";
-            //_shader = new Shader(null, shaderPath + "blur3.frag");
-
-            //_shader.SetParameter("blur_radius", 0.08F);
-            //_shader.SetParameter("resolution", 1280, 720);
-            //_shader.SetParameter("dir", 1, 0);
-            //_shader.SetParameter("radius", 0.0015f);
+            EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
         }
 
       
