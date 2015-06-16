@@ -34,19 +34,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             w.SetMouseCursorVisible(false);
             _world = new World(new Vector2(0,0));
             _drawables.Add(_map);
+
             EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
             {
-                _drawables.Add(new Monster(_world, _map)); 
+                _drawables.Add(new Monster(_world, _map));
             });
-
-
-            //String shaderPath = @"Assets\Shader\";
-            //_shader = new Shader(null, shaderPath + "blur3.frag");
-
-            //_shader.SetParameter("blur_radius", 0.08F);
-            //_shader.SetParameter("resolution", 1280, 720);
-            //_shader.SetParameter("dir", 1, 0);
-            //_shader.SetParameter("radius", 0.0015f);
             _window.MouseButtonPressed += _window_MouseButtonPressed;
         }
 
@@ -69,10 +61,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _world.Step(WORLD_STEP_SIZE);
             base.Update();
             _MoveView();
-            //if(InputManager.Instance.MousePosition.X > 300)
-            //    _shader.SetParameter("radius", (InputManager.Instance.MousePosition.X-300) * 0.00001F);
-            //else
-            //    _shader.SetParameter("radius", 0);
         }
 
         public override void PastUpdate()
