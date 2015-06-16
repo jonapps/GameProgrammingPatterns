@@ -38,6 +38,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 _view = new View(new FloatRect(0, 0, _window.Size.X, _window.Size.Y));
                 _view.Viewport = new FloatRect(0, 0, 1, 1);
                 _window.SetView(_view);
+                _renderTexture.Display();
         }
 
         bool _InputHandler(string name, InputEvent e, int channel)
@@ -170,8 +171,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 ScreenData current = _screens.ElementAt(i);
                 if (current.render)
                 {
-                    _renderTexture.Clear();
-                    _renderTexture.Display();
+                    _renderTexture.Clear(new Color(255, 255, 255, 0));
                     _renderTexture.SetView(current.screen.View);
                     _renderTexture.Draw(current.screen, states);
 
