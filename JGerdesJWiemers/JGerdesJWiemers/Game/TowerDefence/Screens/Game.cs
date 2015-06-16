@@ -44,6 +44,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //_shader.SetParameter("resolution", 1280, 720);
             //_shader.SetParameter("dir", 1, 0);
             //_shader.SetParameter("radius", 0.0015f);
+            _window.MouseButtonPressed += _window_MouseButtonPressed;
+        }
+
+        void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
+        {
+            Tile t = _map.GetTileAtScreenPoint(_window.MapPixelToCoords(InputManager.Instance.MousePosition, _view));
+            if (t != null)
+            {
+                t.mark();
+            }
         }
 
       
