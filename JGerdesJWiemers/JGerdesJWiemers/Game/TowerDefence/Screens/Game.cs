@@ -67,7 +67,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)
         {
-            _window.SetView(_view);
             base.Draw(renderTarget, states);
         }
 

@@ -37,6 +37,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 _renderTexture = new RenderTexture(_window.Size.X, _window.Size.Y);
                 _view = new View(new FloatRect(0, 0, _window.Size.X, _window.Size.Y));
                 _view.Viewport = new FloatRect(0, 0, 1, 1);
+                _window.SetView(_view);
         }
 
         bool _InputHandler(string name, InputEvent e, int channel)
@@ -172,15 +173,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                     _renderTexture.Clear();
                     _renderTexture.Display();
                     _renderTexture.SetView(current.screen.View);
-                    _renderTexture.Clear();
                     _renderTexture.Draw(current.screen, states);
 
                     RenderStates screenStates = new RenderStates(states);
+                    screenStates.BlendMode = BlendMode.Alpha;
                     if (current.screen.Shader != null)
                     {
                         screenStates.Shader = current.screen.Shader;
                     }
-                    renderTarget.SetView(_view);
                     renderTarget.Draw(new Sprite(_renderTexture.Texture), screenStates);
                 }
                     
