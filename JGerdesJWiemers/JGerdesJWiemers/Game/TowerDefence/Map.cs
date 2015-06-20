@@ -1,6 +1,7 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
+using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using SFML.Graphics;
 using SFML.System;
 using System;
@@ -13,39 +14,70 @@ namespace JGerdesJWiemers.Game.TowerDefence
 {
     class Map : IDrawable 
     {
-        private Tile[,] tiles;
-        private Vector2i mapSize;
-        private Vector2i tileSize;
+        private Tile[,] _tiles;
+        private Vector2i _mapSize;
+        private Vector2i _tileSize;
         public int MapOffsetX { get; set; }
 
         public Map(int width, int height, int tileSize = 32)
             : this(width, height, tileSize, tileSize) { }
+       
+        
         public Map(int width, int height, int tileWidth, int tileHeight)
         {
             MapOffsetX = 0;
-            tiles = new Tile[width, height];
-            mapSize = new Vector2i(width, height);
-            tileSize = new Vector2i(tileWidth, tileHeight);
+            _tiles = new Tile[width, height];
+            _mapSize = new Vector2i(width, height);
+            _tileSize = new Vector2i(tileWidth, tileHeight);
             Texture tex1 = new Texture(@"Assets/Graphics/tiles/grass.png");
             Texture tex2 = new Texture(@"Assets/Graphics/tiles/grassdirt.png");
+
+            _CreateRandomMap(width, height, tileWidth, tileHeight, new List<Texture> {tex1, tex2});
+        }
+
+        public Map(MapAsset asset)
+        {
+            _tiles = new Tile[asset.Width, asset.Height];
+            _mapSize = new Vector2i(asset.Width, asset.Height);
+            _tileSize = new Vector2i(asset.Tileheight, asset.Tileheight);
+            _CreateMapByAsset(asset.Width, asset.Height, asset.Tileheight, asset.Tileheight, asset);
+        }
+
+        private void _CreateMapByAsset(int width, int height, int tileWidth, int tileHeight, MapAsset asset)
+        {
+            List<Texture> textures = new List<Texture>();
+            foreach (TileImageAsset imgasset in asset.TileSets[0].TileImages)
+            {
+                textures.Add(new Texture(@imgasset.Image));
+            }
+            int nextTex = 0;
+            
+            for (int y = 0; y < width; y++)
+            {
+                for (int x = 0; x < height; x++)
+                {
+                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[asset.Layers.First().Data[nextTex++]-1], MapOffsetX);
+                }
+            }
+            
+        }
+
+        private void _CreateRandomMap(int width, int height, int tileWidth, int tileHeight, List<Texture> textures)
+        {
             Texture tex;
             Random rand = new Random();
-
+            
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if(rand.Next(2) == 0){
-                        tex = tex2;
-                    }
-                    else
-                    {
-                        tex = tex1;
-                    }
-                    tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, tex, MapOffsetX);
+                    int randomNUmber = rand.Next(0, textures.Count);
+                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[randomNUmber], MapOffsetX);
                 }
             }
         }
+
+        
 
         public static Vector2f ScreenToMap(float screenX, float screenY)
         {
@@ -75,8 +107,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
         {
            
             Vector2i result = new Vector2i();
-            result.X = ((int)mapX) / tileSize.X;
-            result.Y = ((int)mapY) / tileSize.Y;
+            result.X = ((int)mapX) / _tileSize.X;
+            result.Y = ((int)mapY) / _tileSize.Y;
             float x = SFML.Window.Mouse.GetPosition().X;
             return result;
 
@@ -85,8 +117,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
         public Tile GetTileAtScreenPoint(float screenX, float screenY)
         {
             Vector2i index = GetTileIndexAtScreenPoint(screenX, screenY);
-            if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
-                return tiles[index.X, index.Y];
+            if (index.X >= 0 && index.X < _mapSize.X && index.Y >= 0 && index.Y < _mapSize.Y)
+                return _tiles[index.X, index.Y];
             else
                 return null;
         }
@@ -104,8 +136,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
         public Tile GetTileAtMapPoint(float mapX, float mapY)
         {
             Vector2i index = GetTileIndexAtMapPoint(mapX, mapY);
-            if (index.X >= 0 && index.X < mapSize.X && index.Y >= 0 && index.Y < mapSize.Y)
-                return tiles[index.X, index.Y];
+            if (index.X >= 0 && index.X < _mapSize.X && index.Y >= 0 && index.Y < _mapSize.Y)
+                return _tiles[index.X, index.Y];
             else
                 return null;
         }
@@ -123,11 +155,11 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            for (int x = 0; x < mapSize.X; x++)
+            for (int x = 0; x < _mapSize.X; x++)
             {
-                for (int y = 0; y < mapSize.Y; y++)
+                for (int y = 0; y < _mapSize.Y; y++)
                 {
-                    target.Draw(tiles[x, y], states);
+                    target.Draw(_tiles[x, y], states);
                 }
             }
         }

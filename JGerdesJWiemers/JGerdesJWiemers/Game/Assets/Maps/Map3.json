@@ -1,7 +1,7 @@
 { "height":10,
  "layers":[
         {
-         "data":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         "data":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          "height":10,
          "name":"Kachelebene 1",
          "opacity":1,
@@ -17,33 +17,33 @@
     {
 
     },
- "renderorder":"right-down",
- "tileheight":24,
+ "renderorder":"left-up",
+ "tileheight":48,
  "tilesets":[
         {
          "firstgid":1,
          "margin":0,
-         "name":"grassdirt_klein",
+         "name":"std",
          "properties":
             {
 
             },
          "spacing":0,
-         "tileheight":24,
+         "tileheight":48,
          "tiles":
             {
              "0":
                 {
-                 "image":"..\/Graphics\/tiles\/grass_klein.png"
+                 "image":"Assets\/Graphics\/tiles\/grass.png"
                 },
              "1":
                 {
-                 "image":"..\/Graphics\/tiles\/grassdirt_klein.png"
+                 "image":"Assets\/Graphics\/tiles\/grassdirt.png"
                 }
             },
-         "tilewidth":48
+         "tilewidth":96
         }],
- "tilewidth":48,
+ "tilewidth":96,
  "version":1,
  "width":10
 }

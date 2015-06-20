@@ -26,6 +26,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
+        private readonly String DIR_MAPS = @"Assets\Maps\";
         private readonly String DIR_SETTINGS = @"Assets\Configuration";
 
         private Dictionary<String, Font> _fonts;
@@ -137,8 +138,38 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 }
             }   
             return _textures[name];
-
         }
+
+        /// <summary>
+        /// loads a MapAsset from json file
+        /// </summary>
+        /// <param name="pathToMap"></param>
+        /// <returns></returns>
+        public MapAsset LoadMap(string pathToMap)
+        {
+            string filepath = DIR_MAPS + pathToMap;
+            System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+            string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
+            string completeFile = file.ReadToEnd();
+            file.Close();
+            JObject jsonObj = JObject.Parse(completeFile);
+           
+            MapAsset mapAsset = JsonConvert.DeserializeObject<MapAsset>(completeFile);
+
+            // Because of senseless object notation in tiled exported json
+            JToken jobject = jsonObj["tilesets"][0]["tiles"];
+            IJEnumerable<JToken> values = jobject.Values();
+            int size = values.Count();
+            foreach (JToken token in values)
+            {
+                String str = token.ToString();
+                TileImageAsset imageAsset = JsonConvert.DeserializeObject<TileImageAsset>(str);
+                // we are working with only one tileset. if not refactor this!
+                mapAsset.TileSets[0].TileImages.Add(imageAsset);
+            }
+            return mapAsset;
+        }
+
 
         public TextureContainer getTexture(String name)
         {

@@ -5,6 +5,8 @@ using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
+using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using JGerdesJWiemers.Game.TowerDefence.Entities;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -29,8 +31,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w)
             :base(w)
         {
-
-            _map = new Map(24, 24, 48);
+            MapAsset mapAsset = AssetLoader.Instance.LoadMap("Map3.json");
+            //_map = new Map(24, 24, 48);
+            _map = new Map(mapAsset);
             w.SetMouseCursorVisible(false);
             _world = new World(new Vector2(0,0));
             _drawables.Add(_map);
@@ -49,8 +52,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 t.mark();
             }
-            for (int i = 0; i < 100; i++ )
-                EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
+            //for (int i = 0; i < 100; i++ )
+            //    EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
         }
 
       

@@ -114,7 +114,11 @@
     <Compile Include="Game\Engine\Utils\Helper\Asset.cs" />
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
     <Compile Include="Game\Engine\Utils\Helper\GameSettingsAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LayerAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\MapAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\SpriteVectorAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\TileImageAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\TilesetsAsset.cs" />
     <Compile Include="Game\Engine\Utils\Math.cs" />
     <Compile Include="Game\Engine\Utils\Helper\SpriteAsset.cs" />
     <Compile Include="Game\Game.cs" />
@@ -134,6 +138,7 @@
     <None Include="Game\Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="Game\Assets\Fonts\Roboto-Thin.ttf" />
     <None Include="Game\Assets\Maps\Map1.json" />
+    <None Include="Game\Assets\Maps\Map3.json" />
     <None Include="Game\Assets\Shader\blur3.frag" />
     <None Include="Game\Assets\Shader\blur.frag" />
     <None Include="Game\Assets\Shader\blur2.frag" />
