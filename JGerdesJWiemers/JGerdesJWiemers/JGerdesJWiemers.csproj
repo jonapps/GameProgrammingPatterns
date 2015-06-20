@@ -137,7 +137,6 @@
     <None Include="Game\Assets\Fonts\Roboto-Medium.ttf" />
     <None Include="Game\Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="Game\Assets\Fonts\Roboto-Thin.ttf" />
-    <None Include="Game\Assets\Maps\Map1.json" />
     <None Include="Game\Assets\Maps\Map3.json" />
     <None Include="Game\Assets\Shader\blur3.frag" />
     <None Include="Game\Assets\Shader\blur.frag" />

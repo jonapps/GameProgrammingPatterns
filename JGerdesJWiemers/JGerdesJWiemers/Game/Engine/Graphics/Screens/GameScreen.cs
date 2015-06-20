@@ -18,30 +18,26 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public static readonly float WORLD_STEP_SIZE = 1 / 60f;
 
-        protected List<IDrawable> _drawables;
+        protected List<Entity> _entities;
         protected List<int> _toDeleteEntities;
 
         public GameScreen(RenderWindow w) : base(w)
         {
-            _drawables = new List<IDrawable>();
+            _entities = new List<Entity>();
             _toDeleteEntities = new List<int>();
             
         }
 
         public override void Update()
         {
-            for (int i = 0; i < _drawables.Count; ++i)
-            {
-                _drawables[i].Update();
-            }
+            foreach(Entity e in _entities)
+                e.Update();
         }
 
         public override void PastUpdate()
         {
-            for (int i = 0; i < _drawables.Count; ++i)
-            {
-                _drawables[i].PastUpdate();
-            }
+            foreach(Entity e in _entities)
+                e.PastUpdate();
         }
 
         public override void Exit()
@@ -53,18 +49,16 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public override void PreDraw(float extra)
         {
-            foreach (IDrawable e in _drawables)
-            {
+            foreach(Entity e in _entities)
                 e.PreDraw(extra);
-            }
+
+            _entities.Sort((first, second) => first.Z.CompareTo(second.Z));
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
         {
-            foreach (IDrawable e in _drawables)
-            {
+            foreach(Entity e in _entities)
                 target.Draw(e, states);
-            }
         }
     }
 }

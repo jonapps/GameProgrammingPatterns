@@ -36,11 +36,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _map = new Map(mapAsset);
             w.SetMouseCursorVisible(false);
             _world = new World(new Vector2(0,0));
-            _drawables.Add(_map);
+            
 
             EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
             {
-                _drawables.Add(new Monster(_world, _map));
+                for (int i = 0; i < 20; i++ )
+                    _entities.Add(new Monster(_world, _map));
             });
             _window.MouseButtonPressed += _window_MouseButtonPressed;
         }
@@ -54,6 +55,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
             //for (int i = 0; i < 100; i++ )
             //    EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
+
         }
 
       
@@ -63,16 +65,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             _world.Step(WORLD_STEP_SIZE);
             base.Update();
+            _map.Update();
             _MoveView();
         }
 
         public override void PastUpdate()
         {
+            _map.PastUpdate();
             base.PastUpdate();
         }
 
         public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)
         {
+            renderTarget.Draw(_map, states);
             base.Draw(renderTarget, states);
         }
 
