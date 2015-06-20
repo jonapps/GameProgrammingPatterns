@@ -1,0 +1,12 @@
+{
+	"ImageTitle": "tower.png",
+	"Collider": {
+		"Type": "Tile",
+		"Width": 1,
+		"Height": 1
+	},
+	"Center": {
+		"x" : 48,
+		"y" : 163
+	}
+}

@@ -18,8 +18,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
     {
         public static readonly String DATA_FILE_ENDING = "json";
 
-        
-        public static readonly String TEXTURE_EXPLOSION1 = @"explosions\explosion1";
+
+        public static readonly String TEXTURE_GUY = @"guy";
+        public static readonly String TEXTURE_TOWER = @"tower\tower";
+
+        public static readonly String TEXTURE_TILE_GRASS = @"tiles\grass";
+        public static readonly String TEXTURE_TILE_DIRT = @"tiles\dirt";
 
         public static readonly String CONFIG_INPUT = "input.json";
 
@@ -38,7 +42,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             _fonts = new Dictionary<string, Font>();
             _textures = new Dictionary<string, TextureContainer>();
 
-            LoadTexture(TEXTURE_EXPLOSION1, TEXTURE_EXPLOSION1);
+            LoadTexture(TEXTURE_GUY, TEXTURE_GUY);
+            LoadTexture(TEXTURE_TOWER, TEXTURE_TOWER);
+
+            LoadTexture(TEXTURE_TILE_GRASS, TEXTURE_TILE_GRASS);
+            LoadTexture(TEXTURE_TILE_DIRT, TEXTURE_TILE_DIRT);
 
         }
 
@@ -98,40 +106,41 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
                 SpriteAsset spriteAsset = JsonConvert.DeserializeObject<SpriteAsset>(completeFile);
                 texture = new Texture(directory + "\\" + spriteAsset.ImageTitle);
-                type = spriteAsset.Type;
-                width = spriteAsset.Width;
-                height = spriteAsset.Height;
 
-                if (type == TextureContainer.IDENTIFIER)
+                width = (int)texture.Size.X / (spriteAsset.SpriteSheet == null ? 1 : spriteAsset.SpriteSheet.x);
+                height = (int)texture.Size.Y / (spriteAsset.SpriteSheet == null ? 1 : spriteAsset.SpriteSheet.y);
+
+                if (spriteAsset.Collider == null)
                 {
                     container = new TextureContainer(texture, width, height);
                     _textures.Add(name, container);
                     return container;
                 }
-                else if (type == RectangleTextureContainer.IDENTIFIER)
+                else if (spriteAsset.Collider.Type == RectangleTextureContainer.IDENTIFIER)
                 {
-                    container = new RectangleTextureContainer(texture, width, height);
-                    _textures.Add(name, container);
-                    return container;
-                } 
-                else if (type == CircleTextureContainer.IDENTIFIER)
-                {
-                    float radius = spriteAsset.Radius;
-                    container = new CircleTextureContainer(texture, width, height, radius);
-                    _textures.Add(name, container);
-                    return container;
-                } 
-                else if (type == PolygonTextureContainer.IDENTIFIER)
-                {
-                    Vertices vert = new Vertices();
-
-                    foreach (SpriteVectorAsset sva in spriteAsset.Vertices)
-                    {
-                        vert.Add(new Vector2(sva.X, sva.Y));
+                    //default size
+                    Vector2 center = new Vector2(width/2f, height - width/4f);
+                    if(spriteAsset.Center != null){
+                        center.X = spriteAsset.Center.x;
+                        center.Y = spriteAsset.Center.y;
                     }
-
-                    container = new PolygonTextureContainer(texture, width, height, vert);
+                    container = new RectangleTextureContainer(texture, width, height, center, new Vector2(spriteAsset.Collider.Width, spriteAsset.Collider.Height) * 24 * 2);
+                    _textures.Add(name, container);
+                    return container;
                 }
+                else if (spriteAsset.Collider.Type == CircleTextureContainer.IDENTIFIER)
+                {
+                    //default size
+                    Vector2 center = new Vector2(width / 2f, height - width / 4f);
+                    if (spriteAsset.Center != null)
+                    {
+                        center.X = spriteAsset.Center.x;
+                        center.Y = spriteAsset.Center.y;
+                    }
+                    container = new CircleTextureContainer(texture, width, height, center, spriteAsset.Collider.Radius * 24);
+                    _textures.Add(name, container);
+                    return container;
+                } 
                 if(container != null){
                     _textures.Add(name, container);
                     return container;

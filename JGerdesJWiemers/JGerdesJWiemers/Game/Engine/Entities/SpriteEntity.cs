@@ -26,19 +26,21 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             if (textureContainer is RectangleTextureContainer)
             {
-                float w = ConvertUnits.ToSimUnits(textureContainer.Width * scale);
-                float h = ConvertUnits.ToSimUnits(textureContainer.Height * scale);
-                _body = BodyFactory.CreateRectangle(world, w, h, 1f, new Vector2(x, y), 0, bodyType, this);
+                RectangleTextureContainer rectCont = textureContainer as RectangleTextureContainer;
+                float w = ConvertUnits.ToSimUnits(rectCont.TileSize.X * scale);
+                float h = ConvertUnits.ToSimUnits(rectCont.TileSize.Y * scale);
+                _body = BodyFactory.CreateRectangle(world, w, h, 1f, new Vector2(0, 0), 0, bodyType, this);
                 _fixture = FixtureFactory.AttachRectangle(w, h, 1f, new Vector2(0, 0), _body, this);
 
-                w = textureContainer.Width * scale;
-                h = textureContainer.Height * scale;
+                w = rectCont.TileSize.X * scale;
+                h = rectCont.TileSize.Y * scale;
                 List<Vector2f> points = new List<Vector2f>();
                 points.Add(Map.MapToScreen(0,0));
                 points.Add(Map.MapToScreen(w, 0));
                 points.Add(Map.MapToScreen(w, h));
                 points.Add(Map.MapToScreen(0, h));
                 _colliderShape = new PolygonShape(points);
+                _colliderShape.Origin = Map.MapToScreen(w/2,h/2);
             }
             else if (textureContainer is CircleTextureContainer)
             {
@@ -57,19 +59,6 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 }
                 _colliderShape = new PolygonShape(points);
             }
-            else if (textureContainer is PolygonTextureContainer)
-            {
-                PolygonTextureContainer pTextureContainer = (PolygonTextureContainer)textureContainer;
-                Vertices verts = new Vertices();
-                Vector2 c = new Vector2(textureContainer.Width * scale * 0.5f, textureContainer.Height * scale * 0.5f); //center of polygon
-                foreach (Vector2 v in pTextureContainer.Vertices)
-                {
-                    verts.Add(ConvertUnits.ToSimUnits(v.X * scale - c.X, v.Y * scale - c.Y));
-                }
-                _body = BodyFactory.CreatePolygon(world, verts, 1f, new Vector2(x, y), 0, bodyType, this);
-                _fixture = FixtureFactory.AttachPolygon(verts, 1f, _body, this);
-
-            }
 
         }
 
@@ -78,6 +67,15 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         {
             _sprite = new AnimatedSprite(textureContainer.Texture, textureContainer.Width, textureContainer.Height);
             _sprite.Origin = new Vector2f(textureContainer.Width / 2f, textureContainer.Height);
+            if (textureContainer is CircleTextureContainer)
+            {
+                _sprite.Origin = _ConvertVectorToVector2f((textureContainer as CircleTextureContainer).Center);
+            }
+            if (textureContainer is RectangleTextureContainer)
+            {
+                _sprite.Origin = _ConvertVectorToVector2f((textureContainer as RectangleTextureContainer).Center);
+            }
+            
             _sprite.Scale = new Vector2f(scale, scale);
         }
 

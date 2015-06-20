@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Utils;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -19,7 +20,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         private Map _map;
         public Monster(FarseerPhysics.Dynamics.World w, Map map)
-            : base(w, new CircleTextureContainer(new Texture(@"Assets/Graphics/guy.png"), 39, 69, 16), 1)
+            : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 1)
         {
             _sprite.SetAnimation(new Animation(0, 7, 100, true, false));
 
@@ -28,7 +29,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             //_sprite.Scale = new Vector2f(1, 1);
             //_body.Position = new Vector2(20, 20);
             Random r = new Random();
-            _sprite.Origin = new Vector2f(39 / 2f, 59);
+            //_sprite.Origin = new Vector2f(39 / 2f, 59);
             _body.Position = new Vector2(r.Next(10)+2 + ConvertUnits.ToSimUnits(_map.MapOffsetX), 2);
             _body.LinearVelocity = new Vector2(1, (float)r.NextDouble());
         }
