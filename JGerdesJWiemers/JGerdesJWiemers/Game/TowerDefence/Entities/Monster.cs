@@ -22,10 +22,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 1)
         {
             _sprite.SetAnimation(new Animation(0, 7, 100, true, false));
-
             _body.Position = ConvertUnits.ToSimUnits(x, y);
 
             _body.LinearVelocity = new Vector2(1, 0); 
+
         }
 
         public override void Update()

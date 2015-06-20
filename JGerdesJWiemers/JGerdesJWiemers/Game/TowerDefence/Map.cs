@@ -64,7 +64,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
             {
                 for (int x = 0; x < height; x++)
                 {
-                    _CreateTile(tileWidth, tileHeight, asset, textures, nextTex++, y, x);
+                    _CreateTileByAsset(tileWidth, tileHeight, asset, textures, nextTex++, y, x);
                 }
             }
             
@@ -80,7 +80,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
         /// <param name="nextTex"></param>
         /// <param name="y"></param>
         /// <param name="x"></param>
-        private void _CreateTile(int tileWidth, int tileHeight, MapAsset asset, List<Texture> textures, int nextTex, int y, int x)
+        private void _CreateTileByAsset(int tileWidth, int tileHeight, MapAsset asset, List<Texture> textures, int nextTex, int y, int x)
         {
             foreach (LayerAsset l in asset.Layers)
             {
@@ -94,11 +94,16 @@ namespace JGerdesJWiemers.Game.TowerDefence
                     _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX, isRoad);
                 }
             }
-
-            
-
         }
 
+        /// <summary>
+        /// Creates a radom map from a list of graphics
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="tileWidth"></param>
+        /// <param name="tileHeight"></param>
+        /// <param name="textures"></param>
         private void _CreateRandomMap(int width, int height, int tileWidth, int tileHeight, List<Texture> textures)
         {
             Texture tex;
@@ -115,7 +120,12 @@ namespace JGerdesJWiemers.Game.TowerDefence
         }
 
         
-
+        /// <summary>
+        /// maps screen corrds to map coords
+        /// </summary>
+        /// <param name="screenX"></param>
+        /// <param name="screenY"></param>
+        /// <returns></returns>
         public static Vector2f ScreenToMap(float screenX, float screenY)
         {
             Vector2f result = new Vector2f();
@@ -124,6 +134,12 @@ namespace JGerdesJWiemers.Game.TowerDefence
             return result;
         }
 
+        /// <summary>
+        /// maps map coords to screen coords
+        /// </summary>
+        /// <param name="mapX"></param>
+        /// <param name="mapY"></param>
+        /// <returns></returns>
         public static Vector2f MapToScreen(float mapX, float mapY)
         {
             Vector2f result = new Vector2f();
@@ -131,6 +147,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
             result.Y = 0.5f * mapX + 0.5f * mapY;
             return result;
         }
+
 
         public Vector2i GetTileIndexAtScreenPoint(float screenX, float screenY)
         {

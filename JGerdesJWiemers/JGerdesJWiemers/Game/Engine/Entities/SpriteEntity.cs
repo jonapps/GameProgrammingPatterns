@@ -69,11 +69,11 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             _sprite.Origin = new Vector2f(textureContainer.Width / 2f, textureContainer.Height);
             if (textureContainer is CircleTextureContainer)
             {
-                _sprite.Origin = _ConvertVectorToVector2f((textureContainer as CircleTextureContainer).Center);
+                _sprite.Origin = _ConvertVector2ToVector2f((textureContainer as CircleTextureContainer).Center);
             }
             if (textureContainer is RectangleTextureContainer)
             {
-                _sprite.Origin = _ConvertVectorToVector2f((textureContainer as RectangleTextureContainer).Center);
+                _sprite.Origin = _ConvertVector2ToVector2f((textureContainer as RectangleTextureContainer).Center);
             }
             
             _sprite.Scale = new Vector2f(scale, scale);

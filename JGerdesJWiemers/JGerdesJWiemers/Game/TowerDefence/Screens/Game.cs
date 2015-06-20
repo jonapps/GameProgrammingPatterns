@@ -43,6 +43,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 Tile start = _map.GetTileByIndex(0, 2);
                 _entities.Add(new Monster(_world, start.getCenter().X, start.getCenter().Y));
+
             });
 
             _window.MouseButtonPressed += _window_MouseButtonPressed;
@@ -64,8 +65,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 _entities.Add(tower);
 
             }
-           
-
         }
 
       
