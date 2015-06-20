@@ -43,6 +43,14 @@ namespace JGerdesJWiemers.Game.TowerDefence
             _CreateMapByAsset(asset.Width, asset.Height, asset.Tileheight, asset.Tileheight, asset);
         }
 
+        /// <summary>
+        /// Creates the map by MapAsset information
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="tileWidth"></param>
+        /// <param name="tileHeight"></param>
+        /// <param name="asset"></param>
         private void _CreateMapByAsset(int width, int height, int tileWidth, int tileHeight, MapAsset asset)
         {
             List<Texture> textures = new List<Texture>();
@@ -51,15 +59,43 @@ namespace JGerdesJWiemers.Game.TowerDefence
                 textures.Add(new Texture(@"Assets/Graphics/"+imgasset.Image));
             }
             int nextTex = 0;
-            
             for (int y = 0; y < width; y++)
             {
                 for (int x = 0; x < height; x++)
                 {
-                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[asset.Layers.First().Data[nextTex++]-1], MapOffsetX);
+                    _CreateTile(tileWidth, tileHeight, asset, textures, nextTex++, y, x);
                 }
             }
             
+        }
+
+        /// <summary>
+        /// Creates a Tile at the next x / y pos 
+        /// </summary>
+        /// <param name="tileWidth"></param>
+        /// <param name="tileHeight"></param>
+        /// <param name="asset"></param>
+        /// <param name="textures"></param>
+        /// <param name="nextTex"></param>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        private void _CreateTile(int tileWidth, int tileHeight, MapAsset asset, List<Texture> textures, int nextTex, int y, int x)
+        {
+            foreach (LayerAsset l in asset.Layers)
+            {
+                int nextNumber = l.Data[nextTex] - 1;
+                bool isRoad = false;
+                if (l.Name == "Road")
+                {
+                    isRoad = true;
+                }
+                if(nextNumber >= 0){
+                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX, isRoad);
+                }
+            }
+
+            
+
         }
 
         private void _CreateRandomMap(int width, int height, int tileWidth, int tileHeight, List<Texture> textures)
@@ -72,7 +108,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
                 for (int y = 0; y < height; y++)
                 {
                     int randomNUmber = rand.Next(0, textures.Count);
-                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[randomNUmber], MapOffsetX);
+                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[randomNUmber], MapOffsetX, false);
                 }
             }
         }

@@ -11,5 +11,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper
         public List<int> Data { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public String Name { get; set; }
     }
 }

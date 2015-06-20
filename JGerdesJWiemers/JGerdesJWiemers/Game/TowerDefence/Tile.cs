@@ -13,13 +13,16 @@ namespace JGerdesJWiemers.Game.TowerDefence
     class Tile : IDrawable
     {
         Sprite _sprite;
-       
-        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
+        private bool _isRoad = false;
+
+        public bool IsRoad { get { return _isRoad; } }
+
+        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter, bool isRoad)
         {
             _sprite = new Sprite(tex);
             _sprite.Position = Map.MapToScreen(x * width + mapCenter, y * height);
             _sprite.Origin = new Vector2f(width, 0);
-
+            _isRoad = isRoad;
             
         }
 
@@ -42,7 +45,14 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         public void mark()
         {
-            _sprite.Color = new Color(255, 0, 0);
+            if (_isRoad)
+            {
+                _sprite.Color = new Color(0, 255, 0);
+            }
+            else
+            {
+                _sprite.Color = new Color(255, 0, 0);
+            }
         }
 
         public Vector2f getCenter()
