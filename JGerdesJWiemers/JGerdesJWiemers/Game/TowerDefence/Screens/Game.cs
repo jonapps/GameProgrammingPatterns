@@ -5,6 +5,7 @@ using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Input;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using JGerdesJWiemers.Game.TowerDefence.Entities;
@@ -40,25 +41,30 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
             {
-                for (int i = 0; i < 2; i++ )
-                    _entities.Add(new Monster(_world, _map));
+                Tile start = _map.GetTileByIndex(0, 2);
+                _entities.Add(new Monster(_world, start.getCenter().X, start.getCenter().Y));
             });
-            _window.MouseButtonPressed += _window_MouseButtonPressed;
 
+            _window.MouseButtonPressed += _window_MouseButtonPressed;
+            _window.KeyPressed += delegate(object sender, KeyEventArgs args)
+            {
+                if(args.Code == Keyboard.Key.G)
+                    EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
+            };
         }
 
         void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
         {
             Tile t = _map.GetTileAtScreenPoint(_window.MapPixelToCoords(InputManager.Instance.MousePosition, _view));
-            if (t != null)
+            if (t != null && !t.IsRoad && !t.IsOccupied)
             {
-                t.mark();
                 Vector2 pos = t.getCenter();
-                _entities.Add(new Tower(_world, pos.X, pos.Y));
+                Tower tower = new Tower(_world, pos.X, pos.Y);
+                t.Occupier = tower;
+                _entities.Add(tower);
+
             }
-            
-            //for (int i = 0; i < 100; i++ )
-            EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
+           
 
         }
 

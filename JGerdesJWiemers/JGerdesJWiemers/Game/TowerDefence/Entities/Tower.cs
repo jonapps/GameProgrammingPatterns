@@ -2,6 +2,7 @@
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using Microsoft.Xna.Framework;
 using System;
@@ -15,7 +16,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
     class Tower : SpriteEntity
     {
         public Tower(World world, float x, float y)
-            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER))
+            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER), 1, 0, 0, BodyType.Static)
         {
             _body.Position = ConvertUnits.ToSimUnits(x, y);
         }

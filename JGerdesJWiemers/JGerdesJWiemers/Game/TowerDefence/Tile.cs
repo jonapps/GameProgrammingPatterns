@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Interfaces;
+﻿using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -17,8 +18,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
         private bool _isRoad = false;
         private Vector2 _size;
         private Vector2 _position;
+        private Entity _occupier;
 
-        public bool IsRoad { get { return _isRoad; } }
 
         public Tile(float x, float y, float width, float height, Texture tex, int mapCenter, bool isRoad)
         {
@@ -29,6 +30,26 @@ namespace JGerdesJWiemers.Game.TowerDefence
             _position = new Vector2(x * width, y * height);
             _isRoad = isRoad;
             
+        }
+
+        public bool IsRoad { get { return _isRoad; } }
+
+        public bool IsOccupied { get { return _occupier != null; } }
+
+        public Entity Occupier
+        {
+            get
+            {
+                return _occupier;
+            }
+
+            set
+            {
+                if (_occupier == null && value != null)
+                {
+                    _occupier = null;
+                }
+            }
         }
 
         public void Update()
@@ -64,5 +85,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
         {
             return _position + 0.5f * _size;
         }
+
+
+
     }
 }

@@ -178,6 +178,13 @@ namespace JGerdesJWiemers.Game.TowerDefence
             else
                 return null;
         }
+
+        public Tile GetTileByIndex(int x, int y)
+        {
+            if (x >= 0 && x < _tiles.Length && y >= 0 && y < _tiles.Length)
+                return _tiles[x, y];
+            return null;
+        }
    
 
         public void Update()

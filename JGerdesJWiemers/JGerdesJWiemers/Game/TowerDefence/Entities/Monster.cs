@@ -18,29 +18,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public static String EVENT_SPAWN = "monster.spawn";
 
 
-        private Map _map;
-        public Monster(FarseerPhysics.Dynamics.World w, Map map)
+        public Monster(FarseerPhysics.Dynamics.World w, float x, float y)
             : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 1)
         {
             _sprite.SetAnimation(new Animation(0, 7, 100, true, false));
 
-            _map = map;
-            
-            //_sprite.Scale = new Vector2f(1, 1);
-            //_body.Position = new Vector2(20, 20);
-            Random r = new Random();
-            //_sprite.Origin = new Vector2f(39 / 2f, 59);
-            _body.Position = new Vector2(r.Next(10)+2 + ConvertUnits.ToSimUnits(_map.MapOffsetX), 2);
-            _body.LinearVelocity = new Vector2(1, (float)r.NextDouble());
+            _body.Position = ConvertUnits.ToSimUnits(x, y);
+
+            _body.LinearVelocity = new Vector2(1, 0); 
         }
 
         public override void Update()
         {
             base.Update();
-            Vector2 pos = getPositionInPixel();
-            Tile tile = _map.GetTileAtMapPoint(pos.X, pos.Y);
-            if (tile != null)
-                tile.mark();
         }
     }
 }
