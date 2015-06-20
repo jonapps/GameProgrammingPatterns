@@ -40,7 +40,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 points.Add(Map.MapToScreen(w, h));
                 points.Add(Map.MapToScreen(0, h));
                 _colliderShape = new PolygonShape(points);
-                _colliderShape.Origin = Map.MapToScreen(w/2,h/2);
+                _colliderShape.Origin = Map.MapToScreen(w/2, h/2);
             }
             else if (textureContainer is CircleTextureContainer)
             {

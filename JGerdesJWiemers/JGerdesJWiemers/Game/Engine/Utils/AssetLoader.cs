@@ -22,8 +22,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_GUY = @"guy";
         public static readonly String TEXTURE_TOWER = @"tower\tower";
 
-        public static readonly String TEXTURE_TILE_GRASS = @"tiles\grass";
-        public static readonly String TEXTURE_TILE_DIRT = @"tiles\dirt";
+        public static readonly String TEXTURE_TILE_GRASS = @"../Graphics/tiles/grass.png";
+        public static readonly String TEXTURE_TILE_DIRT = @"../Graphics/tiles/grassdirt.png";
+
+        private static readonly String TEXTURE_TILE_GRASS_FILE = @"tiles\grass";
+        private static readonly String TEXTURE_TILE_DIRT_FILE = @"tiles\dirt";
 
         public static readonly String CONFIG_INPUT = "input.json";
 
@@ -45,8 +48,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_GUY, TEXTURE_GUY);
             LoadTexture(TEXTURE_TOWER, TEXTURE_TOWER);
 
-            LoadTexture(TEXTURE_TILE_GRASS, TEXTURE_TILE_GRASS);
-            LoadTexture(TEXTURE_TILE_DIRT, TEXTURE_TILE_DIRT);
+            LoadTexture(TEXTURE_TILE_GRASS, TEXTURE_TILE_GRASS_FILE);
+            LoadTexture(TEXTURE_TILE_DIRT, TEXTURE_TILE_DIRT_FILE);
 
         }
 

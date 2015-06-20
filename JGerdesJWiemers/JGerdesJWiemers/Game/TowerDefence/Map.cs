@@ -1,6 +1,7 @@
 ﻿using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
+using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using SFML.Graphics;
 using SFML.System;
@@ -56,7 +57,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
             List<Texture> textures = new List<Texture>();
             foreach (TileImageAsset imgasset in asset.TileSets[0].TileImages)
             {
-                textures.Add(new Texture(@"Assets/Graphics/"+imgasset.Image));
+                textures.Add(AssetLoader.Instance.getTexture(imgasset.Image).Texture);
             }
             int nextTex = 0;
             for (int y = 0; y < width; y++)
