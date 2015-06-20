@@ -48,7 +48,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
             List<Texture> textures = new List<Texture>();
             foreach (TileImageAsset imgasset in asset.TileSets[0].TileImages)
             {
-                textures.Add(new Texture(@imgasset.Image));
+                textures.Add(new Texture(@"Assets/Graphics/"+imgasset.Image));
             }
             int nextTex = 0;
             

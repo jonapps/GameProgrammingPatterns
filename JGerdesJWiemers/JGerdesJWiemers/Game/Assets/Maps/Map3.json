@@ -34,11 +34,11 @@
             {
              "0":
                 {
-                 "image":"Assets\/Graphics\/tiles\/grass.png"
+                 "image":"..\/Graphics\/tiles\/grass.png"
                 },
              "1":
                 {
-                 "image":"Assets\/Graphics\/tiles\/grassdirt.png"
+                 "image":"..\/Graphics\/tiles\/grassdirt.png"
                 }
             },
          "tilewidth":96
