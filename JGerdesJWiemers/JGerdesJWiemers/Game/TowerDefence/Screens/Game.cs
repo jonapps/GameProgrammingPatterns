@@ -40,8 +40,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
             {
-                for (int i = 0; i < 20; i++ )
-                    _entities.Add(new Monster(_world, _map));
+                _entities.Add(new Monster(_world, _map));
             });
             _window.MouseButtonPressed += _window_MouseButtonPressed;
         }
@@ -53,9 +52,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 t.mark();
             }
-            //for (int i = 0; i < 100; i++ )
-            //    EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
-
+            EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent()); 
         }
 
       

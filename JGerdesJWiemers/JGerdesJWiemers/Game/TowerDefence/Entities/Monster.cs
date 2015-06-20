@@ -29,8 +29,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             //_body.Position = new Vector2(20, 20);
             Random r = new Random();
             _sprite.Origin = new Vector2f(39 / 2f, 59);
-            _body.Position = new Vector2(r.Next(10)+2 + ConvertUnits.ToSimUnits(_map.MapOffsetX), 2);
-            _body.LinearVelocity = new Vector2(1, (float)r.NextDouble());
+            _body.Position = _ConvertVector2fToVector2(Map.MapToScreen(0, 0));
+            _body.LinearVelocity = new Vector2(1,0);
         }
 
         public override void Update()

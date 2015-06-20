@@ -21,9 +21,14 @@ namespace JGerdesJWiemers.Game.Engine
         protected bool _debug = Game.DEBUG;
         protected int _health = 100;
                 
-        protected Vector2f _ConvertVectorToVector2f(Vector2 vec)
+        protected Vector2f _ConvertVector2ToVector2f(Vector2 vec)
         {
             return new Vector2f(vec.X, vec.Y);
+        }
+
+        protected Vector2 _ConvertVector2fToVector2(Vector2f vec)
+        {
+            return new Vector2(vec.X, vec.Y);
         }
 
         public float Z
