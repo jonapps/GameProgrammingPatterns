@@ -20,22 +20,18 @@ namespace JGerdesJWiemers.Game.Engine
         protected bool _deleteMe = false;
         protected bool _debug = Game.DEBUG;
         protected int _health = 100;
-
-        #region Getter && Setter
-
-        public bool DeleteMe { get { return _deleteMe; } set { _deleteMe = value; } }
-
-        public Body Body { get{ return _body; } set { _body = value;} }
-
-        public Fixture Fixture { set { _fixture = value; } get { return _fixture; } }
-
-
-        #endregion
-
-        
+                
         protected Vector2f _ConvertVectorToVector2f(Vector2 vec)
         {
             return new Vector2f(vec.X, vec.Y);
+        }
+
+        public float Z
+        {
+            get
+            {
+                return _body.Position.X * _body.Position.Y;
+            }
         }
 
 
@@ -76,4 +72,5 @@ namespace JGerdesJWiemers.Game.Engine
 
         public abstract void Update();
     }
+
 }
