@@ -20,8 +20,8 @@ namespace JGerdesJWiemers.Game
 {
     class Game
     {
-        public static readonly string VERSION = "v1.0";
-        public static readonly string GAME_TITLE = "ShootEmUp";
+        public static readonly string VERSION = "v0.3";
+        public static readonly string GAME_TITLE = "Dower Tefense";
         public static long ElapsedTime = 0;
         public static bool DEBUG = !true;
 
@@ -47,7 +47,7 @@ namespace JGerdesJWiemers.Game
             settings.AntialiasingLevel = 16;
             Settings.MaxPolygonVertices = 32;
             ConvertUnits.SetDisplayUnitToSimUnitRatio(64f);
-            this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE, Styles.Default, settings);
+            this._window = new RenderWindow(new VideoMode(1280, 720), GAME_TITLE + " " + VERSION, Styles.Default, settings);
             _window.KeyPressed += this._CloseGame;
             this._stopWatch = new Stopwatch();
             InputManager.Instance.Init(_window);

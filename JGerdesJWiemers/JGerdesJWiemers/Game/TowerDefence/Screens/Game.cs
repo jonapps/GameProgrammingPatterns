@@ -9,6 +9,7 @@ using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using JGerdesJWiemers.Game.TowerDefence.Entities;
+using JGerdesJWiemers.Game.TowerDefence.Logic.AI;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -42,7 +43,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
             {
                 Tile start = _map.GetTileByIndex(0, 2);
-                _entities.Add(new Monster(_world, start.getCenter().X, start.getCenter().Y));
+                _entities.Add(new Monster(_world, start.getCenter().X, start.getCenter().Y, new FollowRoadAI(_map)));
 
             });
 
@@ -52,6 +53,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 if(args.Code == Keyboard.Key.G)
                     EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
             };
+
+            //Center view to center tile
+            Vector2 center = _map.GetTileByIndex(5,5).getCenter();
+            _view.Center = Map.MapToScreen(center.X, center.Y);
         }
 
         void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)

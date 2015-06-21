@@ -30,8 +30,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
             _tiles = new Tile[width, height];
             _mapSize = new Vector2i(width, height);
             _tileSize = new Vector2i(tileWidth, tileHeight);
-            Texture tex1 = new Texture(@"Assets/Graphics/tiles/grass.png");
-            Texture tex2 = new Texture(@"Assets/Graphics/tiles/grassdirt.png");
+            Texture tex1 = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TILE_GRASS).Texture;
+            Texture tex2 = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TILE_DIRT).Texture;
 
             _CreateRandomMap(width, height, tileWidth, tileHeight, new List<Texture> {tex1, tex2});
         }
@@ -163,7 +163,6 @@ namespace JGerdesJWiemers.Game.TowerDefence
             Vector2i result = new Vector2i();
             result.X = ((int)mapX) / _tileSize.X;
             result.Y = ((int)mapY) / _tileSize.Y;
-            float x = SFML.Window.Mouse.GetPosition().X;
             return result;
 
         }
