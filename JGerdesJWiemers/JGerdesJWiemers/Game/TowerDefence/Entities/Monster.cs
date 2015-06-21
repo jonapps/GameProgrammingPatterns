@@ -29,7 +29,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         {
             _sprite.SetAnimation(new Animation(0, 7, 100, true, false));
             _body.Position = ConvertUnits.ToSimUnits(x, y);
-            _destination = ConvertUnits.ToSimUnits(x + 300, y);
+            _destination = _body.Position;
 
             _ai = ai;
             _ai.OnDestinationChanged += OnDestinationChanged;
@@ -45,7 +45,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public override void Update()
         {
             base.Update();
-            _ai.Update(_body);
+           
 
             Vector2 direction = _destination - _body.WorldCenter;
             float distance = direction.Length();
@@ -57,7 +57,25 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             else
             {
                 _body.LinearVelocity = new Vector2(0, 0);
+                _ai.Update(_body);
             }
+
+            //if (direction.X < STOPPING_DISTANCE)
+            //{
+            //    if (direction.Y < STOPPING_DISTANCE)
+            //    {
+            //        _ai.Update(_body);
+            //    }
+            //    else
+            //    {
+            //        _body.LinearVelocity = new Vector2(0, SMath.Sign(direction.Y) * _speed);
+            //    }
+                
+            //}
+            //else
+            //{
+            //    _body.LinearVelocity = new Vector2(SMath.Sign(direction.X) * _speed, 0);
+            //}
             
         }
     }

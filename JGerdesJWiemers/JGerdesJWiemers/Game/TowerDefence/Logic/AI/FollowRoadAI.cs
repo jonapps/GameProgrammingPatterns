@@ -72,12 +72,28 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
             Vector2i nextTileIndex = currentTileIndex + direction.PositionChange;
             Tile nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
             
-            while (nextTile == null || !nextTile.IsRoad)
+            //Try to go right
+            if (nextTile == null || !nextTile.IsRoad)
             {
-                direction = direction.Right;
+                direction = _direction.Right;
                 nextTileIndex = currentTileIndex + direction.PositionChange;
                 nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
             }
+            //Try to go left
+            if (nextTile == null || !nextTile.IsRoad)
+            {
+                direction = _direction.Left;
+                nextTileIndex = currentTileIndex + direction.PositionChange;
+                nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
+            }
+            //Try to turn around
+            if (nextTile == null || !nextTile.IsRoad)
+            {
+                direction = _direction.Right.Right;
+                nextTileIndex = currentTileIndex + direction.PositionChange;
+                nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
+            }
+
             _direction = direction;
             return nextTile;
         }
