@@ -22,12 +22,21 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         private FollowRoadAI _ai;
         private Vector2 _destination;
-        private float _speed = 2;
+        private float _speed = 1.5f;
+
+        private Animation _right;
+        private Animation _left;
+        private Animation _up;
+        private Animation _down;
 
         public Monster(FarseerPhysics.Dynamics.World w, float x, float y, FollowRoadAI ai)
-            : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 1)
+            : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 0.75f)
         {
-            _sprite.SetAnimation(new Animation(0, 7, 100, true, false));
+            _right = new Animation(2 * 8, 3 * 8 - 1, 100, true, false);
+            _left = new Animation(1 * 8, 2 * 8 - 1, 100, true, false);
+            _up = new Animation(0 * 8, 1 * 8 - 1, 100, true, false);
+            _down = new Animation(3 * 8, 4 * 8 - 1, 100, true, false);
+            _sprite.SetAnimation(_right);
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _destination = _body.Position;
 
@@ -39,7 +48,27 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         void OnDestinationChanged(Tile destination)
         {
             _destination = ConvertUnits.ToSimUnits(destination.getCenter());
-            destination.mark();
+            Vector2 direction = _destination - _body.WorldCenter;
+            float distance = direction.Length();
+            direction /= distance;
+
+            if (direction.X > STOPPING_DISTANCE)
+            {
+                _sprite.SetAnimation(_right);
+            }
+            else if (direction.X < -STOPPING_DISTANCE)
+            {
+                _sprite.SetAnimation(_left);
+            }
+
+            if (direction.Y > STOPPING_DISTANCE)
+            {
+                _sprite.SetAnimation(_down);
+            }
+            else if (direction.Y < -STOPPING_DISTANCE)
+            {
+                _sprite.SetAnimation(_up);
+            }
         }
 
         public override void Update()
@@ -59,6 +88,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 _body.LinearVelocity = new Vector2(0, 0);
                 _ai.Update(_body);
             }
+
+            
 
             //if (direction.X < STOPPING_DISTANCE)
             //{
