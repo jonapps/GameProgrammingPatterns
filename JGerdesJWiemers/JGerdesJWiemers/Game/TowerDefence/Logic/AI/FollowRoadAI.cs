@@ -16,6 +16,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
         public delegate void DestinationChangedHandler(Tile destination);
 
         public event DestinationChangedHandler OnDestinationChanged;
+        public event DestinationChangedHandler OnOnDespawn;
 
         private Map _map;
         private Direction _direction;
@@ -62,6 +63,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
                 _destination = destination;
                 OnDestinationChanged(_destination);
             }
+            Tile t = _map.GetTileAtMapPoint(body.Position.X, body.Position.Y);
+            if (t.GetType() == TileType.DespawnTile)
+            {
+                if (OnOnDespawn != null) OnOnDespawn(t);
+            }
         }
 
         private Tile findDestination(Vector2i currentTileIndex)
@@ -69,23 +75,29 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
             Direction direction = _direction;
             Vector2i nextTileIndex = currentTileIndex + direction.PositionChange;
             Tile nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
-            
+
+
+            bool runnable = (nextTile == null || !(nextTile.GetType() == TileType.RoadTile || nextTile.GetType() == TileType.SpawnTile || nextTile.GetType() == TileType.DespawnTile));
             //Try to go right
-            if (nextTile == null || nextTile.GetType() != TileType.RoadTile)
+            if (runnable)
             {
+                
                 direction = _direction.Right;
                 nextTileIndex = currentTileIndex + direction.PositionChange;
                 nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
+                runnable = (nextTile == null || !(nextTile.GetType() == TileType.RoadTile || nextTile.GetType() == TileType.SpawnTile || nextTile.GetType() == TileType.DespawnTile));
             }
             //Try to go left
-            if (nextTile == null || nextTile.GetType() != TileType.RoadTile)
+            if (runnable)
             {
+               
                 direction = _direction.Left;
                 nextTileIndex = currentTileIndex + direction.PositionChange;
                 nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
+                runnable = (nextTile == null || !(nextTile.GetType() == TileType.RoadTile || nextTile.GetType() == TileType.SpawnTile || nextTile.GetType() == TileType.DespawnTile));
             }
             //Try to turn around
-            if (nextTile == null || nextTile.GetType() != TileType.RoadTile)
+            if (runnable)
             {
                 direction = _direction.Right.Right;
                 nextTileIndex = currentTileIndex + direction.PositionChange;

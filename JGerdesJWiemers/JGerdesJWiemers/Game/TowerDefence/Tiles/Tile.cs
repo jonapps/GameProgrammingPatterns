@@ -17,7 +17,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         RoadTile,
         NoBuildTile,
         BuildTile,
-        SpawnTile
+        SpawnTile,
+        DespawnTile
     }
 
     abstract class Tile : IDrawable

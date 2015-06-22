@@ -92,6 +92,9 @@ namespace JGerdesJWiemers.Game.TowerDefence
                             t = new SpawnTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
                             _spawnTiles.Add(t);
                             break;
+                        case "Despawn":
+                            t = new DespawnTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
+                            break;
                     }
                     _tiles[x, y] = t;
                 }
@@ -150,7 +153,10 @@ namespace JGerdesJWiemers.Game.TowerDefence
             return result;
         }
 
-
+        /// <summary>
+        /// Returns all spawnpositions
+        /// </summary>
+        /// <returns></returns>
         public List<Tile> GetSpawnTiles()
         {
             return _spawnTiles;

@@ -79,7 +79,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
         }
 
-
+        /// <summary>
+        /// Spawns a Monster at the first spawn point
+        /// </summary>
+        /// <param name="e"></param>
         private void _SpawnMonster(EngineEvent e)
         {
             Tile position = _map.GetSpawnTiles()[0];

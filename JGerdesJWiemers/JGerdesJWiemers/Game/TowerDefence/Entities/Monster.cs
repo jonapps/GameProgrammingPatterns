@@ -43,8 +43,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
             _ai = ai;
             _ai.OnDestinationChanged += OnDestinationChanged;
+            _ai.OnOnDespawn += _OnOnDespawn;
 
         }
+
+        private void _OnOnDespawn(Tile destination)
+        {
+            _deleteMe = true;
+        }
+
 
         void OnDestinationChanged(Tile destination)
         {
@@ -89,26 +96,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 _body.LinearVelocity = new Vector2(0, 0);
                 _ai.Update(_body);
             }
-
             
 
-            //if (direction.X < STOPPING_DISTANCE)
-            //{
-            //    if (direction.Y < STOPPING_DISTANCE)
-            //    {
-            //        _ai.Update(_body);
-            //    }
-            //    else
-            //    {
-            //        _body.LinearVelocity = new Vector2(0, SMath.Sign(direction.Y) * _speed);
-            //    }
-                
-            //}
-            //else
-            //{
-            //    _body.LinearVelocity = new Vector2(SMath.Sign(direction.X) * _speed, 0);
-            //}
-            
         }
     }
 }
