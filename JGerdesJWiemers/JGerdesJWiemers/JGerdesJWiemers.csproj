@@ -132,6 +132,7 @@
     <Compile Include="Game\TowerDefence\Map.cs" />
     <Compile Include="Game\TowerDefence\Screens\CursorScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
+    <Compile Include="Game\TowerDefence\Tiles\DespawnTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\TerrainTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\NoBuildTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\RoadTile.cs" />
