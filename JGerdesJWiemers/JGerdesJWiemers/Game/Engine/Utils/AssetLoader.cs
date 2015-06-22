@@ -22,12 +22,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_GUY = @"guy";
         public static readonly String TEXTURE_TOWER = @"tower\tower";
 
-        public static readonly String TEXTURE_TILE_GRASS = @"../Graphics/tiles/grass.png";
-        public static readonly String TEXTURE_TILE_DIRT = @"../Graphics/tiles/grassdirt.png";
-
-        private static readonly String TEXTURE_TILE_GRASS_FILE = @"tiles\grass";
-        private static readonly String TEXTURE_TILE_DIRT_FILE = @"tiles\dirt";
-
         public static readonly String CONFIG_INPUT = "input.json";
 
         private static AssetLoader _instance;
@@ -47,9 +41,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
             LoadTexture(TEXTURE_GUY, TEXTURE_GUY);
             LoadTexture(TEXTURE_TOWER, TEXTURE_TOWER);
-
-            LoadTexture(TEXTURE_TILE_GRASS, TEXTURE_TILE_GRASS_FILE);
-            LoadTexture(TEXTURE_TILE_DIRT, TEXTURE_TILE_DIRT_FILE);
 
         }
 
@@ -176,6 +167,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             {
                 String str = token.ToString();
                 TileImageAsset imageAsset = JsonConvert.DeserializeObject<TileImageAsset>(str);
+                Texture tex = new Texture(DIR_TEXTURES + imageAsset.Image);
+                _textures.Add(imageAsset.Image, new TextureContainer(tex));
                 // we are working with only one tileset. if not refactor this!
                 mapAsset.TileSets[0].TileImages.Add(imageAsset);
             }
