@@ -43,7 +43,15 @@ namespace JGerdesJWiemers.Game.Engine
         public Vector2 Position {
             get
             {
-                return ConvertUnits.ToDisplayUnits(_body.WorldCenter);
+                return _body.WorldCenter;
+            }
+        }
+
+        public Boolean DeleteMe
+        {
+            get
+            {
+                return _deleteMe;
             }
         }
 

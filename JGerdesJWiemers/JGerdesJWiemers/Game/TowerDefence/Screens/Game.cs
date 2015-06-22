@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
-    class Game : GameScreen, IMapRadar
+    class Game : GameScreen, IEntityHolder
     {
 
         public float SCROLL_SPEED = 10;
@@ -44,6 +44,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             
 
             EventStream.Instance.On(Monster.EVENT_SPAWN, _SpawnMonster);
+            EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);
 
             _window.MouseButtonPressed += _window_MouseButtonPressed;
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
@@ -66,6 +67,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
             position = _map.GetTileByIndex(4, 6);
             _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
+        }
+
+        private void _SpawnNuke(EngineEvent eventData)
+        {
+            Nuke.Def data = (eventData.Data as Nuke.Def);
+            _entitiesToAdd.Add(new Nuke(_world, data));
         }
 
         void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
@@ -141,26 +148,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
         }
 
-        public Tile GetTileAtPosition(float x, float y)
+       
+        public void AddEntity(Entity e)
         {
-            return _map.GetTileAtMapPoint(x, y);
-        }
-
-        public List<Entity> FindEntitiesAround(Vector2 position, float radius)
-        {
-            return _entities.FindAll(e => (e.Position - position).LengthSquared() <= radius * radius);
-
-        }
-        
-        public List<Entity> FindEntitiesAround(float x, float y, float radius)
-        {
-            return FindEntitiesAround(new Vector2(x, y), radius);
+            _entities.Add(e);
         }
 
 
-        public Entity FindEntityAround(Vector2 position, float radius)
+        public List<Entity> GetEntities()
         {
-            return _entities.Find(e => (e.Position - position).LengthSquared() <= radius * radius);
+            return _entities;
         }
     }
 }

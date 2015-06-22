@@ -2,6 +2,8 @@
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
@@ -19,21 +21,22 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         public class Def
         {
-            public float Radius = 100;
-            public int FireFrequency = 1;
+            public float Radius = 1;
+            public int FireFrequency = 2;
             public float Damage = 1;
+            public float BulletSpeed = 4;
         }
 
         private Def _def;
         private long _lastFired = 0;
-        private IMapRadar _radar;
+        private IEntityHolder _entityHolder;
 
-        public Tower(World world, float x, float y, Def def, IMapRadar radar)
+        public Tower(World world, float x, float y, Def def, IEntityHolder holder)
             : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER), 1, 0, 0, BodyType.Static)
         {
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _def = def;
-            _radar = radar;
+            _entityHolder = holder;
         }
 
         public override void Update()
@@ -42,8 +45,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
             if (Game.ElapsedTime - _lastFired > 1000f / _def.FireFrequency)
             {
-
-                Entity destination = _radar.FindEntitiesAround(ConvertUnits.ToDisplayUnits(_body.WorldCenter), _def.Radius).Find(e => e is Monster);
+                //find a monster in radius
+                Entity destination = _entityHolder.GetEntities().Find(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster);
 
                 if (destination != null)
                 {
@@ -57,7 +60,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         private void _Fire(Entity destination)
         {
-            Console.WriteLine("firing on " + destination.ToString());
+            Nuke.Def data = new Nuke.Def
+            {
+                Destination = destination.Position,
+                Position = _body.WorldCenter,
+                Speed = _def.BulletSpeed
+            };
+
+            EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
 

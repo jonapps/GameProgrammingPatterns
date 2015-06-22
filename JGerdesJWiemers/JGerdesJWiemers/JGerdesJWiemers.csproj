@@ -110,6 +110,7 @@
     <Compile Include="Game\Engine\Input\InputMapper.cs" />
     <Compile Include="Game\Engine\Interfaces\IDrawable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
+    <Compile Include="Game\Engine\Interfaces\IEntityHolder.cs" />
     <Compile Include="Game\Engine\Shapes\PolygonShape.cs" />
     <Compile Include="Game\Engine\Utils\Helper\Asset.cs" />
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
@@ -125,10 +126,10 @@
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
     <Compile Include="Game\TowerDefence\Entities\Monster.cs" />
+    <Compile Include="Game\TowerDefence\Entities\Nuke.cs" />
     <Compile Include="Game\TowerDefence\Entities\Tower.cs" />
     <Compile Include="Game\TowerDefence\Logic\AI\FollowRoadAI.cs" />
     <Compile Include="Game\TowerDefence\Logic\Builder.cs" />
-    <Compile Include="Game\TowerDefence\Logic\IMapRadar.cs" />
     <Compile Include="Game\TowerDefence\Map.cs" />
     <Compile Include="Game\TowerDefence\Screens\CursorScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />

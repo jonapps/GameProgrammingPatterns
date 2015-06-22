@@ -19,19 +19,38 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         public static readonly float WORLD_STEP_SIZE = 1 / 60f;
 
         protected List<Entity> _entities;
-        protected List<int> _toDeleteEntities;
+        protected List<int> _entitiesToDelete;
+        protected List<Entity> _entitiesToAdd;
 
         public GameScreen(RenderWindow w) : base(w)
         {
             _entities = new List<Entity>();
-            _toDeleteEntities = new List<int>();
+            _entitiesToDelete = new List<int>();
+            _entitiesToAdd = new List<Entity>();
             
         }
 
         public override void Update()
         {
-            foreach(Entity e in _entities)
+
+            for (int i = 0, c = _entities.Count; i < c; ++i)
+            {
+                Entity e = _entities[i];
                 e.Update();
+                if (e.DeleteMe)
+                    _entitiesToDelete.Add(i);
+            }
+
+            foreach (int i in _entitiesToDelete)
+            {
+                _entities.RemoveAt(i);
+            }
+
+            foreach (Entity e in _entitiesToAdd)
+            {
+                _entities.Add(e);
+            }
+                
         }
 
         public override void PastUpdate()

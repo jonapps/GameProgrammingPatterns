@@ -8,10 +8,16 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem.Events
 {
     class EngineEvent
     {
-        
+        public Object Data;
 
         public EngineEvent()
         {
+            
+        }
+
+        public EngineEvent(Object data)
+        {
+            Data = data;
         }
     }
 }
