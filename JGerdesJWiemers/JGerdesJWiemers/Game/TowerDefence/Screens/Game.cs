@@ -57,6 +57,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
+
+            //test entities
+
+            Tile position = _map.GetTileByIndex(0, 2);
+            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
+            position = _map.GetTileByIndex(4, 2);
+            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
+            position = _map.GetTileByIndex(3, 4);
+            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
+            position = _map.GetTileByIndex(4, 6);
+            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
         }
 
         void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)

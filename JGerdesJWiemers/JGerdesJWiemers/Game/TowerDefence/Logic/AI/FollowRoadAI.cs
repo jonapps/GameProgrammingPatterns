@@ -55,9 +55,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
         public void Update(Body body)
         {
             Vector2 position = ConvertUnits.ToDisplayUnits(body.WorldCenter);
-            //Tile t = _map.GetTileAtMapPoint(position.X, position.Y);
-            //if(t != null)
-            //    t.mark();
             Tile destination = findDestination(_map.GetTileIndexAtMapPoint(position.X, position.Y));
             if (destination != _destination)
             {
