@@ -10,9 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JGerdesJWiemers.Game.TowerDefence
+namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 {
-    class Tile : IDrawable
+    enum TileType
+    {
+        RoadTile,
+        NoBuildTile,
+        BuildTile,
+        SpawnTile
+    }
+
+    abstract class Tile : IDrawable
     {
         Sprite _sprite;
         private bool _isRoad = false;
@@ -21,16 +29,15 @@ namespace JGerdesJWiemers.Game.TowerDefence
         private Entity _occupier;
 
 
-        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter, bool isRoad)
+        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
         {
             _sprite = new Sprite(tex);
             _sprite.Position = Map.MapToScreen(x * width + mapCenter, y * height);
             _sprite.Origin = new Vector2f(width, 0);
             _size = new Vector2(width, height);
-            _position = new Vector2(x * width, y * height);
-            _isRoad = isRoad;
-            
+            _position = new Vector2(x * width, y * height);     
         }
+
 
         public bool IsRoad { get { return _isRoad; } }
 
@@ -71,14 +78,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         public void mark()
         {
-            if (_isRoad)
-            {
-                _sprite.Color = new Color(0, 255, 0);
-            }
-            else
-            {
-                _sprite.Color = new Color(255, 0, 0);
-            }
+            _sprite.Color = new Color(255, 0, 0);
         }
 
         public Vector2 getCenter()
@@ -86,7 +86,6 @@ namespace JGerdesJWiemers.Game.TowerDefence
             return _position + 0.5f * _size;
         }
 
-
-
+        public abstract TileType GetType();
     }
 }

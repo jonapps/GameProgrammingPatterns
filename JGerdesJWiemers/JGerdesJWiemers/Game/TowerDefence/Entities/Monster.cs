@@ -3,6 +3,7 @@ using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic.AI;
+using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;

@@ -3,6 +3,7 @@ using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
+using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using SFML.Graphics;
 using SFML.System;
 using System;
@@ -85,13 +86,25 @@ namespace JGerdesJWiemers.Game.TowerDefence
             foreach (LayerAsset l in asset.Layers)
             {
                 int nextNumber = l.Data[nextTex] - 1;
-                bool isRoad = false;
-                if (l.Name == "Road")
-                {
-                    isRoad = true;
-                }
+                
                 if(nextNumber >= 0){
-                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX, isRoad);
+                    Tile t = null;
+                    switch (l.Name)
+                    {
+                        case "Terrain":
+                            t = new TerrainTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
+                            break;
+                        case "Road":
+                            t = new RoadTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
+                            break;
+                        case "NoBuildArea":
+                            t = new NoBuildTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
+                            break;
+                        case "EnemySpawn":
+                            t = new SpawnTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
+                            break;
+                    }
+                    _tiles[x, y] = t;
                 }
             }
         }
@@ -114,7 +127,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
                 for (int y = 0; y < height; y++)
                 {
                     int randomNUmber = rand.Next(0, textures.Count);
-                    _tiles[x, y] = new Tile(x, y, tileWidth, tileHeight, textures[randomNUmber], MapOffsetX, false);
+                    _tiles[x, y] = new TerrainTile(x, y, tileWidth, tileHeight, textures[randomNUmber], MapOffsetX);
                 }
             }
         }
