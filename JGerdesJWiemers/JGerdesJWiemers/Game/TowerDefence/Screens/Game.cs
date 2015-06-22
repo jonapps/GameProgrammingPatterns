@@ -1,4 +1,5 @@
 ﻿using FarseerPhysics.Dynamics;
+using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Entities.Input;
 using JGerdesJWiemers.Game.Engine.EventSystem;
@@ -9,6 +10,7 @@ using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using JGerdesJWiemers.Game.TowerDefence.Entities;
+using JGerdesJWiemers.Game.TowerDefence.Logic;
 using JGerdesJWiemers.Game.TowerDefence.Logic.AI;
 using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using Microsoft.Xna.Framework;
@@ -23,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
-    class Game : GameScreen
+    class Game : GameScreen, IMapRadar
     {
 
         public float SCROLL_SPEED = 10;
@@ -72,7 +74,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             if (t != null && t.GetType() == TileType.BuildTile && !t.IsOccupied)
             {
                 Vector2 pos = t.getCenter();
-                Tower tower = new Tower(_world, pos.X, pos.Y);
+                Tower tower = new Tower(_world, pos.X, pos.Y, new Tower.Def(), this);
                 t.Occupier = tower;
                 _entities.Add(tower);
 
@@ -134,6 +136,28 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 _view.Move(new Vector2f(0, SCROLL_SPEED));
             }
+        }
+
+        public Tile GetTileAtPosition(float x, float y)
+        {
+            return _map.GetTileAtMapPoint(x, y);
+        }
+
+        public List<Entity> FindEntitiesAround(Vector2 position, float radius)
+        {
+            return _entities.FindAll(e => (e.Position - position).LengthSquared() <= radius * radius);
+
+        }
+        
+        public List<Entity> FindEntitiesAround(float x, float y, float radius)
+        {
+            return FindEntitiesAround(new Vector2(x, y), radius);
+        }
+
+
+        public Entity FindEntityAround(Vector2 position, float radius)
+        {
+            return _entities.Find(e => (e.Position - position).LengthSquared() <= radius * radius);
         }
     }
 }

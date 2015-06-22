@@ -10,6 +10,7 @@ using SFML.System;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using JGerdesJWiemers.Game.Engine.Interfaces;
+using FarseerPhysics;
 
 namespace JGerdesJWiemers.Game.Engine
 {
@@ -35,7 +36,14 @@ namespace JGerdesJWiemers.Game.Engine
         {
             get
             {
-                return _body.Position.X * _body.Position.Y;
+                return _body.WorldCenter.X * _body.WorldCenter.Y;
+            }
+        }
+
+        public Vector2 Position {
+            get
+            {
+                return ConvertUnits.ToDisplayUnits(_body.WorldCenter);
             }
         }
 

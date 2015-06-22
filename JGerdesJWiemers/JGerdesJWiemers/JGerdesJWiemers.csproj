@@ -128,6 +128,7 @@
     <Compile Include="Game\TowerDefence\Entities\Tower.cs" />
     <Compile Include="Game\TowerDefence\Logic\AI\FollowRoadAI.cs" />
     <Compile Include="Game\TowerDefence\Logic\Builder.cs" />
+    <Compile Include="Game\TowerDefence\Logic\IMapRadar.cs" />
     <Compile Include="Game\TowerDefence\Map.cs" />
     <Compile Include="Game\TowerDefence\Screens\CursorScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
