@@ -71,21 +71,21 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
             Tile nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
             
             //Try to go right
-            if (nextTile == null || !nextTile.IsRoad)
+            if (nextTile == null || nextTile.GetType() != TileType.RoadTile)
             {
                 direction = _direction.Right;
                 nextTileIndex = currentTileIndex + direction.PositionChange;
                 nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
             }
             //Try to go left
-            if (nextTile == null || !nextTile.IsRoad)
+            if (nextTile == null || nextTile.GetType() != TileType.RoadTile)
             {
                 direction = _direction.Left;
                 nextTileIndex = currentTileIndex + direction.PositionChange;
                 nextTile = _map.GetTileByIndex(nextTileIndex.X, nextTileIndex.Y);
             }
             //Try to turn around
-            if (nextTile == null || !nextTile.IsRoad)
+            if (nextTile == null || nextTile.GetType() != TileType.RoadTile)
             {
                 direction = _direction.Right.Right;
                 nextTileIndex = currentTileIndex + direction.PositionChange;
