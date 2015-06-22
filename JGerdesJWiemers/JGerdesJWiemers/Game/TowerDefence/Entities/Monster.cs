@@ -57,7 +57,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 _sprite.SetAnimation(_right);
             }
-            else if (direction.X < -STOPPING_DISTANCE)
+            if (direction.X < -STOPPING_DISTANCE)
             {
                 _sprite.SetAnimation(_left);
             }
@@ -66,7 +66,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 _sprite.SetAnimation(_down);
             }
-            else if (direction.Y < -STOPPING_DISTANCE)
+            if (direction.Y < -STOPPING_DISTANCE)
             {
                 _sprite.SetAnimation(_up);
             }

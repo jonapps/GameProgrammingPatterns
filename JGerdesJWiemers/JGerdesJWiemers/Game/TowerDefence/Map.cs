@@ -21,22 +21,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
         private Vector2i _tileSize;
         public int MapOffsetX { get; set; }
 
-        public Map(int width, int height, int tileSize = 32)
-            : this(width, height, tileSize, tileSize) { }
-       
         
-        public Map(int width, int height, int tileWidth, int tileHeight)
-        {
-            MapOffsetX = 0;
-            _tiles = new Tile[width, height];
-            _mapSize = new Vector2i(width, height);
-            _tileSize = new Vector2i(tileWidth, tileHeight);
-            Texture tex1 = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TILE_GRASS).Texture;
-            Texture tex2 = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TILE_DIRT).Texture;
-
-            _CreateRandomMap(width, height, tileWidth, tileHeight, new List<Texture> {tex1, tex2});
-        }
-
         public Map(MapAsset asset)
         {
             _tiles = new Tile[asset.Width, asset.Height];
