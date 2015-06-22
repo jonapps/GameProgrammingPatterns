@@ -34,19 +34,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w)
             :base(w)
         {
-            MapAsset mapAsset = AssetLoader.Instance.LoadMap("LayerTest2.json");
+            MapAsset mapAsset = AssetLoader.Instance.LoadMap("LayerTest.json");
             //_map = new Map(24, 24, 48);
             _map = new Map(mapAsset);
             w.SetMouseCursorVisible(false);
             _world = new World(new Vector2(0,0));
             
 
-            EventStream.Instance.On(Monster.EVENT_SPAWN, delegate(EngineEvent e)
-            {
-                Tile start = _map.GetTileByIndex(0, 2);
-                _entities.Add(new Monster(_world, start.getCenter().X, start.getCenter().Y, new FollowRoadAI(_map)));
-
-            });
+            EventStream.Instance.On(Monster.EVENT_SPAWN, _SpawnMonster);
 
             _window.MouseButtonPressed += _window_MouseButtonPressed;
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
@@ -61,7 +56,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             //test entities
 
-            Tile position = _map.GetTileByIndex(0, 2);
+            Tile position = _map.GetSpawnTiles()[0];
             _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
             position = _map.GetTileByIndex(4, 2);
             _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
@@ -74,7 +69,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
         {
             Tile t = _map.GetTileAtScreenPoint(_window.MapPixelToCoords(InputManager.Instance.MousePosition, _view));
-            if (t != null && !t.IsRoad && !t.IsOccupied)
+            if (t != null && t.GetType() == TileType.BuildTile && !t.IsOccupied)
             {
                 Vector2 pos = t.getCenter();
                 Tower tower = new Tower(_world, pos.X, pos.Y);
@@ -82,6 +77,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 _entities.Add(tower);
 
             }
+        }
+
+
+        private void _SpawnMonster(EngineEvent e)
+        {
+            Tile position = _map.GetSpawnTiles()[0];
+            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
         }
 
       

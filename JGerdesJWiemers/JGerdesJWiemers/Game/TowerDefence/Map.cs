@@ -17,6 +17,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
     class Map : IDrawable 
     {
         private Tile[,] _tiles;
+        private List<Tile> _spawnTiles;
         private Vector2i _mapSize;
         private Vector2i _tileSize;
         public int MapOffsetX { get; set; }
@@ -27,7 +28,9 @@ namespace JGerdesJWiemers.Game.TowerDefence
             _tiles = new Tile[asset.Width, asset.Height];
             _mapSize = new Vector2i(asset.Width, asset.Height);
             _tileSize = new Vector2i(asset.Tileheight, asset.Tileheight);
+            _spawnTiles = new List<Tile>();
             _CreateMapByAsset(asset.Width, asset.Height, asset.Tileheight, asset.Tileheight, asset);
+            
         }
 
         /// <summary>
@@ -87,6 +90,7 @@ namespace JGerdesJWiemers.Game.TowerDefence
                             break;
                         case "EnemySpawn":
                             t = new SpawnTile(x, y, tileWidth, tileHeight, textures[nextNumber], MapOffsetX);
+                            _spawnTiles.Add(t);
                             break;
                     }
                     _tiles[x, y] = t;
@@ -146,6 +150,11 @@ namespace JGerdesJWiemers.Game.TowerDefence
             return result;
         }
 
+
+        public List<Tile> GetSpawnTiles()
+        {
+            return _spawnTiles;
+        }
 
         public Vector2i GetTileIndexAtScreenPoint(float screenX, float screenY)
         {
