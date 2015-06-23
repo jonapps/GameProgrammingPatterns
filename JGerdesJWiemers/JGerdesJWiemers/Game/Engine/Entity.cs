@@ -21,6 +21,7 @@ namespace JGerdesJWiemers.Game.Engine
         protected bool _deleteMe = false;
         protected bool _debug = Game.DEBUG;
         protected int _health = 100;
+        protected float _z = 0;
                 
         protected Vector2f _ConvertVector2ToVector2f(Vector2 vec)
         {
@@ -36,7 +37,7 @@ namespace JGerdesJWiemers.Game.Engine
         {
             get
             {
-                return _body.WorldCenter.X * _body.WorldCenter.Y;
+                return _z;
             }
         }
 
@@ -84,6 +85,11 @@ namespace JGerdesJWiemers.Game.Engine
             _health -= dmg;
         }
 
+        public void _CalcZ()
+        {
+            Vector2 center = _body.WorldCenter;
+            _z = center.X * center.Y;
+        }
 
         public abstract void PastUpdate();
 

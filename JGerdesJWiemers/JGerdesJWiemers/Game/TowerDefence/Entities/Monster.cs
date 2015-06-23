@@ -55,6 +55,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _sprite.Position += new Vector2f(0, (float)SMath.Sin(Game.ElapsedTime / 200f) * 5 - 5);
         }
 
+
+        public override void PastUpdate()
+        {
+            base.PastUpdate();
+            _CalcZ(); 
+        }
+
         public override void Update()
         {
             base.Update();

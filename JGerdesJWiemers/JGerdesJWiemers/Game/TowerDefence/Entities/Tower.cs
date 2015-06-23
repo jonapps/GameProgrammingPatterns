@@ -37,6 +37,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _def = def;
             _entityHolder = holder;
+            _CalcZ(); 
         }
 
         public override void Update()
@@ -67,7 +68,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Speed = _def.BulletSpeed
             };
 
-            EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
+            //EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
 

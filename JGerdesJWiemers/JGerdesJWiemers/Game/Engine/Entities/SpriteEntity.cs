@@ -59,7 +59,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
                 }
                 _colliderShape = new PolygonShape(points);
             }
-
+ 
         }
 
         public SpriteEntity(TextureContainer textureContainer, float scale = 1)
@@ -77,6 +77,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
             }
             
             _sprite.Scale = new Vector2f(scale, scale);
+
         }
 
         public override void Update()
