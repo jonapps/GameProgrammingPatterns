@@ -1,15 +1,11 @@
 {
 	"ImageTitle": "guy.png",
-	"SpriteSheet": {
-		"x": 8,
-		"y": 4
-	},
 	"Collider": {
 		"Type": "Circle",
 		"Radius": 0.4
 	},
 	"Center": {
-		"x" : 19,
-		"y" : 59
+		"x" : 16,
+		"y" : 28
 	}
 }
