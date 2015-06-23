@@ -60,6 +60,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
             Tile destination = findDestination(_map.GetTileIndexAtMapPoint(position.X, position.Y));
             if (destination != _destination)
             {
+                if(_destination != null)
+                    _destination.demark();
+                destination.mark();
                 _destination = destination;
                 OnDestinationChanged(_destination);
             }

@@ -218,7 +218,13 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         public void Update()
         {
-            
+            for (int x = 0; x < _mapSize.X; x++)
+            {
+                for (int y = 0; y < _mapSize.Y; y++)
+                {
+                    _tiles[x, y].Update();
+                }
+            }
         }
 
         public void PastUpdate()

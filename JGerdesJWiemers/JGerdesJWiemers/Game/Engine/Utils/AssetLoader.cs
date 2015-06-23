@@ -170,7 +170,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 String str = token.ToString();
                 TileImageAsset imageAsset = JsonConvert.DeserializeObject<TileImageAsset>(str);
                 Texture tex = new Texture(DIR_TEXTURES + imageAsset.Image);
-                _textures.Add(imageAsset.Image, new TextureContainer(tex));
+                if (!_textures.ContainsKey(imageAsset.Image))
+                {
+                    _textures.Add(imageAsset.Image, new TextureContainer(tex));
+                }
+                
                 // we are working with only one tileset. if not refactor this!
                 mapAsset.TileSets[0].TileImages.Add(imageAsset);
             }

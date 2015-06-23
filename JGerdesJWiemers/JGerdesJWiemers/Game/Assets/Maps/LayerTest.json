@@ -83,20 +83,20 @@
             {
              "0":
                 {
-                 "image":"..\/Graphics\/tiles\/grass.png"
+                 "image":"..\/Graphics\/tiles\/tile.png"
                 },
              "1":
                 {
-                 "image":"..\/Graphics\/tiles\/grassdirt.png",
+                 "image":"..\/Graphics\/tiles\/tile.png",
                  "terrain":[0, 0, 0, 0]
                 },
              "2":
                 {
-                 "image":"..\/Graphics\/tiles\/enemySpawner.png"
+                 "image":"..\/Graphics\/tiles\/tile.png"
                 },
              "3":
                 {
-                 "image":"..\/Graphics\/tiles\/noBuildArea.png"
+                 "image":"..\/Graphics\/tiles\/tile.png"
                 }
             },
          "tilewidth":96

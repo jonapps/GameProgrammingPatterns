@@ -1,4 +1,5 @@
 ﻿using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
 using Microsoft.Xna.Framework;
@@ -23,7 +24,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
     abstract class Tile : IDrawable
     {
-        Sprite _sprite;
+        protected AnimatedSprite _sprite;
         private bool _isRoad = false;
         private Vector2 _size;
         private Vector2 _position;
@@ -32,7 +33,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
         {
-            _sprite = new Sprite(tex);
+            _sprite = new AnimatedSprite(tex, 96, 48);
+            _sprite.SetAnimation(new Animation());
+            _sprite.Color = new Color(0, 150, 136);
             _sprite.Position = Map.MapToScreen(x * width + mapCenter, y * height);
             _sprite.Origin = new Vector2f(width, 0);
             _size = new Vector2(width, height);
@@ -62,6 +65,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         public void Update()
         {
+            _sprite.Update();
         }
 
         public void PastUpdate()
@@ -79,7 +83,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         public void mark()
         {
-            _sprite.Color = new Color(255, 0, 0);
+            _sprite.SetAnimation(new Animation(0, 15, 30, false, false));
+            _sprite.EnqueueAnimation(new Animation(new int[]{15}, 1000, false));
+
+        }
+
+        public void demark()
+        {
+            _sprite.SetAnimation(new Animation(new int[] { 15, 15, 15, 15, 15, 14, 13, 12, 11, 10, 9, 8, 6, 5, 4, 3, 2, 1, 0 }, 30, false));
+            _sprite.EnqueueAnimation(new Animation(new int[] { 0 }, 1000, false));
+
         }
 
         public Vector2 getCenter()

@@ -12,7 +12,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         public NoBuildTile(float x, float y, float width, float height, Texture tex, int mapCenter)
             : base(x, y, width, height, tex, mapCenter)
         {
-
+            _sprite.Color = new Color(222, 60, 129);
         }
 
         public override TileType GetType()

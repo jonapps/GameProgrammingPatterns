@@ -12,7 +12,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         public RoadTile(float x, float y, float width, float height, Texture tex, int mapCenter)
             : base(x,y,width,height,tex,mapCenter)
         {
-
+            _sprite.Color = new Color(3, 169, 244);
         }
 
         public override TileType GetType()
