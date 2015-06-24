@@ -1,0 +1,8 @@
+{
+	"ImageTitle": "tower_base.png",
+	"Collider": {
+		"Type": "Tile",
+		"Width": 1,
+		"Height": 1
+	}
+}

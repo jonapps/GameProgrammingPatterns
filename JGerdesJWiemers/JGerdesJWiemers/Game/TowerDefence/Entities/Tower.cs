@@ -4,15 +4,18 @@ using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
 using Microsoft.Xna.Framework;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Entities
 {
@@ -30,10 +33,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private Def _def;
         private long _lastFired = 0;
         private IEntityHolder _entityHolder;
+        private AnimatedSprite _top;
 
         public Tower(World world, float x, float y, Def def, IEntityHolder holder)
-            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER), 1, 0, 0, BodyType.Static)
+            : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_BASE), 1, 0, 0, BodyType.Static)
         {
+            TextureContainer tex = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_TOP);
+            _top = new AnimatedSprite(tex.Texture, tex.Width, tex.Height);
+            _top.Origin = new Vector2f(tex.Width / 2f, tex.Height / 2f);
+            _top.SetAnimation(new Animation(0, 31, 30, true, false));
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _def = def;
             _entityHolder = holder;
@@ -43,20 +51,35 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public override void Update()
         {
             base.Update();
-
-            if (Game.ElapsedTime - _lastFired > 1000f / _def.FireFrequency)
+            _top.Update();
+            Entity destination = _entityHolder.GetEntities().Find(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster);
+            if (destination != null)
             {
-                //find a monster in radius
-                Entity destination = _entityHolder.GetEntities().Find(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster);
+                Vector2 direction = destination.Position - this.Position;
+                double angle = (float)(SMath.Atan2(direction.Y, direction.X) / SMath.PI) / 2 + 0.5f;
+                int index = (int)((angle * 31)+1);
+                _top.SetAnimation(new Animation(new int[] { index }, 1000, false));
 
-                if (destination != null)
+                if (Game.ElapsedTime - _lastFired > 1000f / _def.FireFrequency)
                 {
+                    //find a monster in radius
+
                     _lastFired = Game.ElapsedTime;
                     _Fire(destination);
                 }
-                
-
             }
+        }
+
+        public override void PreDraw(float extra)
+        {
+            base.PreDraw(extra);
+            _top.Position = Map.MapToScreen(_ConvertVector2ToVector2f(ConvertUnits.ToDisplayUnits(_body.WorldCenter) + new Vector2(-4, -8)));
+        }
+
+        public override void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
+        {
+            base.Draw(target, states);
+            target.Draw(_top, states);
         }
 
         private void _Fire(Entity destination)
@@ -68,7 +91,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Speed = _def.BulletSpeed
             };
 
-            EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
+            //EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
 

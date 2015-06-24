@@ -35,7 +35,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             TextureContainer tex =  AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SHADOW);
             _shadow = new Sprite(tex.Texture);
             _shadow.Origin = new Vector2f(tex.Width / 2f, tex.Height / 2f);
-            _shadow.Color = new Color(0, 0, 0, 200);
+            _shadow.Color = new Color(0, 0, 0, 140);
             _ai = ai;
             _ai.OnDestinationChanged += OnDestinationChanged;
             _ai.OnOnDespawn += _OnOnDespawn;
