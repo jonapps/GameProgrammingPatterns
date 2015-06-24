@@ -24,8 +24,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
     abstract class Tile : IDrawable
     {
+        protected List<Entity> _entities;
         protected AnimatedSprite _sprite;
-        private bool _isRoad = false;
         private Vector2 _size;
         private Vector2 _position;
         private Entity _occupier;
@@ -33,6 +33,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
         {
+            _entities = new List<Entity>();
             _sprite = new AnimatedSprite(tex, 96, 48);
             _sprite.SetAnimation(new Animation());
             _sprite.Color = new Color(0, 150, 136);
@@ -41,9 +42,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
             _size = new Vector2(width, height);
             _position = new Vector2(x * width, y * height);     
         }
-
-
-        public bool IsRoad { get { return _isRoad; } }
 
         public bool IsOccupied { get { return _occupier != null; } }
 

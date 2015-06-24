@@ -40,16 +40,17 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
                 if (e.DeleteMe)
                     _entitiesToDelete.Add(i);
             }
-
+            _entitiesToDelete.Sort();
             foreach (int i in _entitiesToDelete)
             {
                 _entities.RemoveAt(i);
             }
-
             foreach (Entity e in _entitiesToAdd)
             {
                 _entities.Add(e);
             }
+            _entitiesToAdd.Clear();
+            _entitiesToDelete.Clear();
                 
         }
 

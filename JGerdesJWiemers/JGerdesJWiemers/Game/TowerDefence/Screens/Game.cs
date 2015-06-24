@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JGerdesJWiemers.Game;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -71,6 +72,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private void _SpawnNuke(EngineEvent eventData)
         {
+            Console.WriteLine(DateTime.Now);
             Nuke.Def data = (eventData.Data as Nuke.Def);
             _entitiesToAdd.Add(new Nuke(_world, data));
         }
