@@ -57,7 +57,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
         public void Update(Body body)
         {
             Vector2 position = ConvertUnits.ToDisplayUnits(body.WorldCenter);
-            Tile destination = findDestination(_map.GetTileIndexAtMapPoint(position.X, position.Y));
+            Tile destination = _FindDestination(_map.GetTileIndexAtMapPoint(position.X, position.Y));
             if (destination != _destination)
             {
                 if(_destination != null)
@@ -66,14 +66,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
                 _destination = destination;
                 OnDestinationChanged(_destination);
             }
-            Tile t = _map.GetTileAtMapPoint(body.Position.X, body.Position.Y);
+            Tile t = _map.GetTileAtMapPoint(position.X, position.Y);
             if (t.GetType() == TileType.DespawnTile)
             {
                 if (OnOnDespawn != null) OnOnDespawn(t);
             }
         }
 
-        private Tile findDestination(Vector2i currentTileIndex)
+        private Tile _FindDestination(Vector2i currentTileIndex)
         {
             Direction direction = _direction;
             Vector2i nextTileIndex = currentTileIndex + direction.PositionChange;
