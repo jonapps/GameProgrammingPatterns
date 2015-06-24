@@ -29,6 +29,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public Monster(FarseerPhysics.Dynamics.World w, float x, float y, FollowRoadAI ai)
             : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 0.75f)
         {
+ 
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _destination = _body.Position;
             _sprite.Color = new Color(102, 57, 182);

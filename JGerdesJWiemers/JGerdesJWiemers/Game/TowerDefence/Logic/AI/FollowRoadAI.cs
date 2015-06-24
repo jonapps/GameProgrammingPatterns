@@ -85,10 +85,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
                 _destination = destination;
                 OnDestinationChanged(_destination);
             }
-            Tile t = _map.GetTileAtMapPoint(position.X, position.Y);
-            if (t.GetType() == TileType.DespawnTile)
+            if (_currentTile != null && _currentTile.GetType() == TileType.DespawnTile)
             {
-                if (OnOnDespawn != null) OnOnDespawn(t);
+                if (OnOnDespawn != null) OnOnDespawn(_currentTile);
             }
 
         }

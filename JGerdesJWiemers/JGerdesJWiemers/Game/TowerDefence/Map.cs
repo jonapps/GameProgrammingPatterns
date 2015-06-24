@@ -174,8 +174,8 @@ namespace JGerdesJWiemers.Game.TowerDefence
         {
            
             Vector2i result = new Vector2i();
-            result.X = ((int)mapX) / _tileSize.X;
-            result.Y = ((int)mapY) / _tileSize.Y;
+            result.X = (int)(mapX / _tileSize.X);
+            result.Y = (int)(mapY / _tileSize.Y);
             return result;
 
         }
