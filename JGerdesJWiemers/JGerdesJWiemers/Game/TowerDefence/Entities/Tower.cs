@@ -5,11 +5,11 @@ using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Graphics;
-using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
 using Microsoft.Xna.Framework;
+using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
@@ -29,6 +29,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public int FireFrequency = 200;
             public float Damage = 1;
             public float BulletSpeed = 4;
+            public Color Base;
+            public Color TopActive;
+            public Color TopWaiting;
+
+            public Def()
+            {
+                Base = new Color(63, 81, 181);
+                TopActive = new Color(255, 152, 0);
+                TopWaiting = new Color(255, 224, 178);
+            }
         }
 
         private Def _def;
@@ -40,9 +50,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_BASE), 1, 0, 0, BodyType.Static)
         {
             TextureContainer tex = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_TOP);
+            _sprite.Color = def.Base;
             _top = new AnimatedSprite(tex.Texture, tex.Width, tex.Height);
             _top.Origin = new Vector2f(tex.Width / 2f, tex.Height / 2f);
-            _top.SetAnimation(new Animation(0, 31, 30, true, false));
+            _top.Color = def.TopWaiting;
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _def = def;
             _entityHolder = holder;
@@ -53,25 +64,35 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         {
             base.Update();
             _top.Update();
-            Entity destination = _entityHolder.GetEntities().Find(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster);
+            Entity destination = _entityHolder.GetEntities()
+                                    .FindAll(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster)
+                                    .OrderBy(e => (e.Position - _body.WorldCenter).LengthSquared())
+                                    .FirstOrDefault();
 
-            //if (destination != null)
-            //{
-            Vector2 pos =_ConvertVector2fToVector2( Map.ScreenToMap(InputManager.Instance.MousePosition.X, InputManager.Instance.MousePosition.Y));
-                Vector2 direction =   ConvertUnits.ToSimUnits(pos)- this.Position;
-                double angle = (float)(SMath.Atan2(direction.Y, direction.X) );
-                int index = (int)((angle * 31)+1);
+            if (destination != null)
+            {
+                _top.Color = _def.TopActive;
+                Vector2 direction = destination.Position - this.Position;
+                double angle = (float)(SMath.Atan2(direction.Y, direction.X) / SMath.PI) / 2 + 0.5f;
+                int index = (int)((angle * 31)) + 18;
+                if (index > 31)
+                {
+                    index -= 31;
+                }
                 _top.SetAnimation(new Animation(new int[] { index }, 1000, false));
-                Console.WriteLine(angle);
 
-            //    if (Game.ElapsedTime - _lastFired > _def.FireFrequency)
-            //    {
-            //        //find a monster in radius
+                if (Game.ElapsedTime - _lastFired > _def.FireFrequency)
+                {
+                    //find a monster in radius
 
-            //        _lastFired = Game.ElapsedTime;
-            //        _Fire(destination);
-            //    }
-            //}
+                    _lastFired = Game.ElapsedTime;
+                    _Fire(destination);
+                }
+            }
+            else
+            {
+                _top.Color = _def.TopWaiting;
+            }
         }
 
         public override void PreDraw(float extra)

@@ -41,6 +41,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
                     _entitiesToDelete.Add(i);
             }
             _entitiesToDelete.Sort();
+            _entitiesToDelete.Reverse();
             foreach (int i in _entitiesToDelete)
             {
                 _entities.RemoveAt(i);
