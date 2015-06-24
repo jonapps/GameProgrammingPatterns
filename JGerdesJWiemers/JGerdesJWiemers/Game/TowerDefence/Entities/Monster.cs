@@ -24,6 +24,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private FollowRoadAI _ai;
         private Vector2 _destination;
         private float _speed = 0.5f;
+        private Sprite _shadow;
 
         public Monster(FarseerPhysics.Dynamics.World w, float x, float y, FollowRoadAI ai)
             : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 0.75f)
@@ -31,6 +32,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.Position = ConvertUnits.ToSimUnits(x, y);
             _destination = _body.Position;
             _sprite.Color = new Color(102, 57, 182);
+            TextureContainer tex =  AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SHADOW);
+            _shadow = new Sprite(tex.Texture);
+            _shadow.Origin = new Vector2f(tex.Width / 2f, tex.Height / 2f);
+            _shadow.Color = new Color(0, 0, 0, 200);
             _ai = ai;
             _ai.OnDestinationChanged += OnDestinationChanged;
             _ai.OnOnDespawn += _OnOnDespawn;
@@ -52,9 +57,18 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public override void PreDraw(float extra)
         {
             base.PreDraw(extra);
-            _sprite.Position += new Vector2f(0, (float)SMath.Sin(Game.ElapsedTime / 200f) * 5 - 5);
+            float sine = (float)SMath.Sin(Game.ElapsedTime / 200f);
+            _sprite.Position += new Vector2f(0,  sine * 6 - 12);
+            float scale = (sine * 0.5f + 0.5f) * 0.4f + 0.4f;
+            _shadow.Scale = new Vector2f(scale, scale);
+            _shadow.Position = Map.MapToScreen(_ConvertVector2ToVector2f(ConvertUnits.ToDisplayUnits(_body.WorldCenter)));
         }
 
+        public override void Draw(RenderTarget target, RenderStates states)
+        {
+            target.Draw(_shadow, states);
+            base.Draw(target, states);
+        }
 
         public override void PastUpdate()
         {

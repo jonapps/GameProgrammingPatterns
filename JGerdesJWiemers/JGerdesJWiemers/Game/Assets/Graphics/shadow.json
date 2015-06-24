@@ -1,0 +1,11 @@
+{
+	"ImageTitle": "shadow.png",
+	"Collider": {
+		"Type": "Circle",
+		"Radius": 0.4
+	},
+	"Center": {
+		"x" : 48,
+		"y" : 24
+	}
+}

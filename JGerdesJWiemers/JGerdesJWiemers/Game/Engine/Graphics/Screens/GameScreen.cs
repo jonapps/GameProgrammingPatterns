@@ -71,7 +71,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             foreach(Entity e in _entities)
                 e.PreDraw(extra);
 
-            //_entities.Sort((first, second) => first.Z.CompareTo(second.Z));
+            _entities.Sort((first, second) => first.Z.CompareTo(second.Z));
         }
 
         public override void Draw(RenderTarget target, RenderStates states)

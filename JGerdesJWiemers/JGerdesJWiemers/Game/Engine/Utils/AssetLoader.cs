@@ -22,6 +22,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_GUY = @"guy";
         public static readonly String TEXTURE_TOWER = @"tower\tower";
         public static readonly String TEXTURE_NUKE = @"weapons\nuke";
+        public static readonly String TEXTURE_SHADOW = @"shadow";
 
         public static readonly String CONFIG_INPUT = "input.json";
 
@@ -41,6 +42,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             _textures = new Dictionary<string, TextureContainer>();
 
             LoadTexture(TEXTURE_GUY, TEXTURE_GUY);
+            LoadTexture(TEXTURE_SHADOW, TEXTURE_SHADOW);
             LoadTexture(TEXTURE_TOWER, TEXTURE_TOWER);
             LoadTexture(TEXTURE_NUKE, TEXTURE_NUKE);
 

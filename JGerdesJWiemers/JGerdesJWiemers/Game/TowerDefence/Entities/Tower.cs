@@ -68,7 +68,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Speed = _def.BulletSpeed
             };
 
-            //EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
+            EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
 

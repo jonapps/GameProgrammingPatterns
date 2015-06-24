@@ -248,5 +248,10 @@ namespace JGerdesJWiemers.Game.TowerDefence
         {
             
         }
+
+        public static Vector2f MapToScreen(Vector2f pos)
+        {
+            return MapToScreen(pos.X, pos.Y);
+        }
     }
 }
