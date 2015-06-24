@@ -3,6 +3,8 @@ using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Utils;
 using Microsoft.Xna.Framework;
+using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +28,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
 
         public Nuke(World world, Def def)
-            :base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_NUKE))
+            :base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BULLET))
         {
+            _sprite.Scale = new Vector2f(0.2f, 0.2f);
+            _sprite.Color = new Color(156, 39, 176);
             _body.Position = def.Position;
             _body.FixedRotation = true;
             Vector2 direction = (def.Destination - _body.WorldCenter);
@@ -43,6 +47,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             if ((Game.ElapsedTime - _startTime) > _timeToLive)
             {
                 _deleteMe = true;
+            }
+        }
+
+        public override void PreDraw(float extra)
+        {
+            base.PreDraw(extra);
+            if (_sprite.Scale.X < 1)
+            {
+                _sprite.Scale *= 1.1f;
             }
         }
  

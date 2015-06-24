@@ -1,11 +1,11 @@
 {
-	"ImageTitle": "nuke.png",
+	"ImageTitle": "bullet.png",
 	"Collider": {
 		"Type": "Circle",
-		"Radius": 0.4
+		"Radius": 0.3
 	},
 	"Center": {
-		"x" : 24,
+		"x" : 6,
 		"y" : 8
 	}
 }
