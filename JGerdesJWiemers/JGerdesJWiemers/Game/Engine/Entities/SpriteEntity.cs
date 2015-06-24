@@ -99,7 +99,7 @@ namespace JGerdesJWiemers.Game.Engine.Entities
 
         public override void Draw(RenderTarget target, RenderStates states)
         {
-            if (Game.DEBUG)
+            if (true)
                 target.Draw(_colliderShape);
             target.Draw(_sprite, states);
         }

@@ -115,7 +115,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         private void _CheckMark()
         {
+            if (_entities.Count >= 2)
+                Console.WriteLine("X");
+            
             if (_entities.Count > 0)
+                
                 _Mark();
             else
                 _Demark();
