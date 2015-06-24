@@ -72,6 +72,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         public void PreDraw(float extra)
         {
+            
         }
 
         public void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
@@ -79,14 +80,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
             target.Draw(_sprite, states);
         }
 
-        public void mark()
+        private void _Mark()
         {
             _sprite.SetAnimation(new Animation(0, 15, 30, false, false));
             _sprite.EnqueueAnimation(new Animation(new int[]{15}, 1000, false));
 
         }
 
-        public void demark()
+        private void _Demark()
         {
             _sprite.SetAnimation(new Animation(new int[] { 15, 15, 15, 15, 15, 14, 13, 12, 11, 10, 9, 8, 6, 5, 4, 3, 2, 1, 0 }, 30, false));
             _sprite.EnqueueAnimation(new Animation(new int[] { 0 }, 1000, false));
@@ -99,5 +100,26 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         }
 
         public abstract TileType GetType();
+
+        public void AddEntity(Entity e)
+        {
+            _entities.Add(e);
+            _CheckMark();
+        }
+
+        public void RemoveEntity(Entity e)
+        {
+            _entities.Remove(e);
+            _CheckMark();
+        }
+
+        private void _CheckMark()
+        {
+            if (_entities.Count > 0)
+                _Mark();
+            else
+                _Demark();
+        }
+
     }
 }

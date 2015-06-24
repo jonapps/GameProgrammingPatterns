@@ -14,13 +14,18 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
     class FollowRoadAI
     {
         public delegate void DestinationChangedHandler(Tile destination);
-
         public event DestinationChangedHandler OnDestinationChanged;
         public event DestinationChangedHandler OnOnDespawn;
+
+        public delegate void TileMoveHandler(Tile t);
+        public event TileMoveHandler OnTileLeft;
+        public event TileMoveHandler OnTileEnter;
 
         private Map _map;
         private Direction _direction;
         private Tile _destination;
+        private Tile _currentTile = null;
+        private Tile _lastTile = null;
 
         private class Direction
         {
@@ -57,12 +62,26 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
         public void Update(Body body)
         {
             Vector2 position = ConvertUnits.ToDisplayUnits(body.WorldCenter);
+            _currentTile = _map.GetTileAtMapPoint(position.X, position.Y);
+            
+            if (_lastTile != null)
+            {
+                if (_currentTile != _lastTile)
+                {
+                    if (OnTileLeft != null) OnTileLeft(_lastTile);
+                    if (OnTileEnter != null) OnTileEnter(_currentTile);
+                    _lastTile = _currentTile;
+                }
+            }
+            else
+            {
+                _lastTile = _currentTile;
+            }
+
+            
             Tile destination = _FindDestination(_map.GetTileIndexAtMapPoint(position.X, position.Y));
             if (destination != _destination)
             {
-                if(_destination != null)
-                    _destination.demark();
-                destination.mark();
                 _destination = destination;
                 OnDestinationChanged(_destination);
             }
@@ -71,6 +90,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic.AI
             {
                 if (OnOnDespawn != null) OnOnDespawn(t);
             }
+
         }
 
         private Tile _FindDestination(Vector2i currentTileIndex)

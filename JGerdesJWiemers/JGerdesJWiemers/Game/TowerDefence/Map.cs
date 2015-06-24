@@ -246,7 +246,13 @@ namespace JGerdesJWiemers.Game.TowerDefence
 
         public void PreDraw(float extra)
         {
-            
+            for (int x = 0; x < _mapSize.X; x++)
+            {
+                for (int y = 0; y < _mapSize.Y; y++)
+                {
+                    _tiles[x, y].PreDraw(extra);
+                }
+            }
         }
 
         public static Vector2f MapToScreen(Vector2f pos)
