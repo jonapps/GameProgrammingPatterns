@@ -39,7 +39,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _ai = ai;
             _ai.OnDestinationChanged += OnDestinationChanged;
             _ai.OnOnDespawn += _OnOnDespawn;
+            _ai.OnTileEnter += _OnTileEnter;
+            _ai.OnTileLeft += _OnTileLeft;
 
+        }
+
+        void _OnTileLeft(Tile t)
+        {
+            t.RemoveEntity(this);
+        }
+
+        void _OnTileEnter(Tile t)
+        {
+            t.AddEntity(this);
         }
 
         private void _OnOnDespawn(Tile destination)

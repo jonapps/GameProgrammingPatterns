@@ -116,6 +116,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             base.PastUpdate();
         }
 
+        public override void PreDraw(float extra)
+        {
+            base.PreDraw(extra);
+            _map.PreDraw(extra);
+        }
+
         public override void Draw(SFML.Graphics.RenderTarget renderTarget, RenderStates states)
         {
             renderTarget.Draw(_map, states);
