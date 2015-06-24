@@ -1,0 +1,48 @@
+Aufgabe Pong
+
+Note: 1
+
+Positiv:
+
+Compiliert & Startet sofort
+Schicke Präsentation
+ScreenManager funktioniert
+GameLoop ordentlich umgesetzt.
+Controllersteuerung
+
+Kritik & Tips:
+
+Hab wirklich wenig zu meckern! Insgesamt sehr gute Ideen und sehr gute Umsetzung.
+
+Die Collisionsbehandlung ist teilweise noch etas buggy.
+
+Auch Effekte (_effects) hätten als Entity modeliert werden könnnen. Man würde sich die zweite Schleife in der Rendermethode sparen und müsste die Position nicht im Rendering updaten sondern schön davon getrennt im Update().
+
+
+Euer Sound-Manager kann jeden Sound nur einmal zur Zeit spielen. In der Praxis können sich SFX durchaus überlagern. Deshalb die (übliche) Trennung in SoundBuffer (einmal pro Sound-Source) und Sound (Instanziiert einen SoundBuffer mehrfach)
+
+Aufgabe Shoot’m Up
+
+Note: 1
+
+Positiv:
+
+Vorbildliche, elegante Architektur. Engine und Game sind schön getrennt.
+Code ließt sich größtenteils sehr gut.
+Cutscenes und generell sehr schicke Präsentation besonders das UI und der Paralax-Hintergrund.
+Rundes Gesamtpaket.
+
+Kritik & Tips:
+
+Das Flugmodell ist sehr unphysikalisch, die Umsetzung mit einem Haufen Delegaten eher verwirrend. Wenn man eine Physikengien verwendet ist man eigentlich verpflichtet mit Kräften oder zumindest Impulsen zu arbeiten, finde ich. ;)
+
+Beim Spielen ging irgendwann der Sound aus.
+
+Waves wären entweder datengetrieben oder komplett prozedural schöner. Wave.Generate() gibt eine Liste von Entities zurück, führt intern eine zweite Liste und außerdem wird jede Entity noch den N bei der Factory hinterlegten Holdern hinzugefügt. Verwirrend viele Listen von Entities!
+
+Exceptions, die nie gefangen werden und im Constructor eine Logausgabe machen? Ungewöhnlich! (Ungefangene Exception generieren eh schon unübersehbare Logausgaben) Wie wär’s mit einem Assert?
+
+Wie benutzt man den Editor? Für einen Editor hätte sich auch ein zweites Projekt in der Projektmappe geeignet.
+
+Sounds werden der _plaingSounds Liste hinzugefügt (damit der GC sie nicht frisst?) aber nie entfernt.
+
