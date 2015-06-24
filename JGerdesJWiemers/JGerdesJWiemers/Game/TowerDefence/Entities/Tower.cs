@@ -5,6 +5,7 @@ using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Graphics;
+using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
@@ -54,21 +55,23 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _top.Update();
             Entity destination = _entityHolder.GetEntities().Find(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster);
 
-            if (destination != null)
-            {
-                Vector2 direction = destination.Position - this.Position;
-                double angle = (float)(SMath.Atan2(direction.Y, direction.X) / SMath.PI) / 2 + 0.5f;
+            //if (destination != null)
+            //{
+            Vector2 pos =_ConvertVector2fToVector2( Map.ScreenToMap(InputManager.Instance.MousePosition.X, InputManager.Instance.MousePosition.Y));
+                Vector2 direction =   ConvertUnits.ToSimUnits(pos)- this.Position;
+                double angle = (float)(SMath.Atan2(direction.Y, direction.X) );
                 int index = (int)((angle * 31)+1);
                 _top.SetAnimation(new Animation(new int[] { index }, 1000, false));
+                Console.WriteLine(angle);
 
-                if (Game.ElapsedTime - _lastFired > _def.FireFrequency)
-                {
-                    //find a monster in radius
+            //    if (Game.ElapsedTime - _lastFired > _def.FireFrequency)
+            //    {
+            //        //find a monster in radius
 
-                    _lastFired = Game.ElapsedTime;
-                    _Fire(destination);
-                }
-            }
+            //        _lastFired = Game.ElapsedTime;
+            //        _Fire(destination);
+            //    }
+            //}
         }
 
         public override void PreDraw(float extra)
@@ -92,7 +95,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Speed = _def.BulletSpeed
             };
 
-            //EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
+            EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
 
