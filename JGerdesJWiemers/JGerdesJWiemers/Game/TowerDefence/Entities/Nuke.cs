@@ -15,7 +15,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
     class Nuke : SpriteEntity
     {
         public static readonly String EVENT_SPAWN = "nuke.spawn";
-
+        private long _timeToLive = 1000;
+        private long _startTime = 0;
         public class Def
         {
             public Vector2 Position;
@@ -33,8 +34,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             direction.Normalize();
             _body.LinearVelocity = direction * def.Speed;
             _sprite.Rotation =  (float) (SMath.Atan2(direction.Y, direction.X) * (180 / SMath.PI));
+            _startTime = Game.ElapsedTime;
         }
 
+        public override void Update()
+        {
+            base.Update();
+            if ((Game.ElapsedTime - _startTime) > _timeToLive)
+            {
+                _deleteMe = true;
+            }
+        }
  
     }
 }

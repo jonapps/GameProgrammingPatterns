@@ -22,7 +22,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public class Def
         {
             public float Radius = 3;
-            public int FireFrequency = 10;
+            public int FireFrequency = 200;
             public float Damage = 1;
             public float BulletSpeed = 4;
         }
@@ -44,7 +44,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         {
             base.Update();
 
-            if (Game.ElapsedTime - _lastFired > 1000f / _def.FireFrequency)
+            if ((Game.ElapsedTime - _lastFired) > _def.FireFrequency)
             {
                 //find a monster in radius
                 Entity destination = _entityHolder.GetEntities().Find(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster);
