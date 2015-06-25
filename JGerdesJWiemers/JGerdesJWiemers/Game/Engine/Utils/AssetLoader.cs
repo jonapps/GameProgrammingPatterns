@@ -25,6 +25,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_BULLET = @"weapons\bullet";
         public static readonly String TEXTURE_SHADOW = @"shadow";
 
+        public static readonly String TEXTURE_UI_TOWER_SELECTION = @"ui\tower_selection";
+
         public static readonly String CONFIG_INPUT = "input.json";
 
         private static AssetLoader _instance;
@@ -47,6 +49,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_TOWER_BASE, TEXTURE_TOWER_BASE);
             LoadTexture(TEXTURE_TOWER_TOP, TEXTURE_TOWER_TOP);
             LoadTexture(TEXTURE_BULLET, TEXTURE_BULLET);
+
+            LoadTexture(TEXTURE_UI_TOWER_SELECTION, TEXTURE_UI_TOWER_SELECTION);
 
         }
 

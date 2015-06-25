@@ -1,0 +1,11 @@
+{
+	"ImageTitle": "tower_selection.png",
+	"SpriteSheet": {
+		"x": 8,
+		"y": 4
+	},
+	"Center": {
+		"x" : 64,
+		"y" : 64
+	}
+}
