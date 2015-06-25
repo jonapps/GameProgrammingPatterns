@@ -2,6 +2,7 @@
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.Interfaces;
+using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -19,15 +20,16 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         public static readonly float WORLD_STEP_SIZE = 1 / 60f;
 
         protected List<Entity> _entities;
-        protected List<int> _entitiesToDelete;
+        protected List<Entity> _entitiesToDelete;
         protected List<Entity> _entitiesToAdd;
+        protected World _world;
 
         public GameScreen(RenderWindow w) : base(w)
         {
             _entities = new List<Entity>();
-            _entitiesToDelete = new List<int>();
+            _entitiesToDelete = new List<Entity>();
             _entitiesToAdd = new List<Entity>();
-            
+            _world = new World(new Vector2(0, 0));
         }
 
         public override void Update()
@@ -38,13 +40,12 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
                 Entity e = _entities[i];
                 e.Update();
                 if (e.DeleteMe)
-                    _entitiesToDelete.Add(i);
+                    _entitiesToDelete.Add(e);
             }
-            _entitiesToDelete.Sort();
-            _entitiesToDelete.Reverse();
-            foreach (int i in _entitiesToDelete)
+            foreach (Entity delE in _entitiesToDelete)
             {
-                _entities.RemoveAt(i);
+                delE.DeleteFromWorld(_world);
+                _entities.Remove(delE);
             }
             foreach (Entity e in _entitiesToAdd)
             {

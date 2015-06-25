@@ -3,6 +3,7 @@ using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic.AI;
+using JGerdesJWiemers.Game.TowerDefence.Screens;
 using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -42,7 +43,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _ai.OnOnDespawn += _OnOnDespawn;
             _ai.OnTileEnter += _OnTileEnter;
             _ai.OnTileLeft += _OnTileLeft;
-
+            _body.CollisionCategories = EntityCategory.Monster;
         }
 
         void _OnTileLeft(Tile t)
@@ -107,6 +108,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             }
             _ai.Update(_body);
 
+        }
+
+        public void Kill()
+        {
+            _deleteMe = true;
         }
     }
 }

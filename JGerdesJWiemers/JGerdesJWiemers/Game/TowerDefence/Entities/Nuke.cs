@@ -2,6 +2,7 @@
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.TowerDefence.Screens;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -34,6 +35,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _sprite.Color = new Color(156, 39, 176);
             _body.Position = def.Position;
             _body.FixedRotation = true;
+            _body.CollisionCategories = EntityCategory.Nuke;
+            _body.CollidesWith = EntityCategory.Monster;
+
+
             Vector2 direction = (def.Destination - _body.WorldCenter);
             direction.Normalize();
             _body.LinearVelocity = direction * def.Speed;
@@ -44,9 +49,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            if (fixtureB.Body.UserData is Tower)
+            Monster m = null;
+            if (fixtureB.Body.UserData is Tower || fixtureB.UserData is Nuke)
             {
                 return false;
+            }
+            else if ((m = fixtureB.Body.UserData as Monster) != null)
+            {
+                //m.Kill();
             }
             return true;
         }

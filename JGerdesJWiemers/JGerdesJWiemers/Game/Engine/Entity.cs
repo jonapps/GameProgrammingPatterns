@@ -98,6 +98,16 @@ namespace JGerdesJWiemers.Game.Engine
         public abstract void Draw(RenderTarget target, RenderStates states);
 
         public abstract void Update();
+
+
+        /// <summary>
+        /// delete all entity data here
+        /// </summary>
+        /// <param name="w"></param>
+        public virtual void DeleteFromWorld(World w)
+        {
+            w.RemoveBody(_body);
+        }
     }
 
 }
