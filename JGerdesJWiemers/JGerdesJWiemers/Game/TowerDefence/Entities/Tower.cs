@@ -8,6 +8,7 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
+using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
 using SFML.System;
@@ -22,6 +23,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 {
     class Tower : SpriteEntity
     {
+        public static readonly String EVENT_BUILD = "tower.create";
 
         public class Def
         {
@@ -32,12 +34,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Color Base;
             public Color TopActive;
             public Color TopWaiting;
+            public Vector2 Position;
 
             public Def()
             {
                 Base = new Color(63, 81, 181);
                 TopActive = new Color(255, 152, 0);
                 TopWaiting = new Color(255, 224, 178);
+                Position = new Vector2();
             }
         }
 
@@ -46,7 +50,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private IEntityHolder _entityHolder;
         private AnimatedSprite _top;
 
-        public Tower(World world, float x, float y, Def def, IEntityHolder holder)
+        public Tower(World world, Def def, IEntityHolder holder)
             : base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_BASE), 1, 0, 0, BodyType.Static)
         {
             TextureContainer tex = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_TOP);
@@ -54,7 +58,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _top = new AnimatedSprite(tex.Texture, tex.Width, tex.Height);
             _top.Origin = new Vector2f(tex.Width / 2f, tex.Height / 2f);
             _top.Color = def.TopWaiting;
-            _body.Position = ConvertUnits.ToSimUnits(x, y);
+            _body.Position = ConvertUnits.ToSimUnits(def.Position);
             _def = def;
             _entityHolder = holder;
             _CalcZ(); 

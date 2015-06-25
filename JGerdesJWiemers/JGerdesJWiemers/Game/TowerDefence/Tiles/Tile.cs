@@ -91,7 +91,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 
         private void _Demark()
         {
-            _sprite.SetAnimation(new Animation(new int[] { 15, 15, 15, 15, 15, 14, 13, 12, 11, 10, 9, 8, 6, 5, 4, 3, 2, 1, 0 }, 30, false));
+            _sprite.SetAnimation(new Animation(new int[] {15, 14, 13, 12, 11, 10, 9, 8, 6, 5, 4, 3, 2, 1, 0 }, 30, false));
             _sprite.EnqueueAnimation(new Animation(new int[] { 0 }, 1000, false));
 
         }
