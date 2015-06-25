@@ -9,10 +9,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 {
     class SpawnTile : Tile
     {
-        public SpawnTile(float x, float y, float width, float height, Texture tex, int mapCenter)
-            : base(x, y, width, height, tex, mapCenter)
+        public SpawnTile(float x, float y, float width, float height, Texture tex, int mapCenter, Color c)
+            : base(x, y, width, height, tex, mapCenter, c)
         {
-            _sprite.Color = new Color(254, 192, 6);
+
         }
 
         public override TileType GetType()

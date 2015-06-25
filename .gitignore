@@ -196,3 +196,6 @@ FakesAssemblies/
 *.opt
 
 *[Tt]est/*
+.DS_Store
+
+**/Thumbs.db

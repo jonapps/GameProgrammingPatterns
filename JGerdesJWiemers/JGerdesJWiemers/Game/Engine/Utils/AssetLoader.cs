@@ -47,7 +47,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_TOWER_BASE, TEXTURE_TOWER_BASE);
             LoadTexture(TEXTURE_TOWER_TOP, TEXTURE_TOWER_TOP);
             LoadTexture(TEXTURE_BULLET, TEXTURE_BULLET);
-
         }
 
         public void LoadFont(String name, String filename)
@@ -165,24 +164,61 @@ namespace JGerdesJWiemers.Game.Engine.Utils
            
             MapAsset mapAsset = JsonConvert.DeserializeObject<MapAsset>(completeFile);
 
+
+
             // Because of senseless object notation in tiled exported json
-            JToken jobject = jsonObj["tilesets"][0]["tiles"];
-            IJEnumerable<JToken> values = jobject.Values();
-            int size = values.Count();
-            foreach (JToken token in values)
+            JToken jobject, colorTiles = null;
+            jobject = jsonObj["tilesets"];
+            for (int i = 0; i < jobject.Count(); ++i)
             {
-                String str = token.ToString();
+                if (jobject[i]["name"].ToString() == "Underground")
+                {
+                    colorTiles = jsonObj["tilesets"][i];
+                }
+            }
+            if (colorTiles == null)
+            {
+                throw new Exception("No Underground defined in Map json");
+            }
+            TilesetsAsset animationSet = mapAsset.TileSets.FirstOrDefault(t => t.Name == "Animation");
+            TilesetsAsset colorSet = mapAsset.TileSets.FirstOrDefault(t => t.Name == "Underground");
+
+            IJEnumerable<JToken> values = colorTiles.Values();
+
+            int textureNumber = 0;
+
+            foreach (JToken token in colorTiles["tiles"])
+            {
+                String str = token.ToList()[0].ToString();
                 TileImageAsset imageAsset = JsonConvert.DeserializeObject<TileImageAsset>(str);
                 Texture tex = new Texture(DIR_TEXTURES + imageAsset.Image);
-                if (!_textures.ContainsKey(imageAsset.Image))
-                {
-                    _textures.Add(imageAsset.Image, new TextureContainer(tex));
-                }
-                
-                // we are working with only one tileset. if not refactor this!
-                mapAsset.TileSets[0].TileImages.Add(imageAsset);
+                Color texCol = GetColor(tex);
+
+                imageAsset.color = texCol;
+                imageAsset.Image = animationSet.Image;
+                imageAsset.Number = colorSet.Firstgid + textureNumber++;
+                colorSet.TileImages.Add(imageAsset);
             }
+            Texture aniTex = new Texture(DIR_TEXTURES + animationSet.Image);
+            _textures.Add(animationSet.Image, new TextureContainer(aniTex));
+            
             return mapAsset;
+        }
+
+        private Color GetColor(Texture tex)
+        {
+            for (uint x = 0; x < tex.Size.X; ++x)
+            {
+                for (uint y = 0; y < tex.Size.Y; ++y)
+                {
+                    Color c = tex.CopyToImage().GetPixel(x, y);
+                    if (c.A == 255)
+                    {
+                        return c;
+                    }
+                }
+            }
+            throw new Exception("Every tile needs a color");
         }
 
 

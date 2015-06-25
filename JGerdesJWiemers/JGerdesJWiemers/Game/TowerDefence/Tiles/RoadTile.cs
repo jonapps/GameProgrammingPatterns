@@ -9,10 +9,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 {
     class RoadTile : Tile
     {
-        public RoadTile(float x, float y, float width, float height, Texture tex, int mapCenter)
-            : base(x,y,width,height,tex,mapCenter)
+        public RoadTile(float x, float y, float width, float height, Texture tex, int mapCenter, Color c)
+            : base(x,y,width,height,tex,mapCenter, c)
         {
-            _sprite.Color = new Color(3, 169, 244);
+
         }
 
         public override TileType GetType()

@@ -32,12 +32,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         private bool _isMarked = false;
 
 
-        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
+        public Tile(float x, float y, float width, float height, Texture tex, int mapCenter, Color c)
         {
             _entities = new List<Entity>();
             _sprite = new AnimatedSprite(tex, 96, 48);
             _sprite.SetAnimation(new Animation());
-            _sprite.Color = new Color(0, 150, 136);
+            _sprite.Color = c;
             _sprite.Position = Map.MapToScreen(x * width + mapCenter, y * height);
             _sprite.Origin = new Vector2f(width, 0);
             _size = new Vector2(width, height);
@@ -113,6 +113,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
             _entities.Remove(e); 
         }
 
+
+        /// <summary>
+        /// mark this tile if thre are entities on it
+        /// </summary>
         private void _CheckMark()
         {
             if (_entities.Count > 0)
