@@ -39,6 +39,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.LinearVelocity = direction * def.Speed;
             _sprite.Rotation =  (float) (SMath.Atan2(direction.Y, direction.X) * (180 / SMath.PI));
             _startTime = Game.ElapsedTime;
+            _body.OnCollision += _OnCollision;
+        }
+
+        private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            if (fixtureB.Body.UserData is Tower)
+            {
+                return false;
+            }
+            return true;
         }
 
         public override void Update()
