@@ -29,6 +29,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         private Vector2 _size;
         private Vector2 _position;
         private Entity _occupier;
+        private bool _isMarked = false;
 
 
         public Tile(float x, float y, float width, float height, Texture tex, int mapCenter)
@@ -64,6 +65,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         public void Update()
         {
             _sprite.Update();
+            _CheckMark();
         }
 
         public void PastUpdate()
@@ -104,25 +106,31 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         public void AddEntity(Entity e)
         {
             _entities.Add(e);
-            _CheckMark();
         }
 
         public void RemoveEntity(Entity e)
         {
-            _entities.Remove(e);
-            _CheckMark();
+            _entities.Remove(e); 
         }
 
         private void _CheckMark()
         {
-            if (_entities.Count >= 2)
-                Console.WriteLine("X");
-            
             if (_entities.Count > 0)
-                
-                _Mark();
+            {
+                if(!_isMarked)
+                {
+                    _Mark();
+                    _isMarked = true;
+                }
+            }
             else
-                _Demark();
+            {
+                if (_isMarked)
+                {
+                    _Demark();
+                    _isMarked = false;
+                }
+            }
         }
 
     }

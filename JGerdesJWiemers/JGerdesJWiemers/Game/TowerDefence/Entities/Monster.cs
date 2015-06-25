@@ -104,9 +104,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             else
             {
                 _body.LinearVelocity = new Vector2(0, 0);
-                _ai.Update(_body);
             }
-            
+            _ai.Update(_body);
 
         }
     }
