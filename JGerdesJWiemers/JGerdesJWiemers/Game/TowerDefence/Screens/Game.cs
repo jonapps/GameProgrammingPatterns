@@ -26,7 +26,7 @@ using JGerdesJWiemers.Game;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
-    class Game : GameScreen, IEntityHolder
+    class Game : GameScreen, IEntityHolder, ICoordsConverter
     {
 
         public float SCROLL_SPEED = 10;
@@ -46,8 +46,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             EventStream.Instance.On(Monster.EVENT_SPAWN, _SpawnMonster);
             EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);
+            EventStream.Instance.On(Tower.EVENT_BUILD, _BuildTower);
 
-            _window.MouseButtonPressed += _window_MouseButtonPressed;
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
             {
                 if(args.Code == Keyboard.Key.G)
@@ -58,6 +58,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
 
+                       
             //test entities
 
             Tile position = _map.GetSpawnTiles()[0];
@@ -70,22 +71,29 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
         }
 
+        public override void Create()
+        {
+            base.Create();
+            UiScreen uiScreen = new UiScreen(_window, _map, (ICoordsConverter)this);
+            _screenManager.Push(uiScreen);
+        }
+
         private void _SpawnNuke(EngineEvent eventData)
         {
             Nuke.Def data = (eventData.Data as Nuke.Def);
             _entitiesToAdd.Add(new Nuke(_world, data));
         }
 
-        void _window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
+        void _BuildTower(EngineEvent e)
         {
-            Tile t = _map.GetTileAtScreenPoint(_window.MapPixelToCoords(InputManager.Instance.MousePosition, _view));
-            if (t != null && t.GetType() == TileType.BuildTile && !t.IsOccupied)
-            {
-                Vector2 pos = t.getCenter();
-                Tower tower = new Tower(_world, pos.X, pos.Y, new Tower.Def(), this);
-                t.Occupier = tower;
-                _entities.Add(tower);
+            Tower.Def def = e.Data as Tower.Def;
+            Tower tower = new Tower(_world, def, this);
+            _entities.Add(tower);
 
+            Tile t = _map.GetTileAtMapPoint(def.Position.X, def.Position.Y);
+            if (t != null)
+            {
+                t.Occupier = tower;
             }
         }
 
@@ -165,6 +173,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public List<Entity> GetEntities()
         {
             return _entities;
+        }
+
+        public Vector2f MapPixelToCoords(Vector2i pixelPoint)
+        {
+            return _window.MapPixelToCoords(pixelPoint, _view);
+        }
+
+
+        public Vector2i MapCoordsToPixel(Vector2f coordsPoint)
+        {
+            return _window.MapCoordsToPixel(coordsPoint, _view);
         }
     }
 }

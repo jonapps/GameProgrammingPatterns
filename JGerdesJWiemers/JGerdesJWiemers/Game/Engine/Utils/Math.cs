@@ -90,5 +90,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return new Vector2(v.X, v.Y);
         }
 
+        public static Vector2f ToVector2f(this Vector2i v){
+            return new Vector2f(v.X, v.Y);
+        }
+
     }
 }

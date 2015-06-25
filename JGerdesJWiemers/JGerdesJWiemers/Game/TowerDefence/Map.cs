@@ -20,6 +20,10 @@ namespace JGerdesJWiemers.Game.TowerDefence
         private List<Tile> _spawnTiles;
         private Vector2i _mapSize;
         private Vector2i _tileSize;
+
+        private RenderTarget _converter;
+        private View _view;
+
         public int MapOffsetX { get; set; }
 
         

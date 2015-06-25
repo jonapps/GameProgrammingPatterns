@@ -108,6 +108,7 @@
     <Compile Include="Game\Engine\Input\InputHandler.cs" />
     <Compile Include="Game\Engine\Input\InputManager.cs" />
     <Compile Include="Game\Engine\Input\InputMapper.cs" />
+    <Compile Include="Game\Engine\Interfaces\ICoordsConverter.cs" />
     <Compile Include="Game\Engine\Interfaces\IDrawable.cs" />
     <Compile Include="Game\Engine\Graphics\ScreenManager.cs" />
     <Compile Include="Game\Engine\Interfaces\IEntityHolder.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Game\TowerDefence\Map.cs" />
     <Compile Include="Game\TowerDefence\Screens\CursorScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
+    <Compile Include="Game\TowerDefence\Screens\UiScreen.cs" />
     <Compile Include="Game\TowerDefence\Tiles\DespawnTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\TerrainTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\NoBuildTile.cs" />
