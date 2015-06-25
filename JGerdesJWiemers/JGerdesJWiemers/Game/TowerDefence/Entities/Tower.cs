@@ -8,6 +8,7 @@ using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
+using JGerdesJWiemers.Game.TowerDefence.Screens;
 using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -61,7 +62,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.Position = ConvertUnits.ToSimUnits(def.Position);
             _def = def;
             _entityHolder = holder;
-            _CalcZ(); 
+            _CalcZ();
+            _body.CollisionCategories = EntityCategory.Tower;
         }
 
         public override void Update()

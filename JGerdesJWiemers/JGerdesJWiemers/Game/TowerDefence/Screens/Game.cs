@@ -26,6 +26,14 @@ using JGerdesJWiemers.Game;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
+
+    public static class EntityCategory
+    {
+        public static Category Monster = Category.Cat1;
+        public static Category Tower = Category.Cat2;
+        public static Category Nuke = Category.Cat3;
+    }
+
     class Game : GameScreen, IEntityHolder, ICoordsConverter
     {
 
@@ -33,7 +41,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public float SCROLL_DISTANCE = 30;
 
         private Map _map;
-        private World _world;
+        
         public Game(RenderWindow w)
             :base(w)
         {
@@ -41,7 +49,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //_map = new Map(24, 24, 48);
             _map = new Map(mapAsset);
             w.SetMouseCursorVisible(false);
-            _world = new World(new Vector2(0,0));
             
 
             EventStream.Instance.On(Monster.EVENT_SPAWN, _SpawnMonster);
