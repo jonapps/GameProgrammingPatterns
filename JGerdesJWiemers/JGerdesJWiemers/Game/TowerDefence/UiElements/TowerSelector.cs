@@ -34,7 +34,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
         public delegate void OnSelectioChanged(Tower.Def selection);
         public event OnSelectioChanged SelectionChanged;
         private List<Option> _options;
-        private int _selected = 0;
+        private int _selected = -1;
 
         public TowerSelector(List<Tower.Def> defintions, Vector2f position)
         {
@@ -47,18 +47,21 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                 _options.Add(option);
                 counter++;
             }
+            Select(0);
         }
 
         public void Select(int option)
         {
             if (option >= 0 && option < _options.Count && option != _selected)
             {
-                AnimatedSprite oldS = _options[_selected].Sprite;
-                AnimatedSprite newS =  _options[option].Sprite;
-
-                oldS.SetAnimation(new Animation(16, 31, 30, false, false));
-                oldS.EnqueueAnimation(new Animation());
-
+                if (_selected != -1)
+                {
+                    AnimatedSprite oldS = _options[_selected].Sprite;
+                    oldS.SetAnimation(new Animation(16, 31, 30, false, false));
+                    oldS.EnqueueAnimation(new Animation());
+                }
+                
+                AnimatedSprite newS = _options[option].Sprite;
                 newS.SetAnimation(new Animation(0, 15, 30, false, false));
                 newS.EnqueueAnimation(new Animation(new int[]{15}, 1000, true));
 

@@ -25,11 +25,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             List<Tower.Def> defs = new List<Tower.Def>();
             defs.Add(new Tower.Def());
-            defs.Add(new Tower.Def{
-                        Base = new Color(100, 100, 100),
-                        TopActive = new Color(240, 30, 220),
-                        TopWaiting = new Color(180, 10, 160)
-                    });
+            defs.Add(new Tower.Def
+            {
+                Base = new Color(100, 100, 100),
+                TopActive = new Color(240, 30, 220),
+                TopWaiting = new Color(180, 10, 160)
+            });
+            defs.Add(new Tower.Def
+            {
+                Base = new Color(0, 150, 160)
+            });
 
 
             _builder = new Builder(map, converter);
@@ -38,6 +43,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _window.MouseButtonPressed += _window_MouseButtonPressed;
 
             _selector.SelectionChanged += OnSelectionChanged;
+            OnSelectionChanged(defs[0]);
         }
 
         void OnSelectionChanged(Tower.Def selection)
