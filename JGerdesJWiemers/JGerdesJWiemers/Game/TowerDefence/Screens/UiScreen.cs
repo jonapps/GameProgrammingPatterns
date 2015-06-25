@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JGerdesJWiemers.Game.TowerDefence.UiElements;
+using SFML.System;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -15,14 +17,32 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     {
 
         private Builder _builder;
+        private TowerSelector _selector;
 
         public UiScreen(RenderWindow w, Map map, ICoordsConverter converter)
             :base(w)
         {
-            _builder = new Builder(map, converter);
 
+            List<Tower.Def> defs = new List<Tower.Def>();
+            defs.Add(new Tower.Def());
+            defs.Add(new Tower.Def{
+                        Base = new Color(100, 100, 100),
+                        TopActive = new Color(240, 30, 220),
+                        TopWaiting = new Color(180, 10, 160)
+                    });
+
+
+            _builder = new Builder(map, converter);
+            _selector = new TowerSelector(defs, new Vector2f(400, 680));
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
+
+            _selector.SelectionChanged += OnSelectionChanged;
+        }
+
+        void OnSelectionChanged(Tower.Def selection)
+        {
+            _builder.Selection = selection;
         }
 
         void _window_MouseButtonPressed(object sender, SFML.Window.MouseButtonEventArgs e)
@@ -35,21 +55,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         void _window_KeyPressed(object sender, SFML.Window.KeyEventArgs e)
         {
-            switch (e.Code)
+            if ((int)e.Code > 26 && (int)e.Code < 35)
             {
-                case SFML.Window.Keyboard.Key.Num1:
-                    _builder.Selection = new Tower.Def();
-                    break;
-                case SFML.Window.Keyboard.Key.Num2:
-                    _builder.Selection = new Tower.Def{
-                        Base = new Color(100, 100, 100),
-                        TopActive = new Color(240, 30, 220),
-                        TopWaiting = new Color(180, 10, 160)
-                    };
-                    break;
-                default:
-                    _builder.Selection = null;
-                    break;
+                _selector.Select((int) e.Code - 27);
             }
                 
 
@@ -63,6 +71,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void Update()
         {
             _builder.Update();
+            _selector.Update();
         }
 
         public override void PastUpdate()
@@ -78,6 +87,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
         {
             target.Draw(_builder, states);
+            target.Draw(_selector, states);
         }
 
         public override bool DoRenderBelow()

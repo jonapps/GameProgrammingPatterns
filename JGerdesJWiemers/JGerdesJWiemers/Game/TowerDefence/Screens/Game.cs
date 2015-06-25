@@ -37,7 +37,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w)
             :base(w)
         {
-            MapAsset mapAsset = AssetLoader.Instance.LoadMap("LayerTest.json");
+            MapAsset mapAsset = AssetLoader.Instance.LoadMap("NewMapStyle.json");
             //_map = new Map(24, 24, 48);
             _map = new Map(mapAsset);
             w.SetMouseCursorVisible(false);

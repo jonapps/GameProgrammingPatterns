@@ -16,12 +16,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
         private class Option
         {
             public AnimatedSprite Sprite;
-            private Tower.Def _towerDef;
+            public Tower.Def TowerDef;
 
             public Option(Tower.Def def)
             {
                 TextureContainer container = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_TOWER_SELECTION); ;
-                _towerDef = def;
+                TowerDef = def;
                 Sprite = new AnimatedSprite(container.Texture, container.Width, container.Height);
                 Sprite.Color = def.Base;
                 Sprite.Origin = new Vector2f(container.Width / 2f, container.Height / 2f);
@@ -31,29 +31,43 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
 
         }
 
+        public delegate void OnSelectioChanged(Tower.Def selection);
+        public event OnSelectioChanged SelectionChanged;
         private List<Option> _options;
         private int _selected = 0;
 
-        public TowerSelector(List<Tower.Def> defintions)
+        public TowerSelector(List<Tower.Def> defintions, Vector2f position)
         {
             _options = new List<Option>();
-
+            int counter = 0;
             foreach (Tower.Def def in defintions)
             {
                 Option option = new Option(def);
+                option.Sprite.Position = position + new Vector2f(counter * 96, 0);
+                _options.Add(option);
+                counter++;
             }
         }
 
         public void Select(int option)
         {
-            if (option > 0 && option < _options.Count)
+            if (option >= 0 && option < _options.Count && option != _selected)
             {
-                _options[_selected].Sprite.SetAnimation(new Animation(16, 31, 30, false, false));
-                _options[_selected].Sprite.EnqueueAnimation(new Animation());
+                AnimatedSprite oldS = _options[_selected].Sprite;
+                AnimatedSprite newS =  _options[option].Sprite;
 
-                _options[option].Sprite.SetAnimation(new Animation(0, 15, 30, false, false));
-                _options[option].Sprite.EnqueueAnimation(new Animation(new int[]{15}, 1000, true));
+                oldS.SetAnimation(new Animation(16, 31, 30, false, false));
+                oldS.EnqueueAnimation(new Animation());
+
+                newS.SetAnimation(new Animation(0, 15, 30, false, false));
+                newS.EnqueueAnimation(new Animation(new int[]{15}, 1000, true));
+
                 _selected = option;
+
+                if (SelectionChanged != null)
+                {
+                    SelectionChanged(_options[_selected].TowerDef);
+                }
             }
         }
 

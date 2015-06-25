@@ -9,8 +9,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
 {
     class TerrainTile : Tile
     {
-        public TerrainTile(float x, float y, float width, float height, Texture tex, int mapCenter)
-            : base(x, y, width, height, tex, mapCenter)
+        public TerrainTile(float x, float y, float width, float height, Texture tex, int mapCenter, Color c)
+            : base(x, y, width, height, tex, mapCenter, c)
         {
 
         }
