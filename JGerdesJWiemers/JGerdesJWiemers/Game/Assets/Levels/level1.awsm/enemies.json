@@ -7,7 +7,7 @@
 			"Floating": true,
 			"Health": 100,
 			"Energy": 100,
-			"Speed": 5, // velocity?
+			"Speed": 1, // velocity?
 			"Shoot":
 			{
 				"Shooting": false,
@@ -28,7 +28,7 @@
 			"Floating": true,
 			"Health": 50,
 			"Energy": 75,
-			"Speed": 15, // velocity?
+			"Speed": 3, // velocity?
 			"Shoot":
 			{
 				"Shooting": false,

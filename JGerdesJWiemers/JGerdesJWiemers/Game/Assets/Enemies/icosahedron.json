@@ -1,5 +1,9 @@
 {
 	"ImageTitle": "icosahedron.png",
+	"Collider": {
+		"Type": "Circle",
+		"Radius": 0.4
+	},
 	"Center": {
 		"x" : 12,
 		"y" : 17

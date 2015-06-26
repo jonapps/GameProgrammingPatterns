@@ -214,10 +214,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             foreach (string path in pathes)
             {
                 //only use json files
-                if(System.IO.Path.GetExtension(path).Equals(DATA_FILE_ENDING))
+                string filename = System.IO.Path.GetFileNameWithoutExtension(path);
+                if(System.IO.Path.GetExtension(path).Equals("."+DATA_FILE_ENDING) && !filename.Equals("enemies"))
                 {
-                    string filename = System.IO.Path.GetFileNameWithoutExtension(path);
-                    LoadTexture(filename, path);
+                    
+                    LoadTexture(filename, @"..\Enemies\"+filename);
                 }
             }
         }

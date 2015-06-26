@@ -131,6 +131,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private void _SpawnEnemy(EngineEvent e)
         {
             Enemy.Def def = e.Data as Enemy.Def;
+            
             foreach (Tile pos in _map.GetSpawnTiles())
             {
                 def.Position = pos.getCenter();

@@ -1,5 +1,9 @@
 {
 	"ImageTitle": "cube.png",
+	"Collider": {
+		"Type": "Circle",
+		"Radius": 0.4
+	},
 	"Center": {
 		"x" : 16,
 		"y" : 30
