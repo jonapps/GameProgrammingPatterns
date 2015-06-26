@@ -1,0 +1,9 @@
+{
+	"Name" : "City Nights",
+	"BackgroundColor" : {
+		"R" : 8,
+		"G" : 16,
+		"B" : 23,
+		"A" : 255
+	}
+}
