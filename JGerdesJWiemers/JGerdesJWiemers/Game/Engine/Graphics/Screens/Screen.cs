@@ -18,6 +18,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         protected InputMapper _input;
         protected Shader _shader;
         protected View _view;
+        protected Color _clearColor;
 
         public Screen(RenderWindow window)
         {
@@ -25,6 +26,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             _view = new View(new FloatRect(0, 0, _window.Size.X, _window.Size.Y));
             _view.Viewport = new FloatRect(0, 0, 1, 1);
             _input = new InputMapper();
+            _clearColor = new Color(255, 255, 255, 0);
 
         }
 
@@ -41,6 +43,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             get
             {
                 return _shader;
+            }
+        }
+
+        public Color ClearColor
+        {
+            get
+            {
+                return _clearColor;
             }
         }
 

@@ -9,11 +9,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
 {
     class LevelAsset
     {
-        public String Name { get; set; }
+        public InfoAsset Info { get; set; }
         public MapAsset Map { get; set; }
         public EnemiesAsset Enemies { get; set; }
         public WavesAsset Waves { get; set; }
 
         public List<Tower.Def> Tower {get; set; }
+
     }
 }

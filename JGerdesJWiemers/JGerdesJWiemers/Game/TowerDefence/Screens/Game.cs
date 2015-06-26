@@ -50,6 +50,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w)
             :base(w)
         {
+            
             AssetLoader.Instance.LoadEnemyTextures();
             List<LevelAsset> levels = AssetLoader.Instance.ReadLevels();
 
@@ -60,6 +61,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
             _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this);
+            _clearColor = level.Info.BackgroundColor;
             // do this somewhere else    --------------------------------------------
 
             

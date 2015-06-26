@@ -120,6 +120,7 @@
     <Compile Include="Game\Engine\Utils\Helper\LayerAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\EnemiesAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\EnemyWavesAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\InfoAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\LevelAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\MapAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\TowerAsset.cs" />

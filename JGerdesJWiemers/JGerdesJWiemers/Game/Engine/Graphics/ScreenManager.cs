@@ -171,12 +171,12 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 ScreenData current = _screens.ElementAt(i);
                 if (current.render)
                 {
-                    _renderTexture.Clear(new Color(255, 255, 255, 0));
+                    _renderTexture.Clear(current.screen.ClearColor);
                     _renderTexture.SetView(current.screen.View);
                     _renderTexture.Draw(current.screen, states);
 
                     RenderStates screenStates = new RenderStates(states);
-                    screenStates.BlendMode = BlendMode.Alpha;
+                    //screenStates.BlendMode = BlendMode.Alpha;
                     if (current.screen.Shader != null)
                     {
                         screenStates.Shader = current.screen.Shader;
