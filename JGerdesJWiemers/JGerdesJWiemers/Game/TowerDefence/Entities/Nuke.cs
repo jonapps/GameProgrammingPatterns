@@ -22,6 +22,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private long _startTime = 0;
 
 
+        private Enemy _toDealDmg;
+
         private int _damage = 0;
 
         public class Def
@@ -63,11 +65,20 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 if (!_deleteMe)
                 {
-                    m.ApplyDamage(_damage);
+                    _toDealDmg = m;
                 }
                 _deleteMe = true;   
             }
             return true;
+        }
+
+        public override void PastUpdate()
+        {
+            base.PastUpdate();
+            if (_deleteMe && _toDealDmg != null)
+            {
+                _toDealDmg.ApplyDamage(_damage);
+            }
         }
 
         public override void Update()
