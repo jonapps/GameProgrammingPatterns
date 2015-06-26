@@ -46,9 +46,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
                     float convertedRadius = ConvertUnits.ToDisplayUnits(_currentTower.Radius);
                     Color radiusColor = _currentTower.TopActive;
-                    radiusColor.A = 120;
+                    radiusColor.A = 100;
                     _radiusCircle.Radius = convertedRadius;
                     _radiusCircle.FillColor = radiusColor;
+                    _radiusCircle.OutlineColor = new Color(radiusColor.R, radiusColor.G, radiusColor.B, 180);
+                    _radiusCircle.OutlineThickness = 2;
                 }
                
             }
@@ -58,7 +60,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
         {
             _map = map;
             _converter = converter;
-            _radiusCircle = new CircleShape(1);
+            _radiusCircle = new CircleShape(1, 36);
             _radiusCircle.Scale = new Vector2f(1, 0.5f);
            
             TextureContainer baseContainer = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_BASE);
