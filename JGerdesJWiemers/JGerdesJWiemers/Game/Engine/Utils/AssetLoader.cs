@@ -105,7 +105,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 int width = 0, height = 0;
                 Texture texture = null;
                 TextureContainer container = null;
-                string type = "undefined";
 
                 string filepath = DIR_TEXTURES + filename + "." + DATA_FILE_ENDING;
                 System.IO.StreamReader file = new System.IO.StreamReader(filepath);
@@ -163,28 +162,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         /// </summary>
         /// <param name="pathToMap"></param>
         /// <returns></returns>
-        public MapAsset LoadMap(string pathToMap, bool debug = false)
+        private MapAsset _LoadMap(string filepath)
         {
-            string filepath = "";
-            if (debug)
-            {
-                filepath = pathToMap;
-            }
-            else
-            {
-                filepath = DIR_MAPS + pathToMap;
-            }
-            
-            System.IO.StreamReader file = new System.IO.StreamReader(filepath);
-            string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
-            string completeFile = file.ReadToEnd();
-            file.Close();
+            string completeFile = _ReadFileCompletely(filepath);
             JObject jsonObj = JObject.Parse(completeFile);
-           
             MapAsset mapAsset = JsonConvert.DeserializeObject<MapAsset>(completeFile);
-
-
-
             // Because of senseless object notation in tiled exported json
             JToken jobject, colorTiles = null;
             jobject = jsonObj["tilesets"];
@@ -270,7 +252,10 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
 
 
-
+        /// <summary>
+        /// Loads all levels from level folder
+        /// </summary>
+        /// <returns></returns>
         public List<LevelAsset> ReadLevels()
         {
 
@@ -291,7 +276,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             foreach (String dir in dirEntries)
             {
                 level = new LevelAsset();
-                level.Map = this.LoadMap(dir + _LEVEL_FILE_MAP, true);
+                level.Map = this._LoadMap(dir + _LEVEL_FILE_MAP);
                 level.Enemies = this._LoadEnemies(dir + _LEVEL_FILE_ENEMIES);
                 level.Waves = this._LoadWaves(dir + _LEVEL_FILE_WAVES);
                 if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
@@ -299,31 +284,44 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
                 result.Add(level);
             }
-
-
-
             return result;
         }
 
+        /// <summary>
+        /// load WavesAsset from filepath
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         private WavesAsset _LoadWaves(string filepath)
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(filepath);
-            string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
-            string completeFile = file.ReadToEnd();
-            file.Close();
-            return JsonConvert.DeserializeObject<WavesAsset>(completeFile); 
+            return JsonConvert.DeserializeObject<WavesAsset>(_ReadFileCompletely(filepath)); 
         }
 
+
+
+        /// <summary>
+        /// load EnemiesAsset from filepath
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         private EnemiesAsset _LoadEnemies(string filepath)
+        {
+            return JsonConvert.DeserializeObject<EnemiesAsset>(_ReadFileCompletely(filepath)); 
+        }
+
+        /// <summary>
+        /// Loads a complete textfile as string
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
+        private static string _ReadFileCompletely(string filepath)
         {
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
             string completeFile = file.ReadToEnd();
             file.Close();
-            return JsonConvert.DeserializeObject<EnemiesAsset>(completeFile); 
+            return completeFile;
         }
-
-         
 
 
     }
