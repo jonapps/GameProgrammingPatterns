@@ -42,12 +42,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
             public string Name;
             public string Type;
-            public bool IsFloating;
+            public bool DoFloat;
             public float Health;
             public float Energy;
             public float Speed;
             public Shooter Shoot;
             public Color Color;
+            public Color DeadColor;
 
             public Vector2 Position;
 
@@ -55,6 +56,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Def()
             {
                 Color = new Color(255, 255, 255, 255);
+                DeadColor = new Color(255, 255, 255);
                 Shoot = new Shooter();
             }
         }
@@ -153,7 +155,18 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public override void ApplyDamage(int dmg)
         {
             base.ApplyDamage(dmg);
-            _sprite.Color = new Color(_def.Color.R, _def.Color.G, _def.Color.B, _CalcAlpha());
+            //_sprite.Color = new Color(_def.Color.R, _def.Color.G, _def.Color.B, _CalcAlpha());
+
+            float alive = _healthPercentage / 100f;
+            float dead = 1 - alive;
+            Color color = new Color();
+            color.R = (byte)(_def.Color.R * alive + _def.DeadColor.R * dead);
+            color.G = (byte)(_def.Color.G * alive + _def.DeadColor.G * dead);
+            color.B = (byte)(_def.Color.B * alive + _def.DeadColor.B * dead);
+            color.A = (byte)(_def.Color.A * alive + _def.DeadColor.A * dead);
+            _sprite.Color = color;
+
+
             int energy = _energy / 100 * _healthPercentage / (dmg / 2);
             Particle.Def def = new Particle.Def();
             def.Position = _body.Position;

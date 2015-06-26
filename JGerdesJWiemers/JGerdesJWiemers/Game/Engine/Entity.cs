@@ -113,16 +113,6 @@ namespace JGerdesJWiemers.Game.Engine
         }
 
 
-        protected byte _CalcAlpha()
-        {
-            float pr = ((float)(255 / 100) * (float)_healthPercentage);
-            if (pr <= 30)
-            {
-                pr = 30;
-            }
-            return (byte)(pr);
-        }
-
     }
 
 }

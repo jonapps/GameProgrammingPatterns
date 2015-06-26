@@ -3,14 +3,14 @@
 	[
 		{
 			"Name": "LameBox",
-			"Type": "cube",
-			"Floating": true,
+			"Type": "pyramid",
+			"DoFloat": true,
 			"Health": 100,
 			"Energy": 100,
 			"Speed": 1, // velocity?
 			"Shoot":
 			{
-				"Shooting": false,
+				"DoShoot": false,
 				"Damage": 0,
 				"Speed": 0 // delay of shooting
 			},
@@ -25,13 +25,13 @@
 		{
 			"Name": "FastBox",
 			"Type": "cube",
-			"Floating": true,
+			"DoFloat": true,
 			"Health": 50,
 			"Energy": 75,
 			"Speed": 3, // velocity?
 			"Shoot":
 			{
-				"Shooting": false,
+				"DoShoot": false,
 				"Damage": 0,
 				"Speed": 0 // delay of shooting
 			},

@@ -19,11 +19,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
         private WavesAsset _wavesAsset;
         private int _currentIndex = 0;
-        private List<EnemyAsset> _enemies;
+        private List<Enemy.Def> _enemies;
         //private World _world;
         //private Map _map;
 
-        public WaveManager(WavesAsset w, List<EnemyAsset> enemies){
+        public WaveManager(WavesAsset w, List<Enemy.Def> enemies){
             _wavesAsset = w;
             _enemies = enemies;
             //_world = world;
@@ -44,24 +44,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                 {
                     long delay = delayMultiplayer++ * 1000;
                     //find EnemyAssets by type
-                    EnemyAsset enemyData = _enemies.Find(e => e.Name.Equals(ewa.Type));
+                    Enemy.Def enemyData = _enemies.Find(e => e.Name.Equals(ewa.Type));
                     if (enemyData != null)
                     {
-                        EventStream.Instance.EmitDelay(Enemy.EVENT_SPAWN, new EngineEvent(new Enemy.Def
-                        {
-                            Color = new Color((byte)enemyData.Color.R, (byte)enemyData.Color.G, (byte)enemyData.Color.B, (byte)enemyData.Color.A),
-                            IsFloating = enemyData.Floating,
-                            Speed = enemyData.Speed,
-                            Health = enemyData.Health,
-                            Energy = enemyData.Energy,
-                            Type = enemyData.Type,
-                            Shoot = new Enemy.Def.Shooter
-                            {
-                                Damage = enemyData.Shoot.Damage,
-                                DoShoot = enemyData.Shoot.Shooting,
-                                Speed = enemyData.Shoot.Speed,
-                            }
-                        }), delay);
+                        EventStream.Instance.EmitDelay(Enemy.EVENT_SPAWN, new EngineEvent(enemyData), delay);
                     }
                 }
             }
