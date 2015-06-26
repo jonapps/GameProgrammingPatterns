@@ -19,35 +19,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Builder _builder;
         private TowerSelector _selector;
 
-        public UiScreen(RenderWindow w, Map map, ICoordsConverter converter)
+        public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter)
             :base(w)
         {
 
-            List<Tower.Def> defs = new List<Tower.Def>();
-            defs.Add(new Tower.Def());
-            defs.Add(new Tower.Def
-            {
-                Base = new Color(100, 100, 100),
-                TopActive = new Color(240, 30, 220),
-                TopWaiting = new Color(180, 10, 160),
-                Radius = 2,
-                FireFrequency = 100
-            });
-            defs.Add(new Tower.Def
-            {
-                Base = new Color(0, 150, 160),
-                Radius = 5,
-                FireFrequency = 1000
-            });
-
-
             _builder = new Builder(map, converter);
-            _selector = new TowerSelector(defs, new Vector2f(400, 680));
+            _selector = new TowerSelector(towers, new Vector2f(400, 680));
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
 
             _selector.SelectionChanged += OnSelectionChanged;
-            OnSelectionChanged(defs[0]);
+            OnSelectionChanged(towers[0]);
         }
 
         void OnSelectionChanged(Tower.Def selection)

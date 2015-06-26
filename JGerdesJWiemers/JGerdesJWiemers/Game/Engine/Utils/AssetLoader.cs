@@ -22,6 +22,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private static readonly String _LEVEL_FILE_MAP = "\\map.json";
         private static readonly String _LEVEL_FILE_WAVES = "\\waves.json";
         private static readonly String _LEVEL_FILE_ENEMIES = "\\enemies.json";
+        private static readonly String _LEVEL_FILE_TOWER = "\\tower.json";
 
         public static readonly String DATA_FILE_ENDING = "json";
         public static readonly String TEXTURE_TOWER_BASE = @"tower\tower_base";
@@ -281,6 +282,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
                 if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
                 if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
+                if (!File.Exists(dir + _LEVEL_FILE_TOWER)) alright = false;
             }
             if (!alright)
             {
@@ -295,12 +297,15 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 level.Map = this._LoadMap(dir + _LEVEL_FILE_MAP);
                 level.Enemies = this._LoadEnemies(dir + _LEVEL_FILE_ENEMIES);
                 level.Waves = this._LoadWaves(dir + _LEVEL_FILE_WAVES);
-                if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
+                level.Tower = this._LoadTower(dir + _LEVEL_FILE_TOWER);
                 result.Add(level);
             }
             return result;
+        }
+
+        private List<TowerDefence.Entities.Tower.Def> _LoadTower(string filepath)
+        {
+            return JsonConvert.DeserializeObject <TowerAsset>(_ReadFileCompletely(filepath)).Tower;
         }
 
         /// <summary>

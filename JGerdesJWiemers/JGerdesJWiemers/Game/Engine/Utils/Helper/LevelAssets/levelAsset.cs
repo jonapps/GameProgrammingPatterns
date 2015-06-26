@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JGerdesJWiemers.Game.TowerDefence.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
         public MapAsset Map { get; set; }
         public EnemiesAsset Enemies { get; set; }
         public WavesAsset Waves { get; set; }
+
+        public List<Tower.Def> Tower {get; set; }
     }
 }

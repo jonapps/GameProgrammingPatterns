@@ -125,6 +125,7 @@
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\LevelAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\MapAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\ShootAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\TowerAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\WaveAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LevelAssets\WavesAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\SpriteVectorAsset.cs" />

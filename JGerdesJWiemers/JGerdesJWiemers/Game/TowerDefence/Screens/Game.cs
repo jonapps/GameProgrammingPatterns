@@ -45,6 +45,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private Map _map;
         private WaveManager _waveManager;
+        private UiScreen _uiScreen;
         
         public Game(RenderWindow w)
             :base(w)
@@ -55,9 +56,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
 
             // do this somewhere else    --------------------------------------------
-            _map = new Map(levels.First().Map);
             LevelAsset level = levels.First();
+            _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
+            _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this);
             // do this somewhere else    --------------------------------------------
 
             
@@ -101,8 +103,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void Create()
         {
             base.Create();
-            UiScreen uiScreen = new UiScreen(_window, _map, (ICoordsConverter)this);
-            _screenManager.Push(uiScreen);
+            _screenManager.Push(_uiScreen);
         }
 
         private void _SpawnNuke(EngineEvent eventData)

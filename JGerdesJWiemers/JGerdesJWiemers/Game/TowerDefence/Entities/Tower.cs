@@ -36,6 +36,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Color TopActive;
             public Color TopWaiting;
             public Vector2 Position;
+            public float Health = 100;
+            public float Price = 10;
 
             public Def()
             {
