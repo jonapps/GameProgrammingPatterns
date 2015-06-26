@@ -9,5 +9,6 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem.Events
     class SpawnEvent : EngineEvent
     {
         public int TimeToSpawn { get; set; }
+        public Entity Entity { get; set; }
     }
 }
