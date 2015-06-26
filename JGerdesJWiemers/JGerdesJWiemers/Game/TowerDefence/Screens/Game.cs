@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
-using JGerdesJWiemers.Game.TowerDefence.GameLogic;
+using JGerdesJWiemers.Game.TowerDefence.Logic;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -48,13 +48,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w)
             :base(w)
         {
+            AssetLoader.Instance.LoadEnemyTextures();
             List<LevelAsset> levels = AssetLoader.Instance.ReadLevels();
 
 
 
             // do this somewhere else    --------------------------------------------
             _map = new Map(levels.First().Map);
-            _waveManager = new WaveManager(levels.First().Waves);
+            LevelAsset level = levels.First();
+            _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
             // do this somewhere else    --------------------------------------------
 
             
@@ -67,8 +69,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
             {
-                if(args.Code == Keyboard.Key.G)
-                    EventStream.Instance.Emit(Enemy.EVENT_SPAWN, new SpawnEvent());
+                //if(args.Code == Keyboard.Key.G)
+                    //EventStream.Instance.Emit(Enemy.EVENT_SPAWN, new SpawnEvent());
 
 
                 if (args.Code == Keyboard.Key.N)

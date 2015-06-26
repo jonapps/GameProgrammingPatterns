@@ -24,7 +24,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private static readonly String _LEVEL_FILE_ENEMIES = "\\enemies.json";
 
         public static readonly String DATA_FILE_ENDING = "json";
-        public static readonly String TEXTURE_GUY = @"guy";
         public static readonly String TEXTURE_TOWER_BASE = @"tower\tower_base";
         public static readonly String TEXTURE_TOWER_TOP = @"tower\tower_top";
         public static readonly String TEXTURE_BULLET = @"weapons\bullet";
@@ -37,6 +36,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
         private readonly String DIR_LEVELS = @"Assets\Levels\";
+        private readonly String DIR_ENEMIES = @"Assets\Enemies\";
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
         private readonly String DIR_MAPS = @"Assets\Maps\";
         private readonly String DIR_SETTINGS = @"Assets\Configuration";
@@ -50,7 +50,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             _fonts = new Dictionary<string, Font>();
             _textures = new Dictionary<string, TextureContainer>();
 
-            LoadTexture(TEXTURE_GUY, TEXTURE_GUY);
             LoadTexture(TEXTURE_SHADOW, TEXTURE_SHADOW);
             LoadTexture(TEXTURE_TOWER_BASE, TEXTURE_TOWER_BASE);
             LoadTexture(TEXTURE_TOWER_TOP, TEXTURE_TOWER_TOP);
@@ -208,6 +207,21 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return mapAsset;
         }
 
+        public void LoadEnemyTextures()
+        {
+
+            string[] pathes = Directory.GetFiles(DIR_ENEMIES);
+            foreach (string path in pathes)
+            {
+                //only use json files
+                if(System.IO.Path.GetExtension(path).Equals(DATA_FILE_ENDING))
+                {
+                    string filename = System.IO.Path.GetFileNameWithoutExtension(path);
+                    LoadTexture(filename, path);
+                }
+            }
+        }
+
         private Color GetColor(Texture tex)
         {
             for (uint x = 0; x < tex.Size.X; ++x)
@@ -307,7 +321,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         /// <returns></returns>
         private EnemiesAsset _LoadEnemies(string filepath)
         {
-            return JsonConvert.DeserializeObject<EnemiesAsset>(_ReadFileCompletely(filepath)); 
+            return JsonConvert.DeserializeObject<EnemiesAsset>(_ReadFileCompletely(filepath));
         }
 
         /// <summary>

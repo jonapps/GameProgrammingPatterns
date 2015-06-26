@@ -4,7 +4,7 @@
 		{
 			"Name": "LameBox",
 			"Type": "cube",
-			"MovingPattern": "?", // auf ab schwingen oder seitwärtz, Kreisföhrimg?
+			"Floating": true,
 			"Health": 100,
 			"Energy": 100,
 			"Speed": 5, // velocity?
@@ -25,7 +25,7 @@
 		{
 			"Name": "FastBox",
 			"Type": "cube",
-			"MovingPattern": "?", // auf ab schwingen oder seitwärtz, Kreisföhrimg?
+			"Floating": true,
 			"Health": 50,
 			"Energy": 75,
 			"Speed": 15, // velocity?

@@ -10,7 +10,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
     {
         public String Name { get; set; }
         public String Type { get; set; }
-        public String Floating { get; set; }
+        public bool Floating { get; set; }
         public int Health { get; set; }
         public int Energy { get; set; }
         public int Speed { get; set; }

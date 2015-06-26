@@ -63,7 +63,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         }
 
         public Enemy(FarseerPhysics.Dynamics.World w, Def def, FollowRoadAI ai)
-            : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 0.75f)
+            : base(w, AssetLoader.Instance.getTexture(def.Type), 0.75f)
         {
             _def = def;
             _body.Position = ConvertUnits.ToSimUnits(_def.Position);
