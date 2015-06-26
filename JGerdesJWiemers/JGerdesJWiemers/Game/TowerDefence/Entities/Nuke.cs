@@ -20,11 +20,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public static readonly String EVENT_SPAWN = "nuke.spawn";
         private long _timeToLive = 1000;
         private long _startTime = 0;
+
+
+        private int _damage = 0;
+
         public class Def
         {
-            public Vector2 Position;
-            public Vector2 Destination;
-            public float Speed;
+            public Vector2 Position { get; set; }
+            public Vector2 Destination { get; set; }
+            public float Speed { get; set; }
+            public int Damage { get; set; }
         }
 
 
@@ -37,7 +42,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.FixedRotation = true;
             _body.CollisionCategories = EntityCategory.Nuke;
             _body.CollidesWith = EntityCategory.Monster;
-
+            _damage = def.Damage;
 
             Vector2 direction = (def.Destination - _body.WorldCenter);
             direction.Normalize();
@@ -56,7 +61,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             }
             else if ((m = fixtureB.Body.UserData as Enemy) != null)
             {
-                //m.Kill();
+                _deleteMe = true;
+                m.ApplyDamage(_damage);
             }
             return true;
         }

@@ -21,7 +21,9 @@ namespace JGerdesJWiemers.Game.Engine
         protected bool _deleteMe = false;
         protected bool _debug = Game.DEBUG;
         protected int _health = 100;
+        protected int _maxhealth = 100;
         protected float _z = 0;
+        protected int _healthPercentage = 100;
                 
         protected Vector2f _ConvertVector2ToVector2f(Vector2 vec)
         {
@@ -83,6 +85,7 @@ namespace JGerdesJWiemers.Game.Engine
         public virtual void ApplyDamage(int dmg)
         {
             _health -= dmg;
+            _healthPercentage = 100 / _maxhealth * _health;
         }
 
         public void _CalcZ()
