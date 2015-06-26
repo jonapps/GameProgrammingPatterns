@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using Microsoft.Xna.Framework;
 using SFML.Graphics;
@@ -57,6 +58,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public override void PastUpdate()
         {
+            EventStream.Instance.Update();
             foreach(Entity e in _entities)
                 e.PastUpdate();
         }

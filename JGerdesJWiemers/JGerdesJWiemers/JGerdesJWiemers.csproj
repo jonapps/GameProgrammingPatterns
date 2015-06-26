@@ -96,6 +96,7 @@
     <Compile Include="Game\Engine\EventSystem\EventStream.cs" />
     <Compile Include="Game\Engine\EventSystem\Events\EngineEvent.cs" />
     <Compile Include="Game\Engine\EventSystem\Events\SpawnEvent.cs" />
+    <Compile Include="Game\Engine\EventSystem\DelayedEvent.cs" />
     <Compile Include="Game\Engine\Exceptions\NotEnoughVerticesException.cs" />
     <Compile Include="Game\Engine\Exceptions\NotInitialisatedException.cs" />
     <Compile Include="Game\Engine\Graphics\AnimatedSprite.cs" />

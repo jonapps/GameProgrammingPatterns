@@ -11,10 +11,11 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
     class EventStream
     {
         public delegate void EventListener(EngineEvent eventData);
-
         private Dictionary<String, List<EventListener>> _events;
-
         private static EventStream _instance = null;
+
+        private List<DelayedEvent> _delayedEvents;
+        private List<DelayedEvent> _executedDelayedEvents;
 
         public static EventStream Instance { 
             get
@@ -29,6 +30,8 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
 
         private EventStream()
         {
+            _executedDelayedEvents = new List<DelayedEvent>();
+            _delayedEvents = new List<DelayedEvent>();
             _events = new Dictionary<string, List<EventListener>>();
         }
 
@@ -56,6 +59,17 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             _NotifyAll(eventName, eventData);
         }
 
+
+        public void EmitDelay(String eventName, EngineEvent eventData, long delay)
+        {
+            DelayedEvent delayed = new DelayedEvent();
+            delayed.Delay = delay;
+            delayed.EventName = eventName;
+            delayed.EventData = eventData;
+            delayed.StartTime = Game.ElapsedTime;
+            _delayedEvents.Add(delayed);
+        }
+
         private void _NotifyAll(String eventName, EngineEvent eventData)
         {
             if (_events.ContainsKey(eventName))
@@ -67,5 +81,25 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
                 } 
             }
         }
+
+
+        public void Update()
+        {
+            _executedDelayedEvents.Clear();
+            foreach (DelayedEvent ewd in _delayedEvents)
+            {
+                if ((Game.ElapsedTime - ewd.StartTime) > ewd.Delay)
+                {
+                    _NotifyAll(ewd.EventName, ewd.EventData);
+                    _executedDelayedEvents.Add(ewd);
+                }
+            }
+            foreach (DelayedEvent ewd in _executedDelayedEvents)
+            {
+                _delayedEvents.Remove(ewd);
+            }
+            
+        }
+
     }
 }

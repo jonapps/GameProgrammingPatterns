@@ -2,12 +2,12 @@
 	"waves":
 	[
 		{
-			"Time": 0,
+			"Time": 10000,
 			"Enemies":
 			[
 				{
 					"Type": "LameBox",
-					"Quantity": 5
+					"Quantity": 10
 				},
 				{
 					"Type": "FastBox",

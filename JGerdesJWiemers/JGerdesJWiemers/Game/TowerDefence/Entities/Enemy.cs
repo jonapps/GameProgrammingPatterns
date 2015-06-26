@@ -89,7 +89,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         void _OnTileEnter(Tile t)
         {
-            t.AddEntity(this);
+            if (t != null)
+            {
+                t.AddEntity(this);
+            }
+            
         }
 
         private void _OnOnDespawn(Tile destination)

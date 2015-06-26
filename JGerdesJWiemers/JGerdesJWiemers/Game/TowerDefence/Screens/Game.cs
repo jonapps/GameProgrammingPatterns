@@ -69,13 +69,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 if(args.Code == Keyboard.Key.G)
                     EventStream.Instance.Emit(Enemy.EVENT_SPAWN, new SpawnEvent());
+
+
+                if (args.Code == Keyboard.Key.N)
+                    EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
             };
+
 
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
-
-            _waveManager.Run();
         }
 
         public override void Create()
@@ -127,6 +130,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             base.Update();
             _map.Update();
             _MoveView();
+            
         }
 
         public override void PastUpdate()
