@@ -117,7 +117,15 @@
     <Compile Include="Game\Engine\Utils\AssetLoader.cs" />
     <Compile Include="Game\Engine\Utils\Helper\GameSettingsAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\LayerAsset.cs" />
-    <Compile Include="Game\Engine\Utils\Helper\MapAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\ColorAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\EnemiesAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\EnemyAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\EnemyWavesAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\LevelAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\MapAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\ShootAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\WaveAsset.cs" />
+    <Compile Include="Game\Engine\Utils\Helper\LevelAssets\WavesAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\SpriteVectorAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\TileImageAsset.cs" />
     <Compile Include="Game\Engine\Utils\Helper\TilesetsAsset.cs" />

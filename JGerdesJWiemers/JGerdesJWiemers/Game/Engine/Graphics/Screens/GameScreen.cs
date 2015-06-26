@@ -34,7 +34,6 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public override void Update()
         {
-
             for (int i = 0, c = _entities.Count; i < c; ++i)
             {
                 Entity e = _entities[i];

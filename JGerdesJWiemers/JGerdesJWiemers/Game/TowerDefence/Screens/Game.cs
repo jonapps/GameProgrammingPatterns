@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game;
+using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -45,9 +46,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w)
             :base(w)
         {
-            MapAsset mapAsset = AssetLoader.Instance.LoadMap("NewMapStyle.json");
+            List<LevelAsset> levels = AssetLoader.Instance.ReadLevels();
             //_map = new Map(24, 24, 48);
-            _map = new Map(mapAsset);
+            _map = new Map(levels.First().Map);
             w.SetMouseCursorVisible(false);
             
 

@@ -10,7 +10,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper
     class TileImageAsset
     {
         public String Image { get; set; }
-        public Color color { get; set; }
+        public Color Color { get; set; }
 
         public int Number { get; set; }
     }

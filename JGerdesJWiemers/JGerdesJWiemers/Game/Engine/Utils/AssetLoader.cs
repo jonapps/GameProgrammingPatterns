@@ -11,14 +11,19 @@ using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using FarseerPhysics.Common;
 using Microsoft.Xna.Framework;
 using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
+using System.IO;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {
     class AssetLoader
     {
+
+        private static readonly String _LEVEL_FILE_MAP = "\\map.json";
+        private static readonly String _LEVEL_FILE_WAVES = "\\waves.json";
+        private static readonly String _LEVEL_FILE_ENEMIES = "\\enemies.json";
+
         public static readonly String DATA_FILE_ENDING = "json";
-
-
         public static readonly String TEXTURE_GUY = @"guy";
         public static readonly String TEXTURE_TOWER_BASE = @"tower\tower_base";
         public static readonly String TEXTURE_TOWER_TOP = @"tower\tower_top";
@@ -31,6 +36,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         private static AssetLoader _instance;
         private readonly String DIR_FONTS = @"Assets\Fonts\";
+        private readonly String DIR_LEVELS = @"Assets\Levels\";
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
         private readonly String DIR_MAPS = @"Assets\Maps\";
         private readonly String DIR_SETTINGS = @"Assets\Configuration";
@@ -157,9 +163,18 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         /// </summary>
         /// <param name="pathToMap"></param>
         /// <returns></returns>
-        public MapAsset LoadMap(string pathToMap)
+        public MapAsset LoadMap(string pathToMap, bool debug = false)
         {
-            string filepath = DIR_MAPS + pathToMap;
+            string filepath = "";
+            if (debug)
+            {
+                filepath = pathToMap;
+            }
+            else
+            {
+                filepath = DIR_MAPS + pathToMap;
+            }
+            
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
             string completeFile = file.ReadToEnd();
@@ -198,14 +213,16 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 Texture tex = new Texture(DIR_TEXTURES + imageAsset.Image);
                 Color texCol = GetColor(tex);
 
-                imageAsset.color = texCol;
+                imageAsset.Color = texCol;
                 imageAsset.Image = animationSet.Image;
                 imageAsset.Number = colorSet.Firstgid + textureNumber++;
                 colorSet.TileImages.Add(imageAsset);
             }
             Texture aniTex = new Texture(DIR_TEXTURES + animationSet.Image);
-            _textures.Add(animationSet.Image, new TextureContainer(aniTex));
-            
+            if (!_textures.ContainsKey(animationSet.Image))
+            {
+                _textures.Add(animationSet.Image, new TextureContainer(aniTex));
+            }            
             return mapAsset;
         }
 
@@ -247,5 +264,67 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 return _instance;
             }
         }
+
+
+
+
+
+
+
+        public List<LevelAsset> ReadLevels()
+        {
+
+            string[] dirEntries = Directory.GetDirectories(this.DIR_LEVELS);
+            bool alright = true;
+            foreach (String dir in dirEntries)
+            {
+                if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
+                if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
+                if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
+            }
+            if (!alright)
+            {
+                throw new Exception("some levelfiles are missing");
+            }
+            List<LevelAsset> result = new List<LevelAsset>();
+            LevelAsset level = null;
+            foreach (String dir in dirEntries)
+            {
+                level = new LevelAsset();
+                level.Map = this.LoadMap(dir + _LEVEL_FILE_MAP, true);
+                level.Enemies = this._LoadEnemies(dir + _LEVEL_FILE_ENEMIES);
+                level.Waves = this._LoadWaves(dir + _LEVEL_FILE_WAVES);
+                if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
+                if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
+                if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
+                result.Add(level);
+            }
+
+
+
+            return result;
+        }
+
+        private WavesAsset _LoadWaves(string filepath)
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+            string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
+            string completeFile = file.ReadToEnd();
+            file.Close();
+            return JsonConvert.DeserializeObject<WavesAsset>(completeFile); 
+        }
+
+        private EnemiesAsset _LoadEnemies(string filepath)
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+            string directory = filepath.Substring(0, filepath.LastIndexOf('\\'));
+            string completeFile = file.ReadToEnd();
+            file.Close();
+            return JsonConvert.DeserializeObject<EnemiesAsset>(completeFile); 
+        }
+
+         
+
+
     }
 }

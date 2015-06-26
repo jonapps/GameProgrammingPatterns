@@ -1,0 +1,47 @@
+{
+	"Enemies":
+	[
+		{
+			"Name": "LameBox",
+			"Type": "cube",
+			"MovingPattern": "?", // auf ab schwingen oder seitwärtz, Kreisföhrimg?
+			"Health": 100,
+			"Energy": 100,
+			"Speed": 5, // velocity?
+			"Shoot":
+			{
+				"Shooting": false,
+				"Damage": 0,
+				"Speed": 0 // delay of shooting
+			},
+			"Color":
+			{
+				"R": 255,
+				"G": 0,
+				"B": 223,
+				"A": 255
+			}
+		},
+		{
+			"Name": "FastBox",
+			"Type": "cube",
+			"MovingPattern": "?", // auf ab schwingen oder seitwärtz, Kreisföhrimg?
+			"Health": 50,
+			"Energy": 75,
+			"Speed": 15, // velocity?
+			"Shoot":
+			{
+				"Shooting": false,
+				"Damage": 0,
+				"Speed": 0 // delay of shooting
+			},
+			"Color":
+			{
+				"R": 125,
+				"G": 2,
+				"B": 124,
+				"A": 255
+			}
+		}
+	]
+}

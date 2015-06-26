@@ -1,0 +1,19 @@
+{
+	"waves":
+	[
+		{
+			"Time": 0,
+			"Enemies":
+			[
+				{
+					"Type": "LameBox",
+					"Quantity": 5
+				},
+				{
+					"Type": "FastBox",
+					"quantity": 2
+				}
+			]
+		}
+	]
+}

@@ -3,6 +3,7 @@ using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
+using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
 using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using SFML.Graphics;
 using SFML.System;
@@ -84,20 +85,20 @@ namespace JGerdesJWiemers.Game.TowerDefence
                     switch (l.Name)
                     {
                         case "Terrain":
-                            t = new TerrainTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.color);
+                            t = new TerrainTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.Color);
                             break;
                         case "Road":
-                            t = new RoadTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.color);
+                            t = new RoadTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.Color);
                             break;
                         case "NoBuildArea":
-                            t = new NoBuildTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.color);
+                            t = new NoBuildTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.Color);
                             break;
                         case "EnemySpawn":
-                            t = new SpawnTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.color);
+                            t = new SpawnTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.Color);
                             _spawnTiles.Add(t);
                             break;
                         case "Despawn":
-                            t = new DespawnTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.color);
+                            t = new DespawnTile(x, y, tileWidth, tileHeight, tex, MapOffsetX, tileimageasset.Color);
                             break;
                     }
                     _tiles[x, y] = t;
