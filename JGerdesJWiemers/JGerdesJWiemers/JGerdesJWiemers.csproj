@@ -126,7 +126,7 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\Program.cs" />
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
-    <Compile Include="Game\TowerDefence\Entities\Monster.cs" />
+    <Compile Include="Game\TowerDefence\Entities\Enemy.cs" />
     <Compile Include="Game\TowerDefence\Entities\Nuke.cs" />
     <Compile Include="Game\TowerDefence\Entities\Tower.cs" />
     <Compile Include="Game\TowerDefence\Logic\AI\FollowRoadAI.cs" />
