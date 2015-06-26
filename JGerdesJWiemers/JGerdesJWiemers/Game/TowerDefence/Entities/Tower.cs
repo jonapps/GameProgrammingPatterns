@@ -71,7 +71,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             base.Update();
             _top.Update();
             Entity destination = _entityHolder.GetEntities()
-                                    .FindAll(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Monster)
+                                    .FindAll(e => (e.Position - _body.WorldCenter).LengthSquared() <= _def.Radius * _def.Radius && e is Enemy)
                                     .OrderBy(e => (e.Position - _body.WorldCenter).LengthSquared())
                                     .FirstOrDefault();
 

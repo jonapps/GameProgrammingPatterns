@@ -49,12 +49,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            Monster m = null;
+            Enemy m = null;
             if (fixtureB.Body.UserData is Tower || fixtureB.UserData is Nuke)
             {
                 return false;
             }
-            else if ((m = fixtureB.Body.UserData as Monster) != null)
+            else if ((m = fixtureB.Body.UserData as Enemy) != null)
             {
                 //m.Kill();
             }

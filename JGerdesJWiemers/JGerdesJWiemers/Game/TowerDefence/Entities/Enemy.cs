@@ -17,23 +17,53 @@ using SMath = System.Math;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Entities
 {
-    class Monster : SpriteEntity
+    class Enemy : SpriteEntity
     {
-        public static readonly String EVENT_SPAWN = "monster.spawn";
+        public static readonly String EVENT_SPAWN = "enemy.spawn";
         private static readonly float STOPPING_DISTANCE = 0.1f;
 
         private FollowRoadAI _ai;
         private Vector2 _destination;
-        private float _speed = 0.5f;
         private Sprite _shadow;
+        private Def _def;
 
-        public Monster(FarseerPhysics.Dynamics.World w, float x, float y, FollowRoadAI ai)
+        public class Def
+        {
+
+            public class Shooter
+            {
+                public bool DoShoot = false;
+                public float Damage = 0;
+                public float Speed = 1;
+            }
+
+            public string Name;
+            public string Type;
+            public bool IsFloating;
+            public float Health;
+            public float Energy;
+            public float Speed;
+            public Shooter Shoot;
+            public Color Color;
+
+            public Vector2 Position;
+
+
+            public Def()
+            {
+                Color = new Color(255, 255, 255, 255);
+                Shoot = new Shooter();
+            }
+        }
+
+        public Enemy(FarseerPhysics.Dynamics.World w, Def def, FollowRoadAI ai)
             : base(w, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_GUY), 0.75f)
         {
- 
-            _body.Position = ConvertUnits.ToSimUnits(x, y);
+            _def = def;
+            _body.Position = ConvertUnits.ToSimUnits(_def.Position);
             _destination = _body.Position;
-            _sprite.Color = new Color(102, 57, 182);
+            _sprite.Color = _def.Color;
+            //TODO : use typ from def
             TextureContainer tex =  AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SHADOW);
             _shadow = new Sprite(tex.Texture);
             _shadow.Origin = new Vector2f(tex.Width / 2f, tex.Height / 2f);
@@ -100,7 +130,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             if (distance > STOPPING_DISTANCE)
             {
                 direction /= distance;
-                _body.LinearVelocity = direction * _speed;
+                _body.LinearVelocity = direction * _def.Speed;
             }
             else
             {

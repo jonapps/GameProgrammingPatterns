@@ -52,14 +52,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             w.SetMouseCursorVisible(false);
             
 
-            EventStream.Instance.On(Monster.EVENT_SPAWN, _SpawnMonster);
+            EventStream.Instance.On(Enemy.EVENT_SPAWN, _SpawnEnemy);
             EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);
             EventStream.Instance.On(Tower.EVENT_BUILD, _BuildTower);
 
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
             {
                 if(args.Code == Keyboard.Key.G)
-                    EventStream.Instance.Emit(Monster.EVENT_SPAWN, new SpawnEvent());
+                    EventStream.Instance.Emit(Enemy.EVENT_SPAWN, new SpawnEvent());
             };
 
             //Center view to center tile
@@ -69,14 +69,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                        
             //test entities
 
-            Tile position = _map.GetSpawnTiles()[0];
-            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
-            position = _map.GetTileByIndex(4, 2);
-            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
-            position = _map.GetTileByIndex(3, 4);
-            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
-            position = _map.GetTileByIndex(4, 6);
-            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
+            EventStream.Instance.Emit(Enemy.EVENT_SPAWN, new EngineEvent(new Enemy.Def
+            {
+                Color = new Color(102, 57, 182),
+                IsFloating = true,
+                Speed = 0.5f
+            }));
+
+
         }
 
         public override void Create()
@@ -109,10 +109,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         /// Spawns a Monster at the first spawn point
         /// </summary>
         /// <param name="e"></param>
-        private void _SpawnMonster(EngineEvent e)
+        private void _SpawnEnemy(EngineEvent e)
         {
+            Enemy.Def def = e.Data as Enemy.Def;
             Tile position = _map.GetSpawnTiles()[0];
-            _entities.Add(new Monster(_world, position.getCenter().X, position.getCenter().Y, new FollowRoadAI(_map)));
+            def.Position = position.getCenter();
+            _entities.Add(new Enemy(_world, def, new FollowRoadAI(_map)));
         }
 
       
