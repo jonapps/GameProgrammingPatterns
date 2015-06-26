@@ -24,6 +24,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
         private Map _map;
         private ICoordsConverter _converter;
 
+        private CircleShape _radiusCircle;
+
         private Color _notBuildable;
         private bool _canBuild;
 
@@ -41,6 +43,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                     _currentTower.TopActive.A = 190;
                     _towerBase.Color = _currentTower.Base;
                     _towerTop.Color = _currentTower.TopActive;
+
+                    float convertedRadius = ConvertUnits.ToDisplayUnits(_currentTower.Radius);
+                    Color radiusColor = _currentTower.TopActive;
+                    radiusColor.A = 120;
+                    _radiusCircle.Radius = convertedRadius;
+                    _radiusCircle.FillColor = radiusColor;
                 }
                
             }
@@ -50,7 +58,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
         {
             _map = map;
             _converter = converter;
-
+            _radiusCircle = new CircleShape(1);
+            _radiusCircle.Scale = new Vector2f(1, 0.5f);
+           
             TextureContainer baseContainer = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_BASE);
             TextureContainer topContainer = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_TOWER_TOP);
 
@@ -107,6 +117,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                     _towerBase.Position = positionOnScreen.ToVector2f();
                     _towerTop.Position = _towerBase.Position;
 
+                    _radiusCircle.Position = _towerBase.Position - new Vector2f(_radiusCircle.Radius, _radiusCircle.Radius / 2f);
+
                     if (!tile.IsOccupied && tile.GetType() == TileType.BuildTile)
                     {
                         _canBuild = true;
@@ -124,12 +136,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
             }
         }
 
-        public void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
+        public void Draw(RenderTarget target, RenderStates states)
         {
             if (_currentTower != null)
             {
-                target.Draw(_towerBase);
-                target.Draw(_towerTop);
+                target.Draw(_radiusCircle, states);
+                target.Draw(_towerBase, states);
+                target.Draw(_towerTop, states);
             }
             
         }

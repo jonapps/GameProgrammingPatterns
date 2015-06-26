@@ -29,11 +29,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 Base = new Color(100, 100, 100),
                 TopActive = new Color(240, 30, 220),
-                TopWaiting = new Color(180, 10, 160)
+                TopWaiting = new Color(180, 10, 160),
+                Radius = 2,
+                FireFrequency = 100
             });
             defs.Add(new Tower.Def
             {
-                Base = new Color(0, 150, 160)
+                Base = new Color(0, 150, 160),
+                Radius = 5,
+                FireFrequency = 1000
             });
 
 
