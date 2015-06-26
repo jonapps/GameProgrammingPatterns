@@ -137,6 +137,7 @@
     <Compile Include="Game\Engine\Graphics\Screens\GameScreen.cs" />
     <Compile Include="Game\TowerDefence\Entities\Enemy.cs" />
     <Compile Include="Game\TowerDefence\Entities\Nuke.cs" />
+    <Compile Include="Game\TowerDefence\Entities\Particle.cs" />
     <Compile Include="Game\TowerDefence\Entities\Tower.cs" />
     <Compile Include="Game\TowerDefence\Logic\WaveManager.cs" />
     <Compile Include="Game\TowerDefence\Logic\AI\FollowRoadAI.cs" />

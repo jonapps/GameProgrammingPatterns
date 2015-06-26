@@ -34,6 +34,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public static Category Monster = Category.Cat1;
         public static Category Tower = Category.Cat2;
         public static Category Nuke = Category.Cat3;
+        public static Category Particle = Category.Cat4;
     }
 
     class Game : GameScreen, IEntityHolder, ICoordsConverter
@@ -66,6 +67,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             EventStream.Instance.On(Enemy.EVENT_SPAWN, _SpawnEnemy);
             EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);
             EventStream.Instance.On(Tower.EVENT_BUILD, _BuildTower);
+            EventStream.Instance.On(Particle.EVENT_SPAWN, _SpawnParticle);
 
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
             {
@@ -75,12 +77,25 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
                 if (args.Code == Keyboard.Key.N)
                     EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
+
+                //if (args.Code == Keyboard.Key.P)
+                //{
+                    
+                
+                //}
+                   
             };
 
 
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
+        }
+
+        private void _SpawnParticle(EngineEvent e)
+        {
+            Particle.Def def = e.Data as Particle.Def;
+            _entitiesToAdd.Add(new Particle(_world, def));
         }
 
         public override void Create()
@@ -119,7 +134,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             foreach (Tile pos in _map.GetSpawnTiles())
             {
                 def.Position = pos.getCenter();
-                _entities.Add(new Enemy(_world, def, new FollowRoadAI(_map)));
+                _entitiesToAdd.Add(new Enemy(_world, def, new FollowRoadAI(_map)));
             }
         }
 

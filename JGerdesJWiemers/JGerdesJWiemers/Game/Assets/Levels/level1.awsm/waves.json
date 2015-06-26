@@ -14,6 +14,34 @@
 					"quantity": 2
 				}
 			]
+		},
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "LameBox",
+					"Quantity": 10
+				},
+				{
+					"Type": "FastBox",
+					"quantity": 2
+				}
+			]
+		},
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "LameBox",
+					"Quantity": 10
+				},
+				{
+					"Type": "FastBox",
+					"quantity": 2
+				}
+			]
 		}
 	]
 }

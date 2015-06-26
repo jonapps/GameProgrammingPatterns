@@ -35,6 +35,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
 
         public override void Update()
         {
+
             for (int i = 0, c = _entities.Count; i < c; ++i)
             {
                 Entity e = _entities[i];
@@ -42,17 +43,13 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
                 if (e.DeleteMe)
                     _entitiesToDelete.Add(e);
             }
-            foreach (Entity delE in _entitiesToDelete)
-            {
-                delE.DeleteFromWorld(_world);
-                _entities.Remove(delE);
-            }
+            
             foreach (Entity e in _entitiesToAdd)
             {
                 _entities.Add(e);
             }
             _entitiesToAdd.Clear();
-            _entitiesToDelete.Clear();
+            
                 
         }
 
@@ -61,6 +58,14 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             EventStream.Instance.Update();
             foreach(Entity e in _entities)
                 e.PastUpdate();
+
+
+            foreach (Entity delE in _entitiesToDelete)
+            {
+                delE.DeleteFromWorld(_world);
+                _entities.Remove(delE);
+            }
+            _entitiesToDelete.Clear();
         }
 
         public override void Exit()

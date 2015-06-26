@@ -1,5 +1,7 @@
 ﻿using FarseerPhysics;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Logic.AI;
@@ -26,8 +28,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private Vector2 _destination;
         private Sprite _shadow;
         private Def _def;
+        private int _energy = 0;
 
-        public class Def : EntityDef
+        public class Def
         {
 
             public class Shooter
@@ -53,12 +56,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 Color = new Color(255, 255, 255, 255);
                 Shoot = new Shooter();
-            }
-
-
-            public override Engine.Entity Spawn(FarseerPhysics.Dynamics.World world)
-            {
-                throw new NotImplementedException();
             }
         }
 
@@ -147,12 +144,29 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 _body.LinearVelocity = new Vector2(0, 0);
             }
             _ai.Update(_body);
-
+            
         }
 
-        public void Kill()
+
+
+
+        public override void ApplyDamage(int dmg)
         {
-            _deleteMe = true;
+            base.ApplyDamage(dmg);
+            _sprite.Color = new Color(_def.Color.R, _def.Color.G, _def.Color.B, _CalcAlpha());
+            int energy = _energy / 100 * _healthPercentage / (dmg / 2);
+            Particle.Def def = new Particle.Def();
+            def.Position = _body.Position;
+            def.Color = _def.Color;
+            def.Energy = energy;
+            for (int i = 0; i < (dmg / 2); ++i)
+            {
+                EventStream.Instance.Emit(Particle.EVENT_SPAWN, new EngineEvent(def));
+            }
+                
         }
+
+        
+
     }
 }
