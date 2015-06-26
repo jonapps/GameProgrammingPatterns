@@ -29,7 +29,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         public class Def
         {
             public float Radius = 3;
-            public int FireFrequency = 200;
+            public int FireFrequency = 600;
             public float Damage = 1;
             public float BulletSpeed = 4;
             public Color Base;
