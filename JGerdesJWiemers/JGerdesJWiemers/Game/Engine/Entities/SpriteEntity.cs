@@ -83,6 +83,10 @@ namespace JGerdesJWiemers.Game.Engine.Entities
         public override void Update()
         {
             _sprite.Update();
+            if (_health < 0)
+            {
+                _deleteMe = true;
+            }
         }
 
         public override void PastUpdate()

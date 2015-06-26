@@ -61,8 +61,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             }
             else if ((m = fixtureB.Body.UserData as Enemy) != null)
             {
-                _deleteMe = true;
-                m.ApplyDamage(_damage);
+                if (!_deleteMe)
+                {
+                    m.ApplyDamage(_damage);
+                }
+                _deleteMe = true;   
             }
             return true;
         }

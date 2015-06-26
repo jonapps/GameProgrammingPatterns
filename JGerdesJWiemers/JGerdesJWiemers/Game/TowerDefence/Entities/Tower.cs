@@ -119,7 +119,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 Destination = destination.Position,
                 Position = _body.WorldCenter,
-                Speed = _def.BulletSpeed
+                Speed = _def.BulletSpeed,
+                Damage = 20
             };
 
             EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));

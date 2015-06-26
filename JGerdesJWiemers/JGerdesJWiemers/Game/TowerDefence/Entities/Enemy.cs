@@ -141,20 +141,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 _body.LinearVelocity = new Vector2(0, 0);
             }
             _ai.Update(_body);
-
+            
         }
 
-        public void Kill()
-        {
-            _deleteMe = true;
-        }
+
 
 
         public override void ApplyDamage(int dmg)
         {
             base.ApplyDamage(dmg);
-
+            _sprite.Color = new Color(_def.Color.R, _def.Color.G, _def.Color.B, _CalcAlpha());
         }
+
+        
 
     }
 }
