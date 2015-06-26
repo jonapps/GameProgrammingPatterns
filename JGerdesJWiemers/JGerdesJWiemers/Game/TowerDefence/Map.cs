@@ -1,9 +1,11 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics;
+﻿using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Shapes;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
+using JGerdesJWiemers.Game.TowerDefence.Entities;
 using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using SFML.Graphics;
 using SFML.System;
@@ -35,6 +37,14 @@ namespace JGerdesJWiemers.Game.TowerDefence
             _tileSize = new Vector2i(asset.Tileheight, asset.Tileheight);
             _spawnTiles = new List<Tile>();
             _CreateMapByAsset(asset.Width, asset.Height, asset.Tileheight, asset.Tileheight, asset);
+
+
+
+            EventStream.Instance.On(Enemy.EVENT_SPAWN, _OnEnemySpawn);
+        }
+
+        private void _OnEnemySpawn(Engine.EventSystem.Events.EngineEvent eventData)
+        {
             
         }
 

@@ -27,7 +27,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private Sprite _shadow;
         private Def _def;
 
-        public class Def
+        public class Def : EntityDef
         {
 
             public class Shooter
@@ -53,6 +53,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 Color = new Color(255, 255, 255, 255);
                 Shoot = new Shooter();
+            }
+
+
+            public override Engine.Entity Spawn(FarseerPhysics.Dynamics.World world)
+            {
+                throw new NotImplementedException();
             }
         }
 

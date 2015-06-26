@@ -271,6 +271,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             {
                 throw new Exception("some levelfiles are missing");
             }
+            
             List<LevelAsset> result = new List<LevelAsset>();
             LevelAsset level = null;
             foreach (String dir in dirEntries)
