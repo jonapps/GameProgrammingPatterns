@@ -167,7 +167,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _sprite.Color = color;
 
 
-            int energy = _energy / 100 * _healthPercentage / (dmg / 2);
+            int energy = (int)(_energy / 100 * _healthPercentage / (dmg / 2f));
             Particle.Def def = new Particle.Def();
             def.Position = _body.Position;
             def.Color = _def.Color;

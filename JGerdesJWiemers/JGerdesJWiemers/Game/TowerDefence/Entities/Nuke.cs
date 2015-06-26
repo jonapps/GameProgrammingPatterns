@@ -32,6 +32,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Vector2 Destination { get; set; }
             public float Speed { get; set; }
             public int Damage { get; set; }
+            public Color Color { get; set; }
         }
 
 
@@ -39,7 +40,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             :base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BULLET))
         {
             _sprite.Scale = new Vector2f(0.2f, 0.2f);
-            _sprite.Color = new Color(156, 39, 176);
+            _sprite.Color = def.Color;
             _body.Position = def.Position;
             _body.FixedRotation = true;
             _body.CollisionCategories = EntityCategory.Nuke;

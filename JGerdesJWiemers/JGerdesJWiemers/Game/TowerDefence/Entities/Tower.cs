@@ -30,11 +30,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         {
             public float Radius = 3;
             public int FireFrequency = 600;
-            public float Damage = 1;
+            public int Damage = 1;
             public float BulletSpeed = 4;
             public Color Base;
             public Color TopActive;
             public Color TopWaiting;
+            public Color BulletColor;
             public Vector2 Position;
             public float Health = 100;
             public float Price = 10;
@@ -44,6 +45,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Base = new Color(63, 81, 181);
                 TopActive = new Color(255, 152, 0);
                 TopWaiting = new Color(255, 224, 178);
+                BulletColor = new Color(0, 0, 0);
                 Position = new Vector2();
             }
         }
@@ -122,7 +124,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Destination = destination.Position,
                 Position = _body.WorldCenter,
                 Speed = _def.BulletSpeed,
-                Damage = 20
+                Damage = _def.Damage,
+                Color = _def.BulletColor
             };
 
             EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
