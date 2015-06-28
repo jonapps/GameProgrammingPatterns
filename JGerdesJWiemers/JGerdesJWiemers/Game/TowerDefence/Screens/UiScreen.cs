@@ -24,7 +24,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
 
             _builder = new Builder(map, converter);
-            _selector = new TowerSelector(towers, new Vector2f(400, 680));
+            _selector = new TowerSelector(towers, new Vector2f(400, _window.Size.Y - 40));
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
 
@@ -80,6 +80,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             target.Draw(_builder, states);
             target.Draw(_selector, states);
+        }
+
+        protected override void _Resize(Engine.EventSystem.Events.EngineEvent eventData)
+        {
+            base._Resize(eventData);
+            Vector2f size = (Vector2f)eventData.Data;
+            _selector.Position = new Vector2f(400, size.Y - 40);
         }
 
         public override bool DoRenderBelow()

@@ -13,6 +13,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
 {
     class TowerSelector : IDrawable
     {
+
+
         private class Option
         {
             public AnimatedSprite Sprite;
@@ -48,6 +50,20 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                 counter++;
             }
             Select(0);
+        }
+
+        public Vector2f Position
+        {
+            set
+            {
+                int counter = 0;
+                foreach (Option o in _options)
+                {
+                    o.Sprite.Position = value + new Vector2f(counter * 96, 0);
+                    Console.WriteLine(o.Sprite.Position);
+                    counter++;
+                }
+            }
         }
 
         public void Select(int option)

@@ -31,13 +31,17 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             _view.Viewport = new FloatRect(0, 0, 1, 1);
             _input = new InputMapper();
             _clearColor = new Color(255, 255, 255, 0);
-            EventStream.Instance.On(JGerdesJWiemers.Game.Game.EVENT_RESIZE, _ResizeView);
+            EventStream.Instance.On(JGerdesJWiemers.Game.Game.EVENT_RESIZE, _Resize);
         }
 
-        private void _ResizeView(EngineEvent eventData)
+        protected virtual void _Resize(EngineEvent eventData)
         {
-            if(_autoResize)
-                _view.Size = (Vector2f)eventData.Data;
+            if (_autoResize)
+            {
+                Vector2f size = (Vector2f)eventData.Data;
+                _view = new View(new FloatRect(0, 0, size.X, size.Y));
+            }
+              
         }
 
         public ScreenManager Manager
