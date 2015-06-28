@@ -14,6 +14,8 @@ using JGerdesJWiemers.Game.Engine.Input;
 using FarseerPhysics;
 using GameScreen = JGerdesJWiemers.Game.TowerDefence.Screens;
 using JGerdesJWiemers.Game.TowerDefence.Screens;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 
 
 namespace JGerdesJWiemers.Game
@@ -24,6 +26,9 @@ namespace JGerdesJWiemers.Game
         public static readonly string GAME_TITLE = "Dower Tefense";
         public static long ElapsedTime = 0;
         public static bool DEBUG = !true;
+
+        public static readonly string EVENT_RESIZE = "window.resize";
+
 
         public static readonly Time TargetElapsedTime = Time.FromMilliseconds(16);
         readonly Time MaxElapsedTime = Time.FromMilliseconds(25);
@@ -57,8 +62,14 @@ namespace JGerdesJWiemers.Game
             //this._screenManager.Push(new Editor.EditorScreen(_window));
             _window.SetActive();
             _window.Closed += this._OnClose;
+            _window.Resized += _window_Resized;
             _window.SetVerticalSyncEnabled(true);
             this.Run();
+        }
+
+        void _window_Resized(object sender, SizeEventArgs e)
+        {
+            EventStream.Instance.Emit(EVENT_RESIZE, new EngineEvent(new Vector2f(e.Width, e.Height)));
         }
 
         /// <summary>

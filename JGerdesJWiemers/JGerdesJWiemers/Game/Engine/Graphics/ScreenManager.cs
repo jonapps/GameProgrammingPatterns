@@ -8,6 +8,7 @@ using JGerdesJWiemers.Game.Engine.Input;
 using SFML.Graphics;
 using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using SFML.System;
+using JGerdesJWiemers.Game.Engine.EventSystem;
 
 namespace JGerdesJWiemers.Game.Engine.Graphics
 {
@@ -39,6 +40,21 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 _view.Viewport = new FloatRect(0, 0, 1, 1);
                 _window.SetView(_view);
                 _renderTexture.Display();
+
+                EventStream.Instance.On(Game.EVENT_RESIZE, _Resize);
+        }
+
+        private void _Resize(EventSystem.Events.EngineEvent eventData)
+        {
+            Vector2f sizef = (Vector2f)eventData.Data;
+            Vector2u size = new Vector2u((uint)sizef.X , (uint)sizef.Y);
+            _renderTexture.Dispose();
+            _renderTexture = new RenderTexture(size.X, size.Y);
+            _renderTexture.Smooth = true;
+            _view = new View(new FloatRect(0, 0, sizef.X, sizef.Y));
+            _view.Viewport = new FloatRect(0, 0, 1, 1);
+            _window.SetView(_view);
+            _renderTexture.Display();
         }
 
         bool _InputHandler(string name, InputEvent e, int channel)

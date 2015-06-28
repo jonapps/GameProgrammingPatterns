@@ -1,7 +1,10 @@
 ﻿using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Input;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using SFML.Graphics;
+using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -19,6 +22,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         protected Shader _shader;
         protected View _view;
         protected Color _clearColor;
+        protected bool _autoResize = true;
 
         public Screen(RenderWindow window)
         {
@@ -27,7 +31,13 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             _view.Viewport = new FloatRect(0, 0, 1, 1);
             _input = new InputMapper();
             _clearColor = new Color(255, 255, 255, 0);
+            EventStream.Instance.On(JGerdesJWiemers.Game.Game.EVENT_RESIZE, _ResizeView);
+        }
 
+        private void _ResizeView(EngineEvent eventData)
+        {
+            if(_autoResize)
+                _view.Size = (Vector2f)eventData.Data;
         }
 
         public ScreenManager Manager
