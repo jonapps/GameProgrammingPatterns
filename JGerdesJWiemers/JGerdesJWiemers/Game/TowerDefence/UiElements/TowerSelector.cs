@@ -41,15 +41,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
         public TowerSelector(List<Tower.Def> defintions, Vector2f position)
         {
             _options = new List<Option>();
-            int counter = 0;
             foreach (Tower.Def def in defintions)
             {
-                Option option = new Option(def);
-                option.Sprite.Position = position + new Vector2f(counter * 96, 0);
-                _options.Add(option);
-                counter++;
+                _options.Add(new Option(def));
             }
             Select(0);
+            Position = position;
         }
 
         public Vector2f Position
@@ -57,10 +54,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             set
             {
                 int counter = 0;
+                float width = _options[0].Sprite.TextureRect.Width;
+                float offset = (_options.Count * width * 1.5f - width) / 2f;
                 foreach (Option o in _options)
                 {
-                    o.Sprite.Position = value + new Vector2f(counter * 96, 0);
-                    Console.WriteLine(o.Sprite.Position);
+                    float x = counter * width * 1.5f;
+                    x -= offset;
+                    o.Sprite.Position = value + new Vector2f(x, 0);
                     counter++;
                 }
             }
