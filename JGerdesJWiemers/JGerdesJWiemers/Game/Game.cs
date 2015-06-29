@@ -63,8 +63,25 @@ namespace JGerdesJWiemers.Game
             _window.SetActive();
             _window.Closed += this._OnClose;
             _window.Resized += _window_Resized;
+            _window.KeyPressed += _window_KeyPressed;
             _window.SetVerticalSyncEnabled(true);
             this.Run();
+        }
+
+        void _window_KeyPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Code == Keyboard.Key.F11)
+            {
+                ContextSettings settings = new ContextSettings();
+                settings.AntialiasingLevel = 16;
+                _window.Dispose();
+                _window = new RenderWindow(new VideoMode(1920, 1080), GAME_TITLE, Styles.Fullscreen, settings);
+                _window.Display();
+                _window.KeyPressed += this._CloseGame;
+                _window.Closed += this._OnClose;
+                _window.SetVerticalSyncEnabled(true);
+                EventStream.Instance.Emit(EVENT_RESIZE, new EngineEvent(new Vector2f(_window.Size.X, _window.Size.Y)));
+            }
         }
 
         void _window_Resized(object sender, SizeEventArgs e)
