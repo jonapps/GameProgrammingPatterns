@@ -26,11 +26,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
         public WaveManager(WavesAsset w, List<Enemy.Def> enemies){
             _wavesAsset = w;
             _enemies = enemies;
-            //_world = world;
-            //_map = m;
-
-
-
             EventStream.Instance.On(EVENT_NEXT_WAVE, _Run);
         }
 

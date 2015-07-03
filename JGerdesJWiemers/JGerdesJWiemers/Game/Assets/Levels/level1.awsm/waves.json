@@ -6,11 +6,11 @@
 			"Enemies":
 			[
 				{
-					"Type": "LameBox",
+					"Type": "NightRider",
 					"Quantity": 10
 				},
 				{
-					"Type": "FastBox",
+					"Type": "DeadCruiser",
 					"quantity": 2
 				}
 			]
@@ -20,11 +20,38 @@
 			"Enemies":
 			[
 				{
-					"Type": "LameBox",
+					"Type": "NightRider",
 					"Quantity": 10
 				},
 				{
-					"Type": "FastBox",
+					"Type": "DeadCruiser",
+					"quantity": 2
+				}
+			]
+		},
+        {
+            "Time": 10000,
+            "Enemies": [
+                {
+                    "Type": "DrunkHeads",
+                    "Quantity": 10
+                },
+                {
+                    "Type": "DeadCruiser",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "NightRider",
+					"Quantity": 10
+				},
+				{
+					"Type": "DeadCruiser",
 					"quantity": 2
 				}
 			]
@@ -34,11 +61,25 @@
 			"Enemies":
 			[
 				{
-					"Type": "LameBox",
+					"Type": "NightRider",
 					"Quantity": 10
 				},
 				{
-					"Type": "FastBox",
+					"Type": "DeadCruiser",
+					"quantity": 2
+				}
+			]
+		},
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "DrunkHeads",
+					"Quantity": 10
+				},
+				{
+					"Type": "DeadCruiser",
 					"quantity": 2
 				}
 			]

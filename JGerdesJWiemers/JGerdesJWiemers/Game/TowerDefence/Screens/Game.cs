@@ -46,7 +46,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Map _map;
         private WaveManager _waveManager;
         private UiScreen _uiScreen;
-        
+
+
+        private bool _viewLeft, _viewRight, _viewUp, _viewDown = false;
+
+
         public Game(RenderWindow w)
             :base(w)
         {
@@ -57,7 +61,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
 
             // do this somewhere else    --------------------------------------------
-            LevelAsset level = levels.First();
+            LevelAsset level = levels.Last();
             _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
             _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this);
@@ -75,20 +79,40 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             _window.KeyPressed += delegate(object sender, KeyEventArgs args)
             {
-                //if(args.Code == Keyboard.Key.G)
-                    //EventStream.Instance.Emit(Enemy.EVENT_SPAWN, new SpawnEvent());
 
 
                 if (args.Code == Keyboard.Key.N)
                     EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
 
-                //if (args.Code == Keyboard.Key.P)
-                //{
-                    
-                
-                //}
-                   
+                if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
+                    _viewLeft = true;
+
+                if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
+                    _viewRight = true;
+
+                if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
+                    _viewUp = true;
+
+                if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
+                    _viewDown = true;
             };
+
+            _window.KeyReleased += delegate(object sender, KeyEventArgs args)
+            {
+
+                if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
+                    _viewLeft = false;
+
+                if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
+                    _viewRight = false;
+
+                if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
+                    _viewUp = false;
+
+                if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
+                    _viewDown = false;
+            };
+
 
 
             //Center view to center tile
@@ -151,7 +175,25 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             base.Update();
             _map.Update();
             _MoveView();
-            
+
+
+
+            if (_viewLeft)
+            {
+                _MoveViewLeft();
+            }
+            if(_viewRight)
+            {
+                _MoveViewRight();
+            }
+            if(_viewUp)
+            {
+                _MoveViewUp();
+            }
+            if(_viewDown)
+            {
+                _MoveViewDown();
+            }
         }
 
         public override void PastUpdate()
@@ -183,21 +225,40 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             Vector2i position = InputManager.Instance.MousePosition;
             if (position.X < SCROLL_DISTANCE)
             {
-                _view.Move(new Vector2f(-SCROLL_SPEED, 0));
+                _MoveViewLeft();
             }
             if (position.X > _window.Size.X - SCROLL_DISTANCE)
             {
-                _view.Move(new Vector2f(SCROLL_SPEED, 0));
+                _MoveViewRight();
             }
             if (position.Y < SCROLL_DISTANCE)
             {
-                _view.Move(new Vector2f(0, -SCROLL_SPEED));
+                _MoveViewUp();
             }
             if (position.Y >_window.Size.Y - SCROLL_DISTANCE)
             {
-                _view.Move(new Vector2f(0, SCROLL_SPEED));
+                _MoveViewDown();
             }
         }
+
+        private void _MoveViewLeft()
+        {
+            _view.Move(new Vector2f(-SCROLL_SPEED, 0));
+        }
+        private void _MoveViewRight()
+        {
+            _view.Move(new Vector2f(SCROLL_SPEED, 0));
+        }
+        private void _MoveViewUp()
+        {
+            _view.Move(new Vector2f(0, -SCROLL_SPEED));
+        }
+        private void _MoveViewDown()
+        {
+            _view.Move(new Vector2f(0, SCROLL_SPEED));
+        }
+
+
 
        
         public void AddEntity(Entity e)
