@@ -22,6 +22,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
     class Enemy : SpriteEntity
     {
         public static readonly String EVENT_SPAWN = "enemy.spawn";
+        public static readonly String EVENT_DESPAWN = "enemy.despawn";
+        public static readonly String EVENT_LOST_ENERGY = "enemy.lostenergy";
+
         private static readonly float STOPPING_DISTANCE = 0.1f;
 
         private FollowRoadAI _ai;
@@ -98,6 +101,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private void _OnOnDespawn(Tile destination)
         {
             _deleteMe = true;
+            EventStream.Instance.Emit(EVENT_DESPAWN, new EngineEvent());
         }
 
 
@@ -176,6 +180,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             {
                 EventStream.Instance.Emit(Particle.EVENT_SPAWN, new EngineEvent(def));
             }
+
+            EventStream.Instance.Emit(EVENT_LOST_ENERGY, new EngineEvent(dmg));
                 
         }
 

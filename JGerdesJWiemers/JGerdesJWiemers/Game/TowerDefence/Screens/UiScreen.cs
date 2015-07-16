@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using JGerdesJWiemers.Game.TowerDefence.UiElements;
 using SFML.System;
 using JGerdesJWiemers.Game.Engine.Utils;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -38,10 +40,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _drawer.Position = new Vector2f(0, 0);
             _selector = new TowerSelector(towers, new Vector2f(DRAWER_WIDTH, _window.Size.Y / 2f));
 
-            _energy = new Label("123", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
+            _energy = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
             _energy.Position = new Vector2f(30, 50);
 
-            _missed = new Label("2", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
+            _missed = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
             _missed.Position = new Vector2f(30, 90);
 
 
@@ -50,6 +52,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             _selector.SelectionChanged += OnSelectionChanged;
             OnSelectionChanged(towers[0]);
+
+            EventStream.Instance.On(ScoreManager.EVENT_ENERGY_CHANGED, onEnergyChanged);
+            EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, onMissedChanged);
+        }
+
+        private void onMissedChanged(EngineEvent eventData)
+        {
+            _missed.DisplayedString = "" + (int)(eventData.Data);
+        }
+
+        private void onEnergyChanged(EngineEvent eventData)
+        {
+            _energy.DisplayedString = "" + (int)(eventData.Data);
         }
 
         void OnSelectionChanged(Tower.Def selection)

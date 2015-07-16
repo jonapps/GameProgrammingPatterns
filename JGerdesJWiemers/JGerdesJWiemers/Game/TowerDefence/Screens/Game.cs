@@ -45,7 +45,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private Map _map;
         private WaveManager _waveManager;
+        private ScoreManager _scoreManager;
         private UiScreen _uiScreen;
+
 
 
         private bool _viewLeft, _viewRight, _viewUp, _viewDown = false;
@@ -58,7 +60,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             AssetLoader.Instance.LoadEnemyTextures();
             List<LevelAsset> levels = AssetLoader.Instance.ReadLevels();
 
-
+            _scoreManager = new ScoreManager();
 
             // do this somewhere else    --------------------------------------------
             LevelAsset level = levels.Last();

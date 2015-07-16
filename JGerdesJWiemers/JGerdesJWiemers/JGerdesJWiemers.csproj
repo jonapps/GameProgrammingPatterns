@@ -138,6 +138,7 @@
     <Compile Include="Game\TowerDefence\Entities\Nuke.cs" />
     <Compile Include="Game\TowerDefence\Entities\Particle.cs" />
     <Compile Include="Game\TowerDefence\Entities\Tower.cs" />
+    <Compile Include="Game\TowerDefence\Logic\ScoreManager.cs" />
     <Compile Include="Game\TowerDefence\Logic\WaveManager.cs" />
     <Compile Include="Game\TowerDefence\Logic\AI\FollowRoadAI.cs" />
     <Compile Include="Game\TowerDefence\Logic\Builder.cs" />

@@ -6,7 +6,7 @@
 			"Damage" : 10,
 			"BulletSpeed" : 4,
 			"Health" : 100,
-			"Price" : 10,
+			"Price" : 100,
 			"Base" : {
 				"R": 222,
 				"G": 64,
@@ -37,7 +37,7 @@
 			"FireFrequency" : 200,
 			"Damage" : 5,
 			"BulletSpeed" : 10,
-			"Health" : 100,
+			"Health" : 500,
 			"Price" : 50,
 			"Base" : {
 				"R": 244,
@@ -70,7 +70,7 @@
 			"Damage" : 20,
 			"BulletSpeed" : 8,
 			"Health" : 100,
-			"Price" : 10,
+			"Price" : 200,
 			"Base" : {
 				"R": 108,
 				"G": 33,
