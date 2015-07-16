@@ -20,6 +20,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             public AnimatedSprite Button;
             public AnimatedSprite Top;
             public Tower.Def TowerDef;
+            public Label PriceTag;
 
             public Option(Tower.Def def)
             {
@@ -33,6 +34,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                 Top = new AnimatedSprite(container.Texture, container.Width, container.Height);
                 Top.Color = def.TopActive;
                 Top.SetAnimation(new Animation());
+
+                PriceTag = new Label("" + def.Price, AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MONEY);
 
             }
 
@@ -65,8 +68,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                 {
                     float y = counter * height * 1.25f;
                     y -= offset;
-                    o.Button.Position = value + new Vector2f(0, y);
-                    o.Top.Position = value + new Vector2f(0, y);
+                    o.Button.Position = value + new Vector2f(-128, y);
+                    o.Top.Position = value + new Vector2f(-128, y);
+                    o.PriceTag.Position = value + new Vector2f(-160, y + 72);
                     counter++;
                 }
             }
@@ -125,6 +129,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
         {
             foreach (Option option in _options)
             {
+                target.Draw(option.PriceTag, states);
                 target.Draw(option.Button, states);
                 target.Draw(option.Top, states);
             }
