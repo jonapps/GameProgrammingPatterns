@@ -123,7 +123,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private void _SpawnParticle(EngineEvent e)
         {
             Particle.Def def = e.Data as Particle.Def;
-            _entitiesToAdd.Add(new Particle(_world, def));
+            _entitiesToAdd.Add(new Particle(_world, def, this));
         }
 
         public override void Create()
