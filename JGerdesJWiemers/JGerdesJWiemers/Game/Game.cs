@@ -16,14 +16,15 @@ using GameScreen = JGerdesJWiemers.Game.TowerDefence.Screens;
 using JGerdesJWiemers.Game.TowerDefence.Screens;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
+using System.IO;
 
 
 namespace JGerdesJWiemers.Game
 {
     class Game
     {
-        public static readonly string VERSION = "v0.3";
-        public static readonly string GAME_TITLE = "Dower Tefense";
+        public static readonly string VERSION = "v0.91";
+        public static readonly string GAME_TITLE = "AWSM";
         public static long ElapsedTime = 0;
         public static bool DEBUG = !true;
 
@@ -64,6 +65,8 @@ namespace JGerdesJWiemers.Game
             _window.Resized += _window_Resized;
             _window.KeyPressed += _window_KeyPressed;
             _window.SetVerticalSyncEnabled(true);
+            //doesn't seem to work :(
+            //setIcon(@"Assets\Graphics\icon.ico");
             this.Run();
         }
 
@@ -165,6 +168,17 @@ namespace JGerdesJWiemers.Game
         private void _PastUpdate()
         {
             this._screenManager.PastUpdate();
+        }
+
+        private void setIcon(String file)
+        {
+            System.Drawing.Icon icon = new System.Drawing.Icon(file);
+            MemoryStream ms = new MemoryStream();
+            icon.Save(ms);
+            byte[] data = ms.ToArray();
+            _window.SetIcon((uint)icon.Width, (uint)icon.Height, data);
+            icon.Dispose();
+            ms.Close();
         }
 
 
