@@ -151,6 +151,7 @@
     <Compile Include="Game\TowerDefence\Tiles\RoadTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\SpawnTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\Tile.cs" />
+    <Compile Include="Game\TowerDefence\UiElements\Label.cs" />
     <Compile Include="Game\TowerDefence\UiElements\TowerSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

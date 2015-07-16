@@ -34,6 +34,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_UI_TOWER_SELECTION_BUTTON = @"ui\tower_button";
         public static readonly String TEXTURE_UI_TOWER_SELECTION_TOP = @"ui\tower_button_top";
 
+        public static readonly String TEXTURE_UI_ICON_ENEGRY = @"ui\icon_energy";
+        public static readonly String TEXTURE_UI_ICON_MISSED = @"ui\icon_missed";
+
+        public static readonly String FONT_ROBOTO_THIN = @"Roboto-Thin.ttf";
+
         public static readonly String CONFIG_INPUT = "input.json";
 
         private static AssetLoader _instance;
@@ -60,6 +65,10 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
             LoadTexture(TEXTURE_UI_TOWER_SELECTION_BUTTON, TEXTURE_UI_TOWER_SELECTION_BUTTON);
             LoadTexture(TEXTURE_UI_TOWER_SELECTION_TOP, TEXTURE_UI_TOWER_SELECTION_TOP);
+            LoadTexture(TEXTURE_UI_ICON_ENEGRY, TEXTURE_UI_ICON_ENEGRY);
+            LoadTexture(TEXTURE_UI_ICON_MISSED, TEXTURE_UI_ICON_MISSED);
+
+            LoadFont(FONT_ROBOTO_THIN, FONT_ROBOTO_THIN);
         }
 
         public void LoadFont(String name, String filename)

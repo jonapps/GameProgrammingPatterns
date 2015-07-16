@@ -68,9 +68,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _clearColor = level.Info.BackgroundColor;
             // do this somewhere else    --------------------------------------------
 
-            
-
-
+        
             w.SetMouseCursorVisible(false);
             EventStream.Instance.On(Enemy.EVENT_SPAWN, _SpawnEnemy);
             EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);

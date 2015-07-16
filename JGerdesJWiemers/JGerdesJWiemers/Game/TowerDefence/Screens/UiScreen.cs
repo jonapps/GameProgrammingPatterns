@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game.TowerDefence.UiElements;
 using SFML.System;
+using JGerdesJWiemers.Game.Engine.Utils;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -23,6 +24,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Shape _drawer;
         private Color _drawerColor;
 
+        private Label _energy;
+        private Label _missed;
+
         public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter, Color drawerColor)
             :base(w)
         {
@@ -33,6 +37,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _drawer.FillColor = _drawerColor;
             _drawer.Position = new Vector2f(0, 0);
             _selector = new TowerSelector(towers, new Vector2f(DRAWER_WIDTH - 64, _window.Size.Y / 2f));
+
+            _energy = new Label("123", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
+            _energy.Position = new Vector2f(30, 50);
+
+            _missed = new Label("2", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
+            _missed.Position = new Vector2f(30, 90);
+
+
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
 
@@ -87,6 +99,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
         {
             target.Draw(_drawer);
+
+            target.Draw(_energy);
+            target.Draw(_missed);
+
             target.Draw(_builder, states);
             target.Draw(_selector, states);
         }
