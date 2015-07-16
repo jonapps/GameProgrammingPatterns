@@ -107,7 +107,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
         void OnDestinationChanged(Tile destination)
         {
-            _destination = ConvertUnits.ToSimUnits(destination.getCenter());
+            if(destination != null)
+                _destination = ConvertUnits.ToSimUnits(destination.getCenter());
           
         }
 
