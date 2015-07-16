@@ -13,5 +13,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
         public int StartEnergy;
         public Color BackgroundColor;
         public Color DrawerColor;
+        public Texture Preview;
     }
 }

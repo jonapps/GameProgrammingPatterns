@@ -22,13 +22,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             public LevelAsset Asset;
 
             public LevelLabel(LevelAsset asset)
-            : base(asset.Info.Name, AssetLoader.FONT_ROBOTO_THIN, 36){
+            : base(asset.Info.Name, AssetLoader.FONT_ROBOTO_THIN, 48, asset.Info.Preview){
                 Asset = asset;
             }
         }
 
         private static Color WHITE = new Color(255, 255, 255, 255);
-        private static Color AWSM_ORANGE = new Color(157, 162, 71);
+        private static Color AWSM_ORANGE = new Color(253, 162, 71);
 
         //Dööö dööö döö, dö dö dö dö dö döö dö dö
         List<LevelLabel> levels;
@@ -36,16 +36,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public LevelSelector(RenderWindow w)
         :base(w){
+            _clearColor = new Color(84, 84, 84);
 
             levels = new List<LevelLabel>();
 
             AssetLoader.Instance.LoadEnemyTextures();
             List<LevelAsset> levelAssets = AssetLoader.Instance.ReadLevels();
-            Vector2f position = new Vector2f(100, 100);
+            Vector2f position = new Vector2f(_window.Size.X / 2f - 192, 100);
             int count = 0;
             foreach(LevelAsset la in levelAssets){
                 LevelLabel ll = new LevelLabel(la);
-                ll.Position = position + new Vector2f(0, count * 64);
+                ll.Position = position + new Vector2f(0, count * 96);
                 levels.Add(ll);
                 ++count;
             }
@@ -54,6 +55,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
 
             _window.KeyPressed += _window_KeyPressed;
+
         }
 
         void _window_KeyPressed(object sender, SFML.Window.KeyEventArgs e)

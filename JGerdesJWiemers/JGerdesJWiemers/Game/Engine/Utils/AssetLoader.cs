@@ -24,6 +24,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private static readonly String _LEVEL_FILE_ENEMIES = "\\enemies.json";
         private static readonly String _LEVEL_FILE_TOWER = "\\tower.json";
         private static readonly String _LEVEL_FILE_INFO = "\\info.json";
+        private static readonly String _LEVEL_FILE_PREVIEW = "\\preview.png";
 
         public static readonly String DATA_FILE_ENDING = "json";
         public static readonly String TEXTURE_TOWER_BASE = @"tower\tower_base";
@@ -302,6 +303,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
                 if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
                 if (!File.Exists(dir + _LEVEL_FILE_TOWER)) alright = false;
+                if (!File.Exists(dir +  _LEVEL_FILE_PREVIEW)) alright = false;
             }
             if (!alright)
             {
@@ -318,6 +320,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
                 level.Enemies = this._LoadEnemies(dir + _LEVEL_FILE_ENEMIES);
                 level.Waves = this._LoadWaves(dir + _LEVEL_FILE_WAVES);
                 level.Tower = this._LoadTower(dir + _LEVEL_FILE_TOWER);
+                level.Info.Preview = new Texture(dir + _LEVEL_FILE_PREVIEW);
                 result.Add(level);
             }
             return result;

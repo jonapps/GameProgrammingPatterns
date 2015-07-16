@@ -67,17 +67,22 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             }
         }
 
-        public Label(String text, String fontName, uint fontSize = 24, String iconTextureName = null)
+        public Label(String text, String fontName, uint fontSize = 24, Texture texture = null)
         {
             _text = new Text(text, AssetLoader.Instance.getFont(fontName));
             _text.CharacterSize = fontSize;
             _text.Origin = new Vector2f(0,fontSize);
-            if (iconTextureName != null)
+            if (texture != null)
             {
-                _icon = new Sprite(AssetLoader.Instance.getTexture(iconTextureName).Texture);
+                _icon = new Sprite(texture);
                 _icon.Origin = new Vector2f(0, _icon.TextureRect.Height);
             }
 
+        }
+
+        public Label(String text, String fontName, uint fontSize, String iconTextureName)
+            : this(text, fontName, fontSize, AssetLoader.Instance.getTexture(iconTextureName).Texture)
+        {
         }
         public void Draw(RenderTarget target, RenderStates states)
         {
