@@ -12,13 +12,25 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
     class ScoreManager
     {
 
+        private static ScoreManager _instance;
+
+        public static ScoreManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new ScoreManager();
+                return _instance;
+            }
+        }
+
         public static readonly String EVENT_ENERGY_CHANGED = "event.scoremanager.energychanged";
         public static readonly String EVENT_MISSED_CHANGED = "event.scoremanager.missedchanged";
 
         private int _energy;
         private int _missed;
 
-        public ScoreManager()
+        private ScoreManager()
         {
             EventStream.Instance.On(Enemy.EVENT_LOST_ENERGY, onEnemyEnergyLost);
             EventStream.Instance.On(Enemy.EVENT_DESPAWN, onEnemyDespawn);
@@ -27,13 +39,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
         public void onEnemyDespawn(EngineEvent e)
         {
             Missed += 1;
-            Console.WriteLine("sm - enemyDespawn");
         }
 
         public void onEnemyEnergyLost(EngineEvent e)
         {
             Energy += (int)e.Data;
-            Console.WriteLine("sm - enemyEnergyLost");
         }
        
         public int Energy
@@ -42,7 +52,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
             set 
             { 
                 _energy = value;
-                Console.WriteLine("sm - enery:" + _energy);
                 EventStream.Instance.Emit(EVENT_ENERGY_CHANGED, new EngineEvent(_energy));
             }
         }

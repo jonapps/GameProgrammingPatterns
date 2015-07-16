@@ -1,5 +1,6 @@
 {
 	"Name" : "First Level",
+	"StartEnergy" : 1000,
 	"BackgroundColor" : {
 		"R" : 10,
 		"G" : 10,

@@ -38,7 +38,7 @@
 			"Damage" : 5,
 			"BulletSpeed" : 10,
 			"Health" : 500,
-			"Price" : 50,
+			"Price" : 500,
 			"Base" : {
 				"R": 244,
 				"G": 235,

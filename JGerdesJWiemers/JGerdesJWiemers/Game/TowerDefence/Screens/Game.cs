@@ -45,7 +45,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private Map _map;
         private WaveManager _waveManager;
-        private ScoreManager _scoreManager;
         private UiScreen _uiScreen;
 
 
@@ -60,7 +59,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             AssetLoader.Instance.LoadEnemyTextures();
             List<LevelAsset> levels = AssetLoader.Instance.ReadLevels();
 
-            _scoreManager = new ScoreManager();
 
             // do this somewhere else    --------------------------------------------
             LevelAsset level = levels.Last();
@@ -68,6 +66,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
             _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this, level.Info.DrawerColor);
             _clearColor = level.Info.BackgroundColor;
+            ScoreManager.Instance.Energy = level.Info.StartEnergy;
             // do this somewhere else    --------------------------------------------
 
         
@@ -149,6 +148,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 t.Occupier = tower;
             }
+            ScoreManager.Instance.Energy -= def.Price;
         }
 
         /// <summary>

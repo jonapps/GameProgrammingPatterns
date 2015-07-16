@@ -38,7 +38,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Color BulletColor;
             public Vector2 Position;
             public float Health = 100;
-            public float Price = 10;
+            public int Price = 10;
 
             public Def()
             {

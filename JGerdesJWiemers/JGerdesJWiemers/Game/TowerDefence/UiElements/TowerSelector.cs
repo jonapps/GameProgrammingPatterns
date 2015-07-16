@@ -1,7 +1,10 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics;
+﻿using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.Graphics;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Entities;
+using JGerdesJWiemers.Game.TowerDefence.Logic;
+using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
@@ -55,6 +58,33 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             }
             Select(0);
             Position = position;
+
+            EventStream.Instance.On(ScoreManager.EVENT_ENERGY_CHANGED, onEnergyChanged);
+        }
+
+        private void onEnergyChanged(Engine.EventSystem.Events.EngineEvent eventData)
+        {
+            int enegry = (int)eventData.Data;
+            foreach(Option o in _options){
+                Color top, button;
+                if (o.TowerDef.Price > enegry)
+                {
+                    o.Button.Color = new Color((byte)(o.TowerDef.Base.R / 2),
+                                                (byte)(o.TowerDef.Base.G / 2),
+                                                (byte)(o.TowerDef.Base.B / 2),
+                                                (byte)(o.TowerDef.Base.A / 2));
+                    o.Top.Color = new Color((byte)(o.TowerDef.TopActive.R / 2),
+                                            (byte)(o.TowerDef.TopActive.G / 2),
+                                            (byte)(o.TowerDef.TopActive.B / 2),
+                                            (byte)(o.TowerDef.TopActive.A / 2));
+                }
+                else
+                {
+                    o.Button.Color = o.TowerDef.Base;
+                    o.Top.Color = o.TowerDef.TopActive;
+                }
+            }
+
         }
 
         public Vector2f Position

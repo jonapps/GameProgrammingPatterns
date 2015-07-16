@@ -26,8 +26,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Shape _drawer;
         private Color _drawerColor;
 
-        private Label _energy;
-        private Label _missed;
+        private Label _energyLabel;
+        private Label _missedLabel;
 
         public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter, Color drawerColor)
             :base(w)
@@ -40,11 +40,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _drawer.Position = new Vector2f(0, 0);
             _selector = new TowerSelector(towers, new Vector2f(DRAWER_WIDTH, _window.Size.Y / 2f));
 
-            _energy = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
-            _energy.Position = new Vector2f(30, 50);
+            _energyLabel = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
+            _energyLabel.Position = new Vector2f(30, 50);
 
-            _missed = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
-            _missed.Position = new Vector2f(30, 90);
+            _missedLabel = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
+            _missedLabel.Position = new Vector2f(30, 90);
 
 
             _window.KeyPressed += _window_KeyPressed;
@@ -59,12 +59,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private void onMissedChanged(EngineEvent eventData)
         {
-            _missed.DisplayedString = "" + (int)(eventData.Data);
+            _missedLabel.DisplayedString = "" + (int)(eventData.Data);
         }
 
         private void onEnergyChanged(EngineEvent eventData)
         {
-            _energy.DisplayedString = "" + (int)(eventData.Data);
+            _energyLabel.DisplayedString = "" + (int)(eventData.Data);
         }
 
         void OnSelectionChanged(Tower.Def selection)
@@ -116,8 +116,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             target.Draw(_builder, states);
             target.Draw(_drawer);
 
-            target.Draw(_energy);
-            target.Draw(_missed);
+            target.Draw(_energyLabel);
+            target.Draw(_missedLabel);
 
             target.Draw(_selector, states);
         }

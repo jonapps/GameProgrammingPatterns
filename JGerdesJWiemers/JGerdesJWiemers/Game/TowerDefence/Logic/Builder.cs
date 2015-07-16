@@ -80,7 +80,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
         public void Build()
         {
-            if (_currentTower != null && _canBuild)
+            if (_currentTower != null && _canBuild && ScoreManager.Instance.Energy >= _currentTower.Price)
             {
                 _currentTower.Base.A = 255;
                 _currentTower.TopActive.A = 255;
@@ -121,7 +121,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
                     _radiusCircle.Position = _towerBase.Position - new Vector2f(_radiusCircle.Radius, _radiusCircle.Radius / 2f);
 
-                    if (!tile.IsOccupied && tile.GetType() == TileType.BuildTile)
+                    if (!tile.IsOccupied && tile.GetType() == TileType.BuildTile && !(_currentTower.Price > ScoreManager.Instance.Energy))
                     {
                         _canBuild = true;
                         _towerBase.Color = _currentTower.Base;

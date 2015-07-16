@@ -10,6 +10,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
     class InfoAsset
     {
         public string Name;
+        public int StartEnergy;
         public Color BackgroundColor;
         public Color DrawerColor;
     }
