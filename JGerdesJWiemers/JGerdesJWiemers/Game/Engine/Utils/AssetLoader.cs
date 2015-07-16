@@ -38,6 +38,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_UI_ICON_ENEGRY = @"ui\icon_energy";
         public static readonly String TEXTURE_UI_ICON_MISSED = @"ui\icon_missed";
         public static readonly String TEXTURE_UI_ICON_MONEY = @"ui\icon_money";
+        public static readonly String TEXTURE_UI_ICON_WARN = @"ui\icon_warn";
 
         public static readonly String TEXTURE_SPLAH_AWSM = @"ui\awsm";
 
@@ -72,6 +73,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_UI_ICON_ENEGRY, TEXTURE_UI_ICON_ENEGRY);
             LoadTexture(TEXTURE_UI_ICON_MISSED, TEXTURE_UI_ICON_MISSED);
             LoadTexture(TEXTURE_UI_ICON_MONEY, TEXTURE_UI_ICON_MONEY);
+            LoadTexture(TEXTURE_UI_ICON_WARN, TEXTURE_UI_ICON_WARN);
 
             LoadTexture(TEXTURE_SPLAH_AWSM, TEXTURE_SPLAH_AWSM);
 

@@ -15,7 +15,18 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
     class WaveManager
     {
         public static readonly String EVENT_NEXT_WAVE = "waveManager.next";
+        public static readonly String EVENT_WAVE_STARTED= "waveManager.started";
 
+        public class WaveData
+        {
+            public WaveData(int c, int t)
+            {
+                Current = c;
+                Total = t;
+            }
+            public int Current;
+            public int Total;
+        }
 
         private WavesAsset _wavesAsset;
         private int _currentIndex = 0;
@@ -31,22 +42,26 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
         private void _Run(EngineEvent eventData)
         {
-            int delayMultiplayer = 0;
-            WaveAsset wave = _wavesAsset.Waves[_currentIndex++];
-            foreach (EnemyWavesAsset ewa in wave.Enemies)
+            if (_currentIndex < _wavesAsset.Waves.Count)
             {
-                for (int i = 0; i < ewa.Quantity; ++i)
+                int delayMultiplier = 0;
+                WaveAsset wave = _wavesAsset.Waves[_currentIndex];
+                foreach (EnemyWavesAsset ewa in wave.Enemies)
                 {
-                    long delay = delayMultiplayer++ * 1000;
-                    //find EnemyAssets by type
-                    Enemy.Def enemyData = _enemies.Find(e => e.Name.Equals(ewa.Type));
-                    if (enemyData != null)
+                    for (int i = 0; i < ewa.Quantity; ++i)
                     {
-                        EventStream.Instance.EmitDelay(Enemy.EVENT_SPAWN, new EngineEvent(enemyData), delay);
+                        long delay = delayMultiplier++ * 1000;
+                        //find EnemyAssets by type
+                        Enemy.Def enemyData = _enemies.Find(e => e.Name.Equals(ewa.Type));
+                        if (enemyData != null)
+                        {
+                            EventStream.Instance.EmitDelay(Enemy.EVENT_SPAWN, new EngineEvent(enemyData), delay);
+                        }
                     }
                 }
-            }
-                
+                EventStream.Instance.Emit(EVENT_WAVE_STARTED, new EngineEvent(new WaveData(_currentIndex, _wavesAsset.Waves.Count)));
+                ++_currentIndex;
+            }    
         }
     }
 }

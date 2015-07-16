@@ -28,6 +28,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private Label _energyLabel;
         private Label _missedLabel;
+        private Label _wavesLabel;
 
         public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter, Color drawerColor)
             :base(w)
@@ -46,6 +47,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _missedLabel = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
             _missedLabel.Position = new Vector2f(30, 90);
 
+            _wavesLabel = new Label("No Wave", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_WARN);
+            _wavesLabel.Position = new Vector2f(30, _window.Size.Y - 30);
+
 
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
@@ -55,6 +59,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             EventStream.Instance.On(ScoreManager.EVENT_ENERGY_CHANGED, onEnergyChanged);
             EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, onMissedChanged);
+            EventStream.Instance.On(WaveManager.EVENT_WAVE_STARTED, onWaveStarted);
+        }
+
+        private void onWaveStarted(EngineEvent eventData)
+        {
+            WaveManager.WaveData data = eventData.Data as WaveManager.WaveData;
+            _wavesLabel.DisplayedString = (data.Current+1) + "/" + data.Total;
         }
 
         private void onMissedChanged(EngineEvent eventData)
@@ -118,6 +129,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             target.Draw(_energyLabel);
             target.Draw(_missedLabel);
+            target.Draw(_wavesLabel);
 
             target.Draw(_selector, states);
         }
@@ -132,6 +144,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _drawer.Position = new Vector2f(0, 0);
 
             _selector.Position = new Vector2f(DRAWER_WIDTH, size.Y / 2f);
+
+            _wavesLabel.Position = new Vector2f(30, size.Y - 30);
         }
 
         public override bool DoRenderBelow()
