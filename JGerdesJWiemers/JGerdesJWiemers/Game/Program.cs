@@ -12,7 +12,7 @@ namespace JGerdesJWiemers.Game
     { 
         static void Main(string[] args)
         {
-            new Game().Start();
+            new JGerdesJWiemers.Game.Game().Start();
         }
     }
 }

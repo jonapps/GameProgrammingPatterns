@@ -144,6 +144,7 @@
     <Compile Include="Game\TowerDefence\Map.cs" />
     <Compile Include="Game\TowerDefence\Screens\CursorScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\Game.cs" />
+    <Compile Include="Game\TowerDefence\Screens\SplashScreen.cs" />
     <Compile Include="Game\TowerDefence\Screens\UiScreen.cs" />
     <Compile Include="Game\TowerDefence\Tiles\DespawnTile.cs" />
     <Compile Include="Game\TowerDefence\Tiles\TerrainTile.cs" />

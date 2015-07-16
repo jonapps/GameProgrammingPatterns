@@ -38,7 +38,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String TEXTURE_UI_ICON_MISSED = @"ui\icon_missed";
         public static readonly String TEXTURE_UI_ICON_MONEY = @"ui\icon_money";
 
-        public static readonly String TEXTURE_SPLAH_AWSM = @"ui\aswm";
+        public static readonly String TEXTURE_SPLAH_AWSM = @"ui\awsm";
 
         public static readonly String FONT_ROBOTO_THIN = @"Roboto-Thin.ttf";
 

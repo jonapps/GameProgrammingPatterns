@@ -57,8 +57,7 @@ namespace JGerdesJWiemers.Game
             this._stopWatch = new Stopwatch();
             InputManager.Instance.Init(_window);
             this._screenManager = new ScreenManager(_window);
-            this._screenManager.Push(new GameScreen.Game(_window));
-            this._screenManager.Push(new CursorScreen(_window));
+            this._screenManager.Push(new SplashScreen(_window));
             //this._screenManager.Push(new Editor.EditorScreen(_window));
             _window.SetActive();
             _window.Closed += this._OnClose;
