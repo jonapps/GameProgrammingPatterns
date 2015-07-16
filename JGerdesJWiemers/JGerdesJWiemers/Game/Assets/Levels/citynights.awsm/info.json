@@ -1,5 +1,6 @@
 {
 	"Name" : "City Nights",
+	"StartEnergy" : 5000,
 	"BackgroundColor" : {
 		"R" : 8,
 		"G" : 16,

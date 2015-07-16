@@ -52,22 +52,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private bool _viewLeft, _viewRight, _viewUp, _viewDown = false;
 
 
-        public Game(RenderWindow w)
+        public Game(RenderWindow w, LevelAsset level)
             :base(w)
         {
             
-            AssetLoader.Instance.LoadEnemyTextures();
-            List<LevelAsset> levels = AssetLoader.Instance.ReadLevels();
-
-
-            // do this somewhere else    --------------------------------------------
-            LevelAsset level = levels.Last();
             _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
             _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this, level.Info.DrawerColor);
             _clearColor = level.Info.BackgroundColor;
             ScoreManager.Instance.Energy = level.Info.StartEnergy;
-            // do this somewhere else    --------------------------------------------
 
         
             w.SetMouseCursorVisible(false);

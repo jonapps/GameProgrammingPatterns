@@ -13,7 +13,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     class SplashScreen: Screen
     {
 
-        private static readonly long DURATION = 3000;
+        private static readonly long DURATION = 30;
         private Sprite _image;
         private float _opacity;
         private long _startTime;
@@ -41,9 +41,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             if (JGerdesJWiemers.Game.Game.ElapsedTime - _startTime > DURATION)
             {
-                _screenManager.Pop();
-                _screenManager.Push(new Game(_window));
-                _screenManager.Push(new CursorScreen(_window));
+                _screenManager.Switch(new LevelSelector(_window));
             }
         }
 

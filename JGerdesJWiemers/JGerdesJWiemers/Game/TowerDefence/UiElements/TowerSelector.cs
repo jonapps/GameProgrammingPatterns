@@ -93,10 +93,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             {
                 int counter = 0;
                 float height = _options[0].Button.TextureRect.Height;
-                float offset = (_options.Count * height * 1.25f - height) / 2f;
+                float offset = (_options.Count * height - height) / 2f;
                 foreach (Option o in _options)
                 {
-                    float y = counter * height * 1.25f;
+                    float y = counter * height;
                     y -= offset;
                     o.Button.Position = value + new Vector2f(-128, y);
                     o.Top.Position = value + new Vector2f(-128, y);
