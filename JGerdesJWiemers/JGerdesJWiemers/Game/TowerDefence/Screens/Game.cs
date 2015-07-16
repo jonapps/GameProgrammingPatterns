@@ -64,7 +64,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             LevelAsset level = levels.Last();
             _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
-            _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this);
+            _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this, level.Info.DrawerColor);
             _clearColor = level.Info.BackgroundColor;
             // do this somewhere else    --------------------------------------------
 

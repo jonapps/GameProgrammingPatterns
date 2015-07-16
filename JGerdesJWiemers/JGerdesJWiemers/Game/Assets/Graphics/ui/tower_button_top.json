@@ -1,0 +1,11 @@
+{
+	"ImageTitle": "tower_button_top.png",
+	"SpriteSheet": {
+		"x": 10,
+		"y": 2
+	},
+	"Center": {
+		"x" : 64,
+		"y" : 64
+	}
+}

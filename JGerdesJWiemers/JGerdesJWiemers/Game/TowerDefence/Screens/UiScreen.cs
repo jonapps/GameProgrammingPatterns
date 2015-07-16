@@ -16,15 +16,23 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     class UiScreen : Screen
     {
 
+        public static readonly int DRAWER_WIDTH = 192;
+
         private Builder _builder;
         private TowerSelector _selector;
+        private Shape _drawer;
+        private Color _drawerColor;
 
-        public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter)
+        public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter, Color drawerColor)
             :base(w)
         {
 
             _builder = new Builder(map, converter);
-            _selector = new TowerSelector(towers, new Vector2f(_window.Size.X / 2f, _window.Size.Y - 40));
+            _drawerColor = drawerColor;
+            _drawer = new RectangleShape(new Vector2f(DRAWER_WIDTH, _window.Size.Y));
+            _drawer.FillColor = _drawerColor;
+            _drawer.Position = new Vector2f(0, 0);
+            _selector = new TowerSelector(towers, new Vector2f(DRAWER_WIDTH - 64, _window.Size.Y / 2f));
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
 
@@ -78,6 +86,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
         {
+            target.Draw(_drawer);
             target.Draw(_builder, states);
             target.Draw(_selector, states);
         }
@@ -86,7 +95,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             base._Resize(eventData);
             Vector2f size = (Vector2f)eventData.Data;
-            _selector.Position = new Vector2f(size.X / 2f, size.Y - 40);
+
+            _drawer = new RectangleShape(new Vector2f(DRAWER_WIDTH, _window.Size.Y));
+            _drawer.FillColor = _drawerColor;
+            _drawer.Position = new Vector2f(0, 0);
+
+            _selector.Position = new Vector2f(DRAWER_WIDTH - 64, size.Y / 2f);
         }
 
         public override bool DoRenderBelow()

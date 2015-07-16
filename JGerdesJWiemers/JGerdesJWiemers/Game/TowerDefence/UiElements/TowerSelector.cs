@@ -17,17 +17,22 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
 
         private class Option
         {
-            public AnimatedSprite Sprite;
+            public AnimatedSprite Button;
+            public AnimatedSprite Top;
             public Tower.Def TowerDef;
 
             public Option(Tower.Def def)
             {
-                TextureContainer container = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_TOWER_SELECTION); ;
+                TextureContainer container = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_TOWER_SELECTION_BUTTON);
                 TowerDef = def;
-                Sprite = new AnimatedSprite(container.Texture, container.Width, container.Height);
-                Sprite.Color = def.Base;
-                Sprite.Origin = new Vector2f(container.Width / 2f, container.Height / 2f);
-                Sprite.SetAnimation(new Animation());
+                Button = new AnimatedSprite(container.Texture, container.Width, container.Height);
+                Button.Color = def.Base;
+                Button.SetAnimation(new Animation());
+
+                container = AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_UI_TOWER_SELECTION_TOP);
+                Top = new AnimatedSprite(container.Texture, container.Width, container.Height);
+                Top.Color = def.TopActive;
+                Top.SetAnimation(new Animation());
 
             }
 
@@ -54,13 +59,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             set
             {
                 int counter = 0;
-                float width = _options[0].Sprite.TextureRect.Width;
-                float offset = (_options.Count * width * 1.5f - width) / 2f;
+                float height = _options[0].Button.TextureRect.Height;
+                float offset = (_options.Count * height * 1.25f - height) / 2f;
                 foreach (Option o in _options)
                 {
-                    float x = counter * width * 1.5f;
-                    x -= offset;
-                    o.Sprite.Position = value + new Vector2f(x, 0);
+                    float y = counter * height * 1.25f;
+                    y -= offset;
+                    o.Button.Position = value + new Vector2f(0, y);
+                    o.Top.Position = value + new Vector2f(0, y);
                     counter++;
                 }
             }
@@ -72,14 +78,20 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             {
                 if (_selected != -1)
                 {
-                    AnimatedSprite oldS = _options[_selected].Sprite;
-                    oldS.SetAnimation(new Animation(16, 31, 30, false, false));
+                    AnimatedSprite oldS = _options[_selected].Button;
+                    oldS.SetAnimation(new Animation(new int[]{14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1} ,10, false));
+                    oldS.EnqueueAnimation(new Animation());
+                    oldS = _options[_selected].Top;
+                    oldS.SetAnimation(new Animation(new int[] { 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }, 10, false));
                     oldS.EnqueueAnimation(new Animation());
                 }
                 
-                AnimatedSprite newS = _options[option].Sprite;
-                newS.SetAnimation(new Animation(0, 15, 30, false, false));
+                AnimatedSprite newS = _options[option].Button;
+                newS.SetAnimation(new Animation(0, 15, 10, false, false));
                 newS.EnqueueAnimation(new Animation(new int[]{15}, 1000, true));
+                newS = _options[option].Top;
+                newS.SetAnimation(new Animation(0, 15, 10, false, false));
+                newS.EnqueueAnimation(new Animation(new int[] { 15 }, 1000, true));
 
                 _selected = option;
 
@@ -94,7 +106,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
         {
             foreach (Option option in _options)
             {
-                option.Sprite.Update();
+                option.Button.Update();
+                option.Top.Update();
             }
         }
 
@@ -112,7 +125,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
         {
             foreach (Option option in _options)
             {
-                target.Draw(option.Sprite, states);
+                target.Draw(option.Button, states);
+                target.Draw(option.Top, states);
             }
         }
     }

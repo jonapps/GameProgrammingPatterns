@@ -11,5 +11,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
     {
         public string Name;
         public Color BackgroundColor;
+        public Color DrawerColor;
     }
 }
