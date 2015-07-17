@@ -68,6 +68,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             : base(w, AssetLoader.Instance.getTexture(def.Type), 0.75f)
         {
             _def = def;
+            _energy = (int)def.Energy;
             _body.Position = ConvertUnits.ToSimUnits(_def.Position);
             _destination = _body.Position;
             _sprite.Color = _def.Color;
@@ -180,10 +181,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             for (int i = 0; i < (dmg / 2); ++i)
             {
                 EventStream.Instance.Emit(Particle.EVENT_SPAWN, new EngineEvent(def));
-            }
-
-            EventStream.Instance.Emit(EVENT_LOST_ENERGY, new EngineEvent(dmg));
-                
+            }   
         }
 
         
