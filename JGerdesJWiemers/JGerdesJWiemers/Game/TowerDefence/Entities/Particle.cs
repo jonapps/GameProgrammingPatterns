@@ -1,6 +1,8 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine.Entities;
+using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Interfaces;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.TowerDefence.Screens;
@@ -25,6 +27,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private ICoordsConverter _converter;
         private Vector2 _destination;
 
+        private long _layTime = 5000;
+        private long _layStarted;
+        private bool _toDelivery = true;
         private bool _onDelivery = false;
 
         public class Def
@@ -33,8 +38,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Vector2 Destination { get; set; }
             public float Speed { get; set; }
             public Color Color { get; set; }
-
-
             public int Energy { get; set; }
         }
 
@@ -64,30 +67,45 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             base.Update();
             if ((Game.ElapsedTime - _started > _moveTime) && (!_onDelivery))
             {
-                _body.LinearVelocity = new Vector2(0, 0);
-
-                //_body.Enabled = false;
-                Vector2f pos = _converter.MapPixelToCoords(new Vector2i(500,500));
-                Vector2 dest = ConvertUnits.ToSimUnits(pos.ToVector2());
-                Collect(dest);
+                if (_toDelivery)
+                {
+                    _body.Enabled = false;
+                    _layStarted = Game.ElapsedTime;
+                    _toDelivery = false;
+                }
+                
+                if ((Game.ElapsedTime - _layStarted > _layTime) && (!_onDelivery))
+                {
+                    Vector2f pos = _converter.MapPixelToCoords(new Vector2i(0, 0));
+                    Vector2 dest = ConvertUnits.ToSimUnits(pos.ToVector2());
+                    Collect(dest);
+                }
             }
+
+            
 
             if (_onDelivery)
             {
                 if ((_body.Position - _destination).Length() < 0.2)
                 {
                     _body.Enabled = false;
+                    _deleteMe = true;
+                }
+
+                if (_body.Position.X < - 15 || _body.Position.Y < - 15)
+                {
+                    _body.Enabled = false;
+                    _deleteMe = true;
                 }
             }
         }
 
 
-
-
-
         //(x2 - x1, y2 - y1)
         public void Collect(Vector2 dest)
         {
+            EventStream.Instance.Emit(Enemy.EVENT_LOST_ENERGY, new EngineEvent(_energy));
+            _body.Enabled = true;
             Vector2 pos = _body.Position;
             Vector2 direction = new Vector2();
             direction.X = dest.X - pos.X;
@@ -96,11 +114,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             direction *= .5f;
             _body.ApplyLinearImpulse(direction);
             _destination = dest;
-
             _onDelivery = true;
         }
-
-        
-
     }
 }
