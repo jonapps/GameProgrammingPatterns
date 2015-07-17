@@ -83,7 +83,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Exit()
         {
-            
+
+            _window.KeyPressed -= _window_KeyPressed;
         }
 
         public override void Update()

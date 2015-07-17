@@ -55,7 +55,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w, LevelAsset level)
             :base(w)
         {
-            
+
+            JGerdesJWiemers.Game.Game.ElapsedTime = 0;
             _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
             _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this, level.Info.DrawerColor);
@@ -69,47 +70,54 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             EventStream.Instance.On(Tower.EVENT_BUILD, _BuildTower);
             EventStream.Instance.On(Particle.EVENT_SPAWN, _SpawnParticle);
 
-            _window.KeyPressed += delegate(object sender, KeyEventArgs args)
-            {
+            _window.KeyPressed +=_window_KeyPressed;
 
-
-                if (args.Code == Keyboard.Key.N)
-                    EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
-
-                if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
-                    _viewLeft = true;
-
-                if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
-                    _viewRight = true;
-
-                if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
-                    _viewUp = true;
-
-                if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
-                    _viewDown = true;
-            };
-
-            _window.KeyReleased += delegate(object sender, KeyEventArgs args)
-            {
-
-                if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
-                    _viewLeft = false;
-
-                if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
-                    _viewRight = false;
-
-                if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
-                    _viewUp = false;
-
-                if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
-                    _viewDown = false;
-            };
+            _window.KeyReleased += _window_KeyReleased;
 
 
 
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
+        }
+
+        void _window_KeyReleased(object sender, KeyEventArgs args)
+        {
+            if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
+                _viewLeft = false;
+
+            if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
+                _viewRight = false;
+
+            if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
+                _viewUp = false;
+
+            if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
+                _viewDown = false;
+        }
+
+        void _window_KeyPressed(object sender, KeyEventArgs args)
+        {
+            if (args.Code == Keyboard.Key.N)
+                EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
+
+            if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
+                _viewLeft = true;
+
+            if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
+                _viewRight = true;
+
+            if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
+                _viewUp = true;
+
+            if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
+                _viewDown = true;
+
+            if (args.Code == Keyboard.Key.M)
+            {
+                _screenManager.Pop();
+                _screenManager.Switch(new LevelSelector(_window));
+            }
         }
 
         private void _SpawnParticle(EngineEvent e)
@@ -209,7 +217,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Exit()
         {
-            
+            _window.KeyPressed -= _window_KeyPressed;
+            _window.KeyReleased -= _window_KeyReleased;
         }
 
         private void _MoveView()
