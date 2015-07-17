@@ -25,6 +25,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private ICoordsConverter _converter;
         private Vector2 _destination;
 
+        private long _layTime = 5000;
+        private long _layStarted;
+        private bool _toDelivery = true;
         private bool _onDelivery = false;
 
         public class Def
@@ -64,13 +67,22 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             base.Update();
             if ((Game.ElapsedTime - _started > _moveTime) && (!_onDelivery))
             {
-                _body.LinearVelocity = new Vector2(0, 0);
-
-                //_body.Enabled = false;
-                Vector2f pos = _converter.MapPixelToCoords(new Vector2i(500,500));
-                Vector2 dest = ConvertUnits.ToSimUnits(pos.ToVector2());
-                Collect(dest);
+                if (_toDelivery)
+                {
+                    _body.Enabled = false;
+                    _layStarted = Game.ElapsedTime;
+                    _toDelivery = false;
+                }
+                
+                if ((Game.ElapsedTime - _layStarted > _layTime) && (!_onDelivery))
+                {
+                    Vector2f pos = _converter.MapPixelToCoords(new Vector2i(500, 500));
+                    Vector2 dest = ConvertUnits.ToSimUnits(pos.ToVector2());
+                    Collect(dest);
+                }
             }
+
+            
 
             if (_onDelivery)
             {
@@ -85,9 +97,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
 
 
 
+
+
+
+
+
+
+
         //(x2 - x1, y2 - y1)
         public void Collect(Vector2 dest)
         {
+            _body.Enabled = true;
             Vector2 pos = _body.Position;
             Vector2 direction = new Vector2();
             direction.X = dest.X - pos.X;
@@ -96,7 +116,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             direction *= .5f;
             _body.ApplyLinearImpulse(direction);
             _destination = dest;
-
             _onDelivery = true;
         }
 
