@@ -17,13 +17,14 @@ namespace JGerdesJWiemers.Game.Engine.Entities.Input
         private CircleShape _pointer;
         private Window _window;
         private int _radius = 3;
-        private float _scrollSpeed = 10;
 
         public MouseCursor(Window w)  
         {
             _window = w;
             _pointer = new CircleShape(_radius);
-            _position = InputManager.Instance.MousePosition;
+            _position.X = (int)_window.Size.X / 2;
+            _position.Y = (int)_window.Size.Y / 2;
+            InputManager.Instance.MousePosition = _position;
             _pointer.Origin = new Vector2f(_radius,_radius);
             
         }
