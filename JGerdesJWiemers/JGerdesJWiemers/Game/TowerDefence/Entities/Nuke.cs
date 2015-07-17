@@ -18,9 +18,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
     class Nuke : SpriteEntity
     {
         public static readonly String EVENT_SPAWN = "nuke.spawn";
-        private long _timeToLive = 1000;
+        private long _timeToLive = 10000;
         private long _startTime = 0;
 
+        private Vector2 _destination;
 
         private Enemy _toDealDmg;
 
@@ -46,13 +47,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.CollisionCategories = EntityCategory.Nuke;
             _body.CollidesWith = EntityCategory.Monster;
             _damage = def.Damage;
-
             Vector2 direction = (def.Destination - _body.WorldCenter);
             direction.Normalize();
             _body.LinearVelocity = direction * def.Speed;
             _sprite.Rotation =  (float) (SMath.Atan2(direction.Y, direction.X) * (180 / SMath.PI));
             _startTime = Game.ElapsedTime;
             _body.OnCollision += _OnCollision;
+
+            _destination = def.Destination;
         }
 
         private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)

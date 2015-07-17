@@ -7,7 +7,7 @@
 			"Type": "icosahedron",
 			"DoFloat": true,
 			"Health": 20,
-			"Energy": 75,
+			"Energy": 175,
 			"Speed": 1.5,
 			"Shoot":
 			{
@@ -35,7 +35,7 @@
 			"Type": "donut",
 			"DoFloat": true,
 			"Health": 10,
-			"Energy": 120,
+			"Energy": 250,
 			"Speed": 0.5,
 			"Shoot":
 			{
