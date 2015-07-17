@@ -55,7 +55,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _window.MouseButtonPressed += _window_MouseButtonPressed;
 
             _selector.SelectionChanged += OnSelectionChanged;
-            OnSelectionChanged(towers[0]);
 
             EventStream.Instance.On(ScoreManager.EVENT_ENERGY_CHANGED, onEnergyChanged);
             EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, onMissedChanged);
@@ -96,6 +95,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             if ((int)e.Code > 26 && (int)e.Code < 35)
             {
                 _selector.Select((int) e.Code - 27);
+            }
+            else if (e.Code == SFML.Window.Keyboard.Key.Q)
+            {
+                _selector.Select(-1);
             }
                 
 

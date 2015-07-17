@@ -56,7 +56,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             {
                 _options.Add(new Option(def));
             }
-            Select(0);
             Position = position;
 
             EventStream.Instance.On(ScoreManager.EVENT_ENERGY_CHANGED, onEnergyChanged);
@@ -108,8 +107,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
 
         public void Select(int option)
         {
-            if (option >= 0 && option < _options.Count && option != _selected)
+            if (option >= 0 && option < _options.Count || option == -1)
             {
+                //deselect when same is selected
+                if (option == _selected)
+                    option = -1;
+
                 if (_selected != -1)
                 {
                     AnimatedSprite oldS = _options[_selected].Button;
@@ -119,18 +122,24 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                     oldS.SetAnimation(new Animation(new int[] { 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }, 10, false));
                     oldS.EnqueueAnimation(new Animation());
                 }
-                
-                AnimatedSprite newS = _options[option].Button;
-                newS.SetAnimation(new Animation(0, 15, 10, false, false));
-                newS.EnqueueAnimation(new Animation(new int[]{15}, 1000, true));
-                newS = _options[option].Top;
-                newS.SetAnimation(new Animation(0, 15, 10, false, false));
-                newS.EnqueueAnimation(new Animation(new int[] { 15 }, 1000, true));
+
+                if (option != -1)
+                {
+                    AnimatedSprite newS = _options[option].Button;
+                    newS.SetAnimation(new Animation(0, 15, 10, false, false));
+                    newS.EnqueueAnimation(new Animation(new int[] { 15 }, 1000, true));
+                    newS = _options[option].Top;
+                    newS.SetAnimation(new Animation(0, 15, 10, false, false));
+                    newS.EnqueueAnimation(new Animation(new int[] { 15 }, 1000, true));
+
+                }
 
                 _selected = option;
-
                 if (SelectionChanged != null)
                 {
+                    if(_selected == -1)
+                        SelectionChanged(null);
+                    else
                     SelectionChanged(_options[_selected].TowerDef);
                 }
             }
