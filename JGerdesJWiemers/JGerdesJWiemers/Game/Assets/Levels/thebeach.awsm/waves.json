@@ -1,0 +1,66 @@
+{
+	"waves":
+	[
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "PoolRing",
+					"quantity": 4
+				}
+			]
+		},
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "PoolRing",
+					"quantity": 4
+				},
+				{
+					"Type": "Whatever",
+					"Quantity": 1
+				}
+			]
+		},
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "PoolRing",
+					"quantity": 3
+				},
+				{
+					"Type": "Whatever",
+					"Quantity": 1
+				},
+				{
+					"Type": "PoolRing",
+					"quantity": 3
+				}
+
+			]
+		},
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "PoolRing",
+					"quantity": 2
+				},
+				{
+					"Type": "Whatever",
+					"Quantity": 4
+				},
+				{
+					"Type": "PoolRing",
+					"quantity": 2
+				}
+			]
+		}
+	]
+}

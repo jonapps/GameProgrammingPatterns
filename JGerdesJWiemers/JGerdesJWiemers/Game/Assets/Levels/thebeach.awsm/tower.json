@@ -1,0 +1,68 @@
+{
+	"Tower":[
+		{
+			"Radius" : 10,
+			"FireFrequency" : 500,
+			"Damage" : 10,
+			"BulletSpeed" : 4,
+			"Health" : 100,
+			"Price" : 500,
+			"Base" : {
+				"R": 211,
+				"G": 47,
+				"B": 47,
+				"A": 255
+			},
+			"TopActive" : {
+				"R": 230,
+				"G": 230,
+				"B": 230,
+				"A": 255
+			},
+			"TopWaiting" : {
+				"R": 20,
+				"G": 20,
+				"B": 20,
+				"A": 100
+			},
+			"BulletColor" : {
+				"R": 10,
+				"G": 10,
+				"B": 10,
+				"A": 255
+			},
+		},
+		{
+			"Radius" : 1,
+			"FireFrequency" : 1000,
+			"Damage" : 20,
+			"BulletSpeed" : 4,
+			"Health" : 100,
+			"Price" :750,
+			"Base" : {
+				"R": 93,
+				"G": 64,
+				"B": 55,
+				"A": 255
+			},
+			"TopActive" : {
+				"R": 56,
+				"G": 142,
+				"B": 60,
+				"A": 255
+			},
+			"TopWaiting" : {
+				"R": 200,
+				"G": 230,
+				"B": 201,
+				"A": 255
+			},
+			"BulletColor" : {
+				"R": 62,
+				"G": 39,
+				"B": 35,
+				"A": 255
+			},
+		}
+	]
+}

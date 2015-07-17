@@ -1,0 +1,16 @@
+{
+	"Name" : "The Beach",
+	"StartEnergy" : 5000,
+	"BackgroundColor" : {
+		"R" : 48,
+		"G" : 63,
+		"B" : 159,
+		"A" : 255
+	},
+	"DrawerColor" : {
+		"R" : 0,
+		"G" : 121,
+		"B" : 107,
+		"A" : 255
+	}
+}

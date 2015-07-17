@@ -1,0 +1,62 @@
+{
+	"Enemies":
+	[
+		
+		{
+			"Name": "Whatever",
+			"Type": "icosahedron",
+			"DoFloat": true,
+			"Health": 20,
+			"Energy": 75,
+			"Speed": 1.5,
+			"Shoot":
+			{
+				"DoShoot": false,
+				"Damage": 0,
+				"Speed": 0
+			},
+			"Color":
+			{
+				"R": 255,
+				"G": 82,
+				"B": 82,
+				"A": 255
+			},
+			"DeadColor":
+			{
+				"R": 255,
+				"G": 205,
+				"B": 210,
+				"A": 255
+			}
+		},
+		{
+			"Name": "PoolRing",
+			"Type": "donut",
+			"DoFloat": true,
+			"Health": 10,
+			"Energy": 120,
+			"Speed": 0.5,
+			"Shoot":
+			{
+				"DoShoot": false,
+				"Damage": 10,
+				"Speed": 20
+			},
+			"Color":
+			{
+				"R": 224,
+				"G": 64,
+				"B": 251,
+				"A": 210
+			},
+			"DeadColor":
+			{
+				"R": 225,
+				"G": 190,
+				"B": 231,
+				"A": 50
+			}
+		}
+	]
+}
