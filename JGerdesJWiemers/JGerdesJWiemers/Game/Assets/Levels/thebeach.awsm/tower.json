@@ -33,7 +33,7 @@
 			},
 		},
 		{
-			"Radius" : 1,
+			"Radius" : 2,
 			"FireFrequency" : 1000,
 			"Damage" : 20,
 			"BulletSpeed" : 4,
