@@ -46,7 +46,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Map _map;
         private WaveManager _waveManager;
         private UiScreen _uiScreen;
-
+        private LevelAsset _level;
 
 
         private bool _viewLeft, _viewRight, _viewUp, _viewDown = false;
@@ -55,23 +55,30 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public Game(RenderWindow w, LevelAsset level)
             :base(w)
         {
-
+            _level = level;
             JGerdesJWiemers.Game.Game.ElapsedTime = 0;
+            EventStream.Instance.Clear();
             _map = new Map(level.Map);
             _waveManager = new WaveManager(level.Waves, level.Enemies.Enemies);
-            _uiScreen = new UiScreen(_window, _map, level.Tower, (ICoordsConverter)this, level.Info.DrawerColor);
+            _uiScreen = new UiScreen(_window, _map, (ICoordsConverter)this, level);
             _clearColor = level.Info.BackgroundColor;
             ScoreManager.Instance.Energy = level.Info.StartEnergy;
+            ScoreManager.Instance.Missed = 0;
 
         
             w.SetMouseCursorVisible(false);
+
+
+            // Register Events
             EventStream.Instance.On(Enemy.EVENT_SPAWN, _SpawnEnemy);
             EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);
             EventStream.Instance.On(Tower.EVENT_BUILD, _BuildTower);
             EventStream.Instance.On(Particle.EVENT_SPAWN, _SpawnParticle);
+            EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, _OnLivesChange);
+
+
 
             _window.KeyPressed +=_window_KeyPressed;
-
             _window.KeyReleased += _window_KeyReleased;
 
 
@@ -79,6 +86,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
+        }
+
+        private void _OnLivesChange(EngineEvent eventData)
+        {
+            if ((int)(eventData.Data) >= _level.Info.Lives)
+            {
+                Environment.Exit(1);
+            }
         }
 
         void _window_KeyReleased(object sender, KeyEventArgs args)
@@ -151,6 +166,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
             ScoreManager.Instance.Energy -= def.Price;
         }
+
+
+       
 
         /// <summary>
         /// Spawns a Monster at the first spawn point

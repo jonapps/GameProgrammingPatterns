@@ -1,5 +1,6 @@
 {
-	"Name" : "City Nights",
+    "Name": "City Nights",
+    "Lives": 5,
 	"StartEnergy" : 5000,
 	"BackgroundColor" : {
 		"R" : 8,

@@ -13,6 +13,7 @@ using SFML.System;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
+using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -28,24 +29,27 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private Label _energyLabel;
         private Label _missedLabel;
+        private Label _missedLabelMax;
         private Label _wavesLabel;
 
-        public UiScreen(RenderWindow w, Map map, List<Tower.Def> towers, ICoordsConverter converter, Color drawerColor)
+        public UiScreen(RenderWindow w, Map map, ICoordsConverter converter, LevelAsset level)
             :base(w)
         {
-
             _builder = new Builder(map, converter);
-            _drawerColor = drawerColor;
+            _drawerColor = level.Info.DrawerColor;
             _drawer = new RectangleShape(new Vector2f(DRAWER_WIDTH, _window.Size.Y));
             _drawer.FillColor = _drawerColor;
             _drawer.Position = new Vector2f(0, 0);
-            _selector = new TowerSelector(towers, new Vector2f(DRAWER_WIDTH, _window.Size.Y / 2f));
+            _selector = new TowerSelector( level.Tower, new Vector2f(DRAWER_WIDTH, _window.Size.Y / 2f));
 
             _energyLabel = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
             _energyLabel.Position = new Vector2f(30, 50);
 
             _missedLabel = new Label("0", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MISSED);
             _missedLabel.Position = new Vector2f(30, 90);
+
+            _missedLabelMax = new Label("/ "+level.Info.Lives.ToString(), AssetLoader.FONT_ROBOTO_THIN, 24);
+            _missedLabelMax.Position = new Vector2f(100, 90);
 
             _wavesLabel = new Label("No Wave", AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_WARN);
             _wavesLabel.Position = new Vector2f(30, _window.Size.Y - 30);
@@ -132,6 +136,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             target.Draw(_energyLabel);
             target.Draw(_missedLabel);
+            target.Draw(_missedLabelMax);
             target.Draw(_wavesLabel);
 
             target.Draw(_selector, states);

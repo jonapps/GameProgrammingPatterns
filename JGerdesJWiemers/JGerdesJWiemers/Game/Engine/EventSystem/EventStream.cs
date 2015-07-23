@@ -28,6 +28,9 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             }
         }
 
+
+       
+
         private EventStream()
         {
             _executedDelayedEvents = new List<DelayedEvent>();
@@ -35,6 +38,11 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             _events = new Dictionary<string, List<EventListener>>();
         }
 
+        public void Clear()
+        {
+            //_delayedEvents.Clear();
+            //_executedDelayedEvents.Clear();
+        }
 
         public void On(string eventName, EventListener callback)
         {

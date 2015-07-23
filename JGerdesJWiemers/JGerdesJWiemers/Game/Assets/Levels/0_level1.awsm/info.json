@@ -1,5 +1,6 @@
 {
-	"Name" : "First Level",
+    "Name": "First Level",
+    "Lives": 5,
 	"StartEnergy" : 1000,
 	"BackgroundColor" : {
 		"R" : 10,

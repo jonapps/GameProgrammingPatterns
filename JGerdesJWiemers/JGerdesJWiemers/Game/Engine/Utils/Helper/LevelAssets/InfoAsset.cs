@@ -14,5 +14,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
         public Color BackgroundColor;
         public Color DrawerColor;
         public Texture Preview;
+        public int Lives;
     }
 }

@@ -1,6 +1,8 @@
 {
-	"Name" : "The Beach",
-	"StartEnergy" : 2500,
+    "Name": "The Beach",
+    "Lives": 5,
+    "StartEnergy": 2500,
+
 	"BackgroundColor" : {
 		"R" : 24,
 		"G" : 33,
