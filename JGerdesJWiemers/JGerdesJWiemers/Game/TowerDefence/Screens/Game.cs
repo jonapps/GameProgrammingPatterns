@@ -89,7 +89,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _view.Center = Map.MapToScreen(center.X, center.Y);
 
 
-            AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_2);
+            AudioManager.Instance.PlayMusic("music_"+_level.Info.Name, 0.5f, _level.Info.Music);
         }
 
         private void _OnLivesChange(EngineEvent eventData)

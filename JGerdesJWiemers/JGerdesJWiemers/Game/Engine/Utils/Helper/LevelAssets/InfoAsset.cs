@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using JGerdesJWiemers.Game.Engine.Audio;
+using SFML.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
         public Color BackgroundColor;
         public Color DrawerColor;
         public Texture Preview;
+        public CachedSound Music;
         public int Lives;
     }
 }
