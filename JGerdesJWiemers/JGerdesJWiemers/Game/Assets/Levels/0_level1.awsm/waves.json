@@ -1,125 +1,33 @@
 {
 	"waves":
 	[
-		{
-			"Time": 10000,
-			"Enemies":
-			[
-				{
-					"Type": "NightRider",
-					"Quantity": 30
-				}
-				
-			]
-		},
-		{
-			"Time": 10000,
-			"Enemies":
-			[
-				{
-					"Type": "NightRider",
-					"Quantity": 30
-				}
-
-			]
-		},
         {
             "Time": 10000,
             "Enemies": [
                 {
-                    "Type": "DrunkHeads",
-                    "Quantity": 30
+                    "Type": "DeadCruiser",
+                    "Quantity": 1
                 },
                 {
                     "Type": "DeadCruiser",
-                    "quantity": 2
+                    "Quantity": 1
                 }
+
             ]
         },
         {
 			"Time": 10000,
 			"Enemies":
 			[
-				{
-					"Type": "NightRider",
-					"Quantity": 10
-				},
-				{
-					"Type": "DeadCruiser",
-					"quantity": 1
-				}
-			]
-		},
-		{
-			"Time": 10000,
-			"Enemies":
-			[
-				{
-					"Type": "NightRider",
-					"Quantity": 10
-				},
-				{
-					"Type": "DeadCruiser",
-					"quantity": 1
-				}
-			]
-		},
-		{
-			"Time": 10000,
-			"Enemies":
-			[
                 {
-                    "Type": "DrunkHeads",
-                    "Quantity": 40
-                },
-                {
-					"Type": "NightRider",
-					"Quantity": 10
-				},
-                {
-                    "Type": "HardLiner",
-                    "Quantity": 15
+                    "Type": "DeadCruiser",
+                    "Quantity": 1
                 },
                 {
 					"Type": "DeadCruiser",
-					"quantity": 2
+					"Quantity": 1
 				}
-			]
-		},
-        {
-            "Time": 10000,
-            "Enemies": [
-                {
-                    "Type": "DrunkHeads",
-                    "Quantity": 40
-                },
-                {
-					"Type": "NightRider",
-					"Quantity": 20
-				},
-                {
-                    "Type": "HardLiner",
-                    "Quantity": 40
-                },
-                {
-					"Type": "DeadCruiser",
-					"quantity": 2
-				}
-            ]
-        }
-        ,
-		{
-			"Time": 10000,
-			"Enemies":
-			[
-                {
-                    "Type": "DrunkHeads",
-                    "Quantity": 40
-                },
-                {
-					"Type": "HardLiner",
-					"Quantity": 60
-				}
+			
 			]
 		}
 	]

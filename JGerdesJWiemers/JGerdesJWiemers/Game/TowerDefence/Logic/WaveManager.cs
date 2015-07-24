@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameScreen = JGerdesJWiemers.Game.TowerDefence.Screens.Game;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Logic
 {
@@ -28,9 +29,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
             }
             public int Current;
             public int Total;
-
-
-           
         }
 
         private WavesAsset _wavesAsset;
@@ -44,13 +42,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
             _enemies = enemies;
 
             EventStream.Instance.On(EVENT_NEXT_WAVE, _Run);
+
         }
+
+
+
+
 
 
         private void _Run(EngineEvent eventData)
         {
             if (_currentIndex < _wavesAsset.Waves.Count)
             {
+                
                 int delayMultiplier = 0;
                 WaveAsset wave = _wavesAsset.Waves[_currentIndex];
                 foreach (EnemyWavesAsset ewa in wave.Enemies)
@@ -66,8 +70,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                         }
                     }
                 }
-                EventStream.Instance.Emit(EVENT_WAVE_STARTED, new EngineEvent(new WaveData(_currentIndex, _wavesAsset.Waves.Count)));
                 ++_currentIndex;
+                EventStream.Instance.Emit(EVENT_WAVE_STARTED, new EngineEvent(new WaveData(_currentIndex, _wavesAsset.Waves.Count)));
             }    
         }
     }

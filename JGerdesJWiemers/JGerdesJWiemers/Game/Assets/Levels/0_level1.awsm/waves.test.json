@@ -1,0 +1,16 @@
+{
+	"waves":
+	[
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+				{
+					"Type": "DeadCruiser",
+					"Quantity": 4
+				}
+				
+			]
+		}
+	]
+}
