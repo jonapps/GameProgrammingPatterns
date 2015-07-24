@@ -83,35 +83,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             _textures = new Dictionary<string, TextureContainer>();
             _sounds = new Dictionary<string, CachedSound>();
 
-            LoadTexture(TEXTURE_SHADOW, TEXTURE_SHADOW);
-            LoadTexture(TEXTURE_TOWER_BASE, TEXTURE_TOWER_BASE);
-            LoadTexture(TEXTURE_TOWER_TOP, TEXTURE_TOWER_TOP);
-            LoadTexture(TEXTURE_BULLET, TEXTURE_BULLET);
-
-            LoadTexture(TEXTURE_UI_TOWER_SELECTION_BUTTON, TEXTURE_UI_TOWER_SELECTION_BUTTON);
-            LoadTexture(TEXTURE_UI_TOWER_SELECTION_TOP, TEXTURE_UI_TOWER_SELECTION_TOP);
-            LoadTexture(TEXTURE_UI_ICON_ENEGRY, TEXTURE_UI_ICON_ENEGRY);
-            LoadTexture(TEXTURE_UI_ICON_MISSED, TEXTURE_UI_ICON_MISSED);
-            LoadTexture(TEXTURE_UI_ICON_MONEY, TEXTURE_UI_ICON_MONEY);
-            LoadTexture(TEXTURE_UI_ICON_WARN, TEXTURE_UI_ICON_WARN);
-
-            LoadTexture(TEXTURE_SPLAH_AWSM, TEXTURE_SPLAH_AWSM);
-
             LoadFont(FONT_ROBOTO_THIN, FONT_ROBOTO_THIN);
 
-            LoadSound(AUDIO_SHOT_1, AUDIO_SHOT_1);
-            LoadSound(AUDIO_SHOT_2, AUDIO_SHOT_2);
-            LoadSound(AUDIO_SHOT_3, AUDIO_SHOT_3);
-            LoadSound(AUDIO_SHOT_4, AUDIO_SHOT_4);
-            LoadSound(AUDIO_SHOT_5, AUDIO_SHOT_5);
-            LoadSound(AUDIO_BUILD, AUDIO_BUILD);
-            LoadSound(AUDIO_BUILD_NOT, AUDIO_BUILD_NOT);
-            LoadSound(AUDIO_MISSED, AUDIO_MISSED);
-            LoadSound(AUDIO_START_LEVEL, AUDIO_START_LEVEL);
-            LoadSound(AUDIO_SELECT_LEVEL, AUDIO_SELECT_LEVEL);
-            LoadSound(AUDIO_SELECT_TOWER, AUDIO_SELECT_TOWER);
-
-            LoadSound(AUDIO_MUSIC_1, AUDIO_MUSIC_1);
         }
 
         public void LoadFont(String name, String filename)
