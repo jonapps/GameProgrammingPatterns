@@ -46,7 +46,7 @@
                     "Quantity": 1
                 },
                 {
-                    "Type": "PoolRing",
+                    "Type": "TheShizlDizl",
                     "quantity": 3
                 },
                 {
@@ -68,7 +68,7 @@
                     "Quantity": 4
                 },
                 {
-                    "Type": "PoolRing",
+                    "Type": "TheShizlDizl",
                     "quantity": 2
                 },
                 {
@@ -93,7 +93,7 @@
                     "Quantity": 4
                 },
                 {
-                    "Type": "PoolRing",
+                    "Type": "TheShizlDizl",
                     "quantity": 2
                 },
                 {
@@ -127,7 +127,7 @@
             "Time": 10000,
             "Enemies": [
                 {
-                    "Type": "PoolRing",
+                    "Type": "TheShizlDizl",
                     "quantity": 2
                 },
                 {
@@ -148,8 +148,12 @@
             "Time": 10000,
             "Enemies": [
                 {
-                    "Type": "PoolRing",
-                    "quantity": 2
+                    "Type": "TheShizlDizl",
+                    "quantity": 6
+                },
+                {
+                    "Type": "TickTack",
+                    "quantity": 6
                 },
                 {
                     "Type": "Whatever",
@@ -165,10 +169,14 @@
 			"Time": 10000,
 			"Enemies":
 			[
-				{
-					"Type": "PoolRing",
-					"quantity": 2
-				},
+                {
+                    "Type": "TheShizlDizl",
+                    "quantity": 40
+                },
+                {
+                    "Type": "TickTack",
+                    "quantity": 20
+                },
 				{
 					"Type": "Whatever",
 					"Quantity": 12

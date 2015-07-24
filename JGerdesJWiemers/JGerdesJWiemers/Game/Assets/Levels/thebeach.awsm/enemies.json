@@ -113,6 +113,34 @@
 				"B": 0,
 				"A": 175
 			}
+		},
+		{
+			"Name": "TheShizlDizl",
+			"Type": "pyramid",
+			"DoFloat": true,
+			"Health": 5000,
+			"Energy": 40,
+			"Speed":0.3,
+			"Shoot":
+			{
+				"DoShoot": false,
+				"Damage": 10,
+				"Speed": 20
+			},
+			"Color":
+			{
+				"R": 25,
+				"G": 20,
+				"B": 200,
+				"A": 255
+			},
+			"DeadColor":
+			{
+				"R": 255,
+				"G": 00,
+				"B": 55,
+				"A": 210
+			}
 		}
 	]
 }
