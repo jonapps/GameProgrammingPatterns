@@ -16,6 +16,9 @@ namespace JGerdesJWiemers.Game.Engine.Audio
     //Partly adapted from https://gist.github.com/markheath/8783999
     class AudioManager
     {
+        public static readonly float GLOBAL_SOUND_VOLUME_MULTIPLYER = 0.2f;
+        public static readonly float GLOBAL_MUSIC_VOLUME_MULTIPLYER = 1f;
+
         private readonly IWavePlayer outputDevice;
         private readonly MixingSampleProvider mixer;
 
@@ -48,10 +51,11 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         
         public void PlaySound(String soundname, float volume = 1)
         {
+            volume *= GLOBAL_SOUND_VOLUME_MULTIPLYER;
             AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)), volume);
         }
 
-        public void PlayMusic(String musicName, float volume = 0.5f, CachedSound musicData = null)
+        public void PlayMusic(String musicName, float volume = 1, CachedSound musicData = null)
         {
             if(musicName != _musicName)
             {
@@ -63,6 +67,7 @@ namespace JGerdesJWiemers.Game.Engine.Audio
                 {
                     musicData = AssetLoader.Instance.GetSound(musicName);
                 }
+                volume *= GLOBAL_MUSIC_VOLUME_MULTIPLYER;
                 _music = AddMixerInput(new CachedSoundSampleProvider(musicData), volume);
                 _musicName = musicName;
             }

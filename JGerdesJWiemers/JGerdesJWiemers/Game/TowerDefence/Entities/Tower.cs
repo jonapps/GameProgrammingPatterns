@@ -26,6 +26,15 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
     class Tower : SpriteEntity
     {
         public static readonly String EVENT_BUILD = "tower.create";
+        public static readonly float SHOT_SOUND_VOLUME = 0.5f;
+        public static readonly List<String> SOUNDS = new List<String>()
+            {
+                AssetLoader.AUDIO_SHOT_1,
+                AssetLoader.AUDIO_SHOT_2,
+                AssetLoader.AUDIO_SHOT_3,
+                AssetLoader.AUDIO_SHOT_4,
+                AssetLoader.AUDIO_SHOT_5
+            };
 
         public class Def
         {
@@ -40,6 +49,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             public Vector2 Position;
             public float Health = 100;
             public int Price = 10;
+            public int Sound;
 
             public Def()
             {
@@ -129,7 +139,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Color = _def.BulletColor
             };
 
-            AudioManager.Instance.PlaySound(AssetLoader.AUDIO_SHOT_1, 0.2f);
+            AudioManager.Instance.PlaySound(SOUNDS[_def.Sound], SHOT_SOUND_VOLUME);
             EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
