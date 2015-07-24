@@ -32,8 +32,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
         private ScoreManager()
         {
-            EventStream.Instance.On(Enemy.EVENT_LOST_ENERGY, onEnemyEnergyLost);
-            EventStream.Instance.On(Enemy.EVENT_DESPAWN, onEnemyDespawn);
+            EventStream.Instance.OnPersistent(Enemy.EVENT_LOST_ENERGY, onEnemyEnergyLost);
+            EventStream.Instance.OnPersistent(Enemy.EVENT_DESPAWN, onEnemyDespawn);
         }
 
         public void onEnemyDespawn(EngineEvent e)

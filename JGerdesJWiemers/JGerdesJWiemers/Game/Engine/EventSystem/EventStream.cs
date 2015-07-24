@@ -12,6 +12,7 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
     {
         public delegate void EventListener(EngineEvent eventData);
         private Dictionary<String, List<EventListener>> _events;
+        private Dictionary<String, List<EventListener>> _persistentEvents;
         private static EventStream _instance = null;
 
         private List<DelayedEvent> _delayedEvents;
@@ -36,17 +37,24 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             _executedDelayedEvents = new List<DelayedEvent>();
             _delayedEvents = new List<DelayedEvent>();
             _events = new Dictionary<string, List<EventListener>>();
+            _persistentEvents = new Dictionary<string, List<EventListener>>();
         }
 
         public void Clear()
         {
-            //_delayedEvents.Clear();
-            //_executedDelayedEvents.Clear();
+            _events.Clear();
+            _delayedEvents.Clear();
+            _executedDelayedEvents.Clear();
         }
 
         public void On(string eventName, EventListener callback)
         {
             _AddListener(eventName, callback);
+        }
+
+        public void OnPersistent(string eventName, EventListener callback)
+        {
+            _AddPersistentListener(eventName, callback);
         }
 
         private void _AddListener(string eventName, EventListener callback)
@@ -61,6 +69,20 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
                 _events[eventName].Add(callback);
             }
         }
+
+        private void _AddPersistentListener(string eventName, EventListener callback)
+        {
+            if (_persistentEvents.ContainsKey(eventName))
+            {
+                _persistentEvents[eventName].Add(callback);
+            }
+            else
+            {
+                _persistentEvents[eventName] = new List<EventListener>();
+                _persistentEvents[eventName].Add(callback);
+            }
+        }
+
 
         public void Emit(String eventName, EngineEvent eventData)
         {
@@ -87,6 +109,15 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
                 {
                     callbacks[i].DynamicInvoke(eventData);
                 } 
+            }
+
+            if (_persistentEvents.ContainsKey(eventName))
+            {
+                List<EventListener> callbacks = _persistentEvents[eventName];
+                for (int i = 0; i < callbacks.Count; ++i)
+                {
+                    callbacks[i].DynamicInvoke(eventData);
+                }
             }
         }
 

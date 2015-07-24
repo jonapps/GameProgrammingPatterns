@@ -41,7 +41,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
                 _window.SetView(_view);
                 _renderTexture.Display();
 
-                EventStream.Instance.On(Game.EVENT_RESIZE, _Resize);
+                EventStream.Instance.OnPersistent(Game.EVENT_RESIZE, _Resize);
         }
 
         private void _Resize(EventSystem.Events.EngineEvent eventData)
@@ -139,7 +139,11 @@ namespace JGerdesJWiemers.Game.Engine.Graphics
             Screen old = Pop();
             _Push(s, false);
             return old;
+        }
 
+        public void RemoveAll()
+        {
+            _screens.Clear();
         }
 
         public Screen Top()

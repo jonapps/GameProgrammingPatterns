@@ -51,14 +51,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _sprite.Color = def.Color;
             _body.Position = def.Position;
             _energy = def.Energy;
-            _body.CollisionCategories = EntityCategory.Particle;
             Vector2 direction = new Vector2((float)rand.NextDouble(), (float)rand.NextDouble());
             direction.Normalize();
             _body.CollisionCategories = EntityCategory.Particle;
             _body.CollidesWith = 0;
             _body.LinearVelocity = direction * (_moveTime / 40);
             _started = Game.ElapsedTime;
-
 
         }
 

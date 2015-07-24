@@ -60,11 +60,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private bool _OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
             Enemy m = null;
-            if (fixtureB.Body.UserData is Tower || fixtureB.UserData is Nuke)
-            {
-                return false;
-            }
-            else if ((m = fixtureB.Body.UserData as Enemy) != null)
+            if ((m = fixtureB.Body.UserData as Enemy) != null)
             {
                 if (!_deleteMe)
                 {

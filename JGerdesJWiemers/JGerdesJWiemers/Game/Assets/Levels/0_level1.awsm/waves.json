@@ -7,12 +7,9 @@
 			[
 				{
 					"Type": "NightRider",
-					"Quantity": 10
-				},
-				{
-					"Type": "DeadCruiser",
-					"quantity": 2
+					"Quantity": 30
 				}
+				
 			]
 		},
 		{
@@ -21,12 +18,9 @@
 			[
 				{
 					"Type": "NightRider",
-					"Quantity": 10
-				},
-				{
-					"Type": "DeadCruiser",
-					"quantity": 2
+					"Quantity": 30
 				}
+
 			]
 		},
         {
@@ -34,7 +28,7 @@
             "Enemies": [
                 {
                     "Type": "DrunkHeads",
-                    "Quantity": 10
+                    "Quantity": 30
                 },
                 {
                     "Type": "DeadCruiser",
@@ -52,7 +46,7 @@
 				},
 				{
 					"Type": "DeadCruiser",
-					"quantity": 2
+					"quantity": 1
 				}
 			]
 		},
@@ -66,7 +60,7 @@
 				},
 				{
 					"Type": "DeadCruiser",
-					"quantity": 2
+					"quantity": 1
 				}
 			]
 		},
@@ -76,11 +70,7 @@
 			[
 				{
 					"Type": "DrunkHeads",
-					"Quantity": 10
-				},
-				{
-					"Type": "DeadCruiser",
-					"quantity": 2
+					"Quantity": 40
 				}
 			]
 		}

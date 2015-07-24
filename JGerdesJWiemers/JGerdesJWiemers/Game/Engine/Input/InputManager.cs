@@ -16,6 +16,7 @@ namespace JGerdesJWiemers.Game.Engine.Input
 
     class InputManager
     {
+
         public Vector2i MousePosition = new Vector2i(0, 0);
 
 
