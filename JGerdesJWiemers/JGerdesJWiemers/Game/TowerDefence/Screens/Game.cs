@@ -138,7 +138,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private void _SpawnParticle(EngineEvent e)
         {
             Particle.Def def = e.Data as Particle.Def;
-            _entitiesToAdd.Add(new Particle(_world, def, this));
+            _particlesToAdd.Add(new Particle(_world, def, this));
+            //_particleIsDirty = true;
         }
 
         public override void Create()
@@ -150,7 +151,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private void _SpawnNuke(EngineEvent eventData)
         {
             Nuke.Def data = (eventData.Data as Nuke.Def);
-            _entitiesToAdd.Add(new Nuke(_world, data));
+            _nukesToAdd.Add(new Nuke(_world, data));
         }
 
         void _BuildTower(EngineEvent e)
