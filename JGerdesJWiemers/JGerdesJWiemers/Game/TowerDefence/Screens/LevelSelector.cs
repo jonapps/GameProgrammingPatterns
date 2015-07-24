@@ -28,8 +28,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
         }
 
-        private static Color WHITE = new Color(255, 255, 255, 255);
-        private static Color AWSM_ORANGE = new Color(253, 162, 71);
+        public static Color WHITE = new Color(255, 255, 255, 255);
+        public static Color AWSM_ORANGE = new Color(253, 162, 71);
+        public static Color AWSM_GREY = new Color(84, 84, 84);
 
         //Dööö dööö döö, dö dö dö dö dö döö dö dö
         List<LevelLabel> levels;
@@ -37,7 +38,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public LevelSelector(RenderWindow w)
         :base(w){
-            _clearColor = new Color(84, 84, 84);
+            _clearColor = AWSM_GREY;
 
             levels = new List<LevelLabel>();
 
