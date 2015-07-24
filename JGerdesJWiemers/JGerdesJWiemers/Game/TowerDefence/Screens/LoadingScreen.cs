@@ -14,6 +14,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     {
         private enum Mode {GRAPHICS, AUDIO, LEVEL};
         private static int BAR_HEIGHT = 16;
+        private static int DESCRIPTION_PADDING = 4;
 
         private List<String> _textures;
         private List<String> _sounds;
@@ -22,6 +23,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private int _currentIndex = 0;
 
         private RectangleShape _bar;
+        private Text _description;
         private float _pixels_per_asset;
 
         public LoadingScreen(RenderWindow w)
@@ -60,6 +62,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _bar = new RectangleShape(new Vector2f(0, BAR_HEIGHT));
             _bar.Position = new Vector2f(0, _window.Size.Y - BAR_HEIGHT);
             _bar.FillColor = LevelSelector.AWSM_ORANGE;
+            _description = new Text("Loading graphics...", AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_THIN));
+            _description.CharacterSize = 18;
+            _description.Origin = new Vector2f(0, _description.GetLocalBounds().Height);
+            _description.Position = _bar.Position + new Vector2f(DESCRIPTION_PADDING, -DESCRIPTION_PADDING);
         }
         public override void Exit()
         {
@@ -81,6 +87,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                     {
                         _currentIndex = 0;
                         _mode = Mode.AUDIO;
+                        _description.DisplayedString = "Loading audio...";
                     }
                     else
                     {
@@ -94,6 +101,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                     {
                         _currentIndex = 0;
                         _mode = Mode.LEVEL;
+                        _description.DisplayedString = "Loading levels...";
                     }
                     else
                     {
@@ -141,7 +149,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Draw(SFML.Graphics.RenderTarget target, SFML.Graphics.RenderStates states)
         {
-            target.Draw(_bar);   
+            target.Draw(_bar);
+            target.Draw(_description);
         }
     }
 }
