@@ -79,8 +79,29 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
         {
             foreach(Entity e in _entities)
                 e.PreDraw(extra);
+           _entities = PerformInsertionSort(_entities);
 
-            _entities.Sort((first, second) => first.Z.CompareTo(second.Z));
+        }
+
+
+
+        public List<Entity> PerformInsertionSort(List<Entity> inputarray)
+        {
+            for (var counter = 0; counter < inputarray.Count - 1; counter++)
+            {
+                var index = counter + 1;
+                while (index > 0)
+                {
+                    if (inputarray[index - 1].Z > inputarray[index].Z)
+                    {
+                        var temp = inputarray[index - 1];
+                        inputarray[index - 1] = inputarray[index];
+                        inputarray[index] = temp;
+                    }
+                    index--;
+                }
+            }
+            return inputarray;
         }
 
         public override void Draw(RenderTarget target, RenderStates states)

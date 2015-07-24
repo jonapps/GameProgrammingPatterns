@@ -302,5 +302,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             return _window.MapCoordsToPixel(coordsPoint, _view);
         }
+
+      
     }
+
 }
