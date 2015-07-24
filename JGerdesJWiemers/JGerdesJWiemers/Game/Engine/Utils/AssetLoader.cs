@@ -112,7 +112,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadSound(AUDIO_SELECT_TOWER, AUDIO_SELECT_TOWER);
 
             LoadSound(AUDIO_MUSIC_1, AUDIO_MUSIC_1);
-            LoadSound(AUDIO_MUSIC_2, AUDIO_MUSIC_2);
         }
 
         public void LoadFont(String name, String filename)
