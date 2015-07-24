@@ -45,13 +45,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             :base(world, AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_BULLET))
         {
             _converter = converter;
-            Random rand = new Random();
-            _moveTime = rand.Next(50, 150);
+
+            _moveTime = Game.GameRandom.Next(50, 150);
             _sprite.Scale = new Vector2f(0.4f, 0.4f);
             _sprite.Color = def.Color;
             _body.Position = def.Position;
             _energy = def.Energy;
-            Vector2 direction = new Vector2((float)rand.NextDouble(), (float)rand.NextDouble());
+            Vector2 direction = new Vector2((float)Game.GameRandom.NextDouble(), (float)Game.GameRandom.NextDouble());
             direction.Normalize();
             _body.CollisionCategories = EntityCategory.Particle;
             _body.CollidesWith = 0;

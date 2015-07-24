@@ -2,6 +2,69 @@
 	"waves":
 	[
 		{
+			"Time": 1000,
+			"Enemies":
+			[
+				{
+					"Type": "NightRider",
+					"Quantity": 4
+				},
+				{
+					"Type": "DrunkHeads",
+					"quantity": 2
+				},
+				{
+					"Type": "NightRider",
+					"Quantity": 2
+				}
+			]
+		},
+		{
+			"Time": 100,
+			"Enemies":
+			[
+				{
+					"Type": "DeadCruiser",
+					"Quantity": 1
+				}
+			]
+		},
+		{
+			"Time": 100,
+			"Enemies":
+			[
+				{
+					"Type": "NightRider",
+					"Quantity": 2
+				},
+				{
+					"Type": "DrunkHeads",
+					"quantity": 2
+				},
+				{
+					"Type": "NightRider",
+					"Quantity": 2
+				},
+				{
+					"Type": "NightRider",
+					"Quantity": 1
+				}
+			]
+		},
+        {
+            "Time": 100,
+            "Enemies": [
+                {
+                    "Type": "NightRider",
+                    "Quantity": 8
+                },
+                {
+                    "Type": "DrunkHeads",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
 			"Time": 100,
 			"Enemies":
 			[
@@ -65,7 +128,7 @@
             ]
         },
         {
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{
@@ -83,7 +146,7 @@
 			]
 		},
 		{
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{
@@ -93,70 +156,7 @@
 			]
 		},
 		{
-			"Time": 10000,
-			"Enemies":
-			[
-				{
-					"Type": "NightRider",
-					"Quantity": 2
-				},
-				{
-					"Type": "DrunkHeads",
-					"quantity": 2
-				},
-				{
-					"Type": "NightRider",
-					"Quantity": 2
-				},
-				{
-					"Type": "NightRider",
-					"Quantity": 1
-				}
-			]
-		},
-        {
-            "Time": 10000,
-            "Enemies": [
-                {
-                    "Type": "NightRider",
-                    "Quantity": 8
-                },
-                {
-                    "Type": "DrunkHeads",
-                    "quantity": 2
-                }
-            ]
-        },
-        {
-			"Time": 10000,
-			"Enemies":
-			[
-				{
-					"Type": "NightRider",
-					"Quantity": 4
-				},
-				{
-					"Type": "DrunkHeads",
-					"quantity": 2
-				},
-				{
-					"Type": "NightRider",
-					"Quantity": 2
-				}
-			]
-		},
-		{
-			"Time": 10000,
-			"Enemies":
-			[
-				{
-					"Type": "DeadCruiser",
-					"Quantity": 1
-				}
-			]
-		},
-		{
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{
@@ -178,7 +178,7 @@
 			]
 		},
 		{
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{

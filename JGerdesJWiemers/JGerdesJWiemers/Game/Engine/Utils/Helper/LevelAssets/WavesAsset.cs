@@ -8,7 +8,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets
 {
     class WavesAsset
     {
-        public int Time { get; set; }
+        public int Time = 100;
         public List<WaveAsset> Waves { get; set; }
     }
 }
