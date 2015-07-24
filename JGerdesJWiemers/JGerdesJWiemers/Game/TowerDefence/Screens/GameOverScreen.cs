@@ -43,14 +43,17 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _blurShader = blurShader;
             _levelAsset = levelAsset;
 
+            String titleText = "";
             String subTitleText = "";
             switch (status)
             {
                 case Status.LOSE:
+                    titleText = "Game Over";
                     subTitleText = levelAsset.Info.Lives + " made it to their goal :(\nTry harder next time!";
                     AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_LOSE);
                     break;
                 case Status.WIN:
+                    titleText = "Level Cleared!";
                     subTitleText = "You won!\nEnergy left: " + ScoreManager.Instance.Energy;
                     AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_WIN);
                     break;
@@ -64,7 +67,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             Font roboto = AssetLoader.Instance.getFont(AssetLoader.FONT_ROBOTO_THIN);
 
-            _title = new Text("Game Over!", roboto);
+            _title = new Text(titleText, roboto);
             _title.CharacterSize = 48;
             _title.Origin = new Vector2f(_title.GetGlobalBounds().Width / 2f, _title.GetGlobalBounds().Height / 2f);
             _title.Color = new Color(20, 20, 20);
