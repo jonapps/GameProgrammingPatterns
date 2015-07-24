@@ -80,7 +80,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
         public void Build()
         {
-            if (_currentTower != null && _canBuild && ScoreManager.Instance.Energy >= _currentTower.Price)
+            if (_currentTower != null && _canBuild)
             {
                 _currentTower.Base.A = 255;
                 _currentTower.TopActive.A = 255;

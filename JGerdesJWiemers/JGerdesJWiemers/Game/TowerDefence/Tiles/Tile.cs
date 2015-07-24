@@ -29,12 +29,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         protected AnimatedSprite _sprite;
         private Vector2 _size;
         private Vector2 _position;
-        private Entity _occupier;
+        private Entity _occupier = null;
         private bool _isMarked = false;
 
 
         public Tile(float x, float y, float width, float height, Texture tex, int mapCenter, Color c)
         {
+            
             _entities = new List<Entity>();
             _entitiesToDelete = new List<Entity>();
             _sprite = new AnimatedSprite(tex, 96, 48);
@@ -59,13 +60,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
             {
                 if (_occupier == null && value != null)
                 {
-                    _occupier = null;
+                    _occupier = value;
                 }
             }
         }
 
         public void Update()
         {
+
             _sprite.Update();
             _CheckMark();
             foreach(Entity e in _entities)
