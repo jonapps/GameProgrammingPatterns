@@ -85,7 +85,8 @@ namespace JGerdesJWiemers.Game.Engine
         public virtual void ApplyDamage(int dmg)
         {
             _health -= dmg;
-            _healthPercentage = 100 / _maxhealth * _health;
+            float hp = 100 / (float)_maxhealth;
+            _healthPercentage = (int)(hp * (float)_health);
         }
 
         public void _CalcZ()

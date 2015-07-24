@@ -27,6 +27,7 @@ namespace JGerdesJWiemers.Game
         public static readonly string GAME_TITLE = "AWSM";
         public static long ElapsedTime = 0;
         public static bool DEBUG = !true;
+        public static Random GameRandom = new Random();
 
         public static readonly string EVENT_RESIZE = "window.resize";
 

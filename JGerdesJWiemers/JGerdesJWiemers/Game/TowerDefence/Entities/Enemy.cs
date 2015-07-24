@@ -33,6 +33,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private Sprite _shadow;
         private Def _def;
         private int _energy = 0;
+        private int _maxEnergy = 0;
 
         public class Def
         {
@@ -70,6 +71,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         {
             _def = def;
             _energy = (int)def.Energy;
+            _maxEnergy = (int)def.Energy; 
+            _health = (int)def.Health;
+            _maxhealth = (int)def.Health;
             _body.Position = ConvertUnits.ToSimUnits(_def.Position);
             _destination = _body.Position;
             _sprite.Color = _def.Color;
@@ -175,15 +179,26 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _sprite.Color = color;
 
 
-            int energy = (int)(_energy / 100 * _healthPercentage / (dmg / 2f));
+            int energy = (int)((float)_maxEnergy  / 100f * _healthPercentage);
+            int energyDiff = _energy - energy;
+            _energy = energy;
             Particle.Def def = new Particle.Def();
             def.Position = _body.Position;
             def.Color = _def.Color;
-            def.Energy = energy;
-            for (int i = 0; i < (dmg / 2); ++i)
+            
+            if (energyDiff > 1)
             {
+                def.Energy = 1;
+                for (int i = 0; i < (energyDiff); ++i)
+                {
+                    EventStream.Instance.Emit(Particle.EVENT_SPAWN, new EngineEvent(def));
+                }
+            }
+            else
+            {
+                def.Energy = energyDiff;
                 EventStream.Instance.Emit(Particle.EVENT_SPAWN, new EngineEvent(def));
-            }   
+            }
         }
 
         

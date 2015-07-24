@@ -5,7 +5,7 @@
 			"Name": "NightRider",
 			"Type": "cube",
 			"DoFloat": true,
-			"Health": 100,
+			"Health": 1000,
 			"Energy": 100,
 			"Speed": 0.75,
 			"Shoot":
@@ -33,7 +33,7 @@
 			"Name": "DeadCruiser",
 			"Type": "pyramid",
 			"DoFloat": true,
-			"Health": 50,
+			"Health": 750,
 			"Energy": 75,
 			"Speed": 5,
 			"Shoot":
@@ -57,13 +57,38 @@
 				"A": 255
 			}
 		},
+        {
+            "Name": "DrunkHeads",
+            "Type": "donut",
+            "DoFloat": true,
+            "Health": 500,
+            "Energy": 120,
+            "Speed": 0.2,
+            "Shoot": {
+                "DoShoot": true,
+                "Damage": 10,
+                "Speed": 20
+            },
+            "Color": {
+                "R": 208,
+                "G": 18,
+                "B": 73,
+                "A": 255
+            },
+            "DeadColor": {
+                "R": 0,
+                "G": 0,
+                "B": 0,
+                "A": 255
+            }
+        },
 		{
-			"Name": "DrunkHeads",
-			"Type": "donut",
+			"Name": "HardLiner",
+			"Type": "capsule",
 			"DoFloat": true,
-			"Health": 500,
-			"Energy": 120,
-			"Speed": 0.2,
+			"Health": 5000,
+			"Energy": 250,
+			"Speed": 2,
 			"Shoot":
 			{
 				"DoShoot": true,
@@ -85,5 +110,6 @@
 				"A": 255
 			}
 		}
+
 	]
 }

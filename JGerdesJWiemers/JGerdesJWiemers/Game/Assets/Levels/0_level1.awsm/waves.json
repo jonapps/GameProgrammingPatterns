@@ -68,8 +68,12 @@
 			"Time": 10000,
 			"Enemies":
 			[
-				{
-					"Type": "DrunkHeads",
+                {
+                    "Type": "DrunkHeads",
+                    "Quantity": 40
+                },
+                {
+					"Type": "HardLiner",
 					"Quantity": 40
 				}
 			]
