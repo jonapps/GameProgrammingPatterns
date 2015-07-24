@@ -57,6 +57,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
+            
 
             _selector.SelectionChanged += OnSelectionChanged;
 
@@ -110,7 +111,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Exit()
         {
-            
+            _window.MouseButtonPressed -= _window_MouseButtonPressed;
         }
 
         public override void Update()

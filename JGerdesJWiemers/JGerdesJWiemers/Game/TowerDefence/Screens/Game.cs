@@ -130,8 +130,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             if (args.Code == Keyboard.Key.M)
             {
-                _screenManager.Pop();
+                
+                _screenManager.PopTo(this);
                 _screenManager.Switch(new LevelSelector(_window));
+                EventStream.Instance.Clear();
             }
         }
 

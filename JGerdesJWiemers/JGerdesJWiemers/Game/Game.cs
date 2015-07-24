@@ -81,6 +81,7 @@ namespace JGerdesJWiemers.Game
                 _window.Display();
                 _window.KeyPressed += this._CloseGame;
                 _window.Closed += this._OnClose;
+                _window.SetMouseCursorVisible(false);
                 _window.SetVerticalSyncEnabled(true);
                 EventStream.Instance.Emit(EVENT_RESIZE, new EngineEvent(new Vector2f(_window.Size.X, _window.Size.Y)));
             }

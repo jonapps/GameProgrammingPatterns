@@ -57,7 +57,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             _body.CollidesWith = 0;
             _body.LinearVelocity = direction * (_moveTime / 40);
             _started = Game.ElapsedTime;
-            _body.Enabled = false;
 
         }
 
