@@ -73,8 +73,52 @@
                     "Quantity": 40
                 },
                 {
+					"Type": "NightRider",
+					"Quantity": 10
+				},
+                {
+                    "Type": "HardLiner",
+                    "Quantity": 15
+                },
+                {
+					"Type": "DeadCruiser",
+					"quantity": 2
+				}
+			]
+		},
+        {
+            "Time": 10000,
+            "Enemies": [
+                {
+                    "Type": "DrunkHeads",
+                    "Quantity": 40
+                },
+                {
+					"Type": "NightRider",
+					"Quantity": 20
+				},
+                {
+                    "Type": "HardLiner",
+                    "Quantity": 40
+                },
+                {
+					"Type": "DeadCruiser",
+					"quantity": 2
+				}
+            ]
+        }
+        ,
+		{
+			"Time": 10000,
+			"Enemies":
+			[
+                {
+                    "Type": "DrunkHeads",
+                    "Quantity": 40
+                },
+                {
 					"Type": "HardLiner",
-					"Quantity": 40
+					"Quantity": 60
 				}
 			]
 		}

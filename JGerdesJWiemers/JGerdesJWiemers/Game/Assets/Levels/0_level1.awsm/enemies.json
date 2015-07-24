@@ -35,7 +35,7 @@
 			"DoFloat": true,
 			"Health": 750,
 			"Energy": 75,
-			"Speed": 5,
+			"Speed": 3,
 			"Shoot":
 			{
 				"DoShoot": false,
@@ -63,7 +63,7 @@
             "DoFloat": true,
             "Health": 500,
             "Energy": 120,
-            "Speed": 0.2,
+            "Speed": 1,
             "Shoot": {
                 "DoShoot": true,
                 "Damage": 10,
@@ -86,7 +86,7 @@
 			"Name": "HardLiner",
 			"Type": "capsule",
 			"DoFloat": true,
-			"Health": 5000,
+			"Health": 3500,
 			"Energy": 250,
 			"Speed": 2,
 			"Shoot":

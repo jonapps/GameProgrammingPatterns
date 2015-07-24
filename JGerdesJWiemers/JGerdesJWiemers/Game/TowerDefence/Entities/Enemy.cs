@@ -186,10 +186,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             def.Position = _body.Position;
             def.Color = _def.Color;
             
-            if (energyDiff > 1)
+            if (energyDiff > dmg/2)
             {
-                def.Energy = 1;
-                for (int i = 0; i < (energyDiff); ++i)
+                def.Energy = energyDiff / (dmg / 2);
+                for (int i = 0; i < (energyDiff / (dmg / 2)); ++i)
                 {
                     EventStream.Instance.Emit(Particle.EVENT_SPAWN, new EngineEvent(def));
                 }
