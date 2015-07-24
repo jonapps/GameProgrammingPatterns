@@ -101,7 +101,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private void _OnWaveStart(EngineEvent eventData)
         {
             WaveManager.WaveData data = eventData.Data as WaveManager.WaveData;
-            if (data.Current == data.Total)
+            if (data.Current+1 == data.Total)
             {
                 _lastWave = true;
             }

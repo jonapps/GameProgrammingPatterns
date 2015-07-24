@@ -70,8 +70,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                         }
                     }
                 }
-                ++_currentIndex;
+                
                 EventStream.Instance.Emit(EVENT_WAVE_STARTED, new EngineEvent(new WaveData(_currentIndex, _wavesAsset.Waves.Count)));
+                ++_currentIndex;
             }    
         }
     }

@@ -1,39 +1,6 @@
 {
     "Tower": [
-        {
-			"Radius" : 2,
-			"FireFrequency" : 1000,
-			"Damage" : 150,
-			"BulletSpeed" : 6,
-			"Health" : 100,
-			"Price" : 150,
-			"Base" : {
-				"R": 234,
-				"G": 12,
-				"B": 32,
-				"A": 255
-			},
-			"TopActive" : {
-				"R": 23,
-				"G": 12,
-				"B": 32,
-				"A": 255
-			},
-			"TopWaiting" : {
-				"R": 55,
-				"G": 5,
-				"B": 55,
-				"A": 255
-			},
-			"BulletColor" : {
-				"R": 255,
-				"G": 0,
-				"B": 0,
-				"A": 100
-			},
-			"Sound" : 1
-		},
-        {
+                {
             "Radius": 5,
             "FireFrequency": 500,
             "Damage": 30,
@@ -67,9 +34,42 @@
             "Sound": 1
         },
         {
+            "Radius": 2,
+            "FireFrequency": 1000,
+            "Damage": 150,
+            "BulletSpeed": 6,
+            "Health": 100,
+            "Price": 150,
+            "Base": {
+                "R": 234,
+                "G": 12,
+                "B": 32,
+                "A": 255
+            },
+            "TopActive": {
+                "R": 23,
+                "G": 12,
+                "B": 32,
+                "A": 255
+            },
+            "TopWaiting": {
+                "R": 55,
+                "G": 5,
+                "B": 55,
+                "A": 255
+            },
+            "BulletColor": {
+                "R": 255,
+                "G": 0,
+                "B": 0,
+                "A": 100
+            },
+            "Sound": 1
+        },
+        {
             "Radius": 9,
             "FireFrequency": 1000,
-            "Damage": 128,
+            "Damage": 225,
             "BulletSpeed": 10,
             "Health": 100,
             "Price": 650,
@@ -102,7 +102,7 @@
         {
             "Radius": 7,
             "FireFrequency": 500,
-            "Damage": 70,
+            "Damage": 200,
             "BulletSpeed": 10,
             "Health": 100,
             "Price": 850,
@@ -135,10 +135,10 @@
         {
             "Radius": 3,
             "FireFrequency": 50,
-            "Damage": 40,
+            "Damage": 80,
             "BulletSpeed": 10,
             "Health": 500,
-            "Price": 1400,
+            "Price": 1900,
             "Base": {
                 "R": 244,
                 "G": 235,
