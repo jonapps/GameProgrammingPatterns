@@ -38,7 +38,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                 Top.Color = def.TopActive;
                 Top.SetAnimation(new Animation());
 
-                PriceTag = new Label("" + def.Price, AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_MONEY);
+                PriceTag = new Label("" + def.Price, AssetLoader.FONT_ROBOTO_THIN, 24, AssetLoader.TEXTURE_UI_ICON_ENEGRY);
 
             }
 
