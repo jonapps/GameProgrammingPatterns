@@ -68,10 +68,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             ScoreManager.Instance.Energy = level.Info.StartEnergy;
             ScoreManager.Instance.Missed = 0;
 
-        
-            w.SetMouseCursorVisible(false);
-
-
             // Register Events
             EventStream.Instance.On(Enemy.EVENT_SPAWN, _SpawnEnemy);
             EventStream.Instance.On(Nuke.EVENT_SPAWN, _SpawnNuke);
@@ -80,12 +76,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, _OnLivesChange);
             EventStream.Instance.On(WaveManager.EVENT_WAVE_STARTED, _OnWaveStart);
 
-
-
             _window.KeyPressed +=_window_KeyPressed;
             _window.KeyReleased += _window_KeyReleased;
-
-
 
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
@@ -127,70 +119,89 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         void _window_KeyReleased(object sender, KeyEventArgs args)
         {
-            if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
-                _viewLeft = false;
-
-            if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
-                _viewRight = false;
-
-            if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
-                _viewUp = false;
-
-            if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
-                _viewDown = false;
+            switch (args.Code)
+            {
+                case Keyboard.Key.Left:
+                case Keyboard.Key.A:
+                    _viewLeft = false;
+                    break;
+                case Keyboard.Key.Right:
+                case Keyboard.Key.D:
+                    _viewRight = false;
+                    break;
+                case Keyboard.Key.Up:
+                case Keyboard.Key.W:
+                    _viewUp = false;
+                    break;
+                case Keyboard.Key.Down:
+                case Keyboard.Key.S:
+                    _viewDown = false;
+                    break;
+                default:
+                    break;
+                    
+            }
         }
 
         void _window_KeyPressed(object sender, KeyEventArgs args)
         {
-            if (args.Code == Keyboard.Key.N)
+
+            switch (args.Code)
             {
-                if (_AllEnemiesDead())
-                {
-                    _waveStarted = false;
-                    EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
-                }
-            }
-
-               
-            if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
-                _viewLeft = true;
-
-            if (args.Code == Keyboard.Key.Right || args.Code == Keyboard.Key.D)
-                _viewRight = true;
-
-            if (args.Code == Keyboard.Key.Up || args.Code == Keyboard.Key.W)
-                _viewUp = true;
-
-            if (args.Code == Keyboard.Key.Down || args.Code == Keyboard.Key.S)
-                _viewDown = true;
-
-            if (args.Code == Keyboard.Key.M)
-            {
-                
-                _screenManager.PopTo(this);
-                _screenManager.Switch(new LevelSelector(_window));
-                EventStream.Instance.Clear();
-            }
-
-            if (args.Code == Keyboard.Key.G)
-            {
-                _OnGameOver(true);
-            }
-
-            if (args.Code == Keyboard.Key.L)
-            {
-                _OnGameOver(false);
+                case Keyboard.Key.Left:
+                case Keyboard.Key.A:
+                    _viewLeft = true;
+                    break;
+                case Keyboard.Key.Right:
+                case Keyboard.Key.D:
+                    _viewRight = true;
+                    break;
+                case Keyboard.Key.Up:
+                case Keyboard.Key.W:
+                    _viewUp = true;
+                    break;
+                case Keyboard.Key.Down:
+                case Keyboard.Key.S:
+                    _viewDown = true;
+                    break;
+                case Keyboard.Key.N:
+                    if (_AllEnemiesDead())
+                    {
+                        _waveStarted = false;
+                        EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
+                    }
+                    break;
+                case Keyboard.Key.M:
+                    _screenManager.PopTo(this);
+                    _screenManager.Switch(new LevelSelector(_window));
+                    EventStream.Instance.Clear();
+                    break;
+                case Keyboard.Key.G:
+                    _OnGameOver(true);
+                    break;
+                case Keyboard.Key.L:
+                    _OnGameOver(false);
+                    break;
+                default:
+                    break;
             }
         }
 
 
-
+        /// <summary>
+        /// Spawn particle
+        /// </summary>
+        /// <param name="e"></param>
         private void _SpawnParticle(EngineEvent e)
         {
             Particle.Def def = e.Data as Particle.Def;
             _particlesToAdd.Add(new Particle(_world, def, this));
         }
 
+        /// <summary>
+        /// check if all enemies are dead
+        /// </summary>
+        /// <returns></returns>
         private bool _AllEnemiesDead()
         {
             bool allEnemiesDead = true;
@@ -210,12 +221,20 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _screenManager.Push(_uiScreen);
         }
 
+        /// <summary>
+        /// Spawn nuke
+        /// </summary>
+        /// <param name="eventData"></param>
         private void _SpawnNuke(EngineEvent eventData)
         {
             Nuke.Def data = (eventData.Data as Nuke.Def);
             _nukesToAdd.Add(new Nuke(_world, data));
         }
 
+        /// <summary>
+        /// Build tower on current tile if possible
+        /// </summary>
+        /// <param name="e"></param>
         void _BuildTower(EngineEvent e)
         {
             Tower.Def def = e.Data as Tower.Def;
@@ -231,17 +250,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         }
 
 
-       
-
         /// <summary>
         /// Spawns a Monster at the first spawn point
         /// </summary>
         /// <param name="e"></param>
         private void _SpawnEnemy(EngineEvent e)
         {
-            
             Enemy.Def def = e.Data as Enemy.Def;
-            
             foreach (Tile pos in _map.GetSpawnTiles())
             {
                 def.Position = pos.getCenter();
@@ -259,9 +274,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             base.Update();
             _map.Update();
             _MoveView();
-
-
-
             if (_viewLeft)
             {
                 _MoveViewLeft();

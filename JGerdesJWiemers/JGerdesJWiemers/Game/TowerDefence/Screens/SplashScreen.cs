@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     class SplashScreen: Screen
     {
 
-        private static readonly long DURATION = 10;
+        private static readonly long DURATION = 2500;
 
         private Sprite _image;
         private float _opacity;
