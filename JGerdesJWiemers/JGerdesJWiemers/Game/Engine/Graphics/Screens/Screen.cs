@@ -31,7 +31,7 @@ namespace JGerdesJWiemers.Game.Engine.Graphics.Screens
             _view.Viewport = new FloatRect(0, 0, 1, 1);
             _input = new InputMapper();
             _clearColor = new Color(255, 255, 255, 0);
-            EventStream.Instance.On(JGerdesJWiemers.Game.Game.EVENT_RESIZE, _Resize);
+            EventStream.Instance.OnPersistent(JGerdesJWiemers.Game.Game.EVENT_RESIZE, _Resize);
         }
 
         protected virtual void _Resize(EngineEvent eventData)
