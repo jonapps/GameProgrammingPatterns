@@ -91,7 +91,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
             set
             {
                 int counter = 0;
-                float height = _options[0].Button.TextureRect.Height;
+                float height = _options[0].Button.TextureRect.Height - 36;
                 float offset = (_options.Count * height - height) / 2f;
                 foreach (Option o in _options)
                 {
@@ -99,7 +99,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.UiElements
                     y -= offset;
                     o.Button.Position = value + new Vector2f(-128, y);
                     o.Top.Position = value + new Vector2f(-128, y);
-                    o.PriceTag.Position = value + new Vector2f(-160, y + 72);
+                    o.PriceTag.Position = value + new Vector2f(-180, y + 72);
                     counter++;
                 }
             }
