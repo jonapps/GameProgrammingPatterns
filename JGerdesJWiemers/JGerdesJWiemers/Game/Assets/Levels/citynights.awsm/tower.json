@@ -3,7 +3,7 @@
 		{
 			"Radius" : 4,
 			"FireFrequency" : 600,
-			"Damage" : 2,
+			"Damage" : 10,
 			"BulletSpeed" : 4,
 			"Health" : 100,
 			"Price" : 10,
@@ -35,8 +35,8 @@
 		},
 		{
 			"Radius" : 2,
-			"FireFrequency" : 200,
-			"Damage" : 1,
+			"FireFrequency" : 100,
+			"Damage" : 5,
 			"BulletSpeed" : 4,
 			"Health" : 100,
 			"Price" : 50,
@@ -61,15 +61,15 @@
 			"BulletColor" : {
 				"R": 222,
 				"G": 64,
-				"B": 117,
+				"B": 117, 
 				"A": 100
 			},
 			"Sound" : 2
 		},
 		{
 			"Radius" : 9,
-			"FireFrequency" : 1000,
-			"Damage" : 1,
+			"FireFrequency" : 2000,
+			"Damage" : 15,
 			"BulletSpeed" : 8,
 			"Health" : 100,
 			"Price" : 10,
