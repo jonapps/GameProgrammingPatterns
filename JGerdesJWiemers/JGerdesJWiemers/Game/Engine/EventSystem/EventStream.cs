@@ -29,9 +29,6 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             }
         }
 
-
-       
-
         private EventStream()
         {
             _executedDelayedEvents = new List<DelayedEvent>();
@@ -47,16 +44,31 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             _executedDelayedEvents.Clear();
         }
 
+        /// <summary>
+        /// listener --> deleted on new game
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="callback"></param>
         public void On(string eventName, EventListener callback)
         {
             _AddListener(eventName, callback);
         }
 
+        /// <summary>
+        /// listener --> NOT deleted on new game
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="callback"></param>
         public void OnPersistent(string eventName, EventListener callback)
         {
             _AddPersistentListener(eventName, callback);
         }
 
+        /// <summary>
+        /// adds a listener that will be deleted when a new game starts
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="callback"></param>
         private void _AddListener(string eventName, EventListener callback)
         {
             if (_events.ContainsKey(eventName))
@@ -70,6 +82,11 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             }
         }
 
+        /// <summary>
+        /// adds a listener that wont be deleted if a new game starts
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="callback"></param>
         private void _AddPersistentListener(string eventName, EventListener callback)
         {
             if (_persistentEvents.ContainsKey(eventName))
@@ -89,7 +106,12 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             _NotifyAll(eventName, eventData);
         }
 
-
+        /// <summary>
+        /// Emit an event with some delay
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="eventData"></param>
+        /// <param name="delay"></param>
         public void EmitDelay(String eventName, EngineEvent eventData, long delay)
         {
             DelayedEvent delayed = new DelayedEvent();
@@ -100,6 +122,11 @@ namespace JGerdesJWiemers.Game.Engine.EventSystem
             _delayedEvents.Add(delayed);
         }
 
+        /// <summary>
+        /// notify all listeners
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="eventData"></param>
         private void _NotifyAll(String eventName, EngineEvent eventData)
         {
             if (_events.ContainsKey(eventName))
