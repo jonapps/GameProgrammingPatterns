@@ -17,6 +17,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         private static readonly long DURATION = 4000;
 
+
         private Sprite _image;
         private float _opacity;
         private long _startTime;

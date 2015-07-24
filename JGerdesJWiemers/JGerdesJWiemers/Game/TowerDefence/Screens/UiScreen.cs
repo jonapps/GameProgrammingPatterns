@@ -77,7 +77,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             if (e.Button == SFML.Window.Mouse.Button.Left)
             {
                 _leftMouseDown = false;
-                //_builder.Build();
             }
         }
 
