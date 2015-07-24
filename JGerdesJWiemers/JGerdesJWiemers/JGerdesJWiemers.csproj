@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\FarseerPhysics.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -89,6 +92,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\Engine\Audio\AudioManager.cs" />
+    <Compile Include="Game\Engine\Audio\CachedSound.cs" />
+    <Compile Include="Game\Engine\Audio\CachedSoundSampleProvider.cs" />
     <Compile Include="Game\Engine\Entities\Input\MouseCursor.cs" />
     <Compile Include="Game\Engine\Entities\SpriteEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
@@ -191,12 +196,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game\Assets\Audio\applause.wav" />
-    <Content Include="Game\Assets\Audio\pling.wav" />
-    <Content Include="Game\Assets\Audio\_BALL_BORDER_COLLISION.wav" />
-    <Content Include="Game\Assets\Audio\Bow_Fire_Arrow-Stephan_Schutze-2133929391.wav" />
-    <Content Include="Game\Assets\Audio\game_background.wav" />
-    <Content Include="Game\Assets\Audio\menu_background.wav" />
     <Content Include="Game\Assets\Graphics\asteroids\asteroid1.png" />
     <Content Include="Game\Assets\Graphics\asteroids\asteroid2.png" />
     <Content Include="Game\Assets\Graphics\asteroids\asteroid3.png" />
@@ -210,7 +209,9 @@
     <Content Include="Game\Assets\Graphics\space\space3.png" />
     <Content Include="Game\Assets\Graphics\spaceshuttle.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Game\Assets\Audio\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

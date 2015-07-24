@@ -13,6 +13,8 @@ using Microsoft.Xna.Framework;
 using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
 using System.IO;
+using System.Media;
+using NAudio.Wave;
 
 namespace JGerdesJWiemers.Game.Engine.Utils
 {
@@ -44,6 +46,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
         public static readonly String FONT_ROBOTO_THIN = @"Roboto-Thin.ttf";
 
+        public static readonly String AUDIO_SHOT_1 = @"shot_1.wav";
+        public static readonly String AUDIO_SHOT_2 = @"shot_2.wav";
+        public static readonly String AUDIO_SHOT_3 = @"shot_3.wav";
+        public static readonly String AUDIO_SHOT_4 = @"shot_4.wav";
+        public static readonly String AUDIO_SHOT_5 = @"shot_5.wav";
+
         public static readonly String CONFIG_INPUT = "input.json";
 
         private static AssetLoader _instance;
@@ -51,17 +59,20 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private readonly String DIR_LEVELS = @"Assets\Levels\";
         private readonly String DIR_ENEMIES = @"Assets\Enemies\";
         private readonly String DIR_TEXTURES = @"Assets\Graphics\";
+        private readonly String DIR_AUDIO = @"Assets\Audio\";
         private readonly String DIR_MAPS = @"Assets\Maps\";
         private readonly String DIR_SETTINGS = @"Assets\Configuration";
 
         private Dictionary<String, Font> _fonts;
         private Dictionary<String, TextureContainer> _textures;
+        private Dictionary<String, CachedSound> _sounds;
         
 
         private AssetLoader()
         {
             _fonts = new Dictionary<string, Font>();
             _textures = new Dictionary<string, TextureContainer>();
+            _sounds = new Dictionary<string, CachedSound>();
 
             LoadTexture(TEXTURE_SHADOW, TEXTURE_SHADOW);
             LoadTexture(TEXTURE_TOWER_BASE, TEXTURE_TOWER_BASE);
@@ -78,6 +89,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadTexture(TEXTURE_SPLAH_AWSM, TEXTURE_SPLAH_AWSM);
 
             LoadFont(FONT_ROBOTO_THIN, FONT_ROBOTO_THIN);
+
+            LoadSound(AUDIO_SHOT_1, AUDIO_SHOT_1);
+            LoadSound(AUDIO_SHOT_2, AUDIO_SHOT_2);
+            LoadSound(AUDIO_SHOT_3, AUDIO_SHOT_3);
+            LoadSound(AUDIO_SHOT_4, AUDIO_SHOT_4);
+            LoadSound(AUDIO_SHOT_5, AUDIO_SHOT_5);
         }
 
         public void LoadFont(String name, String filename)
@@ -93,8 +110,17 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             }
         }
 
+        public void LoadSound(String name, String filename){
+            _sounds.Add(name, new CachedSound(DIR_AUDIO + filename));
+        }
+
         public Font getFont(String name){
             return _fonts[name];
+        }
+
+        public CachedSound GetSound(String name)
+        {
+            return _sounds[name];
         }
 
         public String ReadConfig(String name)

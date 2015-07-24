@@ -5,149 +5,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Media;
+using JGerdesJWiemers.Game.Engine.Utils;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 
 namespace JGerdesJWiemers.Game.Engine.Audio
 {
+
+    //Partly adapted from https://gist.github.com/markheath/8783999
     class AudioManager
     {
-        private Dictionary<String, Sound> _sounds;
-        private List<String> _stoppedLoopSounds;
-        private static AudioManager _instance;
-        private Sound _sound;
+        private readonly IWavePlayer outputDevice;
+        private readonly MixingSampleProvider mixer;
 
-        private List<Sound> _plaingSounds;
-
-        private bool _silent = false;
-        
-
-        private AudioManager()
+        public AudioManager(int sampleRate = 44100, int channelCount = 2)
         {
-            _plaingSounds = new List<Sound>();
-            _sounds = new Dictionary<String, Sound>();
-            _sound = new Sound();
-            _stoppedLoopSounds = new List<string>();
+            outputDevice = new WaveOutEvent();
+            mixer = new MixingSampleProvider(WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount));
+            mixer.ReadFully = true;
+            outputDevice.Init(mixer);
+            outputDevice.Play();
         }
 
-
-        public static AudioManager Instance
+       
+        private ISampleProvider ConvertToRightChannelCount(ISampleProvider input)
         {
-            get
+            if (input.WaveFormat.Channels == mixer.WaveFormat.Channels)
             {
-                if (_instance == null)
-                {
-                    _instance = new AudioManager();
-                }
-                return _instance;
+                return input;
             }
+            if (input.WaveFormat.Channels == 1 && mixer.WaveFormat.Channels == 2)
+            {
+                return new MonoToStereoSampleProvider(input);
+            }
+            throw new NotImplementedException("Not yet implemented this channel count conversion");
         }
 
-
-        public bool Silent
+        public void Play(CachedSound sound)
         {
-            get
-            {
-                return _silent;
-            }
-            set
-            {
-                _silent = value;
-                if (value)
-                {
-                    foreach (var sound in _sounds)
-                    {
-                        if(sound.Value.Loop){
-                            _stoppedLoopSounds.Add(sound.Key);
-                        }
-                        sound.Value.Stop();   
-                    }
-                }
-                else
-                {
-                    foreach (var sound in _stoppedLoopSounds)
-                    {
-                        System.Console.WriteLine(sound);
-                        Play(sound);
-                    }
-                    _stoppedLoopSounds.Clear();
-                }
-                
-            }
+            AddMixerInput(new CachedSoundSampleProvider(sound));
         }
 
-        /// <summary>
-        /// creats a sound from string path and adds it to a hashtable 
-        /// </summary>
-        /// <param name="key">storing key</param>
-        /// <param name="pathToSound">Path to the Soundfile</param>
-        public void AddSound(String key, String pathToSound)
+        public void Play(String soundname)
         {
-            if (!_sounds.ContainsKey(key))
-            {
-                _sounds.Add(key, new Sound(new SoundBuffer(pathToSound)));
-            }
-            
+            AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)));
         }
 
-
-        /// <summary>
-        /// plays a sound from the hashtable
-        /// </summary>
-        /// <param name="key">hashtable store key</param>
-        /// <param name="volume"></param>
-        /// <param name="loop"></param>
-        public void Play(String key, float volume = 100, bool loop = false)
+        private void AddMixerInput(ISampleProvider input)
         {
-            try
-            {
-                if (!_silent)
-                {
-                    Sound s = _sounds[key];
-                    Sound ns = new Sound();
-                    ns.SoundBuffer = s.SoundBuffer;
-                    ns.Loop = loop;
-                    ns.Volume = volume;
-                    ns.Play();
-                    _plaingSounds.Add(ns);
-                   
-                    //s.
-                    //s.Loop = loop;
-                    //s.Volume = volume;
-                    //s.Play();
-                }
-            }
-            catch (Exception e)
-            {
-                // sound not inizialized
-            }
+            mixer.AddMixerInput(ConvertToRightChannelCount(input));
         }
 
-
-        public void Stop(String key)
+        public void Dispose()
         {
-            try
-            {
-                Sound s = _sounds[key];
-                s.Stop();
-
-            }
-            catch (Exception e)
-            {
-                // sound not inizialized
-            }
+            outputDevice.Dispose();
         }
 
-        /// <summary>
-        /// returns a sound from the sound hashtable
-        /// </summary>
-        /// <param name="key">hashtable store key</param>
-        /// <returns>Sound</returns>
-        public Sound GetSound(String key)
-        {
-            return (Sound)_sounds[key];
-        }
-
-        
-
-
+        public static readonly AudioManager Instance = new AudioManager(44100, 2);
     }
 }

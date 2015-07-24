@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using JGerdesJWiemers.Game.Engine;
+using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
@@ -128,6 +129,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Color = _def.BulletColor
             };
 
+            AudioManager.Instance.Play(AssetLoader.AUDIO_SHOT_1);
             EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 
