@@ -33,6 +33,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Label _missedLabelMax;
         private Label _wavesLabel;
 
+        private bool _leftMouseDown = false;
+
+
         public UiScreen(RenderWindow w, Map map, ICoordsConverter converter, LevelAsset level)
             :base(w)
         {
@@ -58,6 +61,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
             _window.KeyPressed += _window_KeyPressed;
             _window.MouseButtonPressed += _window_MouseButtonPressed;
+            _window.MouseButtonReleased += _window_MouseButtonReleased;
             
 
             _selector.SelectionChanged += OnSelectionChanged;
@@ -66,6 +70,24 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, onMissedChanged);
             EventStream.Instance.On(WaveManager.EVENT_WAVE_STARTED, onWaveStarted);
         }
+
+        void _window_MouseButtonReleased(object sender, SFML.Window.MouseButtonEventArgs e)
+        {
+            if (e.Button == SFML.Window.Mouse.Button.Left)
+            {
+                _leftMouseDown = false;
+                //_builder.Build();
+            }
+        }
+
+        void _window_MouseButtonPressed(object sender, SFML.Window.MouseButtonEventArgs e)
+        {
+            if (e.Button == SFML.Window.Mouse.Button.Left)
+            {
+                _leftMouseDown = true;
+            }
+        }
+
 
         private void onWaveStarted(EngineEvent eventData)
         {
@@ -89,13 +111,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             AudioManager.Instance.PlaySound(AssetLoader.AUDIO_SELECT_TOWER);
         }
 
-        void _window_MouseButtonPressed(object sender, SFML.Window.MouseButtonEventArgs e)
-        {
-            if (e.Button == SFML.Window.Mouse.Button.Left)
-            {
-                _builder.Build();
-            }
-        }
 
         void _window_KeyPressed(object sender, SFML.Window.KeyEventArgs e)
         {
@@ -120,6 +135,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             _builder.Update();
             _selector.Update();
+            if (_leftMouseDown)
+            {
+                _builder.Build();
+            }
         }
 
         public override void PastUpdate()

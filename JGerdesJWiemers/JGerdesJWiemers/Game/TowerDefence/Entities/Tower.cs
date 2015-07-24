@@ -142,8 +142,5 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
             AudioManager.Instance.PlaySound(SOUNDS[_def.Sound], SHOT_SOUND_VOLUME);
             EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
-
-
-       
     }
 }

@@ -74,45 +74,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 
                 if ((Game.ElapsedTime - _layStarted > _layTime) && (!_onDelivery))
                 {
-                    Vector2f pos = _converter.MapPixelToCoords(new Vector2i(0, 0));
-                    Vector2 dest = ConvertUnits.ToSimUnits(pos.ToVector2());
-                    Collect(dest);
-                }
-            }
-
-            
-
-            if (_onDelivery)
-            {
-                if ((_body.Position - _destination).Length() < 0.2)
-                {
-                    _body.Enabled = false;
-                    _deleteMe = true;
-                }
-
-                if (_body.Position.X < - 15 || _body.Position.Y < - 15)
-                {
-                    _body.Enabled = false;
-                    _deleteMe = true;
+                    Collect();
                 }
             }
         }
 
-
-        //(x2 - x1, y2 - y1)
-        public void Collect(Vector2 dest)
+        public void Collect()
         {
             EventStream.Instance.Emit(Enemy.EVENT_LOST_ENERGY, new EngineEvent(_energy));
-            _body.Enabled = true;
-            Vector2 pos = _body.Position;
-            Vector2 direction = new Vector2();
-            direction.X = dest.X - pos.X;
-            direction.Y = dest.Y - pos.Y;
-            direction.Normalize();
-            direction *= .5f;
-            _body.ApplyLinearImpulse(direction);
-            _destination = dest;
             _onDelivery = true;
+            _deleteMe = true;
         }
     }
 }
