@@ -44,6 +44,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             };
             _sounds = new List<string>(){
                 AssetLoader.AUDIO_MUSIC_1,
+                AssetLoader.AUDIO_MUSIC_WIN,
+                AssetLoader.AUDIO_MUSIC_LOSE,
                 AssetLoader.AUDIO_SHOT_1,
                 AssetLoader.AUDIO_SHOT_2,
                 AssetLoader.AUDIO_SHOT_3,

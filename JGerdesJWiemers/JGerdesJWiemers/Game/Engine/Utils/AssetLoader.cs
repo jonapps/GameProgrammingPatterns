@@ -60,6 +60,8 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String AUDIO_SELECT_TOWER = @"select_tower.wav";
 
         public static readonly String AUDIO_MUSIC_1 = @"music\1.mp3";
+        public static readonly String AUDIO_MUSIC_WIN = @"music\win.mp3";
+        public static readonly String AUDIO_MUSIC_LOSE = @"music\lose.mp3";
 
         public static readonly String CONFIG_INPUT = "input.json";
 

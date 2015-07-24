@@ -48,9 +48,11 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 case Status.LOSE:
                     subTitleText = levelAsset.Info.Lives + " made it to their goal :(\nTry harder next time!";
+                    AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_LOSE);
                     break;
                 case Status.WIN:
                     subTitleText = "You won!\nEnergy left: " + ScoreManager.Instance.Energy;
+                    AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_WIN);
                     break;
             }
 
