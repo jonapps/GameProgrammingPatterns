@@ -129,7 +129,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
                 Color = _def.BulletColor
             };
 
-            AudioManager.Instance.Play(AssetLoader.AUDIO_SHOT_1, 0.2f);
+            AudioManager.Instance.PlaySound(AssetLoader.AUDIO_SHOT_1, 0.2f);
             EventStream.Instance.Emit(Nuke.EVENT_SPAWN, new EngineEvent(data));
         }
 

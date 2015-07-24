@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+﻿using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Utils;
 using SFML.Graphics;
 using System;
@@ -24,6 +25,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _image = new Sprite(AssetLoader.Instance.getTexture(AssetLoader.TEXTURE_SPLAH_AWSM).Texture);
             _startTime = JGerdesJWiemers.Game.Game.ElapsedTime;
             _opacity = 0;
+            AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_1);
 
         }
 

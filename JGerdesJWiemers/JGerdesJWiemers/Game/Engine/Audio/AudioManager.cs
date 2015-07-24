@@ -19,6 +19,8 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         private readonly IWavePlayer outputDevice;
         private readonly MixingSampleProvider mixer;
 
+        private ISampleProvider _music = null;
+
         public AudioManager(int sampleRate = 44100, int channelCount = 2)
         {
             outputDevice = new WaveOutEvent();
@@ -42,27 +44,37 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             throw new NotImplementedException("Not yet implemented this channel count conversion");
         }
 
-        public void Play(CachedSound sound)
-        {
-            AddMixerInput(new CachedSoundSampleProvider(sound));
-        }
-
-        public void Play(String soundname, float volume = 1)
+        
+        public void PlaySound(String soundname, float volume = 1)
         {
             AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)), volume);
         }
 
-        private void AddMixerInput(ISampleProvider input)
+        public void PlayMusic(String soundname, float volume = 1)
         {
-            mixer.AddMixerInput(ConvertToRightChannelCount(input));
+            if (_music != null)
+            {
+                mixer.RemoveMixerInput(_music);
+            }
+            _music = AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)), volume);
         }
 
-        private void AddMixerInput(ISampleProvider input, float volume)
+
+        private ISampleProvider AddMixerInput(ISampleProvider input)
+        {
+            ISampleProvider source = ConvertToRightChannelCount(input);
+            mixer.AddMixerInput(source);
+            return source;
+        }
+
+        private ISampleProvider AddMixerInput(ISampleProvider input, float volume)
         {
             VolumeSampleProvider volumeSampler = new VolumeSampleProvider(input);
             volumeSampler.Volume = volume;
-            AddMixerInput(volumeSampler);
+            return AddMixerInput(volumeSampler);
         }
+
+    
 
         public void Dispose()
         {

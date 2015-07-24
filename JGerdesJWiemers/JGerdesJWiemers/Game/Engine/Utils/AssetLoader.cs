@@ -52,6 +52,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String AUDIO_SHOT_4 = @"shot_4.wav";
         public static readonly String AUDIO_SHOT_5 = @"shot_5.wav";
 
+        public static readonly String AUDIO_MUSIC_1 = @"music\1.mp3";
+        public static readonly String AUDIO_MUSIC_2 = @"music\2.mp3";
+
         public static readonly String CONFIG_INPUT = "input.json";
 
         private static AssetLoader _instance;
@@ -95,6 +98,9 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadSound(AUDIO_SHOT_3, AUDIO_SHOT_3);
             LoadSound(AUDIO_SHOT_4, AUDIO_SHOT_4);
             LoadSound(AUDIO_SHOT_5, AUDIO_SHOT_5);
+
+            LoadSound(AUDIO_MUSIC_1, AUDIO_MUSIC_1);
+            LoadSound(AUDIO_MUSIC_2, AUDIO_MUSIC_2);
         }
 
         public void LoadFont(String name, String filename)

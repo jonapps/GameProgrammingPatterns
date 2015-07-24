@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using JGerdesJWiemers.Game;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
 using JGerdesJWiemers.Game.TowerDefence.Logic;
+using JGerdesJWiemers.Game.Engine.Audio;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -86,6 +87,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             //Center view to center tile
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
+
+
+            AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_2);
         }
 
         private void _OnLivesChange(EngineEvent eventData)
