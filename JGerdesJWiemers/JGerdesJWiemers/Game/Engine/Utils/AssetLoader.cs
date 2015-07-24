@@ -60,7 +60,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String AUDIO_SELECT_TOWER = @"select_tower.wav";
 
         public static readonly String AUDIO_MUSIC_1 = @"music\1.mp3";
-        public static readonly String AUDIO_MUSIC_2 = @"music\2.mp3";
 
         public static readonly String CONFIG_INPUT = "input.json";
 
@@ -113,7 +112,6 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadSound(AUDIO_SELECT_TOWER, AUDIO_SELECT_TOWER);
 
             LoadSound(AUDIO_MUSIC_1, AUDIO_MUSIC_1);
-            LoadSound(AUDIO_MUSIC_2, AUDIO_MUSIC_2);
         }
 
         public void LoadFont(String name, String filename)
