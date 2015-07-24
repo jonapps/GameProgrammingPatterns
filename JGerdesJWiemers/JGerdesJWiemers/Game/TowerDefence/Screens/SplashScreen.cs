@@ -15,7 +15,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     class SplashScreen: Screen
     {
 
-        private static readonly long DURATION = 10;
+        private static readonly long DURATION = 4000;
 
         private Sprite _image;
         private float _opacity;
@@ -42,8 +42,18 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void Update()
         {
 
-            _opacity += 0.01f;
-            _opacity = SMath.Min(_opacity, 1);
+            
+
+            if (JGerdesJWiemers.Game.Game.ElapsedTime - _startTime < 2 * DURATION / 3)
+            {
+                _opacity += 0.01f;
+                _opacity = SMath.Min(_opacity, 1);
+            }
+            else
+            {
+                _opacity -= 0.01f;
+                _opacity = SMath.Max(_opacity, 0);
+            }
 
 
             if (JGerdesJWiemers.Game.Game.ElapsedTime - _startTime > DURATION)
