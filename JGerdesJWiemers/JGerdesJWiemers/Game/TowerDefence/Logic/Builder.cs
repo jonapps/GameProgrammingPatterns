@@ -29,6 +29,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
         private Color _notBuildable;
         private bool _canBuild;
+        private bool _playSound;
+        private bool _soundPlayed;
+
+        private Tile _lastTile;
 
         public Tower.Def Selection
         {
@@ -86,13 +90,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                 _currentTower.Base.A = 255;
                 _currentTower.TopActive.A = 255;
                 EventStream.Instance.Emit(Tower.EVENT_BUILD, new Engine.EventSystem.Events.EngineEvent(_currentTower));
-
-                AudioManager.Instance.PlaySound(AssetLoader.AUDIO_BUILD);
+                if (!_soundPlayed) { AudioManager.Instance.PlaySound(AssetLoader.AUDIO_BUILD); _soundPlayed = true; }
             }
             else
             {
 
-                AudioManager.Instance.PlaySound(AssetLoader.AUDIO_BUILD_NOT);
+                if (!_soundPlayed) { AudioManager.Instance.PlaySound(AssetLoader.AUDIO_BUILD_NOT); _soundPlayed = true; }
             }
                 
         }
@@ -129,6 +132,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
 
                     _radiusCircle.Position = _towerBase.Position - new Vector2f(_radiusCircle.Radius, _radiusCircle.Radius / 2f);
 
+                    if (_lastTile != tile)
+                    {
+                        _soundPlayed = false;
+                    }
+
+
                     if (!tile.IsOccupied && tile.GetType() == TileType.BuildTile && !(_currentTower.Price > ScoreManager.Instance.Energy))
                     {
                         _canBuild = true;
@@ -141,6 +150,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                         _towerBase.Color = _notBuildable;
                         _towerTop.Color = _notBuildable;
                     }
+                    _lastTile = tile;
                 }
    
             }

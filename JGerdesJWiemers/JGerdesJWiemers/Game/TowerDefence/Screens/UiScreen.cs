@@ -34,6 +34,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private Label _wavesLabel;
 
         private bool _leftMouseDown = false;
+        private bool _playSound = false;
 
 
         public UiScreen(RenderWindow w, Map map, ICoordsConverter converter, LevelAsset level)
