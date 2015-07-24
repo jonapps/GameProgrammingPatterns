@@ -43,7 +43,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             levels = new List<LevelLabel>();
 
             AssetLoader.Instance.LoadEnemyTextures();
-            List<LevelAsset> levelAssets = AssetLoader.Instance.ReadLevels();
+            List<LevelAsset> levelAssets = AssetLoader.Instance.GetLevels();
             Vector2f position = new Vector2f(_window.Size.X / 2f - 192, 100);
             int count = 0;
             foreach(LevelAsset la in levelAssets){

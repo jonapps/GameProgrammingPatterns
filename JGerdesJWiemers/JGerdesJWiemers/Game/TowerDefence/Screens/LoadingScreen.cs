@@ -12,11 +12,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
     class LoadingScreen : Screen
     {
-        private enum Mode {GRAPHICS, AUDIO};
+        private enum Mode {GRAPHICS, AUDIO, LEVEL};
         private static int BAR_HEIGHT = 16;
 
         private List<String> _textures;
         private List<String> _sounds;
+        private String[] _levels;
         private Mode _mode = Mode.GRAPHICS;
         private int _currentIndex = 0;
 
@@ -54,7 +55,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 AssetLoader.AUDIO_SELECT_TOWER
             };
 
-            _pixels_per_asset = _window.Size.X / (_textures.Count + _sounds.Count);
+            _levels = new String[0];
+            _pixels_per_asset = _window.Size.X / (_textures.Count + _sounds.Count + _levels.Length);
             _bar = new RectangleShape(new Vector2f(0, BAR_HEIGHT));
             _bar.Position = new Vector2f(0, _window.Size.Y - BAR_HEIGHT);
             _bar.FillColor = LevelSelector.AWSM_ORANGE;
@@ -66,6 +68,12 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
         public override void Update()
         {
+            int loaded = -1;
+
+            if (_levels.Length == 0)
+            {
+                _levels = AssetLoader.Instance.GetLevelDirectories();
+            }
             switch (_mode)
             {
                 case Mode.GRAPHICS:
@@ -76,7 +84,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                     }
                     else
                     {
-                        _bar.Size = _bar.Size + new Vector2f(_pixels_per_asset, 0);
+                        loaded = _currentIndex;
                         AssetLoader.Instance.LoadTexture(_textures[_currentIndex], _textures[_currentIndex]);
                         _currentIndex++;
                     }
@@ -84,23 +92,40 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 case Mode.AUDIO:
                     if (_currentIndex >= _sounds.Count)
                     {
-                        _screenManager.Switch(new SplashScreen(_window));
+                        _currentIndex = 0;
+                        _mode = Mode.LEVEL;
                     }
                     else
                     {
-                        _bar.Size = _bar.Size + new Vector2f( _pixels_per_asset, 0);
+                        loaded = _currentIndex + _textures.Count;
                         AssetLoader.Instance.LoadSound(_sounds[_currentIndex], _sounds[_currentIndex]);
                         _currentIndex++;
                     }
                 break;
+                case Mode.LEVEL:
+                if (_currentIndex >= _levels.Length)
+                {
+                    _screenManager.Switch(new SplashScreen(_window));
+                }
+                else
+                {
+                    loaded = _currentIndex + _textures.Count + _sounds.Count;
+                    _bar.Size = _bar.Size + new Vector2f(_pixels_per_asset, 0);
+                    AssetLoader.Instance.LoadLevel(_levels[_currentIndex]);
+                    _currentIndex++;
+                }
+                break;
             }
+
+            if(loaded != -1)
+                _bar.Size = new Vector2f(_pixels_per_asset * loaded, BAR_HEIGHT);
         }
 
         protected override void _Resize(Engine.EventSystem.Events.EngineEvent eventData)
         {
             base._Resize(eventData);
             Vector2f size = (Vector2f)eventData.Data;
-            _pixels_per_asset = size.X / (_textures.Count + _sounds.Count);
+            _pixels_per_asset = size.X / (_textures.Count + _sounds.Count + _levels.Length);
             _bar.Position = new Vector2f(0, size.Y - BAR_HEIGHT);
         }
 

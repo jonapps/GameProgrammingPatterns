@@ -75,6 +75,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         private Dictionary<String, Font> _fonts;
         private Dictionary<String, TextureContainer> _textures;
         private Dictionary<String, CachedSound> _sounds;
+        private List<LevelAsset> _levels;
         
 
         private AssetLoader()
@@ -82,6 +83,7 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             _fonts = new Dictionary<string, Font>();
             _textures = new Dictionary<string, TextureContainer>();
             _sounds = new Dictionary<string, CachedSound>();
+            _levels = new List<LevelAsset>();
 
             LoadFont(FONT_ROBOTO_THIN, FONT_ROBOTO_THIN);
 
@@ -288,6 +290,11 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             return _textures.Values.ToList();
         }
 
+        public List<LevelAsset> GetLevels()
+        {
+            return _levels;
+        }
+
         public static AssetLoader Instance
         {
             get
@@ -302,48 +309,46 @@ namespace JGerdesJWiemers.Game.Engine.Utils
 
 
 
+        public string[] GetLevelDirectories()
+        {
+           return Directory.GetDirectories(this.DIR_LEVELS);
+        }
 
 
 
         /// <summary>
-        /// Loads all levels from level folder
+        /// Load a level from a given diretory
         /// </summary>
         /// <returns></returns>
-        public List<LevelAsset> ReadLevels()
+        public LevelAsset LoadLevel(String dir)
         {
-
-            string[] dirEntries = Directory.GetDirectories(this.DIR_LEVELS);
             bool alright = true;
-            foreach (String dir in dirEntries)
-            {
-                if (!File.Exists(dir + _LEVEL_FILE_INFO)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_TOWER)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_PREVIEW)) alright = false;
-                if (!File.Exists(dir + _LEVEL_FILE_MUSIC)) alright = false;
-            }
+
+            if (!File.Exists(dir + _LEVEL_FILE_INFO)) alright = false;
+            if (!File.Exists(dir + _LEVEL_FILE_MAP)) alright = false;
+            if (!File.Exists(dir + _LEVEL_FILE_WAVES)) alright = false;
+            if (!File.Exists(dir + _LEVEL_FILE_ENEMIES)) alright = false;
+            if (!File.Exists(dir + _LEVEL_FILE_TOWER)) alright = false;
+            if (!File.Exists(dir + _LEVEL_FILE_PREVIEW)) alright = false;
+            if (!File.Exists(dir + _LEVEL_FILE_MUSIC)) alright = false;
+           
             if (!alright)
             {
-                throw new Exception("some levelfiles are missing");
+                throw new Exception("some levelfiles are missing for '" + dir +  "'");
             }
-            
-            List<LevelAsset> result = new List<LevelAsset>();
-            LevelAsset level = null;
-            foreach (String dir in dirEntries)
-            {
-                level = new LevelAsset();
-                level.Info= this._LoadInfo(dir + _LEVEL_FILE_INFO);
-                level.Map = this._LoadMap(dir + _LEVEL_FILE_MAP);
-                level.Enemies = this._LoadEnemies(dir + _LEVEL_FILE_ENEMIES);
-                level.Waves = this._LoadWaves(dir + _LEVEL_FILE_WAVES);
-                level.Tower = this._LoadTower(dir + _LEVEL_FILE_TOWER);
-                level.Info.Preview = new Texture(dir + _LEVEL_FILE_PREVIEW);
-                level.Info.Music = new CachedSound(dir + _LEVEL_FILE_MUSIC);
-                result.Add(level);
-            }
-            return result;
+
+            LevelAsset level = new LevelAsset();
+            level.Info= this._LoadInfo(dir + _LEVEL_FILE_INFO);
+            level.Map = this._LoadMap(dir + _LEVEL_FILE_MAP);
+            level.Enemies = this._LoadEnemies(dir + _LEVEL_FILE_ENEMIES);
+            level.Waves = this._LoadWaves(dir + _LEVEL_FILE_WAVES);
+            level.Tower = this._LoadTower(dir + _LEVEL_FILE_TOWER);
+            level.Info.Preview = new Texture(dir + _LEVEL_FILE_PREVIEW);
+            level.Info.Music = new CachedSound(dir + _LEVEL_FILE_MUSIC);
+
+            _levels.Add(level);
+
+            return level;
         }
 
         private InfoAsset _LoadInfo(string filepath)
