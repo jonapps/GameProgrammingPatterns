@@ -88,7 +88,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             Vector2 center = _map.GetTileByIndex(5,5).getCenter();
             _view.Center = Map.MapToScreen(center.X, center.Y);
 
-
+            _Resize(new EngineEvent(new Vector2f(_window.Size.X, _window.Size.Y)));
             AudioManager.Instance.PlayMusic("music_"+_level.Info.Name, 0.5f, _level.Info.Music);
         }
 
@@ -96,8 +96,18 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             if ((int)(eventData.Data) >= _level.Info.Lives)
             {
-                Environment.Exit(1);
+                _OnGameOver(false);
             }
+        }
+
+        private void _OnGameOver(bool win)
+        {
+            _screenManager.PopTo(this);
+            _shader = new Shader(null, @"Assets\Shader\blur.frag");
+            _shader.SetParameter("blur_radius", 0f);
+            GameOverScreen.Status status = win ? GameOverScreen.Status.WIN : GameOverScreen.Status.LOSE;
+            _screenManager.Push(new GameOverScreen(_window, status, _shader, _level));
+
         }
 
         void _window_KeyReleased(object sender, KeyEventArgs args)
@@ -152,6 +162,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 _screenManager.PopTo(this);
                 _screenManager.Switch(new LevelSelector(_window));
                 EventStream.Instance.Clear();
+            }
+
+            if (args.Code == Keyboard.Key.G)
+            {
+                _OnGameOver(true);
+            }
+
+            if (args.Code == Keyboard.Key.L)
+            {
+                _OnGameOver(false);
             }
         }
 

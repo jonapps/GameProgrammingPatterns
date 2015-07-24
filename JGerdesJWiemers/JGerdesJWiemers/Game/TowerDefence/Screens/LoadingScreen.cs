@@ -135,6 +135,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             Vector2f size = (Vector2f)eventData.Data;
             _pixels_per_asset = size.X / (_textures.Count + _sounds.Count + _levels.Length);
             _bar.Position = new Vector2f(0, size.Y - BAR_HEIGHT);
+            _description.Position = _bar.Position + new Vector2f(DESCRIPTION_PADDING, -DESCRIPTION_PADDING);
         }
 
         public override void PastUpdate()
