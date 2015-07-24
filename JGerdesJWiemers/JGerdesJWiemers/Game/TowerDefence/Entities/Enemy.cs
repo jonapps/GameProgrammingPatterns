@@ -1,4 +1,5 @@
 ﻿using FarseerPhysics;
+using JGerdesJWiemers.Game.Engine.Audio;
 using JGerdesJWiemers.Game.Engine.Entities;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
@@ -102,6 +103,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Entities
         private void _OnOnDespawn(Tile destination)
         {
             _deleteMe = true;
+            AudioManager.Instance.PlaySound(AssetLoader.AUDIO_MISSED);
             EventStream.Instance.Emit(EVENT_DESPAWN, new EngineEvent());
         }
 

@@ -51,6 +51,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
         public static readonly String AUDIO_SHOT_3 = @"shot_3.wav";
         public static readonly String AUDIO_SHOT_4 = @"shot_4.wav";
         public static readonly String AUDIO_SHOT_5 = @"shot_5.wav";
+        public static readonly String AUDIO_BUILD = @"build.wav";
+        public static readonly String AUDIO_BUILD_NOT = @"build_not.wav";
+        public static readonly String AUDIO_MISSED = @"missed.wav";
+        public static readonly String AUDIO_START_LEVEL = @"start_level.wav";
+        public static readonly String AUDIO_SELECT_LEVEL = @"select_level.wav";
+        public static readonly String AUDIO_SELECT_TOWER = @"select_tower.wav";
 
         public static readonly String AUDIO_MUSIC_1 = @"music\1.mp3";
         public static readonly String AUDIO_MUSIC_2 = @"music\2.mp3";
@@ -98,6 +104,12 @@ namespace JGerdesJWiemers.Game.Engine.Utils
             LoadSound(AUDIO_SHOT_3, AUDIO_SHOT_3);
             LoadSound(AUDIO_SHOT_4, AUDIO_SHOT_4);
             LoadSound(AUDIO_SHOT_5, AUDIO_SHOT_5);
+            LoadSound(AUDIO_BUILD, AUDIO_BUILD);
+            LoadSound(AUDIO_BUILD_NOT, AUDIO_BUILD_NOT);
+            LoadSound(AUDIO_MISSED, AUDIO_MISSED);
+            LoadSound(AUDIO_START_LEVEL, AUDIO_START_LEVEL);
+            LoadSound(AUDIO_SELECT_LEVEL, AUDIO_SELECT_LEVEL);
+            LoadSound(AUDIO_SELECT_TOWER, AUDIO_SELECT_TOWER);
 
             LoadSound(AUDIO_MUSIC_1, AUDIO_MUSIC_1);
             LoadSound(AUDIO_MUSIC_2, AUDIO_MUSIC_2);

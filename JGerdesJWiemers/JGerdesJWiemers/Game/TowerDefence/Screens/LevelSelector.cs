@@ -1,4 +1,5 @@
-﻿using JGerdesJWiemers.Game.Engine.Graphics.Screens;
+﻿using JGerdesJWiemers.Game.Engine.Audio;
+using JGerdesJWiemers.Game.Engine.Graphics.Screens;
 using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
 using JGerdesJWiemers.Game.TowerDefence.UiElements;
@@ -64,18 +65,21 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             {
                 case Keyboard.Key.Return:
                     startLevel(levels[_currentIndex].Asset);
+                    AudioManager.Instance.PlaySound(AssetLoader.AUDIO_START_LEVEL);
                     break;
                 case Keyboard.Key.Up:
                 case Keyboard.Key.Right:
                 case Keyboard.Key.W:
                 case Keyboard.Key.D:
                      _currentIndex = SMath.Max(0, _currentIndex - 1);
+                     AudioManager.Instance.PlaySound(AssetLoader.AUDIO_SELECT_LEVEL);
                     break;
                 case Keyboard.Key.Down:
                 case Keyboard.Key.Left:
                 case Keyboard.Key.S:
                 case Keyboard.Key.A:
                     _currentIndex = SMath.Min(levels.Count - 1, _currentIndex + 1);
+                    AudioManager.Instance.PlaySound(AssetLoader.AUDIO_SELECT_LEVEL);
                     break;
             }
             updateView();

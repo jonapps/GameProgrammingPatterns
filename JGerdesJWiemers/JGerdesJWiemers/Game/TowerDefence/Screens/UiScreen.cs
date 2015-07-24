@@ -14,6 +14,7 @@ using JGerdesJWiemers.Game.Engine.Utils;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
+using JGerdesJWiemers.Game.Engine.Audio;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
 {
@@ -85,6 +86,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         void OnSelectionChanged(Tower.Def selection)
         {
             _builder.Selection = selection;
+            AudioManager.Instance.PlaySound(AssetLoader.AUDIO_SELECT_TOWER);
         }
 
         void _window_MouseButtonPressed(object sender, SFML.Window.MouseButtonEventArgs e)

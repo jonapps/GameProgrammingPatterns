@@ -13,6 +13,7 @@ using JGerdesJWiemers.Game.TowerDefence.Tiles;
 using SFML.System;
 using FarseerPhysics;
 using JGerdesJWiemers.Game.Engine.EventSystem;
+using JGerdesJWiemers.Game.Engine.Audio;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Logic
 {
@@ -85,6 +86,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                 _currentTower.Base.A = 255;
                 _currentTower.TopActive.A = 255;
                 EventStream.Instance.Emit(Tower.EVENT_BUILD, new Engine.EventSystem.Events.EngineEvent(_currentTower));
+
+                AudioManager.Instance.PlaySound(AssetLoader.AUDIO_BUILD);
+            }
+            else
+            {
+
+                AudioManager.Instance.PlaySound(AssetLoader.AUDIO_BUILD_NOT);
             }
                 
         }
