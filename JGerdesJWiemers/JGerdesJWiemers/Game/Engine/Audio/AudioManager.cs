@@ -20,6 +20,7 @@ namespace JGerdesJWiemers.Game.Engine.Audio
         private readonly MixingSampleProvider mixer;
 
         private ISampleProvider _music = null;
+        private String _musicName = null;
 
         public AudioManager(int sampleRate = 44100, int channelCount = 2)
         {
@@ -50,13 +51,17 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)), volume);
         }
 
-        public void PlayMusic(String soundname, float volume = 1)
+        public void PlayMusic(String musicName, float volume = 0.5f)
         {
-            if (_music != null)
+            if(musicName != _musicName)
             {
-                mixer.RemoveMixerInput(_music);
+                if (_music != null)
+                {
+                    mixer.RemoveMixerInput(_music);
+                }
+                _music = AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(musicName)), volume);
+                _musicName = musicName;
             }
-            _music = AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)), volume);
         }
 
 

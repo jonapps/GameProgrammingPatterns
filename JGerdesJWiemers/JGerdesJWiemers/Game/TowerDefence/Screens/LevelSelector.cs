@@ -56,6 +56,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
 
             _window.KeyPressed += _window_KeyPressed;
+            AudioManager.Instance.PlayMusic(AssetLoader.AUDIO_MUSIC_1);
 
         }
 
