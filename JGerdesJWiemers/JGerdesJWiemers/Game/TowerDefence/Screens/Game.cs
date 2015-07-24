@@ -107,6 +107,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
         }
 
+        /// <summary>
+        /// Show GameOverScreen and set Shader!
+        /// </summary>
+        /// <param name="win"></param>
         private void _OnGameOver(bool win)
         {
             _screenManager.PopTo(this);
@@ -114,7 +118,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             _shader.SetParameter("blur_radius", 0f);
             GameOverScreen.Status status = win ? GameOverScreen.Status.WIN : GameOverScreen.Status.LOSE;
             _screenManager.Push(new GameOverScreen(_window, status, _shader, _level));
-
         }
 
         void _window_KeyReleased(object sender, KeyEventArgs args)
