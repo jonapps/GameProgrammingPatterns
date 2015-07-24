@@ -47,3 +47,4 @@ Der Spieler hat eine Auswahl von __Türmen__, die er für __Energie__ kaufen und
  - Hin und wieder kann es vorkommen (vielleicht ist es auch schon gefixt...), dass man zwei Türme auf ein Tile baut und dadurch negative Engerie bekommen kann.
  - Mehr Level - Freischalten von neuen Leveln durch meistern von vorherigen
  - Menüsteuerung und Towerauswahl mit Maus
+ - Online Multiplayer in dem zwei Spieler gegeneinandern spielen können
