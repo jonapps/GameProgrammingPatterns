@@ -2,11 +2,11 @@
     "Tower": [
         {
 			"Radius" : 2,
-			"FireFrequency" : 400,
-			"Damage" : 30,
+			"FireFrequency" : 1000,
+			"Damage" : 150,
 			"BulletSpeed" : 6,
 			"Health" : 100,
-			"Price" : 75,
+			"Price" : 150,
 			"Base" : {
 				"R": 234,
 				"G": 12,
@@ -67,39 +67,6 @@
             "Sound": 1
         },
         {
-            "Radius": 3,
-            "FireFrequency": 50,
-            "Damage": 40,
-            "BulletSpeed": 10,
-            "Health": 500,
-            "Price": 450,
-            "Base": {
-                "R": 244,
-                "G": 235,
-                "B": 66,
-                "A": 255
-            },
-            "TopActive": {
-                "R": 222,
-                "G": 64,
-                "B": 117,
-                "A": 255
-            },
-            "TopWaiting": {
-                "R": 45,
-                "G": 43,
-                "B": 12,
-                "A": 255
-            },
-            "BulletColor": {
-                "R": 222,
-                "G": 64,
-                "B": 117,
-                "A": 100
-            },
-            "Sound": 2
-        },
-        {
             "Radius": 9,
             "FireFrequency": 1000,
             "Damage": 128,
@@ -140,15 +107,48 @@
             "Health": 100,
             "Price": 850,
             "Base": {
-                "R": 108,
-                "G": 33,
-                "B": 161,
+                "R": 0,
+                "G": 255,
+                "B": 15,
                 "A": 255
             },
             "TopActive": {
+                "R": 20,
+                "G": 150,
+                "B": 100,
+                "A": 255
+            },
+            "TopWaiting": {
+                "R": 0,
+                "G": 0,
+                "B": 200,
+                "A": 255
+            },
+            "BulletColor": {
+                "R": 14,
+                "G": 210,
+                "B": 20,
+                "A": 255
+            },
+            "Sound": 3
+        },
+        {
+            "Radius": 3,
+            "FireFrequency": 50,
+            "Damage": 40,
+            "BulletSpeed": 10,
+            "Health": 500,
+            "Price": 1400,
+            "Base": {
                 "R": 244,
                 "G": 235,
                 "B": 66,
+                "A": 255
+            },
+            "TopActive": {
+                "R": 222,
+                "G": 64,
+                "B": 117,
                 "A": 255
             },
             "TopWaiting": {
@@ -158,12 +158,12 @@
                 "A": 255
             },
             "BulletColor": {
-                "R": 244,
-                "G": 235,
-                "B": 66,
+                "R": 222,
+                "G": 64,
+                "B": 117,
                 "A": 100
             },
-            "Sound": 3
+            "Sound": 2
         }
     ]
 }
