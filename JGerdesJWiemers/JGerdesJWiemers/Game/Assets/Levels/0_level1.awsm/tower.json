@@ -67,39 +67,6 @@
             "Sound": 1
         },
         {
-            "Radius": 3,
-            "FireFrequency": 50,
-            "Damage": 40,
-            "BulletSpeed": 10,
-            "Health": 500,
-            "Price": 1400,
-            "Base": {
-                "R": 244,
-                "G": 235,
-                "B": 66,
-                "A": 255
-            },
-            "TopActive": {
-                "R": 222,
-                "G": 64,
-                "B": 117,
-                "A": 255
-            },
-            "TopWaiting": {
-                "R": 45,
-                "G": 43,
-                "B": 12,
-                "A": 255
-            },
-            "BulletColor": {
-                "R": 222,
-                "G": 64,
-                "B": 117,
-                "A": 100
-            },
-            "Sound": 2
-        },
-        {
             "Radius": 9,
             "FireFrequency": 1000,
             "Damage": 128,
@@ -164,6 +131,39 @@
                 "A": 255
             },
             "Sound": 3
+        },
+        {
+            "Radius": 3,
+            "FireFrequency": 50,
+            "Damage": 40,
+            "BulletSpeed": 10,
+            "Health": 500,
+            "Price": 1400,
+            "Base": {
+                "R": 244,
+                "G": 235,
+                "B": 66,
+                "A": 255
+            },
+            "TopActive": {
+                "R": 222,
+                "G": 64,
+                "B": 117,
+                "A": 255
+            },
+            "TopWaiting": {
+                "R": 45,
+                "G": 43,
+                "B": 12,
+                "A": 255
+            },
+            "BulletColor": {
+                "R": 222,
+                "G": 64,
+                "B": 117,
+                "A": 100
+            },
+            "Sound": 2
         }
     ]
 }
