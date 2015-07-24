@@ -1,5 +1,6 @@
 # AWSM
 Ein minimalistisches Tower Defence
+
 *von Jonathan Wiemers und Jonas Gerdes*
 ## Features
 
@@ -43,5 +44,6 @@ Der Spieler hat eine Auswahl von __Türmen__, die er für __Energie__ kaufen und
 ## Hinweise/Schwachstellen/Verbesserungen/zukünftige Features
  - Zur Zeit ist nur das erste Level einigermaßen ausbalanciert. Die anderen beiden sind noch zu einfach.
  - Bei sehr vielen Gegnern und Türmen fängt das Spiel merklich an zu ruckeln. Ein Insertsort für alle Entities, das Entfernen der Fluganimation der Partikel und weitere Tweaks haben leider keine Abhilfe geschaffen
+ - Hin und wieder kann es vorkommen (vielleicht ist es auch schon gefixt...), dass man zwei Türme auf ein Tile baut und dadurch negative Engerie bekommen kann.
  - Mehr Level - Freischalten von neuen Leveln durch meistern von vorherigen
  - Menüsteuerung und Towerauswahl mit Maus
