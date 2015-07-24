@@ -1,4 +1,5 @@
 ﻿using FarseerPhysics.Dynamics;
+using JGerdesJWiemers.Game.Engine;
 using JGerdesJWiemers.Game.Engine.EventSystem;
 using JGerdesJWiemers.Game.Engine.EventSystem.Events;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
@@ -16,6 +17,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
     {
         public static readonly String EVENT_NEXT_WAVE = "waveManager.next";
         public static readonly String EVENT_WAVE_STARTED= "waveManager.started";
+        
 
         public class WaveData
         {
@@ -26,19 +28,25 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
             }
             public int Current;
             public int Total;
+
+
+           
         }
 
         private WavesAsset _wavesAsset;
         private int _currentIndex = 0;
         private List<Enemy.Def> _enemies;
+
         //private World _world;
         //private Map _map;
 
         public WaveManager(WavesAsset w, List<Enemy.Def> enemies){
             _wavesAsset = w;
             _enemies = enemies;
+
             EventStream.Instance.On(EVENT_NEXT_WAVE, _Run);
         }
+
 
         private void _Run(EngineEvent eventData)
         {

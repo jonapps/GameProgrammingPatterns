@@ -118,8 +118,22 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         void _window_KeyPressed(object sender, KeyEventArgs args)
         {
             if (args.Code == Keyboard.Key.N)
-                EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
+            {
+                bool allEnemiesDead = true;
+                foreach (Entity e in _entities)
+                {
+                    if (e is Enemy)
+                    {
+                        allEnemiesDead = false;
+                    }
+                }
+                if (allEnemiesDead)
+                {
+                    EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
+                }
+            }
 
+               
             if (args.Code == Keyboard.Key.Left || args.Code == Keyboard.Key.A)
                 _viewLeft = true;
 
