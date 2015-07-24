@@ -25,6 +25,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
     abstract class Tile : IDrawable
     {
         protected List<Entity> _entities;
+        protected List<Entity> _entitiesToDelete;
         protected AnimatedSprite _sprite;
         private Vector2 _size;
         private Vector2 _position;
@@ -35,6 +36,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         public Tile(float x, float y, float width, float height, Texture tex, int mapCenter, Color c)
         {
             _entities = new List<Entity>();
+            _entitiesToDelete = new List<Entity>();
             _sprite = new AnimatedSprite(tex, 96, 48);
             _sprite.SetAnimation(new Animation());
             _sprite.Color = c;
@@ -66,6 +68,19 @@ namespace JGerdesJWiemers.Game.TowerDefence.Tiles
         {
             _sprite.Update();
             _CheckMark();
+            foreach(Entity e in _entities)
+            {
+                if (e.DeleteMe)
+                {
+                    _entitiesToDelete.Add(e);
+                }
+            }
+            foreach (Entity e in _entitiesToDelete)
+            {
+                _entities.Remove(e);
+            }
+            _entitiesToDelete.Clear();
+
         }
 
         public void PastUpdate()
