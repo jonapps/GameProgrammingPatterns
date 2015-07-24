@@ -24,7 +24,6 @@ using System.Text;
 using System.Threading.Tasks;
 using JGerdesJWiemers.Game;
 using JGerdesJWiemers.Game.Engine.Utils.Helper.LevelAssets;
-using JGerdesJWiemers.Game.TowerDefence.Logic;
 using JGerdesJWiemers.Game.Engine.Audio;
 
 namespace JGerdesJWiemers.Game.TowerDefence.Screens
@@ -40,7 +39,6 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
 
     class Game : GameScreen, IEntityHolder, ICoordsConverter
     {
-
         public float SCROLL_SPEED = 10;
         public float SCROLL_DISTANCE = 30;
 
@@ -48,6 +46,10 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         private WaveManager _waveManager;
         private UiScreen _uiScreen;
         private LevelAsset _level;
+
+
+        private bool _lastWave = false;
+        private bool _waveStarted = false;
 
 
         private bool _viewLeft, _viewRight, _viewUp, _viewDown = false;
@@ -76,6 +78,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             EventStream.Instance.On(Tower.EVENT_BUILD, _BuildTower);
             EventStream.Instance.On(Particle.EVENT_SPAWN, _SpawnParticle);
             EventStream.Instance.On(ScoreManager.EVENT_MISSED_CHANGED, _OnLivesChange);
+            EventStream.Instance.On(WaveManager.EVENT_WAVE_STARTED, _OnWaveStart);
 
 
 
@@ -92,11 +95,23 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             AudioManager.Instance.PlayMusic("music_"+_level.Info.Name, 0.5f, _level.Info.Music);
         }
 
+
+
         private void _OnLivesChange(EngineEvent eventData)
         {
             if ((int)(eventData.Data) >= _level.Info.Lives)
             {
                 _OnGameOver(false);
+            }
+        }
+
+
+        private void _OnWaveStart(EngineEvent eventData)
+        {
+            WaveManager.WaveData data = eventData.Data as WaveManager.WaveData;
+            if (data.Current == data.Total)
+            {
+                _lastWave = true;
             }
         }
 
@@ -129,16 +144,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         {
             if (args.Code == Keyboard.Key.N)
             {
-                bool allEnemiesDead = true;
-                foreach (Entity e in _entities)
+                if (_AllEnemiesDead())
                 {
-                    if (e is Enemy)
-                    {
-                        allEnemiesDead = false;
-                    }
-                }
-                if (allEnemiesDead)
-                {
+                    _waveStarted = false;
                     EventStream.Instance.Emit(WaveManager.EVENT_NEXT_WAVE, new EngineEvent());
                 }
             }
@@ -175,11 +183,25 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
             }
         }
 
+
+
         private void _SpawnParticle(EngineEvent e)
         {
             Particle.Def def = e.Data as Particle.Def;
             _particlesToAdd.Add(new Particle(_world, def, this));
-            //_particleIsDirty = true;
+        }
+
+        private bool _AllEnemiesDead()
+        {
+            bool allEnemiesDead = true;
+            foreach (Entity e in _entities)
+            {
+                if (e is Enemy)
+                {
+                    allEnemiesDead = false;
+                }
+            }
+            return allEnemiesDead;
         }
 
         public override void Create()
@@ -217,6 +239,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         /// <param name="e"></param>
         private void _SpawnEnemy(EngineEvent e)
         {
+            
             Enemy.Def def = e.Data as Enemy.Def;
             
             foreach (Tile pos in _map.GetSpawnTiles())
@@ -224,6 +247,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 def.Position = pos.getCenter();
                 _entitiesToAdd.Add(new Enemy(_world, def, new FollowRoadAI(_map)));
             }
+            _waveStarted = true;
         }
 
       
@@ -259,6 +283,13 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         public override void PastUpdate()
         {
             _map.PastUpdate();
+
+
+            if (_AllEnemiesDead() && _lastWave && _waveStarted)
+            {
+                _OnGameOver(true);
+            }
+
             base.PastUpdate();
         }
 
