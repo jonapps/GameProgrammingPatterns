@@ -37,8 +37,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
         private int _currentIndex = 0;
         private List<Enemy.Def> _enemies;
 
-        //private World _world;
-        //private Map _map;
+
 
         public WaveManager(WavesAsset w, List<Enemy.Def> enemies){
             _wavesAsset = w;
@@ -58,7 +57,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Logic
                 {
                     for (int i = 0; i < ewa.Quantity; ++i)
                     {
-                        long delay = delayMultiplier++ * 1000;
+                        long delay = delayMultiplier++ * _wavesAsset.Time;
                         //find EnemyAssets by type
                         Enemy.Def enemyData = _enemies.Find(e => e.Name.Equals(ewa.Type));
                         if (enemyData != null)

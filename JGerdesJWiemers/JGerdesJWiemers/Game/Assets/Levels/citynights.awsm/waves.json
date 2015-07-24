@@ -2,7 +2,7 @@
 	"waves":
 	[
 		{
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{
@@ -20,7 +20,7 @@
 			]
 		},
 		{
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{
@@ -30,7 +30,7 @@
 			]
 		},
 		{
-			"Time": 10000,
+			"Time": 100,
 			"Enemies":
 			[
 				{
@@ -52,7 +52,7 @@
 			]
 		},
         {
-            "Time": 10000,
+            "Time": 100,
             "Enemies": [
                 {
                     "Type": "NightRider",
