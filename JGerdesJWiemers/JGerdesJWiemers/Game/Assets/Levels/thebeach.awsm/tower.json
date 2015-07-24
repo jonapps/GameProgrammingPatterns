@@ -3,7 +3,7 @@
 		{
 			"Radius" : 10,
 			"FireFrequency" : 500,
-			"Damage" : 10,
+			"Damage" : 300,
 			"BulletSpeed" : 4,
 			"Health" : 100,
 			"Price" : 500,
@@ -39,7 +39,7 @@
             "Damage": 20,
             "BulletSpeed": 4,
             "Health": 100,
-            "Price": 750,
+            "Price": 100,
             "Base": {
                 "R": 93,
                 "G": 64,
@@ -65,6 +65,72 @@
                 "A": 255
             },
             "Sound" : 0
+        },
+        {
+            "Radius": 12,
+            "FireFrequency": 400,
+            "Damage": 120,
+            "BulletSpeed": 12,
+            "Health": 100,
+            "Price": 750,
+            "Base": {
+                "R": 142,
+                "G": 56,
+                "B": 255,
+                "A": 255
+            },
+            "TopActive": {
+                "R": 56,
+                "G": 142,
+                "B": 255,
+                "A": 255
+            },
+            "TopWaiting": {
+                "R": 0,
+                "G": 0,
+                "B": 230,
+                "A": 255
+            },
+            "BulletColor": {
+                "R": 62,
+                "G": 39,
+                "B": 35,
+                "A": 255
+            },
+            "Sound" : 1
+        },
+        {
+            "Radius": 5,
+            "FireFrequency": 250,
+            "Damage": 45,
+            "BulletSpeed": 7,
+            "Health": 100,
+            "Price": 1000,
+            "Base": {
+                "R": 190,
+                "G": 112,
+                "B": 255,
+                "A": 255
+            },
+            "TopActive": {
+                "R": 40,
+                "G": 142,
+                "B": 255,
+                "A": 255
+            },
+            "TopWaiting": {
+                "R": 0,
+                "G": 0,
+                "B": 230,
+                "A": 255
+            },
+            "BulletColor": {
+                "R": 62,
+                "G": 39,
+                "B": 35,
+                "A": 255
+            },
+            "Sound" : 1
         }
 	]
 }

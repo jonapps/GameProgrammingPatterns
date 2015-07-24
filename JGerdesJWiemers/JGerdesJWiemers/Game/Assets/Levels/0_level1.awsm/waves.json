@@ -106,19 +106,71 @@
 					"quantity": 2
 				}
             ]
-        }
-        ,
-		{
-			"Time": 10000,
-			"Enemies":
-			[
+        },
+        {
+            "Time": 10000,
+            "Enemies": [
                 {
                     "Type": "DrunkHeads",
                     "Quantity": 40
                 },
                 {
-					"Type": "HardLiner",
-					"Quantity": 60
+                    "Type": "HardLiner",
+                    "Quantity": 60
+                }
+            ]
+        },
+        {
+			"Time": 10000,
+			"Enemies":
+			[
+                {
+                    "Type": "EndBoss",
+                    "Quantity": 10
+                },
+                {
+                    "Type": "HardLiner",
+                    "Quantity": 60
+                },
+                {
+					"Type": "DeadCruiser",
+					"quantity": 5
+				}
+			]
+		},
+        {
+			"Time": 10000,
+			"Enemies":
+			[
+                {
+                    "Type": "EndBoss",
+                    "Quantity": 20
+                },
+                {
+                    "Type": "HardLiner",
+                    "Quantity": 60
+                },
+                {
+					"Type": "DeadCruiser",
+					"quantity": 5
+				}
+			]
+		},
+        {
+			"Time": 10000,
+			"Enemies":
+			[
+                {
+                    "Type": "EndBoss",
+                    "Quantity": 50
+                },
+                {
+                    "Type": "HardLiner",
+                    "Quantity": 60
+                },
+                {
+					"Type": "DeadCruiser",
+					"quantity": 10
 				}
 			]
 		}

@@ -6,6 +6,10 @@
                 {
                     "Type": "PoolRing",
                     "quantity": 4
+                },
+                {
+                    "Type": "OneShot",
+                    "Quantity": 2
                 }
             ]
         },
@@ -19,6 +23,10 @@
                 {
                     "Type": "Whatever",
                     "Quantity": 1
+                },
+                {
+                    "Type": "OneShot",
+                    "Quantity": 10
                 }
             ]
         },
@@ -30,12 +38,20 @@
                     "quantity": 3
                 },
                 {
+                    "Type": "OneShot",
+                    "Quantity": 10
+                },
+                {
                     "Type": "Whatever",
                     "Quantity": 1
                 },
                 {
                     "Type": "PoolRing",
                     "quantity": 3
+                },
+                {
+                    "Type": "TickTack",
+                    "quantity": 7
                 }
 
             ]
@@ -54,6 +70,14 @@
                 {
                     "Type": "PoolRing",
                     "quantity": 2
+                },
+                {
+                    "Type": "TickTack",
+                    "quantity": 7
+                },
+                {
+                    "Type": "OneShot",
+                    "Quantity": 10
                 }
             ]
         },
@@ -71,6 +95,14 @@
                 {
                     "Type": "PoolRing",
                     "quantity": 2
+                },
+                {
+                    "Type": "TickTack",
+                    "quantity": 7
+                },
+                {
+                    "Type": "OneShot",
+                    "Quantity": 10
                 }
             ]
         },
@@ -104,7 +136,11 @@
                 },
                 {
                     "Type": "PoolRing",
-                    "quantity": 6
+                    "quantity": 20
+                },
+                {
+                    "Type": "TickTack",
+                    "quantity": 20
                 }
             ]
         },

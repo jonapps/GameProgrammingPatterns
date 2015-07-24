@@ -168,6 +168,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                     _viewDown = true;
                     break;
                 case Keyboard.Key.N:
+                case Keyboard.Key.Return:
                     if (_AllEnemiesDead())
                     {
                         _waveStarted = false;
@@ -240,16 +241,16 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         /// <param name="e"></param>
         void _BuildTower(EngineEvent e)
         {
+            
             Tower.Def def = e.Data as Tower.Def;
-            Tower tower = new Tower(_world, def, this);
-            _entities.Add(tower);
-
             Tile t = _map.GetTileAtMapPoint(def.Position.X, def.Position.Y);
-            if (t != null)
+            if (t != null && !t.IsOccupied)
             {
+                Tower tower = new Tower(_world, def, this);
+                _entities.Add(tower);
                 t.Occupier = tower;
+                ScoreManager.Instance.Energy -= def.Price;
             }
-            ScoreManager.Instance.Energy -= def.Price;
         }
 
 
