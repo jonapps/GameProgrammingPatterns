@@ -47,14 +47,21 @@ namespace JGerdesJWiemers.Game.Engine.Audio
             AddMixerInput(new CachedSoundSampleProvider(sound));
         }
 
-        public void Play(String soundname)
+        public void Play(String soundname, float volume = 1)
         {
-            AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)));
+            AddMixerInput(new CachedSoundSampleProvider(AssetLoader.Instance.GetSound(soundname)), volume);
         }
 
         private void AddMixerInput(ISampleProvider input)
         {
             mixer.AddMixerInput(ConvertToRightChannelCount(input));
+        }
+
+        private void AddMixerInput(ISampleProvider input, float volume)
+        {
+            VolumeSampleProvider volumeSampler = new VolumeSampleProvider(input);
+            volumeSampler.Volume = volume;
+            AddMixerInput(volumeSampler);
         }
 
         public void Dispose()

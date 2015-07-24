@@ -94,6 +94,7 @@
     <Compile Include="Game\Engine\Audio\AudioManager.cs" />
     <Compile Include="Game\Engine\Audio\CachedSound.cs" />
     <Compile Include="Game\Engine\Audio\CachedSoundSampleProvider.cs" />
+    <Compile Include="Game\Engine\Audio\VolumeSampleProvider.cs" />
     <Compile Include="Game\Engine\Entities\Input\MouseCursor.cs" />
     <Compile Include="Game\Engine\Entities\SpriteEntity.cs" />
     <Compile Include="Game\Engine\Entity.cs" />
