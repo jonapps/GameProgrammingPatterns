@@ -29,8 +29,8 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
         }
 
         public static Color WHITE = new Color(255, 255, 255, 255);
-        public static Color AWSM_ORANGE = new Color(253, 162, 71);
-        public static Color AWSM_GREY = new Color(84, 84, 84);
+        public static Color AWSM_ORANGE = new Color(251, 140, 0);
+        public static Color AWSM_GREY = new Color(66, 66, 66);
 
         //Dööö dööö döö, dö dö dö dö dö döö dö dö
         List<LevelLabel> levels;

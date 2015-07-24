@@ -13,6 +13,7 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
     class LoadingScreen : Screen
     {
         private enum Mode {GRAPHICS, AUDIO};
+        private static int BAR_HEIGHT = 16;
 
         private List<String> _textures;
         private List<String> _sounds;
@@ -53,9 +54,9 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                 AssetLoader.AUDIO_SELECT_TOWER
             };
 
-            _pixels_per_asset = 1280 / (_textures.Count + _sounds.Count);
-            _bar = new RectangleShape(new Vector2f(0, 16));
-            _bar.Position = new Vector2f(0, 720 - 16);
+            _pixels_per_asset = _window.Size.X / (_textures.Count + _sounds.Count);
+            _bar = new RectangleShape(new Vector2f(0, BAR_HEIGHT));
+            _bar.Position = new Vector2f(0, _window.Size.Y - BAR_HEIGHT);
             _bar.FillColor = LevelSelector.AWSM_ORANGE;
         }
         public override void Exit()
@@ -93,6 +94,14 @@ namespace JGerdesJWiemers.Game.TowerDefence.Screens
                     }
                 break;
             }
+        }
+
+        protected override void _Resize(Engine.EventSystem.Events.EngineEvent eventData)
+        {
+            base._Resize(eventData);
+            Vector2f size = (Vector2f)eventData.Data;
+            _pixels_per_asset = size.X / (_textures.Count + _sounds.Count);
+            _bar.Position = new Vector2f(0, size.Y - BAR_HEIGHT);
         }
 
         public override void PastUpdate()
