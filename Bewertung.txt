@@ -1,3 +1,56 @@
+*************
+Kursnote: 1.0
+*************
+
+Aufgabe Jump&Run
+Spiel: Towerdefence
+
+Note: 1
+
+Positiv:
+Schicke UI
+Screenmanager, viele Screens
+Cooles, richtiges Spiel
+3rd-Party Soundmanager integriert
+Viel Polish!
+Datengetriebene Waves und Präsentation etc
+Sinnvoller Einsatz von Pattern
+Meine Erwartungen für diesen Kurs habt ihr klar übertroffen.
+
+
+Kritik & Tips:
+
+Das Icon kann man so setzen:
+
+		private void setIcon(String file)
+        {
+            System.Drawing.Icon icon = new System.Drawing.Icon(file);
+            Rectangle r = new Rectangle(new Point(), icon.Size);
+            Bitmap bmp = icon.ToBitmap();
+            // Lock the bitmap's bits into sys memory
+            BitmapData bmpData = bmp.LockBits(r, ImageLockMode.ReadWrite, bmp.PixelFormat);
+            // Declare an array to hold the bytes of the bitmap. 
+            int numBytes  = Math.Abs(bmpData.Stride) * bmp.Height;
+            byte[] rgbValues = new byte[numBytes];
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(bmpData.Scan0, rgbValues, 0, numBytes);
+            // now use that as an icon
+            _window.SetIcon((uint)icon.Width, (uint)icon.Height, rgbValues);
+            bmp.UnlockBits(bmpData);
+            icon.Dispose();
+        }
+
+
+Ist in euerm Fall noch nicht wirklich zwingend aber Logik & Visualisierung könnte man noch strenger trennen. Die Tower-Klasse muss sich momentan nicht nur um ihr eigenes Rendering kümmern in dem entsprechende Sprites erzeugt und gezeichnet werden, sondern der Code legt auch fest, dass die animierten Sprites genau 32 Frames haben, wie die Textur geladen wird (AssetLoader) und wie die Textur heißt. Das ist viel oberflächliches für eine Klasse, die auch zentrale logische Bedeutung hat. Wie wärs mit einer SpriteRotation Klasse, die z.b das Richtung->Frame mapping kapselt? Und generell, wie gesagt sind Visualisierung und Logik etwas, dass man am besten trennt. Gilt auch für Enemy.cs.
+Manche Spiele gehen so weit, dass auch Singleplayer aus getrennten Client und Server Prozessen besteht wobei ersterer die Grafik & Steuerung und letzterer die Spiellogik verwaltet.
+
+SpriteEntity sollte mit jeder Form von TextureContainer gleichermaßen klarkommen. Das ist im Prinzip das Versprechen dass der Constructor gibt. Und es ist in der Verantwortung desjenigen, der von TextureContainer erbt dafür zu sorgen, dass das https://de.wikipedia.org/wiki/Liskovsches_Substitutionsprinzip eingehalten wird.
+
+Es gibt noch mehr Details die man man besser oder anders machen könnte. Meistens fallen sie unter das Sitchwort Speration of Concerncs, d.h. mehr dafür kürzere Klassen. Weniger Zahlen im Code. Das entscheidende ist aber dass eure Architektur so gut ist, dass sie die Umsetzung dieser Vorschläge relativ leicht machen würde. Genau das erwartet man von einer guten Systemarchitektur, keine Perfektion aber Evolvierbarkeit. Es soll die sehr gute Note deshalb nicht schmälern. Glatte 1 auch für den Kurs.
+
+
+
+
 Aufgabe Pong
 
 Note: 1
